@@ -1,0 +1,85 @@
+STEP 0 - Install and prepare workflow
+STEP 1 - Download raw datafiles (Illumina lanes)
+STEP 2 - Process_radtags?
+STEP 3 - Rename samples and make links in 03-all_samples
+STEP 4 - STACKS
+    - ustack (or pstacks for reference assisted), cstack, sstack
+    - populations/genotypes
+STEP 5 - Filters
+STEP 6 - Format for population genetics
+STEP 7 - Use your data and be good
+
+
+# WORKFLOW DESCRIPTION
+
+STEP 0 - Install and prepare workflow
+    a) Download and install STACKS
+        - http://creskolab.uoregon.edu/stacks/
+        - Unzip
+        - From within the STACKS folder, run:
+    > ./configure
+    > make
+    > sudo make install
+
+STEP 1 - Download raw datafiles (Illumina lanes)
+    a) Put them in the 'raw' folder of the gbs_workflow
+        - NOTE: All file names MUST end with '.fastq.gz'
+    b) Prepare the 'lane_info.txt' file automatically
+        - From the gbs_workflow folder, run:
+        > ./00-scripts/01b-prepare_lane_info.sh
+ 
+STEP 2 - Process_radtags?
+    a) Prepare barcode information file
+        - barcodes.txt (1 barcode sequence per line)
+
+    b) Launch process_radtags with:
+        ### TODO use discarted reads at each step rather than treating the whole file each time
+        > ./00-scripts/02b-process_radtags.sh <trimLength> <enzyme>
+        Where:
+            trimLength = length to trim all the sequences
+            enzyme = name of enzyme (run 'process_radtags', without options, for list)
+
+STEP 3a - Rename samples and make links in 03-all_samples
+    a) To rename and copy the samples, run:
+        > ./00-scripts/03_rename_samples.sh
+
+    b) Join samples that should go together
+        ### TODO Implement neat way of doing this
+        - Go to 04-all_samples and join the .fq files that should go together
+        - Remove partial .fq files that have been joined
+        - Remove individuals with too few sequences (optional)
+
+STEP 3b - Align reads to a reference genome
+	a) Install bwa
+	b) Download reference genome to the 01-info_files
+	c) Index reference genome, run:
+	        > bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
+	d) copy files
+            > cp genome.* 01-info_files
+	d) Aligned samples, run:
+	        > for i in $(ls -1 04-all_samples/*.fq); do name=$(basename $i); bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome $i | bwa samse -r "@RG\tID:'$name'\tSM:'$name'\tPL:Illumina" ./01-info_files/genome - $i > ./04aln-all_samples/$name.sam; done
+	
+STEP 4 - STACKS
+    a) Prepare population info file
+        - To prepare a template of that file, run:
+        > ./00-scripts/04a-prepare_population_map_template.sh
+    b) Rename the template file to 'population_map.txt' and remove '.fq' extensions in columns 1
+    c) Open the stacks script in the 00-scripts folder and edit the options
+    d) Run the STACKS programs, in order:
+        - ustacks (or pstacks for reference assisted)
+            > ./00-scripts/stacks_1a_ustacks.sh
+            or > ./00-scripts/stacks_1b_pstacks.sh
+        - cstacks
+            > ./00-scripts/stacks_2_cstacks.sh
+        - sstacks
+            > ./00-scripts/stacks_3_sstacks.sh
+        - populations or genotypes
+            > ./00-scripts/stacks_4_populations.sh
+
+STEP 5 - Filters
+    Use filterStacksSNPs_v008.py
+
+STEP 6 - Format for population genetics
+
+STEP 7 - Use your data and be good
+
