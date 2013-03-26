@@ -77,7 +77,7 @@ STEP 4 - STACKS
             > ./00-scripts/stacks_4_populations.sh
 
 STEP 5 - Filters
-    Use filterStacksSNPs_v008.py
+    Use ./00-scripts/05_filterStacksSNPs.py and use the printed help
 
 STEP 6 - Format for population genetics
 
