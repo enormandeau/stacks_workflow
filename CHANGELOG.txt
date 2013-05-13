@@ -1,9 +1,11 @@
 List of changes
 
 v0.1.0
-- 2013-05-13 Made the manual into a .pdf file
-- 2013-05-13 Added Licence
+- 2013-05-13 Made .pdf version of Manual and improve formatting
 - 2013-05-13 Improved scripts' documentation and layout
+- 2013-05-13 Added test suite using Make (not synced in git repository)
+- 2013-05-13 Improved documentation and layout of scripts
+- 2013-05-13 Added Licence
 
 v0.0.1
 - Basic implementation
