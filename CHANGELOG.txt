@@ -1,0 +1,9 @@
+List of changes
+
+v0.1.0
+- 2013-05-13 Made the manual into a .pdf file
+- 2013-05-13 Added Licence
+- 2013-05-13 Improved scripts' documentation and layout
+
+v0.0.1
+- Basic implementation
