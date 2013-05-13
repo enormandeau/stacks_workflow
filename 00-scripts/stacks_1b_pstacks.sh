@@ -1,6 +1,5 @@
 #!/bin/bash
 # Launch pstacks to treat all the samples individually
-# Tested with version 0.99999
 
 # Options
 # Comment out options that you do not wish to use

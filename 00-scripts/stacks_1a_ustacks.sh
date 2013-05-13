@@ -1,6 +1,5 @@
 #!/bin/bash
 # Launch ustacks to treat all the samples individually
-# Tested with STACKS version 0.99999
 
 # OPTIONS: Comment out options that you do not wish to use
 t="-t fastq"      # t: input file Type. Supported types: fasta, fastq, gzfasta,
