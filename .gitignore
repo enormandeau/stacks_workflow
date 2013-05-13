@@ -6,3 +6,5 @@
 *.fasta
 *~
 TODO
+*.fastq.gz*
+Makefile

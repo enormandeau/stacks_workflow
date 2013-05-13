@@ -1,6 +1,25 @@
 #!/bin/bash
+# Renaming the extracted sample files
 
-cat 01-info_files/lane_info.txt | while read f; do for s in $(ls -1 03-samples/$f/sample*); do sample=$(basename $s); mv 03-samples/$f/$sample 03-samples/$f/$f"_"$sample; done; done
+# Renaming files
+cat 01-info_files/lane_info.txt |
+    while read file
+    do
+        for s in $(ls -1 03-samples/$file/sample*)
+        do
+            sample=$(basename $s)
+            mv 03-samples/$file/$sample 03-samples/$file/$file"_"$sample
+        done
+    done
 
-cat 01-info_files/lane_info.txt | while read f; do for s in $(ls -1 03-samples/$f/*.fq); do sample=$(basename $s); cp -l 03-samples/$f/$sample 04-all_samples; done; done
+# Linking files
+cat 01-info_files/lane_info.txt |
+    while read file
+    do
+        for s in $(ls -1 03-samples/$file/*.fq)
+        do
+            sample=$(basename $s)
+            cp -l 03-samples/$file/$sample 04-all_samples
+        done
+    done
 
