@@ -8,3 +8,5 @@
 TODO
 *.fastq.gz*
 Makefile
+*barcode*
+*/population_map*
