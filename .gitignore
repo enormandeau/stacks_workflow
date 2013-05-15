@@ -2,8 +2,11 @@
 *test*
 *.swp
 *.odt
+*.tsv
+*.log
 *.fas
 *.fasta
+*.fq
 *~
 TODO
 *.fastq.gz*
