@@ -12,11 +12,12 @@ o="-o 05-stacks"    # o: output path to write results
 n="-n 0"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
 p="-p 16"           # p: enable parallel execution with num_threads threads
-#report_mmatches="--report_mmatches"
+#report_mmatches="--report_mmatches"    # --report_mmatches: report query loci
+                    #   that match more than one catalog locus
 
 
 # -=( DO NOT MODIFY THE FOLLWING OPTION! )=-
-# Automatically create the list of filenames for cstacks
+# This will automatically create the list of filenames for cstacks
 # s: filename prefix from which to load loci into the catalog
 s="$(for file in $(ls -1 05-stacks/*.tags.tsv | perl -pe 's/\.tags\.tsv//'); do echo -s $file; done)"
 

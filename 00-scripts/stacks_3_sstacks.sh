@@ -12,5 +12,8 @@ p="-p 16"                  # p: enable parallel execution with num_threads
 #x="-x"                    # x: don't verify haplotype of matching locus
 
 # Launch sstacks on all samples
-for file in $(ls -1 05-stacks/*sample*.tags.tsv | perl -pe 's/\.tags\.tsv//'); do sstacks $b $c $o $p $g $x $h -s $file; done  
+for file in $(ls -1 05-stacks/*sample*.tags.tsv | perl -pe 's/\.tags\.tsv//')
+do
+    sstacks $b $c $o $p $g $x $h -s $file
+done  
 

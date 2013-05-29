@@ -29,6 +29,11 @@ alpha="--alpha 0.1"
 
 # Launch ustacks for all the individuals
 id=1
-for file in 04-all_samples/*.fq; do echo -e "\n\n##### Treating individual $id: $file\n\n"; ustacks $t $d $r $o $i $m $M $N $p $R $H $max_locus_stacks $model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id; id=$(echo $id + 1 | bc); done
-
+for file in 04-all_samples/*.fq
+do
+    echo -e "\n\n##### Treating individual $id: $file\n\n"
+    ustacks $t $d $r $o $i $m $M $N $p $R $H $max_locus_stacks $model_type \
+        $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
+    id=$(echo $id + 1 | bc)
+done
 
