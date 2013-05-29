@@ -1,12 +1,15 @@
 List of changes
 
+v0.1.2
+- 2013-05-29 Improved script formatting and documentation
+
 v0.1.1 (Minor version, bugfixes and small improvements)
 - 2013-05-29 Added folders for filtering results and test logs
+- 2013-05-29 Script and manual cleanup (mostly esthetic)
 - 2013-05-15 Clarified documentation of 05_filterStacksSNPs.py
 - 2013-05-15 Added details about how to get the latest version in the MANUAL
 
 v0.1.0
-- 2013-05-29 Script and manual cleanup (mostly esthetic)
 - 2013-05-13 Made .pdf version of Manual and improve formatting
 - 2013-05-13 Improved scripts' documentation and layout
 - 2013-05-13 Added test suite using Make (not synced in git repository)
