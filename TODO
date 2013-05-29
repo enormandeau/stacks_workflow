@@ -1,0 +1,32 @@
+Filters
+- Use proportion of individuals rather than number
+- Use 2 MAF criteria, one global and one per pop
+- Put MAF filters before choosing how many SNPs per loci
+- Improve documentation of script file
+
+Global
+- Improve scripts formatting
+    - stacks_4_populations.sh
+- Rename individuals with pop_ind.fastq rather than lane_barcode.fastq
+    - Take 1 info file for all the individuals, it should contain:
+        - Lane filename, individual name, population name (and number?), barcode
+        - If individual was resequenced, include '.duplicate' in its name 
+        - Make sure the rest of the name is IDENTICAL
+* Add step to merge resequenced individuals (fastq_combine_files.sh)
+
+Process radtags
+- From info file, create one barcode file per line
+- Run the files with the most barcodes first (= faster)
+- Use the -D option to filter recursively on kmer lengths
+- When finished, rename log file with date and barcode length
+    
+Documentation
+- Add know-how section
+    - Testing different trim lengths to keep more reads
+    - Testing different parameters for STACKS scripts
+    - Filtering
+- Improve documentation of scripts
+
+Maybe
+- VCFtools (see what the students need)
+

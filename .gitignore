@@ -6,12 +6,13 @@
 *.odt
 *.swp
 *.tsv
+*.vcf
 */population_map*
 *barcode*
+*list.txt
 *private*
 *test*
 *testlog*
 *~
 Makefile
-TODO
 lane_info.txt
