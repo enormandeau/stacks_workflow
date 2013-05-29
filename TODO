@@ -6,7 +6,8 @@ Filters
 
 Global
 - Improve scripts formatting
-    - stacks_4_populations.sh
+    - Verify options and put them in the same order as the STACKS programs help
+    - Improve tone of documentation in scripts
 - Rename individuals with pop_ind.fastq rather than lane_barcode.fastq
     - Take 1 info file for all the individuals, it should contain:
         - Lane filename, individual name, population name (and number?), barcode
