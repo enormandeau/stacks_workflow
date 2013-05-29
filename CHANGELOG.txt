@@ -1,5 +1,9 @@
 List of changes
 
+v0.1.1 (Minor version, bugfixes and small improvements)
+- 2013-05-15 Clarified documentation of 05_filterStacksSNPs.py
+- 2013-05-15 Added details about how to get the latest version in the MANUAL
+
 v0.1.0
 - 2013-05-29 Script and manual cleanup (mostly esthetic)
 - 2013-05-13 Made .pdf version of Manual and improve formatting
