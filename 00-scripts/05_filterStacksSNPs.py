@@ -2,7 +2,8 @@
 """Filter sumstats.tsv files from STACKS to get the following information:
 
 Usage:
-  ./filterStacksSNPs.py inputFile maxSnpNumber maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis
+  ./filterStacksSNPs.py inputFile maxSnpNumber maxAlleleNumber minPresence \
+       maxHetero minAlleleFreq minFis maxFis
 
 inputFile = batch_1.sumstat.tsv or similarly names output of STACKS (v0.99995+)
 maxSnpNumber = maximum number of SNPs in a single locus (int, 1 or more)
@@ -226,7 +227,8 @@ if __name__ == "__main__":
     for job in trim_jobs:
         trim_snp_dict(SNP.loci, job[0], job[1], job[2])
         to_print.append(str(count_snps(SNP.loci)))
-        write_remaining_snps("filtered_loci_" + str(trim_step) + "_" + job[3] + ".tsv", SNP.loci.items())
+        (write_remaining_snps("filtered_loci_" + str(trim_step) +
+            "_" + job[3] + ".tsv", SNP.loci.items()))
         trim_step += 1
 
     # Update whitelist and blacklist 

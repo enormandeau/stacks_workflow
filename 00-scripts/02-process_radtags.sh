@@ -1,9 +1,11 @@
 #!/bin/bash
 # Launch 'process_radtags' on all the lanes
 
-# Global variable
-TRIM_LENGTH=$1 # Length to which the reads are cut after process_radtags
-ENZYME=$2      # Name of the enzyme (run 'process_radtags', without options, for list)
+### Global variable
+# Length to which the reads are cut after process_radtags
+TRIM_LENGTH=$1
+# Name of the enzyme (run 'process_radtags', without options, for list)
+ENZYME=$2
 
 # Prepare bacode_lengths.txt from barcodes.txt, 
 perl -ne 'chomp; print length."\n"' 01-info_files/barcodes.txt |

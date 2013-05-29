@@ -1,7 +1,6 @@
 #!/bin/bash
-# Description
+# Create a template for the population map file
 
-# Description
 ls -1 04-all_samples/ |
     while read i
     do
