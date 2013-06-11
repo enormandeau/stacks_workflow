@@ -12,6 +12,7 @@ maxHetero = maximal frequency of heterozygous individuals (float, 0 to 1)
 minAlleleFreq = minimum frequency of rare allele (float, 0 to 1)
 minFis = minimum allowed Fis value (float, -1 to 1)
 maxFis = maximum allowed Fis value (float, -1 to 1)
+addFst = if Fst should be calculated (2 pops. only) (int, 0 or 1, defaults to 0)
 """
 
 # Importing modules
@@ -150,6 +151,11 @@ if __name__ == "__main__":
         print __doc__
         sys.exit(1)
     
+    try:
+        addFst = int(sys.argv[9])
+    except:
+        addFst = 0
+    
     # Asserting that parmeters have sensible values
     try:
         with open(inputFile) as test:
@@ -165,6 +171,7 @@ if __name__ == "__main__":
     assert minAlleleFreq > 0 and minAlleleFreq <= 0.5, "minAlleleFreq must be a decimal between 0 and 0.5"
     assert minFis >= -1 and minFis <= 1, "minFis must be a decimal between -1 and 1"
     assert maxFis >= -1 and maxFis <= 1, "maxFis must be a decimal between -1 and 1"
+    assert addFst in [0, 1], "addFst must be either 0 or 1"
 
     # Constructing the SNP instances and dictionary
     output_header = ""
@@ -199,7 +206,8 @@ if __name__ == "__main__":
     all_pops(SNP.loci)
 
     # Add calculated Fst value at the end of the line
-    add_fst(SNP.loci)
+    if addFst:
+        add_fst(SNP.loci)
 
     # >= 1 SNP: no filter
     to_print.append(str(count_snps(SNP.loci)))

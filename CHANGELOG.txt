@@ -1,3 +1,43 @@
+
+n.n.n / 2013-06-04 
+==================
+
+ * Updated TODO
+ * Improved script formatting and documentation
+ * Improved script formatting and documentation
+ * Make ready for v0.1.2 branch
+ * Added cases to .gitignore
+ * Fixed conflict between master and v0.1.1
+ * Global cleanup
+ * Global cleanup
+ * Removed useless script
+ * Added cases to .gitignore
+ * Added cases to .gitignore
+ * Replaced 'MANUAL.txt' by 'MANUAL.pdf' in README.md
+ * Clarified documentation of 05_filterStacksSNPs.py
+ * Added info about how to get newest version
+ * Added info about how to get newest version
+ * Excluded more filetypes
+ * Added version file
+ * Added exceptions to .gitignore or main directory
+ * Improved Manual's formatting
+ * Improved Manual's formatting
+ * Updated scripts after complete test
+ * Updated scripts documentation
+ * Updated scripts documentation
+ * Updated scripts documentation
+ * Updated steps 1 and 2 and manual
+ * Removed unwanted .swp file
+ * Improved 01b script
+ * Preparation for 0.1.0
+ * Preparation for 0.9.1
+ * Added SNP filtering script
+ * Added SNP filtering script
+ * Changed name of the manual
+ * First commit
+ * First commit
+ * First commit
+ * Initial commit
 List of changes
 
 v0.1.2
