@@ -2,7 +2,7 @@
 """Filter sumstats.tsv files from STACKS to remove :
 
 Usage:
-  ./filterStacksSNPs.py inFile maxSnpNumber maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis
+  ./filterStacksSNPs.py inFile maxSnpNumber maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis addFst
 
 inFile = batch_1.sumstat.tsv or similarly names output of STACKS (v0.99995+)
 maxSnpNumber = maximum number of SNPs in a single locus (int, 1 or more)
