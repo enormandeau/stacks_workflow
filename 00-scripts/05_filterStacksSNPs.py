@@ -2,16 +2,16 @@
 """Filter sumstats.tsv files from STACKS to get the following information:
 
 Usage:
-  ./filterStacksSNPs.py inputFile maxSnpNumber maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis
+  ./filterStacksSNPs.py inputFile maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis maxSnpNumber
 
 inputFile = batch_1.sumstat.tsv or similarly names output of STACKS (v0.99995+)
-maxSnpNumber = maximum number of SNPs in a single locus (int, 1 or more)
 maxAlleleNumber = maximum number of possible alleles per SNP (int, 2 to 4)
 minPresence = minimal number of present individuals (int, 1 or more)
 maxHetero = maximal frequency of heterozygous individuals (float, 0 to 1)
 minAlleleFreq = minimum frequency of rare allele (float, 0 to 1)
 minFis = minimum allowed Fis value (float, -1 to 1)
 maxFis = maximum allowed Fis value (float, -1 to 1)
+maxSnpNumber = maximum number of SNPs in a single locus (int, 1 or more)
 """
 
 # TODO
@@ -156,13 +156,13 @@ def write_remaining_snps(filename, snp_dict):
 if __name__ == "__main__":
     try: # Parse user input
         inputFile = sys.argv[1]
-        maxSnpNumber = int(sys.argv[2])
-        maxAlleleNumber = int(sys.argv[3])
-        minPresence = int(sys.argv[4])
-        maxHetero = float(sys.argv[5])
-        minAlleleFreq = float(sys.argv[6])
-        minFis = float(sys.argv[7])
-        maxFis = float(sys.argv[8])
+        maxAlleleNumber = int(sys.argv[2])
+        minPresence = int(sys.argv[3])
+        maxHetero = float(sys.argv[4])
+        minAlleleFreq = float(sys.argv[5])
+        minFis = float(sys.argv[6])
+        maxFis = float(sys.argv[7])
+        maxSnpNumber = int(sys.argv[8])
     except:
         print __doc__
         sys.exit(1)
@@ -200,13 +200,13 @@ if __name__ == "__main__":
     # Creating output file header
     header = ["File",
               "1orMoreSNP",
-              "AtMost{0}SNP".format(maxSnpNumber),
               "Biallelic",
               "AtLeast{0}Ind".format(minPresence),
               "Max{0}Hetero".format(maxHetero),
               "Min{0}AlleleFreq".format(minAlleleFreq),
               "minFis{}".format(minFis),
-              "maxFis{}".format(maxFis)]
+              "maxFis{}".format(maxFis),
+              "AtMost{0}SNP".format(maxSnpNumber)]
 
     # Initializing the filtering output
     to_print = [inputFile]
@@ -222,18 +222,14 @@ if __name__ == "__main__":
     to_print.append(str(count_snps(SNP.loci)))
     write_remaining_snps("filtered_loci_1_allSNPs.tsv", SNP.loci.items())
 
-    # <= maxSnpNumber SNP
-    max_snp_number(SNP.loci, maxSnpNumber)
-    to_print.append(str(count_snps(SNP.loci)))
-    write_remaining_snps("filtered_loci_2_maxnSNPs.tsv", SNP.loci.items())
     
     # <= maxAlleleNumber alleles per SNP
     # TODO This filter not implemented (some SNPs have 3 alleles)
     to_print.append(str(count_snps(SNP.loci)))
-    write_remaining_snps("filtered_loci_3_maxAlleleNum.tsv", SNP.loci.items())
+    write_remaining_snps("filtered_loci_2_maxAlleleNum.tsv", SNP.loci.items())
 
     # Loop over a list of filters [trimFunction, test, parameter, conditional, testName]
-    trim_step = 4
+    trim_step = 3
     trim_jobs = [[remove_locus, enough_individuals, minPresence, all, header[4]], 
                  [remove_locus, max_heterozygote_freq, maxHetero, all, header[5]],
                  [remove_snp, min_allele_freq, minAlleleFreq, any, header[6]],
@@ -245,6 +241,11 @@ if __name__ == "__main__":
         to_print.append(str(count_snps(SNP.loci)))
         write_remaining_snps("filtered_loci_" + str(trim_step) + "_" + job[4] + ".tsv", SNP.loci.items())
         trim_step += 1
+
+    # <= maxSnpNumber SNP
+    max_snp_number(SNP.loci, maxSnpNumber)
+    to_print.append(str(count_snps(SNP.loci)))
+    write_remaining_snps("filtered_loci_8_maxnSNPs.tsv", SNP.loci.items())
 
     # Update whitelist and blacklist 
     whitelist = set()
