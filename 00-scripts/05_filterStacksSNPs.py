@@ -216,7 +216,7 @@ if __name__ == "__main__":
     all_pops(SNP.loci)
 
     # Add calculated Fst value at the end of the line
-    add_fst(SNP.loci)
+    #add_fst(SNP.loci)
 
     # >= 1 SNP: no filter
     to_print.append(str(count_snps(SNP.loci)))
