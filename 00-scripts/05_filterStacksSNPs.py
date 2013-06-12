@@ -1,10 +1,10 @@
 #!/usr/bin/python
-"""Filter sumstats.tsv files from STACKS to remove :
+"""Filter sumstats.tsv files from STACKS to get the following information:
 
 Usage:
-  ./filterStacksSNPs.py inFile maxSnpNumber maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis addFst
+  ./filterStacksSNPs.py inputFile maxSnpNumber maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis
 
-inFile = batch_1.sumstat.tsv or similarly names output of STACKS (v0.99995+)
+inputFile = batch_1.sumstat.tsv or similarly names output of STACKS (v0.99995+)
 maxSnpNumber = maximum number of SNPs in a single locus (int, 1 or more)
 maxAlleleNumber = maximum number of possible alleles per SNP (int, 2 to 4)
 minPresence = minimal number of present individuals (int, 1 or more)
@@ -12,8 +12,12 @@ maxHetero = maximal frequency of heterozygous individuals (float, 0 to 1)
 minAlleleFreq = minimum frequency of rare allele (float, 0 to 1)
 minFis = minimum allowed Fis value (float, -1 to 1)
 maxFis = maximum allowed Fis value (float, -1 to 1)
-addFst = if Fst should be calculated (2 pops. only) (int, 0 or 1, defaults to 0)
 """
+
+# TODO
+# Multiple populations
+# Check that whitelist and blacklist are the right things
+# Remove genotypes of triploid individuals
 
 # Importing modules
 import sys
@@ -75,8 +79,9 @@ def min_fis(snp, lower):
 def max_fis(snp, upper):
     return snp.fis <= upper
 
-# Trim workhouse
-def trim_snp_dict(dct, fun, arg, cond):
+# Trim workhouses
+# TODO refactor the 2 following functions
+def remove_locus(dct, fun, arg, cond):
     """dct = SNP.loci
        fun = test function (eg: enough_individuals)
        arg = argument to fun. If none needed, put None
@@ -87,6 +92,18 @@ def trim_snp_dict(dct, fun, arg, cond):
             if not cond([fun(x, arg) for x in snp.values()]):
                 if locus in dct:
                     dct.pop(locus)
+
+def remove_snp(dct, fun, arg, cond):
+    """dct = SNP.loci
+       fun = test function (eg: enough_individuals)
+       arg = argument to fun. If none needed, put None
+       cond = conditional function (eg: at_least_some_true)
+    """
+    for locus, positions in dct.items():
+        for position, snp in positions.items():
+            if not cond([fun(x, arg) for x in snp.values()]):
+                if locus in dct:
+                    positions.pop(position)
 
 # Remove SNPs that are not present in both populations
 # TODO Generalize for more than 2 populations
@@ -120,8 +137,7 @@ def add_fst(dct):
             population["1"].line.append(str(Fst))
             population["2"].line.append(str(He_tot))
             population["2"].line.append(str(Fst))
-            #print n1, n2, n_tot, p1, p2, p_tot, He_tot, He_mean, Fst
-            
+
 # Counting remaining snps
 def count_snps(dct):
     return sum([len(x) for x in dct.values()])
@@ -151,11 +167,6 @@ if __name__ == "__main__":
         print __doc__
         sys.exit(1)
     
-    try:
-        addFst = int(sys.argv[9])
-    except:
-        addFst = 0
-    
     # Asserting that parmeters have sensible values
     try:
         with open(inputFile) as test:
@@ -167,11 +178,10 @@ if __name__ == "__main__":
     assert maxSnpNumber > 0, "maxSnpNumber must be a non-null integer"
     assert maxAlleleNumber in [2, 3, 4], "maxAlleleNumber must be 2, 3 or 4"
     assert minPresence >= 1, "minPresence must be a a non-number integer"
-    assert maxHetero > 0 and maxHetero <= 1, "maxHetero must be a decimal between 0 and 1"
-    assert minAlleleFreq > 0 and minAlleleFreq <= 0.5, "minAlleleFreq must be a decimal between 0 and 0.5"
+    assert maxHetero >= 0 and maxHetero <= 1, "maxHetero must be a decimal between 0 and 1"
+    assert minAlleleFreq >= 0 and minAlleleFreq <= 0.5, "minAlleleFreq must be a decimal between 0 and 0.5"
     assert minFis >= -1 and minFis <= 1, "minFis must be a decimal between -1 and 1"
     assert maxFis >= -1 and maxFis <= 1, "maxFis must be a decimal between -1 and 1"
-    assert addFst in [0, 1], "addFst must be either 0 or 1"
 
     # Constructing the SNP instances and dictionary
     output_header = ""
@@ -180,7 +190,7 @@ if __name__ == "__main__":
             if not line.startswith("#"):
                 SNP(line) 
             else:
-                output_header = line.strip() + "\tHe_tot\tFst\n"
+                output_header = line.strip() + "\tHe_tot\tFst(ONLY_FOR_2_POPS)\n"
 
     # Initialize blacklist
     blacklist = set()
@@ -206,8 +216,7 @@ if __name__ == "__main__":
     all_pops(SNP.loci)
 
     # Add calculated Fst value at the end of the line
-    if addFst:
-        add_fst(SNP.loci)
+    add_fst(SNP.loci)
 
     # >= 1 SNP: no filter
     to_print.append(str(count_snps(SNP.loci)))
@@ -219,23 +228,22 @@ if __name__ == "__main__":
     write_remaining_snps("filtered_loci_2_maxnSNPs.tsv", SNP.loci.items())
     
     # <= maxAlleleNumber alleles per SNP
-    # TODO This filter not implemented
+    # TODO This filter not implemented (some SNPs have 3 alleles)
     to_print.append(str(count_snps(SNP.loci)))
     write_remaining_snps("filtered_loci_3_maxAlleleNum.tsv", SNP.loci.items())
 
-    # Loop over a list of filters [test, parameter, conditional, testName]
+    # Loop over a list of filters [trimFunction, test, parameter, conditional, testName]
     trim_step = 4
-    trim_jobs = [[enough_individuals, minPresence, all, header[4]], 
-                 [max_heterozygote_freq, maxHetero, all, header[5]],
-                 [min_allele_freq, minAlleleFreq, any, header[6]],
-                 [min_fis, minFis, all, header[7]],
-                 [max_fis, maxFis, all, header[8]]]
+    trim_jobs = [[remove_locus, enough_individuals, minPresence, all, header[4]], 
+                 [remove_locus, max_heterozygote_freq, maxHetero, all, header[5]],
+                 [remove_snp, min_allele_freq, minAlleleFreq, any, header[6]],
+                 [remove_locus, min_fis, minFis, all, header[7]],
+                 [remove_locus, max_fis, maxFis, all, header[8]]]
     
     for job in trim_jobs:
-        trim_snp_dict(SNP.loci, job[0], job[1], job[2])
+        job[0](SNP.loci, job[1], job[2], job[3])
         to_print.append(str(count_snps(SNP.loci)))
-        (write_remaining_snps("filtered_loci_" + str(trim_step) +
-            "_" + job[3] + ".tsv", SNP.loci.items()))
+        write_remaining_snps("filtered_loci_" + str(trim_step) + "_" + job[4] + ".tsv", SNP.loci.items())
         trim_step += 1
 
     # Update whitelist and blacklist 
