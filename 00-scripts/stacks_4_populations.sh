@@ -60,9 +60,10 @@ vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
 #write_single_snp="--write_single_snp"  #--write_single_snp: write only the
                             #   first SNP per locus in Genepop and Structure
                             #   outputs
+#log_fst_comp="--log_fst_comp"  # log components of Fst calculations to a file.
 
 # Launch populations
 populations $b $P $M $r $m $g $V $B $W $s $e $t $r $p $m $a $f $p_value_cutoff \
     $k $window_size $bootstrap $bootstrap_reps $genomic $vcf $genepop \
-    $structure $phylip $phylip_var $write_single_snp
+    $structure $phylip $phylip_var $write_single_snp $log_fst_comp
 
