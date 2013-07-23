@@ -24,6 +24,10 @@ cat 01-info_files/barcode_lengths.txt |
 cat 01-info_files/lane_info.txt |
     while read f
     do
+        # Get barcodes for that line, put in barcodes_current_lane.txt
+        # Prepare barcode_lengths.txt from barcodes_current_lane.txt
+        # Create barcode files
+        # Use the -D option to filter only on discarted reads
         cat 01-info_files/barcode_lengths.txt |
         while read b
         do
