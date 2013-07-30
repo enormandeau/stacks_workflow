@@ -10,7 +10,7 @@ ENZYME=$2
 cat 01-info_files/lane_info.txt |
 while read f
 do
-    grep -E "$f" 01-info_files/sample_information.txt | \
+    grep -E "^$f" 01-info_files/sample_information.txt | \
         cut -f 2 > 01-info_files/barcodes.txt
 
     # Prepare bacode_lengths.txt from barcodes.txt 
