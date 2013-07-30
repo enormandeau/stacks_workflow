@@ -52,6 +52,10 @@ m="-m 4"            # m: specify a minimum stack depth required for individuals
 vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
 #genepop="--genepop"        # --genepop: output results in GenePop format
 #structure="--structure"    # --structure: output results in Structure format
+#phase="--phase"            # --phase: output genotypes in PHASE/fastPHASE format.
+#beagle="--beagle"          # --beagle: output genotypes in Beagle format.
+#plink="--plink"            # --plink: output genotypes in PLINK format.
+
 #phylip="--phylip"          # --phylip: output nucleotides that are fixed-within
                             #   and variant among populations in Phylip format
                             #   for phylogenetic tree construction
@@ -65,5 +69,6 @@ vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
 # Launch populations
 populations $b $P $M $r $m $g $V $B $W $s $e $t $r $p $m $a $f $p_value_cutoff \
     $k $window_size $bootstrap $bootstrap_reps $genomic $vcf $genepop \
-    $structure $phylip $phylip_var $write_single_snp $log_fst_comp
+    $structure $phase $beagle $plink $phylip $phylip_var \
+    $write_single_snp $log_fst_comp
 

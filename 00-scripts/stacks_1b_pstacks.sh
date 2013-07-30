@@ -11,8 +11,6 @@ o="-o 05-stacks-c"    # o: output path to write results.
 m="-m 2"              # m: minimum depth of coverage to report a stack
                       #   (default 1)
 p="-p 3"              # p: enable parallel execution with num_threads threads
-
-#max_locus_stacks="--max_locus_stacks 3"
 model_type="--model_type snp"
 alpha="--alpha 0.05"
 #bound_low="--bound_low 0"
