@@ -16,7 +16,7 @@ Global
 * Add step to merge resequenced individuals (fastq_combine_files.sh)
 
 Process radtags
-- From info file, create one barcode file per line
+- From info file, create one barcode file per lane
 - Run the files with the most barcodes first (= faster)
 - Use the -D option to filter recursively on kmer lengths
 - When finished, rename log file with date and barcode length
@@ -26,8 +26,4 @@ Documentation
     - Testing different trim lengths to keep more reads
     - Testing different parameters for STACKS scripts
     - Filtering
-- Improve documentation of scripts
-
-Maybe
-- VCFtools (see what the students need)
 
