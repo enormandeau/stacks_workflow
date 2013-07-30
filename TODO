@@ -7,7 +7,8 @@ Process radtags
 Global
 - Improve scripts formatting
     - Verify options and put them in the same order as the STACKS programs help
-* Add step to merge resequenced individuals (fastq_combine_files.sh)
+- Add step to merge resequenced individuals (fastq_combine_files.sh)
+* Keep log and error log of all scripts
 
 Filters
 - Use proportion of individuals rather than number
