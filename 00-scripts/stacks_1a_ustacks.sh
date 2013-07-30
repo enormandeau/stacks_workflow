@@ -11,7 +11,7 @@ m="-m 3"          # m: Minimum depth of coverage required to create a stack
 M="-M 2"          # M: Maximum distance (in nucleotides) allowed between stacks
                   #   (default 2).
 N="-N 4"          # N: Maximum distance allowed to align secondary reads to
-                  #   primary stacks (default: M + 2). 
+                  #   primary stacks (default: M + 2).
 #R="-R"           # R: retain unused reads.
 #H="-H"           # H: disable calling haplotypes from secondary reads.
 p="-p 16"         # p: enable parallel execution with num_threads threads.
@@ -31,7 +31,7 @@ id=1
 for file in 04-all_samples/*.fq
 do
     echo -e "\n\n##### Treating individual $id: $file\n\n"
-    ustacks $t $d $r $o $i $m $M $N $p $R $H $max_locus_stacks $model_type \
+    ustacks $t $o $i $m $M $N $R $H $p $r $d $max_locus_stacks $model_type \
         $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
 done

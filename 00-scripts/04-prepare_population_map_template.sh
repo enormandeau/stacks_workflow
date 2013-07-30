@@ -1,9 +1,26 @@
 #!/bin/bash
-# Create a template for the population map file
+# Create population map file
+
+# Global variables
+INFO_FILES="01-info_files"
 
 ls -1 04-all_samples/ |
-    while read i
-    do
-        echo -e "$i\t1" |
-        perl -pe 's/\.fq//'
-    done > 01-info_files/population_map_template.txt
+while read i
+do
+    echo -e "$i" |
+    perl -pe 's/\.fq//'
+done > $INFO_FILES/population_map_temp.txt
+
+cat $INFO_FILES/population_map_temp.txt |
+while read i
+do
+    echo -ne $i"\t"
+    pop=$(echo $i | cut -d "_" -f 1)
+    ind=$(echo $i | cut -d "_" -f 2)
+    echo $(grep -E "[[:space:]]$pop[[:space:]]$ind[[:space:]]" \
+        $INFO_FILES/sample_information.txt | \
+        cut -f 5)
+done > $INFO_FILES/population_map.txt
+
+rm $INFO_FILES/population_map_temp.txt 2> /dev/null
+
