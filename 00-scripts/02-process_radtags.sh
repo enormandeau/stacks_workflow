@@ -32,7 +32,7 @@ do
         mkdir 03-samples/$f
         process_radtags -i gzfastq -f 02-raw/$f".fastq.gz" -o \
             03-samples/$f -b $INFO_FILES/barcodes_"$b".txt \
-            -c -q -r -t $TRIM_LENGTH --barcode_dist \
+            -c -q -r -t $TRIM_LENGTH --barcode_dist 2 \
             --filter_illumina 3 -E phred33 -e $ENZYME
     done
 

@@ -21,6 +21,7 @@ d="-d"            # d: enable the Deleveraging algorithm, used for resolving
                   #   over merged tags.
 #max_locus_stacks="--max_locus_stacks 3"
 model_type="--model_type snp"
+
 alpha="--alpha 0.1"
 #bound_low="--bound_low 0"
 #bound_high="--bound_high 1"
@@ -35,4 +36,10 @@ do
         $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
 done
+
+# TODO experiment with m M N and alpha
+# m: 2 3 4
+# M: 1 2 3
+# N: (M + 2)
+# alpha: 0.05 0.075 0.1
 

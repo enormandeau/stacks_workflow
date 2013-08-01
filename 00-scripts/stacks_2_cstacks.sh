@@ -25,3 +25,6 @@ s="$(for file in $(ls -1 05-stacks/*.tags.tsv | perl -pe 's/\.tags\.tsv//'); do 
 # Run cstacks
 cstacks $b $s $o $g $m $n $p $catalog $report_mmatches
 
+#TODO experiment with the n option
+# n: 0 1 2
+
