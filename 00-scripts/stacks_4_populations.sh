@@ -72,3 +72,6 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $r $p $m $a $f $p_value_cutoff \
     $structure $phase $beagle $plink $phylip $phylip_var \
     $write_single_snp $log_fst_comp
 
+#TODO experiment with the m option
+# m: 4 6 8 10
+
