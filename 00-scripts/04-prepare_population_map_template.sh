@@ -3,8 +3,9 @@
 
 # Global variables
 INFO_FILES="01-info_files"
+ALL_SAMPLES_FOLDER="04-all_samples"
 
-ls -1 04-all_samples/ |
+ls -1 $ALL_SAMPLES_FOLDER/ |
 while read i
 do
     echo -e "$i" |
