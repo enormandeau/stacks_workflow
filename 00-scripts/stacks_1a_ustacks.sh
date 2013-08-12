@@ -8,9 +8,9 @@ o="-o 05-stacks"  # o: output path to write results.
 #i="-i 1"         # i: SQL ID to insert into the output to identify this sample
 m="-m 3"          # m: Minimum depth of coverage required to create a stack
                   #   (default 3).
-M="-M 2"          # M: Maximum distance (in nucleotides) allowed between stacks
+M="-M 3"          # M: Maximum distance (in nucleotides) allowed between stacks
                   #   (default 2).
-N="-N 4"          # N: Maximum distance allowed to align secondary reads to
+N="-N 5"          # N: Maximum distance allowed to align secondary reads to
                   #   primary stacks (default: M + 2).
 #R="-R"           # R: retain unused reads.
 #H="-H"           # H: disable calling haplotypes from secondary reads.
@@ -22,7 +22,7 @@ d="-d"            # d: enable the Deleveraging algorithm, used for resolving
 #max_locus_stacks="--max_locus_stacks 3"
 model_type="--model_type snp"
 
-alpha="--alpha 0.1"
+alpha="--alpha 0.05"
 #bound_low="--bound_low 0"
 #bound_high="--bound_high 1"
 #bc_err_freq="--bc_err_freq 1"

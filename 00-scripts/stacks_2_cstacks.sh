@@ -9,7 +9,7 @@ o="-o 05-stacks"    # o: output path to write results
 #g="-g"             # g: base catalog matching on genomic location, not sequence
                     #   identity
 #m="-m"             # m: include tags in catalog that match more than one entry
-n="-n 0"            # n: number of mismatches allowed between sample tags when
+n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
 p="-p 16"           # p: enable parallel execution with num_threads threads
 #catalog="--catalog PATH"
