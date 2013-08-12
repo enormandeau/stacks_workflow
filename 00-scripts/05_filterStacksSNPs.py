@@ -6,7 +6,7 @@ Usage:
 
 inputFile = batch_1.sumstat.tsv or similarly names output of STACKS (v0.99995+)
 maxAlleleNumber = maximum number of possible alleles per SNP (int, 2 to 4)
-minPresence = minimal number of present individuals (int, 1 or more)
+minPresence = minimal percent of present individuals (int, 0 to 100)
 maxHetero = maximal frequency of heterozygous individuals (float, 0 to 1)
 minAlleleFreq = minimum frequency of rare allele (float, 0 to 1)
 minFis = minimum allowed Fis value (float, -1 to 1)
@@ -28,6 +28,16 @@ class SNP(object):
     """Store and manipulate locus information
     """
     loci = defaultdict(lambda: defaultdict(dict))
+    max_presence = defaultdict(int)
+    @classmethod
+    def populate_max_presence(cls):
+        for l in cls.loci:
+            for pos in cls.loci[l]:
+                for pop in cls.loci[l][pos]:
+                    snp = cls.loci[l][pos][pop]
+                    cls.max_presence[snp.population] = max(
+                            cls.max_presence[snp.population],
+                            snp.presence)
     def __init__(self, line):
         l = line.strip().split("\t")
         self.line = l
@@ -64,8 +74,8 @@ def max_snp_number(dct, n):
         if len(positions) > n:
             dct.pop(locus)
 
-def enough_individuals(snp, n):
-    return snp.presence >= n
+def enough_individuals(snp, percent):
+    return 100 * float(snp.presence) / SNP.max_presence[snp.population] >= percent
 
 def max_heterozygote_freq(snp, freq):
     return snp.hetero <= freq
@@ -177,7 +187,7 @@ if __name__ == "__main__":
 
     assert maxSnpNumber > 0, "maxSnpNumber must be a non-null integer"
     assert maxAlleleNumber in [2, 3, 4], "maxAlleleNumber must be 2, 3 or 4"
-    assert minPresence >= 1, "minPresence must be a a non-number integer"
+    assert 0 <= minPresence <= 100, "minPresence must be an integer between 0 and 100" 
     assert maxHetero >= 0 and maxHetero <= 1, "maxHetero must be a decimal between 0 and 1"
     assert minAlleleFreq >= 0 and minAlleleFreq <= 0.5, "minAlleleFreq must be a decimal between 0 and 0.5"
     assert minFis >= -1 and minFis <= 1, "minFis must be a decimal between -1 and 1"
@@ -191,6 +201,9 @@ if __name__ == "__main__":
                 SNP(line) 
             else:
                 output_header = line.strip() + "\tHe_tot\tFst(ONLY_FOR_2_POPS)\n"
+    
+    # TEMPORARY call populate_max_presence
+    SNP.populate_max_presence()
 
     # Initialize blacklist
     blacklist = set()

@@ -5,13 +5,10 @@ Process radtags
 - When finished, rename log file with date and barcode length
     
 Global
-- Improve scripts formatting
-    - Verify options and put them in the same order as the STACKS programs help
 - Add step to merge resequenced individuals (fastq_combine_files.sh)
-* Keep log and error log of all scripts
+- Keep log and error log of all scripts (use tee)
 
 Filters
-- Use proportion of individuals rather than number
 - Use 2 MAF criteria, one global and one per pop
 
 Documentation
