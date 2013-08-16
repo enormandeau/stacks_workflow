@@ -20,8 +20,8 @@ class SNP(object):
         self.locus = int(l[1])
         self.position = int(l[4])
         self.population = l[5]
-        self.maxFreq = float(l[9])
-        self.minFreq = 1 - self.maxFreq
+        self.maxAlleleFreq = float(l[9])
+        self.maf = 1 - self.maxAlleleFreq
         self.obsHet = float(l[10])
         self.expHet = float(l[12]) 
         self.fis = float(l[17])
@@ -37,8 +37,7 @@ class SNP(object):
         return "\t".join(self.line) + "\n"
 
 class Locus(object):
-    """Locus object containing 1 or more SNPs and with methods to filter them
-
+    """Locus object containing 1 or more SNPs
     self.snps[POSITION][POPULATION] = SNP instance
     """
     def __init__(self, snps):
@@ -80,68 +79,109 @@ def filter_empty_loci(loci):
     """Remove loci without snps
     """
     for locus in loci:
-        if not len(locus.snps) == 0:
+        if len(locus.snps) > 0:
             yield locus
 
-def filter_number_individuals(loci, presence, criterion):
-    """WARNING: filter individual SNPs, not the locus
+def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, use_percent):
+    """Remove snps that do not have enough individuals for all populations
     """
-    print "Presence wanted:", presence, "Num pops:", criterion
     for locus in loci:
-        passing = False
-        number_pass = 0
-        print "=== New locus ===="
-        pos = locus.snps.keys()[0]
-        for pop in locus.snps[pos]:
-            print "  Population:", pop, "Presence:", locus.snps[pos][pop].presence, "/", presence
-            if locus.snps[pos][pop].presence >= presence:
-                number_pass += 1
-                print "  Locus:", locus.snps[pos][pop].locus, "  Pass:", number_pass
-        if number_pass >= criterion:
-            passing = True
-        if passing:
-            print r"  \\\ Passed ///"
+        pos_to_remove = []
+        for pos in locus.snps:
+            number_pass = 0
+            for pop in locus.snps[pos]:
+                max_num_ind = num_ind_per_pop[pop]
+                presence = locus.snps[pos][pop].presence
+                if use_percent:
+                    if 100 * float(presence) / max_num_ind > min_presence:
+                        number_pass += 1
+                else:
+                    if presence >= min_presence:
+                        number_pass += 1
+            if number_pass < criterion:
+                pos_to_remove.append(pos)
+        for p in pos_to_remove:
+            locus.snps.pop(p)
+        if len(locus.snps) > 0:
             yield locus
 
-def filter_global_maf(loci, maf, criterion):
-    """WARNING: filter individual SNPs, not the locus
+def filter_maf(loci, maf_global, maf_population, criterion_global):
+    """Remove SNPs that do not have high enough global or population-wise MAFs
     """
     for locus in loci:
-        yield locus
+        pos_to_remove = []
+        for pos in locus.snps:
+            number_pass_global = 0
+            number_pass_population = 0
+            for pop in locus.snps[pos]:
+                if locus.snps[pos][pop].maf >= maf_global:
+                    number_pass_global += 1
+                if locus.snps[pos][pop].maf >= maf_population:
+                    number_pass_population += 1
+            if number_pass_global < criterion_global and number_pass_population == 0:
+                pos_to_remove.append(pos)
+        for p in pos_to_remove:
+            locus.snps.pop(p)
+        if len(locus.snps) > 0:
+            yield locus
 
-def filter_locus_maf(loci, maf, criterion):
-    """WARNING: filter individual SNPs, not the locus
+def filter_heterozygozity(loci, max_hetero):
+    """Remove all loci where one population in one locus has too many
+    heterozygous individuals
     """
     for locus in loci:
-        yield locus
+        failed = 0
+        for pos in locus.snps:
+            for pop in locus.snps[pos]:
+                if locus.snps[pos][pop].obsHet > max_hetero:
+                    failed += 1
+        if failed > 0:
+            continue
+        else:
+            yield locus
 
-def filter_heterozygozity(loci, max_hetero, criterion):
+def filter_fis(loci, min_fis, max_fis):
+    """Remove all loci where the Fis value of one population in one locus is
+    outside the (min_fis, max_fis) range
+    """
     for locus in loci:
-        yield locus
-
-def filter_min_fis(loci, min_fis, criterion):
-    for locus in loci:
-        yield locus
-
-def filter_max_fis(loci, max_fis, criterion):
-    for locus in loci:
-        yield locus
+        failed = 0
+        for pos in locus.snps:
+            for pop in locus.snps[pos]:
+                if not min_fis < locus.snps[pos][pop].fis < max_fis:
+                    failed += 1
+        if failed > 0:
+            continue
+        else:
+            yield locus
 
 def filter_snp_number(loci, max_snps):
+    """Remove all loci with too many snps
+    """
     for locus in loci:
-        yield locus
+        if len(locus.snps) > max_snps:
+            continue
+        else:
+            yield locus
 
-def write_to_file(loci, output_file):
+def write_to_file(loci, output_file, header):
+    num_loci_kept = 0
     with open(output_file, "w") as out_f:
+        for h in header:
+            out_f.write(h)
         for locus in loci:
+            num_loci_kept += 1
             out_f.write(str(locus))
+    print num_loci_kept, "loci were retained"
 
-# Conditional functions
-def filter_true(lst): # filter true results
-    return [l for l in lst if l]
-
-def at_least_n_true(lst, n):
-    return len(filter_true(lst)) >= n
+def get_header(input_file):
+    header = "" 
+    with open(input_file) as f:
+        for line in f:
+            if line.strip().startswith("#"):
+                header = line
+            else:
+                return header
 
 # Main function
 if __name__ == "__main__":
@@ -155,20 +195,22 @@ if __name__ == "__main__":
     parser.add_argument('-P', '--population_map_file', type=str, required=True,
             help = 'population_map.txt file from "01-info_files"')
     parser.add_argument('-r', '--remove_pops', action="store_true",
-            help = 'population_map.txt file from "01-info_files"')
+            help = 'use the -l option to list populations that should be removed from the analysis')
     parser.add_argument('-k', '--keep_only_pops', action="store_true",
-            help = 'population_map.txt file from "01-info_files"')
+            help = 'use the -l option to list populations that should be kept from the analysis')
     parser.add_argument('-l', '--list_of_populations', type=str,
             help = 'list of populations to remove or keep with -r of -k (string, no spaces, separaged by comas, eg: 1,2,3,7)')
-    parser.add_argument('-n', '--max_allele_number', type=int, default=2,
-            help = 'maximum number of alleles per SNP, (int, 0 to 4, default: 2)')
     parser.add_argument('-p', '--min_presence', type=int, default=0,
             help = 'minimum number of individuals to keep locus (int, 0 to 100, default: 0)')
+    parser.add_argument('-j', '--min_presence_joker_populations', type=int, default=0,
+            help = 'number of populations where it is permitted that the -p threshold could not pass, (int, 0 or more, default: 0')
+    parser.add_argument('--use_percent', action="store_true",
+            help = 'whether to use percentage (float, 0 to 100, default 0) instead of minimal number of individuals')
     parser.add_argument('-H', '--max_hetero', type=float, default=0.5,
             help = 'maximum proportion of heterozygous individuals (float, 0 to 1, default: 0.5)')
     parser.add_argument('-a', '--maf_global', type=float, default=0.05,
             help = 'minimum minor allele frequency, global (float, 0 to 1, default: 0.05)')
-    parser.add_argument('-A', '--maf_locus', type=float, default=0.05,
+    parser.add_argument('-A', '--maf_population', type=float, default=0.02,
             help = 'minimum minor allele frequency, locus (float, 0 to 1, default: 0.05)')
     parser.add_argument('-f', '--min_fis', type=float, default=-1,
             help = 'minimum Fis value (float, -1 to 1, default: -1)')
@@ -177,14 +219,14 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--max_snp_number', type=int, default=999,
             help = 'maximum number of SNPs per locus (int, 0 or more, default: 999)')
     args = parser.parse_args()
-    
+
     # Assert proper values for parameters (do directly with argparse?)
     assert args.max_snp_number > 0, "max_snp_number must be a non-null integer"
-    assert args.max_allele_number in [2, 3, 4], "max_allele_number must be 2, 3 or 4"
     assert 0 <= args.min_presence <= 100, "min_presence must be an integer between 0 and 100" 
+    assert args.min_presence_joker_populations >= 0, "min_presence_joker_populations must be an integer that is 0 or more"
     assert 0 <= args.max_hetero <= 1, "max_hetero must be a decimal between 0 and 1"
     assert 0 <= args.maf_global <= 0.5, "maf_global must be a decimal between 0 and 0.5"
-    assert 0 <= args.maf_locus <= 0.5, "maf_locus must be a decimal between 0 and 0.5"
+    assert 0 <= args.maf_population <= 0.5, "maf_population must be a decimal between 0 and 0.5"
     assert -1 <= args.min_fis <= 1, "min_fis must be a decimal between -1 and 1"
     assert -1 <= args.max_fis <= 1, "max_fis must be a decimal between -1 and 1"
     assert not (args.remove_pops and args.keep_only_pops), "you must choose either remove_pops or keep_only_pops"
@@ -207,33 +249,15 @@ if __name__ == "__main__":
         wanted = set(args.list_of_populations)
         pops = [p for p in pops if p in wanted]
 
-    # TODO temporary
-    criterion = 2 # len(pops)
+    num_populations = len(pops) - args.min_presence_joker_populations
 
-    # Parse sumstats file and remove empty loci
+    # Input Filtering Output
     loci = filter_empty_loci(sumstats_parser(args.input_file, pops))
-
-    # Remove loci with too few individuals
-    loci = filter_number_individuals(loci, args.min_presence, criterion)
-
-    ## Remove SNPs with too low global MAF
-    #loci = filter_global_maf(loci, args.maf_global, criterion)
-
-    ## Remove SNPs with too low locus MAF
-    #loci = filter_locus_maf(loci, args.maf_locus, criterion)
-
-    ## Remove loci with too many heterozygous individuals
-    #loci = filter_heterozygozity(loci, args.min_presence, criterion)
-
-    ## Remove loci with too low Fis values
-    #loci = filter_min_fis(loci, args.min_fis, criterion)
-
-    ## Remove loci with too high Fis values
-    #loci = filter_max_fis(loci, args.max_fis, criterion)
-
-    ## Remove loci with too many SNPs
-    #loci = filter_snp_number(loci, args.max_snp_number)
-
-    # Write remaining loci to file
-    write_to_file(loci, args.output_file)
+    loci = filter_number_individuals(loci, args.min_presence, num_ind_per_pop, num_populations, args.use_percent)
+    loci = filter_maf(loci, args.maf_global, args.maf_population, num_populations)
+    loci = filter_heterozygozity(loci, args.max_hetero)
+    loci = filter_fis(loci, args.min_fis, args.max_fis)
+    loci = filter_snp_number(loci, args.max_snp_number)
+    header = get_header(args.input_file)
+    write_to_file(loci, args.output_file, header)
 
