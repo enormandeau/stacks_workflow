@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""Filter sumstats.tsv files from STACKS to get the following information:
+"""Filter sumstats.tsv files from STACKS
 
 Usage:
   ./filterStacksSNPs.py inputFile maxAlleleNumber minPresence maxHetero minAlleleFreq minFis maxFis maxSnpNumber
