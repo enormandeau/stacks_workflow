@@ -85,84 +85,95 @@ def filter_empty_loci(loci):
 def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, use_percent):
     """Remove snps that do not have enough individuals for all populations
     """
-    for locus in loci:
-        pos_to_remove = []
-        for pos in locus.snps:
-            number_pass = 0
-            for pop in locus.snps[pos]:
-                max_num_ind = num_ind_per_pop[pop]
-                presence = locus.snps[pos][pop].presence
-                if use_percent:
-                    if 100 * float(presence) / max_num_ind > min_presence:
-                        number_pass += 1
-                else:
-                    if presence >= min_presence:
-                        number_pass += 1
-            if number_pass < criterion:
-                pos_to_remove.append(pos)
-        for p in pos_to_remove:
-            locus.snps.pop(p)
-        if len(locus.snps) > 0:
-            yield locus
+    with open("01_filtered_number_individuals.tsv", "w") as out_f:
+        for locus in loci:
+            pos_to_remove = []
+            for pos in locus.snps:
+                number_pass = 0
+                for pop in locus.snps[pos]:
+                    max_num_ind = num_ind_per_pop[pop]
+                    presence = locus.snps[pos][pop].presence
+                    if use_percent:
+                        if 100 * float(presence) / max_num_ind > min_presence:
+                            number_pass += 1
+                    else:
+                        if presence >= min_presence:
+                            number_pass += 1
+                if number_pass < criterion:
+                    pos_to_remove.append(pos)
+                    for pop in locus.snps[pos]:
+                        out_f.write(str(locus.snps[pos][pop]))
+            for p in pos_to_remove:
+                locus.snps.pop(p)
+            if len(locus.snps) > 0:
+                yield locus
 
 def filter_maf(loci, maf_global, maf_population, criterion_global):
     """Remove SNPs that do not have high enough global or population-wise MAFs
     """
-    for locus in loci:
-        pos_to_remove = []
-        for pos in locus.snps:
-            number_pass_global = 0
-            number_pass_population = 0
-            for pop in locus.snps[pos]:
-                if locus.snps[pos][pop].maf >= maf_global:
-                    number_pass_global += 1
-                if locus.snps[pos][pop].maf >= maf_population:
-                    number_pass_population += 1
-            if number_pass_global < criterion_global and number_pass_population == 0:
-                pos_to_remove.append(pos)
-        for p in pos_to_remove:
-            locus.snps.pop(p)
-        if len(locus.snps) > 0:
-            yield locus
+    with open("02_filtered_maf", "w") as out_f:
+        for locus in loci:
+            pos_to_remove = []
+            for pos in locus.snps:
+                number_pass_global = 0
+                number_pass_population = 0
+                for pop in locus.snps[pos]:
+                    if locus.snps[pos][pop].maf >= maf_global:
+                        number_pass_global += 1
+                    if locus.snps[pos][pop].maf >= maf_population:
+                        number_pass_population += 1
+                if number_pass_global < criterion_global and number_pass_population == 0:
+                    pos_to_remove.append(pos)
+                    for pop in locus.snps[pos]:
+                        out_f.write(str(locus.snps[pos][pop]))
+            for p in pos_to_remove:
+                locus.snps.pop(p)
+            if len(locus.snps) > 0:
+                yield locus
 
 def filter_heterozygozity(loci, max_hetero):
     """Remove all loci where one population in one locus has too many
     heterozygous individuals
     """
-    for locus in loci:
-        failed = 0
-        for pos in locus.snps:
-            for pop in locus.snps[pos]:
-                if locus.snps[pos][pop].obsHet > max_hetero:
-                    failed += 1
-        if failed > 0:
-            continue
-        else:
-            yield locus
+    with open("03_filtered_heterozygozity", "w") as out_f:
+        for locus in loci:
+            failed = 0
+            for pos in locus.snps:
+                for pop in locus.snps[pos]:
+                    if locus.snps[pos][pop].obsHet > max_hetero:
+                        out_f.write(str(locus.snps[pos][pop]))
+                        failed += 1
+            if failed > 0:
+                continue
+            else:
+                yield locus
 
 def filter_fis(loci, min_fis, max_fis):
     """Remove all loci where the Fis value of one population in one locus is
     outside the (min_fis, max_fis) range
     """
-    for locus in loci:
-        failed = 0
-        for pos in locus.snps:
-            for pop in locus.snps[pos]:
-                if not min_fis < locus.snps[pos][pop].fis < max_fis:
-                    failed += 1
-        if failed > 0:
-            continue
-        else:
-            yield locus
+    with open("04_filtered_fis", "w") as out_f:
+        for locus in loci:
+            failed = 0
+            for pos in locus.snps:
+                for pop in locus.snps[pos]:
+                    if not min_fis < locus.snps[pos][pop].fis < max_fis:
+                        out_f.write(str(locus.snps[pos][pop]))
+                        failed += 1
+            if failed > 0:
+                continue
+            else:
+                yield locus
 
 def filter_snp_number(loci, max_snps):
     """Remove all loci with too many snps
     """
-    for locus in loci:
-        if len(locus.snps) > max_snps:
-            continue
-        else:
-            yield locus
+    with open("05_filtered_snp_numbers", "w") as out_f:
+        for locus in loci:
+            if len(locus.snps) > max_snps:
+                out_f.write(str(locus))
+            else:
+                yield locus
 
 def write_to_file(loci, output_file, header):
     num_loci_kept = 0
@@ -210,8 +221,8 @@ if __name__ == "__main__":
             help = 'maximum proportion of heterozygous individuals (float, 0 to 1, default: 0.5)')
     parser.add_argument('-a', '--maf_global', type=float, default=0.05,
             help = 'minimum minor allele frequency, global (float, 0 to 1, default: 0.05)')
-    parser.add_argument('-A', '--maf_population', type=float, default=0.02,
-            help = 'minimum minor allele frequency, locus (float, 0 to 1, default: 0.05)')
+    parser.add_argument('-A', '--maf_population', type=float, default=0.1,
+            help = 'minimum minor allele frequency, locus (float, 0 to 1, default: 0.1)')
     parser.add_argument('-f', '--min_fis', type=float, default=-1,
             help = 'minimum Fis value (float, -1 to 1, default: -1)')
     parser.add_argument('-F', '--max_fis', type=float, default=1,
