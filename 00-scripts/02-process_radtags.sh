@@ -9,7 +9,7 @@ ENZYME=$2 # Name of the enzyme (run 'process_radtags' without options for list)
 cat $INFO_FILES/lane_info.txt |
 while read f
 do
-    grep -E "^$f" $INFO_FILES/sample_information.txt | \
+    grep -E "^$f" $INFO_FILES/sample_information.tsv | \
         cut -f 2 > $INFO_FILES/barcodes.txt
 
     # Prepare bacode_lengths.txt from barcodes.txt 

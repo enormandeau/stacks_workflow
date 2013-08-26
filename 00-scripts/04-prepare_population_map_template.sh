@@ -19,7 +19,7 @@ do
     pop=$(echo $i | cut -d "_" -f 1)
     ind=$(echo $i | cut -d "_" -f 2)
     echo $(grep -E "[[:space:]]$pop[[:space:]]$ind[[:space:]]" \
-        $INFO_FILES/sample_information.txt | \
+        $INFO_FILES/sample_information.tsv | \
         cut -f 5)
 done > $INFO_FILES/population_map.txt
 
