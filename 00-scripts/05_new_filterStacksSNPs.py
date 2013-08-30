@@ -157,7 +157,7 @@ def filter_fis(loci, min_fis, max_fis):
             failed = 0
             for pos in locus.snps:
                 for pop in locus.snps[pos]:
-                    if not min_fis < locus.snps[pos][pop].fis < max_fis:
+                    if not min_fis <= locus.snps[pos][pop].fis <= max_fis:
                         out_f.write(str(locus.snps[pos][pop]))
                         failed += 1
             if failed > 0:
@@ -209,7 +209,7 @@ if __name__ == "__main__":
             help = 'use the -l option to list populations that should be removed from the analysis')
     parser.add_argument('-k', '--keep_only_pops', action="store_true",
             help = 'use the -l option to list populations that should be kept from the analysis')
-    parser.add_argument('-l', '--list_of_populations', type=str,
+    parser.add_argument('-l', '--list_of_populations', type=str, action='append',
             help = 'list of populations to remove or keep with -r of -k (string, no spaces, separaged by comas, eg: 1,2,3,7)')
     parser.add_argument('-p', '--min_presence', type=int, default=0,
             help = 'minimum number of individuals to keep locus (int, 0 to 100, default: 0)')
@@ -236,8 +236,8 @@ if __name__ == "__main__":
     assert 0 <= args.min_presence <= 100, "min_presence must be an integer between 0 and 100" 
     assert args.min_presence_joker_populations >= 0, "min_presence_joker_populations must be an integer that is 0 or more"
     assert 0 <= args.max_hetero <= 1, "max_hetero must be a decimal between 0 and 1"
-    assert 0 <= args.maf_global <= 0.5, "maf_global must be a decimal between 0 and 0.5"
-    assert 0 <= args.maf_population <= 0.5, "maf_population must be a decimal between 0 and 0.5"
+    assert 0 <= args.maf_global <= 1.0, "maf_global must be a decimal between 0 and 1.0"
+    assert 0 <= args.maf_population <= 1.0, "maf_population must be a decimal between 0 and 1.0"
     assert -1 <= args.min_fis <= 1, "min_fis must be a decimal between -1 and 1"
     assert -1 <= args.max_fis <= 1, "max_fis must be a decimal between -1 and 1"
     assert not (args.remove_pops and args.keep_only_pops), "you must choose either remove_pops or keep_only_pops"
