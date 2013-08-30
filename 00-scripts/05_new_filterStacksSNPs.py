@@ -209,7 +209,7 @@ if __name__ == "__main__":
             help = 'use the -l option to list populations that should be removed from the analysis')
     parser.add_argument('-k', '--keep_only_pops', action="store_true",
             help = 'use the -l option to list populations that should be kept from the analysis')
-    parser.add_argument('-l', '--list_of_populations', type=str, action='append',
+    parser.add_argument('-l', '--list_of_populations', type=str,
             help = 'list of populations to remove or keep with -r of -k (string, no spaces, separaged by comas, eg: 1,2,3,7)')
     parser.add_argument('-p', '--min_presence', type=int, default=0,
             help = 'minimum number of individuals to keep locus (int, 0 to 100, default: 0)')
@@ -254,10 +254,12 @@ if __name__ == "__main__":
     # Define which populations should be kept
     pops = num_ind_per_pop.keys()
     if args.remove_pops:
-        unwanted = set(args.list_of_populations)
+        unwanted = set(args.list_of_populations.split(","))
+        print "Unwanted pops:", unwanted
         pops = [p for p in pops if p not in unwanted]
     elif args.keep_only_pops:
-        wanted = set(args.list_of_populations)
+        wanted = set(args.list_of_populations.split(","))
+        print "Wanted pops:", wanted
         pops = [p for p in pops if p in wanted]
 
     num_populations = len(pops) - args.min_presence_joker_populations
