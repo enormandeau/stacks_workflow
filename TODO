@@ -9,11 +9,15 @@ Global
 - Keep log and error log of all scripts (use tee)
 
 Filters
-- Use 2 MAF criteria, one global and one per pop
+- Add joker option for Het and Fis
+- First SNP of sumstat file is eliminated ('started' logic)
+- For Het and Fis filters, only the SNPs for 1 population are outputed to the
+  filtered file. Should be the whole locus.
 
 Documentation
 - Add know-how section
     - Testing different trim lengths to keep more reads
     - Testing different parameters for STACKS scripts
     - Filtering
+    - Preparing files for population genetics analyses
 
