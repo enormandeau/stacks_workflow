@@ -9,8 +9,6 @@ Global
 - Keep log and error log of all scripts (use tee)
 
 Filters
-- Add joker option for Het and Fis
-- First SNP of sumstat file is eliminated ('started' logic)
 - For Het and Fis filters, only the SNPs for 1 population are outputed to the
   filtered file. Should be the whole locus.
 

@@ -129,7 +129,7 @@ def filter_maf(loci, maf_global, maf_population, criterion_global):
             if len(locus.snps) > 0:
                 yield locus
 
-def filter_heterozygozity(loci, max_hetero):
+def filter_heterozygozity(loci, max_hetero, joker):
     """Remove all loci where one population in one locus has too many
     heterozygous individuals
     """
@@ -141,12 +141,12 @@ def filter_heterozygozity(loci, max_hetero):
                     if locus.snps[pos][pop].obsHet > max_hetero:
                         out_f.write(str(locus.snps[pos][pop]))
                         failed += 1
-            if failed > 0:
+            if failed > joker:
                 continue
             else:
                 yield locus
 
-def filter_fis(loci, min_fis, max_fis):
+def filter_fis(loci, min_fis, max_fis, joker):
     """Remove all loci where the Fis value of one population in one locus is
     outside the (min_fis, max_fis) range
     """
@@ -158,7 +158,7 @@ def filter_fis(loci, min_fis, max_fis):
                     if not min_fis <= locus.snps[pos][pop].fis <= max_fis:
                         out_f.write(str(locus.snps[pos][pop]))
                         failed += 1
-            if failed > 0:
+            if failed > joker:
                 continue
             else:
                 yield locus
@@ -211,12 +211,14 @@ if __name__ == "__main__":
             help = 'list of populations to remove or keep with -r of -k (string, no spaces, separaged by comas, eg: 1,2,3,7)')
     parser.add_argument('-p', '--min_presence', type=int, default=0,
             help = 'minimum number of individuals to keep locus (int, 0 to 100, default: 0)')
-    parser.add_argument('-j', '--min_presence_joker_populations', type=int, default=0,
-            help = 'number of populations where it is permitted that the -p threshold could not pass, (int, 0 or more, default: 0')
+    parser.add_argument('-x', '--min_presence_joker_populations', type=int, default=0,
+            help = 'number of populations where it is permitted that the -p threshold does not pass, (int, 0 or more, default: 0')
     parser.add_argument('--use_percent', action="store_true",
             help = 'whether to use percentage (float, 0 to 100, default 0) instead of minimal number of individuals')
     parser.add_argument('-H', '--max_hetero', type=float, default=0.5,
             help = 'maximum proportion of heterozygous individuals (float, 0 to 1, default: 0.5)')
+    parser.add_argument('-y', '--max_hetero_joker', type=int, default=0,
+            help = 'number of populations where it is permitted that the -H threshold does not pass, (int, 0 or more, default: 0')
     parser.add_argument('-a', '--maf_global', type=float, default=0.05,
             help = 'minimum minor allele frequency, global (float, 0 to 1, default: 0.05)')
     parser.add_argument('-A', '--maf_population', type=float, default=0.1,
@@ -225,6 +227,8 @@ if __name__ == "__main__":
             help = 'minimum Fis value (float, -1 to 1, default: -1)')
     parser.add_argument('-F', '--max_fis', type=float, default=1,
             help = 'maximum Fis value (float, -1 to 1, default: 1)')
+    parser.add_argument('-z', '--fis_joker', type=int, default=0,
+            help = 'number of populations where it is permitted that the -f or -F thresholds do not pass, (int, 0 or more, default: 0')
     parser.add_argument('-s', '--max_snp_number', type=int, default=999,
             help = 'maximum number of SNPs per locus (int, 0 or more, default: 999)')
     args = parser.parse_args()
@@ -253,22 +257,36 @@ if __name__ == "__main__":
     pops = num_ind_per_pop.keys()
     if args.remove_pops:
         unwanted = set(args.list_of_populations.split(","))
-        print "Unwanted pops:", unwanted
+        print "Unwanted pops:", list(sorted(unwanted))
         pops = [p for p in pops if p not in unwanted]
     elif args.keep_only_pops:
         wanted = set(args.list_of_populations.split(","))
-        print "Wanted pops:", wanted
+        print "Wanted pops:", list(sorted(wanted))
         pops = [p for p in pops if p in wanted]
 
-    num_populations = len(pops) - args.min_presence_joker_populations
+    num_populations = len(pops)
 
     # Input Filtering Output
-    loci = filter_empty_loci(sumstats_parser(args.input_file, pops))
-    loci = filter_number_individuals(loci, args.min_presence, num_ind_per_pop, num_populations, args.use_percent)
-    loci = filter_maf(loci, args.maf_global, args.maf_population, num_populations)
-    loci = filter_heterozygozity(loci, args.max_hetero)
-    loci = filter_fis(loci, args.min_fis, args.max_fis)
-    loci = filter_snp_number(loci, args.max_snp_number)
+    loci = filter_empty_loci(sumstats_parser(args.input_file,
+        pops))
+    loci = filter_number_individuals(loci, args.min_presence,
+            num_ind_per_pop,
+            num_populations - args.min_presence_joker_populations,
+            args.use_percent)
+    loci = filter_maf(loci,
+            args.maf_global,
+            args.maf_population,
+            num_populations)
+    loci = filter_heterozygozity(loci,
+            args.max_hetero,
+            args.max_hetero_joker)
+    loci = filter_fis(loci,
+            args.min_fis,
+            args.max_fis,
+            args.fis_joker)
+    loci = filter_snp_number(loci,
+            args.max_snp_number)
     header = get_header(args.input_file)
-    write_to_file(loci, args.output_file, header)
+    write_to_file(loci, args.output_file,
+            header)
 
