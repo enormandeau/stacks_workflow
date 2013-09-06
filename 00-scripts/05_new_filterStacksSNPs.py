@@ -56,13 +56,12 @@ def sumstats_parser(sumstats_file, pops):
     """Parse sumstats file and yield one locus at a time
     """
     with open(sumstats_file) as f:
-        started = False
         previous_locus = -99
         snps = []
         for line in f:
             if not line.strip().startswith("#"):
                 snp = SNP(line)
-                if started and snp.locus != previous_locus:
+                if snp.locus != previous_locus:
                     if len(snps) > 0:
                         yield Locus(snps)
                     snps = []
@@ -70,7 +69,6 @@ def sumstats_parser(sumstats_file, pops):
                         snps.append(snp)
                         previous_locus = snp.locus
                 else:
-                    started = True
                     if snp.population in pops:
                         snps.append(snp)
 
