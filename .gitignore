@@ -8,13 +8,15 @@
 *.tsv
 *.vcf
 */population_map*
+*/sample_information*
+*_filtered_*
 *barcode*
 *list.txt
 *private*
 *test*
 *testlog*
 *~
+99-papers/*
 Makefile
 lane_info.txt
-*/sample_information*
-99-papers/*
+population_map.txt
