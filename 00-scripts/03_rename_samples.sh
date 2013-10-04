@@ -25,7 +25,7 @@ cat $INFO_FILES/lane_info.txt |
         do
             lane=$file
             barcode=$(echo $sample_file | perl -pe 's/^.*_sample_//; s/\.fq//')
-            sample_info=$(grep $lane $INFO_FILES/sample_information.tsv | grep $barcode)
+            sample_info=$(grep $lane $INFO_FILES/sample_information.csv | grep $barcode)
             population=$(echo $sample_info | cut -d " " -f 3)
             sample_name=$(echo $sample_info | cut -d " " -f 4)
             new_name=$(echo "$population"_"$sample_name".fq)
