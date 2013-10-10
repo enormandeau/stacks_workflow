@@ -80,10 +80,12 @@ def filter_empty_loci(loci):
         if len(locus.snps) > 0:
             yield locus
 
-def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, use_percent):
+def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, use_percent, header):
     """Remove snps that do not have enough individuals for all populations
     """
     with open("01_filtered_number_individuals.tsv", "w") as out_f:
+        for h in header:
+            out_f.write(h)
         for locus in loci:
             pos_to_remove = []
             for pos in locus.snps:
@@ -106,10 +108,12 @@ def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, us
             if len(locus.snps) > 0:
                 yield locus
 
-def filter_maf(loci, maf_global, maf_population, criterion_global):
+def filter_maf(loci, maf_global, maf_population, criterion_global, header):
     """Remove SNPs that do not have high enough global or population-wise MAFs
     """
     with open("02_filtered_maf", "w") as out_f:
+        for h in header:
+            out_f.write(h)
         for locus in loci:
             pos_to_remove = []
             for pos in locus.snps:
@@ -129,11 +133,13 @@ def filter_maf(loci, maf_global, maf_population, criterion_global):
             if len(locus.snps) > 0:
                 yield locus
 
-def filter_heterozygozity(loci, max_hetero, joker):
+def filter_heterozygozity(loci, max_hetero, joker, header):
     """Remove all loci where one population in one locus has too many
     heterozygous individuals
     """
     with open("03_filtered_heterozygozity", "w") as out_f:
+        for h in header:
+            out_f.write(h)
         for locus in loci:
             failed = 0
             for pos in locus.snps:
@@ -146,11 +152,13 @@ def filter_heterozygozity(loci, max_hetero, joker):
             else:
                 yield locus
 
-def filter_fis(loci, min_fis, max_fis, joker):
+def filter_fis(loci, min_fis, max_fis, joker, header):
     """Remove all loci where the Fis value of one population in one locus is
     outside the (min_fis, max_fis) range
     """
     with open("04_filtered_fis", "w") as out_f:
+        for h in header:
+            out_f.write(h)
         for locus in loci:
             failed = 0
             for pos in locus.snps:
@@ -163,10 +171,12 @@ def filter_fis(loci, min_fis, max_fis, joker):
             else:
                 yield locus
 
-def filter_snp_number(loci, max_snps):
+def filter_snp_number(loci, max_snps, header):
     """Remove all loci with too many snps
     """
     with open("05_filtered_snp_numbers", "w") as out_f:
+        for h in header:
+            out_f.write(h)
         for locus in loci:
             if len(locus.snps) > max_snps:
                 out_f.write(str(locus))
@@ -267,26 +277,31 @@ if __name__ == "__main__":
     num_populations = len(pops)
 
     # Input Filtering Output
+    header = get_header(args.input_file)
     loci = filter_empty_loci(sumstats_parser(args.input_file,
         pops))
     loci = filter_number_individuals(loci, args.min_presence,
             num_ind_per_pop,
             num_populations - args.min_presence_joker_populations,
-            args.use_percent)
+            args.use_percent,
+            header)
     loci = filter_maf(loci,
             args.maf_global,
             args.maf_population,
-            num_populations)
+            num_populations,
+            header)
     loci = filter_heterozygozity(loci,
             args.max_hetero,
-            args.max_hetero_joker)
+            args.max_hetero_joker,
+            header)
     loci = filter_fis(loci,
             args.min_fis,
             args.max_fis,
-            args.fis_joker)
+            args.fis_joker,
+            header)
     loci = filter_snp_number(loci,
-            args.max_snp_number)
-    header = get_header(args.input_file)
+            args.max_snp_number,
+            header)
     write_to_file(loci, args.output_file,
             header)
 
