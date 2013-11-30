@@ -5,7 +5,7 @@
 # Comment out options that you do not wish to use
 
 t="-t sam"            # t: input file Type. Supported types: bowtie, sam, or bam
-o="-o 05-stacks-c"    # o: output path to write results.
+o="-o 05-stacks"    # o: output path to write results.
 #i="-i 1"             # i: SQL ID to insert into the output to identify this
                       #   sample
 m="-m 2"              # m: minimum depth of coverage to report a stack
