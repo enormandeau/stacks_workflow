@@ -25,11 +25,11 @@ Step 6 - Format for population genetics
 a) Download and install the most recent version of this workflow
  - From the terminal, run:
 
-    ```
-    cd ~/Desktop
-    wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
-    unzip master.zip
-    ```
+```
+cd ~/Desktop
+wget https://github.com/enormandeau/stacks\_workflow/archive/master.zip
+unzip master.zip
+```
 
 Use the extracted folder (stacks_workflow-master) as your working directory for the rest of the project. If you just updated the workflow, please use the MANUAL.pdf file that comes with that new version.
 
@@ -38,16 +38,17 @@ b) Download and install STACKS
  - Unzip
  - From within the STACKS folder, run:
 
-    ```
-    ./configure
-    make
-    sudo make install
-    ```
+```
+./configure
+make
+sudo make install
+```
 
 
 ## Step 1 - Download raw datafiles (Illumina lanes)
 a) Put them in the **raw** folder of the gbs_workflow
  - NOTE: All file names MUST end with **.fastq.gz**
+
 b) Prepare the **lane_info.txt** file automatically
  - From the gbs_workflow folder, run:
 
@@ -55,7 +56,7 @@ b) Prepare the **lane_info.txt** file automatically
     ./00-scripts/01_prepare_lane_info.sh
     ```
 
-c) Prepare the **sample_information.csv** file using the format of **example_sample_information.csv**. This file will be used to extract the samples and rename the sample files in an intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (Pop01 and pop01), since these will be treated as two different populations.
+c) Prepare the **sample_information.csv** file using the format of **example_sample_information.csv**.This file will be used to extract the samples and rename the sample files in an intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (Pop01 and pop01), since these will be treated as two different populations.
  
 ## Step 2 - Extract individual information with process_radtags
 a) Prepare a sample information file **sample_info.txt** and put it in the **01-info_files folder**. This file should contain one line by sample and two columns. The first column contains the exact name of the lane in which the individual is found (see the **lane_info.txt** file in the **01-info_files folder** for an example of the format) and the sequence of the tag for that individual in the second column.
