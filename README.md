@@ -27,7 +27,7 @@ a) Download and install the most recent version of this workflow
 
     ```
     cd ~/Desktop
-    wget https://github.com/enormandeau/stacks\_workflow/archive/master.zip
+    wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
     unzip master.zip
     ```
 
