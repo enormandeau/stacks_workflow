@@ -20,12 +20,13 @@ Step 5 - Filters
 Step 6 - Format for population genetics  
 
 # The workflow
+
 ## Step 0 - Install and prepare the workflow
     a) Download and install the most recent version of this workflow
         - From the terminal, run:
 
 ```cd ~/Desktop
-wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
+wget https://github.com/enormandeau/stacks\_workflow/archive/master.zip
 unzip master.zip```
 
 Use the extracted folder (stacks_workflow-master) as your working directory for the rest of the project. If you just updated the workflow, please use the MANUAL.pdf file that comes with that new version.
