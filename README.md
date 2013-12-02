@@ -52,9 +52,9 @@ a) Put them in the **raw** folder of the gbs_workflow
 b) Prepare the **lane_info.txt** file automatically
  - From the gbs_workflow folder, run:
 
-    ```
-    ./00-scripts/01_prepare_lane_info.sh
-    ```
+```
+./00-scripts/01_prepare_lane_info.sh
+```
 
 c) Prepare the **sample_information.csv** file using the format of **example_sample_information.csv**.This file will be used to extract the samples and rename the sample files in an intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (Pop01 and pop01), since these will be treated as two different populations.
  
@@ -64,9 +64,9 @@ a) Prepare a sample information file **sample_info.txt** and put it in the **01-
 b) Launch process_radtags with:
  ### TODO use discarted reads at each step rather than treating the whole file each time
 
-    ```
-    ./00-scripts/02_process_radtags.sh <trimLength> <enzyme>
-    ```
+```
+./00-scripts/02_process_radtags.sh <trimLength> <enzyme>
+```
 
 Where:
  - trimLength = length to trim all the sequences
@@ -75,9 +75,9 @@ Where:
 ## Step 3a - Rename samples and make links
 a) To rename and copy the samples, run:
 
-    ```
-    ./00-scripts/03_rename_samples.sh
-    ```
+```
+./00-scripts/03_rename_samples.sh
+```
 
 b) Join samples that should go together
     ### TODO Implement neat way of doing this
@@ -90,75 +90,75 @@ a) Install bwa
 b) Download reference genome to the 01-info_files
 c) Index reference genome, run:
 
-    ```
-    bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
-    ```
+```
+bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
+```
 
 d) copy files
 
-    ```
-    cp genome.* 01-info_files
-    ```
+```
+cp genome.* 01-info_files
+```
 
 d) Aligned samples, run
 
-    ```
-    for i in $(ls -1 04-all_samples/*.fq); do name=$(basename $i); bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome $i | bwa samse -r "@RG\tID:'$name'\tSM:'$name'\tPL:Illumina" ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; done
-    ```
-	
+```
+for i in $(ls -1 04-all_samples/*.fq); do name=$(basename $i); bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome $i | bwa samse -r "@RG\tID:'$name'\tSM:'$name'\tPL:Illumina" ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; done
+```
+
 ## Step 4 - STACKS (ustack/pstacks, cstack, sstack, populations/genotypes)
 a) Prepare population info file
- - To prepare a template of that file, run:
+- To prepare a template of that file, run:
 
-    ```
-    ./00-scripts/04_prepare_population_map_template.sh
-    ```
+```
+./00-scripts/04_prepare_population_map_template.sh
+```
 
 b) Rename the template file to **population_map.txt** and remove **.fq** extensions in column 1
 c) Open the stacks script in the 00-scripts folder and edit the options
 d) Run the STACKS programs, in order:
  - ustacks (or pstacks for reference assisted)
 
-    ```
-    ./00-scripts/stacks_1a_ustacks.sh
-    ```
+```
+./00-scripts/stacks_1a_ustacks.sh
+```
 
 or (if you are using a reference genome)
 
-    ```
-    ./00-scripts/stacks_1b_pstacks.sh
-    ```
+```
+./00-scripts/stacks_1b_pstacks.sh
+```
 
  - cstacks
 
-    ```
-    ./00-scripts/stacks_2_cstacks.sh
-    ```
+```
+./00-scripts/stacks_2_cstacks.sh
+```
 
  - sstacks
 
-    ```
-    ./00-scripts/stacks_3_sstacks.sh
-    ```
+```
+./00-scripts/stacks_3_sstacks.sh
+```
 
  - populations or genotypes
 
-    ```
-    ./00-scripts/stacks_4_populations.sh
-    ```
+```
+./00-scripts/stacks_4_populations.sh
+```
 
 ## Step 5 - Filters
  - Use ./00-scripts/05_filterStacksSNPs.py to filter your SNPs. To print the documentation, type:
 
-    ```
-    ./00-scripts/05_filterStacksSNPs.py
-    ```
+```
+./00-scripts/05_filterStacksSNPs.py
+```
 
  - Launch the script, example:
 
-    ```
-    ./00-scripts/05_filterStacksSNPs.py ./05-stacks/batch_1.sumstats.tsv 2 1 0.6 0.05 -0.3 0.3 8
-    ```
+```
+./00-scripts/05_filterStacksSNPs.py ./05-stacks/batch_1.sumstats.tsv 2 1 0.6 0.05 -0.3 0.3 8
+```
 
 ## Step 6 - Format for population genetics
 ... in development ...
