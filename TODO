@@ -5,12 +5,7 @@ Process radtags
 - When finished, rename log file with date and barcode length
     
 Global
-- Add step to merge resequenced individuals (fastq_combine_files.sh)
 - Keep log and error log of all scripts (use tee)
-
-Filters
-- For Het and Fis filters, only the SNPs for 1 population are outputed to the
-  filtered file. Should be the whole locus.
 
 Documentation
 - Add know-how section
