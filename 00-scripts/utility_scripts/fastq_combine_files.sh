@@ -11,5 +11,5 @@ dir3=$3
 mkdir $dir3
 
 # Combine the files
-for i in d1/*.txt; do file=$(basename $i); cat $dir1/$file $dir2/$file > $dir3/$file; done
+for i in $dir1/*.txt; do file=$(basename $i); cat $dir1/$file $dir2/$file > $dir3/$file; done
 
