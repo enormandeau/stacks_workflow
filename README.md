@@ -1,11 +1,11 @@
 # stacks_workflow
 
-Workflow to work with RAD/GBS data in STACKS
+An integrated workflow standardizing STACKS analyses on RAD/GBS data
 
 # About the STACKS Workflow
-The STACKS analysis pipeline (http://creskolab.uoregon.edu/stacks/) is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people with GBS or RAD projects and limited UNIX/Linux experience can jump on the analysis wagon faster. It is being developped with the needs of our research group in mind and we make no claim about its use to other groups or in other contexts.
+The STACKS analysis pipeline (http://creskolab.uoregon.edu/stacks/) is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people with GBS or RAD projects and limited UNIX/Linux experience can jump on the analysis wagon faster. It was developped with the needs of our research group in mind. We make no claim about its use to other groups or in other contexts but hope it may be of use to some.
 
-The workflow has been tested with version 1.04 of STACKS.
+The workflow has been tested with version 1.08 and earlier versions of STACKS.
 
 # Licence
 The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for more details.
@@ -13,11 +13,10 @@ The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for
 # Overview of the steps
 Step 0 - Install and prepare the workflow  
 Step 1 - Download raw datafiles (Illumina lanes)  
-Step 2 - Extract individual information with process_radtags  
-Step 3 - Rename samples and make links  
-Step 4 - STACKS (ustack/pstacks, cstack, sstack, populations/genotypes)  
+Step 2 - Extract individual data with process_radtags  
+Step 3 - Rename samples and create links  
+Step 4 - STACKS pipeline (ustack/pstacks, cstack, sstack, populations/genotypes)  
 Step 5 - Filters  
-Step 6 - Format for population genetics  
 
 # The workflow
 
@@ -159,7 +158,4 @@ or (if you are using a reference genome)
 ```
 ./00-scripts/05_filterStacksSNPs.py ./05-stacks/batch_1.sumstats.tsv 2 1 0.6 0.05 -0.3 0.3 8
 ```
-
-## Step 6 - Format for population genetics
-... in development ...
 
