@@ -2,10 +2,13 @@
 
 An integrated workflow standardizing STACKS analyses on RAD/GBS data
 
-# About the STACKS Workflow
-The STACKS analysis pipeline (http://creskolab.uoregon.edu/stacks/) is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people with GBS or RAD projects and limited UNIX/Linux experience can jump on the analysis wagon faster. It was developped with the needs of our research group in mind. We mainly developped the part workflow for its use in non-model species studies. We make no claim about its use to other groups or in other contexts but hope it may be of use to some.
+# About STACKS
+The STACKS analysis pipeline (http://creskolab.uoregon.edu/stacks/) is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. Upon starting to use STACKS, it is highly suggested to read the two official STACKS papers. These articles are listed at the bottom of the official page and contain the keyword *Stacks* in their title.
 
-The workflow has been tested with version 1.08 and earlier versions of STACKS.
+# About the STACKS Workflow
+This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people with GBS or RAD projects and limited UNIX/Linux experience can jump on the analysis wagon faster. It was developped with the needs of our research group in mind. We mainly developped the part workflow for its use in non-model species studies. We make no claim about its use to other groups or in other contexts but hope it may be of use to some.
+
+The workflow has been tested with version 1.09 and earlier versions of STACKS.
 
 # Licence
 The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for more details.
@@ -14,7 +17,7 @@ The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for
 Step 0 - Install and prepare the workflow  
 Step 1 - Download raw datafiles (Illumina lanes)  
 Step 2 - Extract individual data with process_radtags  
-Step 3 - Rename samples and create links  
+Step 3 - Rename samples
 Step 4 - STACKS pipeline (ustack/pstacks, cstack, sstack, populations/genotypes)  
 Step 5 - Filters  
 
@@ -57,7 +60,7 @@ b) Prepare the **lane_info.txt** file automatically
 c) Prepare the **sample_information.csv** file using the same format as found in the **example_sample_information.csv** file. This file will be used to extract the samples and rename the sample files in a more intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (eg: Pop01 and pop01), since these will be treated as two different populations.
  
 ## Step 2 - Extract individual data with process_radtags  
-a) Prepare a sample information file **sample_info.txt** and put it in the **01-info_files folder**. This file should contain one line per sample and two columns. The first column contains the exact name of the lane in which the individual is found (see the **lane_info.txt** file in the **01-info_files folder** for an example of the format) and the sequence of the tag for that individual in the second column.
+a) Prepare a sample information file **sample_information.csv** and put it in the **01-info_files folder**. This file should contain one line per sample and two columns. The first column contains the exact name of the lane in which the individual is found and the second column contains the barcode sequence of that individual.
 
 b) Launch process_radtags with:
  ### TODO use discarted reads at each step rather than treating the whole file each time
@@ -70,7 +73,7 @@ Where:
  - trimLength = length to trim all the sequences
  - enzyme = name of enzyme (run **process_radtags**, without options, for a list of the supported enzymes)
 
-## Step 3a - Rename samples and create links  
+## Step 3a - Rename samples
 a) To rename and copy the samples, run:
 
 ```
