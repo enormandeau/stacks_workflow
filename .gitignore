@@ -9,6 +9,7 @@
 *.vcf
 */population_map*
 */sample_information*
+*MANUAL*
 *_filtered_*
 *barcode*
 *list.txt
