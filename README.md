@@ -1,5 +1,6 @@
 # STACKS_WORKFLOW
 
+
 An integrated workflow standardizing STACKS analyses on RAD/GBS data
 
 # About STACKS
