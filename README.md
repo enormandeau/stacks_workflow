@@ -14,10 +14,10 @@ The workflow has been tested with version 1.10 and earlier versions of STACKS un
 This manual can be found in 3 places:
 
  - Online at: https://github.com/enormandeau/stacks_workflow
- - The **MANUAL.pdf** file, also in the base directory of **stacks_workflow**  
- - The **README.md** file in the base directory of **stacks_workflow**  
+ - In the **MANUAL.pdf** file found in the base directory of **stacks_workflow**  
+ - In the **README.md** file, also found in the base directory of **stacks_workflow**  
 
-The online version is especially nicelly formatted. We suggest that you use either the online or the .pdf version. Using the text version is also riskier since there is always a risk of unvoluntarily modifying and corrupting the file.
+The online version is especially nicelly formatted. We suggest that you use it or the .pdf version. Using the text version is riskier because of the risk of involuntarily modifying and corrupting the file.
 
 # Licence
 The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for more details.
@@ -36,7 +36,7 @@ Step 5 - Filtering the results
 a) Download and install the most recent version of this workflow
  - From the terminal, run:
 
-```
+```{bash}
 cd ~/Desktop
 wget https://github.com/enormandeau/stacks\_workflow/archive/master.zip
 unzip master.zip
