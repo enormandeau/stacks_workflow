@@ -44,7 +44,7 @@ unzip master.zip
 
 If you have `git` installed, you can do the same faster with:
 
-```
+```{bash}
 git clone https://github.com/enormandeau/stacks_workflow
 ```
 
@@ -55,7 +55,7 @@ b) Download and install STACKS
  - Unzip the archive
  - From within the STACKS folder, run:
 
-```
+```{bash}
 ./configure
 make
 sudo make install
@@ -68,7 +68,7 @@ a) Put them in the **02-raw** folder of the stacks_workflow folder
 b) Prepare the **lane_info.txt** file automatically
  - From the stacks_workflow folder, run:
 
-```
+```{bash}
 ./00-scripts/01_prepare_lane_info.sh
 ```
  
@@ -78,7 +78,7 @@ a) Prepare a file named **sample_information.csv** using the same format found i
 
 b) Launch process_radtags with:
 
-```
+```{bash}
 ./00-scripts/02_process_radtags.sh <trimLength> <enzyme>
 ```
 
@@ -90,7 +90,7 @@ Where:
 ## Step 3a - Rename samples
 a) To rename and copy the samples, run:
 
-```
+```{bash}
 ./00-scripts/03_rename_samples.sh
 ```
 
@@ -104,19 +104,19 @@ a) Install bwa
 b) Download reference genome to the 01-info_files
 c) Index reference genome, run:
 
-```
+```{bash}
 bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
 ```
 
 d) copy files:
 
-```
+```{bash}
 cp genome.* 01-info_files
 ```
 
 e) Align samples:
 
-```
+```{bash}
 for i in $(ls -1 04-all_samples/*.fq)
 do
     name=$(basename $i)
@@ -130,7 +130,7 @@ done
 a) Prepare population info file
 - To prepare a template of that file, run:
 
-```
+```{bash}
 ./00-scripts/04_prepare_population_map_template.sh
 ```
 
@@ -138,44 +138,44 @@ b) Open the stacks script in the 00-scripts folder and edit the options
 c) Run the STACKS programs, in order:
  - ustacks (or pstacks for reference assisted):
 
-```
+```{bash}
 ./00-scripts/stacks_1a_ustacks.sh
 ```
 
 or (if you are using a reference genome):
 
-```
+```{bash}
 ./00-scripts/stacks_1b_pstacks.sh
 ```
 
  - cstacks:
 
-```
+```{bash}
 ./00-scripts/stacks_2_cstacks.sh
 ```
 
  - sstacks:
 
-```
+```{bash}
 ./00-scripts/stacks_3_sstacks.sh
 ```
 
  - populations or genotypes:
 
-```
+```{bash}
 ./00-scripts/stacks_4_populations.sh
 ```
 
 ## Step 5 - Filtering the results
  - Use ./00-scripts/05_filterStacksSNPs.py to filter your SNPs. To print the documentation, type:
 
-```
+```{bash}
 ./00-scripts/05_filterStacksSNPs.py
 ```
 
  - Launch the script, example:
 
-```
+```{bash}
 ./00-scripts/05_new_filterStacksSNPs.py \
     -i 05-stacks/batch_1.sumstats.tsv \
     -o filtered.tsv \
