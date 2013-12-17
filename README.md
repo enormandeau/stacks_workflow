@@ -192,7 +192,7 @@ Launch the script, example:
 
 ## How to cite stacks_workflow
 
-If you use stacks_workflow in a publication, you can include the following citation:
+If you use [stacks_workflow] (https://github.com/enormandeau/stacks_workflow) in a publication, you can include the following citation:
 
 _Paper under redaction_
 

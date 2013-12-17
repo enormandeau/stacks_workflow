@@ -1,11 +1,12 @@
 Process radtags
-- For each lane, separate the barcodes of different lengths (done)
-- Run the files with the most barcodes first (= faster)
 - Use the -D option to filter recursively on kmer lengths
+- Run the files with the most barcodes first (= faster)
 - When finished, rename log file with date and barcode length
     
 Global
 - Keep log and error log of all scripts (use tee)
+- Separate output of stacks programs in different folders
+- Add workflow flowchart
 
 Documentation
 - Add know-how section
@@ -13,4 +14,5 @@ Documentation
     - Testing different parameters for STACKS scripts
     - Filtering
     - Preparing files for population genetics analyses
+- Automatically create MANUAL.html from the git repository
 
