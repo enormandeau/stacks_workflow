@@ -33,8 +33,10 @@ Step 5 - Filtering the results
 # The workflow
 
 ## Step 0 - Install and prepare the workflow
-a) Download and install the most recent version of this workflow
- - From the terminal, run:
+
+a) Download and install the most recent version of this workflow  
+
+From the terminal, run:
 
 ```{bash}
 cd ~/Desktop
@@ -51,6 +53,7 @@ git clone https://github.com/enormandeau/stacks_workflow
 Use the extracted or cloned folder as your working directory for the rest of the project. All the commands in this manual are launched from that directory.
 
 b) Download and install STACKS
+
  - http://creskolab.uoregon.edu/stacks/
  - Unzip the archive
  - From within the STACKS folder, run:
@@ -63,10 +66,12 @@ sudo make install
 
 ## Step 1 - Download raw datafiles (Illumina lanes)
 a) Put them in the **02-raw** folder of the stacks_workflow folder
- - NOTE: All file names MUST end with **.fastq.gz**
+
+NOTE: All file names MUST end with **.fastq.gz**
 
 b) Prepare the **lane_info.txt** file automatically
- - From the stacks_workflow folder, run:
+
+From the stacks_workflow folder, run:
 
 ```{bash}
 ./00-scripts/01_prepare_lane_info.sh
@@ -128,7 +133,8 @@ done
 
 ## Step 4 - STACKS pipeline
 a) Prepare population info file
-- To prepare a template of that file, run:
+
+To prepare a template of that file, run:
 
 ```{bash}
 ./00-scripts/04_prepare_population_map_template.sh
@@ -136,7 +142,8 @@ a) Prepare population info file
 
 b) Open the stacks script in the 00-scripts folder and edit the options of the `stacks_*` scripts.  
 c) Run the STACKS programs, in order:
- - ustacks (or pstacks for reference assisted):
+
+ustacks (or pstacks for reference assisted):
 
 ```{bash}
 ./00-scripts/stacks_1a_ustacks.sh
@@ -148,32 +155,32 @@ or (use pstacks instead if you have a reference genome):
 ./00-scripts/stacks_1b_pstacks.sh
 ```
 
- - cstacks:
+cstacks:
 
 ```{bash}
 ./00-scripts/stacks_2_cstacks.sh
 ```
 
- - sstacks:
+sstacks:
 
 ```{bash}
 ./00-scripts/stacks_3_sstacks.sh
 ```
 
- - populations or genotypes:
+populations or genotypes:
 
 ```{bash}
 ./00-scripts/stacks_4_populations.sh
 ```
 
 ## Step 5 - Filtering the results
- - Use ./00-scripts/05_filterStacksSNPs.py to filter your SNPs. To print the documentation, type:
+Use ./00-scripts/05_filterStacksSNPs.py to filter your SNPs. To print the documentation, type:
 
 ```{bash}
 ./00-scripts/05_filterStacksSNPs.py
 ```
 
- - Launch the script, example:
+Launch the script, example:
 
 ```{bash}
 ./00-scripts/05_new_filterStacksSNPs.py \
@@ -187,5 +194,5 @@ or (use pstacks instead if you have a reference genome):
 
 If you use stacks_workflow in a publication, you can include the following citation:
 
- - _Paper under redaction_
+_Paper under redaction_
 
