@@ -134,7 +134,7 @@ a) Prepare population info file
 ./00-scripts/04_prepare_population_map_template.sh
 ```
 
-b) Open the stacks script in the 00-scripts folder and edit the options  
+b) Open the stacks script in the 00-scripts folder and edit the options of the `stacks_*` scripts.  
 c) Run the STACKS programs, in order:
  - ustacks (or pstacks for reference assisted):
 
