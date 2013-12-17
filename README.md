@@ -67,7 +67,7 @@ sudo make install
 ## Step 1 - Download raw datafiles (Illumina lanes)
 a) Put them in the **02-raw** folder of the stacks_workflow folder
 
-NOTE: All file names MUST end with **.fastq.gz**
+**NOTE**: All file names MUST end with **.fastq.gz**
 
 b) Prepare the **lane_info.txt** file automatically
 
@@ -89,7 +89,7 @@ b) Launch process_radtags with:
 
 Where:  
 
- - trimLength = length to trim all the sequences
+ - trimLength = length to trim all the sequences. This should be the length of the Illumina reads minus the length of the longest tag or MID.  
  - enzyme = name of enzyme (run **process_radtags**, without options, for a list of the supported enzymes)
 
 ## Step 3a - Rename samples
