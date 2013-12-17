@@ -1,14 +1,14 @@
 # STACKS_WORKFLOW
 
-An integrated workflow standardizing STACKS analyses on RAD/GBS data
+An integrated workflow to streamline STACKS analyses on RAD/GBS data
 
 # About STACKS
 The STACKS analysis pipeline (http://creskolab.uoregon.edu/stacks/) is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. Upon starting to use STACKS, it is highly suggested to read the two official STACKS papers. These articles are listed at the bottom of the official page and contain the keyword *Stacks* in their title.
 
 # About the STACKS Workflow
-This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people with GBS or RAD projects and limited UNIX/Linux experience can jump on the analysis wagon faster. It was developped with the needs of our research group in mind. We mainly developped the part workflow for its use in non-model species studies. We make no claim about its use to other groups or in other contexts but hope it may be of use to some.
+This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people tasked with analysing GBS or RAD data and possessing limited UNIX/Linux experience can jump on the analysis wagon faster. It was developped with the needs of our research group in mind with an emphasis on non-model species studies. We make no claim about its usefulness to other groups or in other contexts, but we still believe it may be of use to some.
 
-The workflow has been tested with version 1.09 and earlier versions of STACKS.
+The workflow has been tested with version 1.10 and earlier versions of STACKS under Linux (Ubuntu 12.04 to 13.10) and MacOSX.
 
 # Licence
 The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for more details.
@@ -17,7 +17,7 @@ The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for
 Step 0 - Install and prepare the workflow  
 Step 1 - Download raw datafiles (Illumina lanes)  
 Step 2 - Extract individual data with process_radtags  
-Step 3 - Rename samples
+Step 3 - Rename samples  
 Step 4 - STACKS pipeline (ustack/pstacks, cstack, sstack, populations/genotypes)  
 Step 5 - Filters  
 
@@ -33,7 +33,13 @@ wget https://github.com/enormandeau/stacks\_workflow/archive/master.zip
 unzip master.zip
 ```
 
-Use the extracted folder (stacks_workflow-master) as your working directory for the rest of the project. If you just updated the workflow, please use the MANUAL.pdf file that comes with that new version.
+If you have `git` installed, you can do the same faster with:
+
+```
+git clone https://github.com/enormandeau/stacks_workflow
+```
+
+Use the extracted or cloned folder as your working directory for the rest of the project. All the commands in this manual are launched from that directory.
 
 b) Download and install STACKS
  - http://creskolab.uoregon.edu/stacks/
@@ -59,7 +65,7 @@ b) Prepare the **lane_info.txt** file automatically
  
 ## Step 2 - Extract individual data with process_radtags  
 
-a) Prepare the **sample_information.csv** file using the same format as found in the **example_sample_information.csv** file in the **01-info_files** folder. This file will be used to extract the samples and rename the sample files in a more intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (eg: Pop01 and pop01), since these will be treated as two different populations.
+a) Prepare a file named **sample_information.csv** using the same format found in the **example_sample_information.csv** file in the **01-info_files** folder. Also save this file in the **01-info_files** folder. This file will be used to extract the samples and rename the sample files automatically. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample (do not include the population name or abbreviation in the sample name). The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (eg: Pop01 and pop01), since these will be treated as two different populations.
 
 b) Launch process_radtags with:
 
@@ -68,8 +74,8 @@ b) Launch process_radtags with:
 ```
 
 Where:
- - trimLength = length to trim all the sequences
- - enzyme = name of enzyme (run **process_radtags**, without options, for a list of the supported enzymes)
+ - trimLength = length to trim all the sequences  
+ - enzyme = name of enzyme (run **process_radtags**, without options, for a list of the supported enzymes)  
 
 ## Step 3a - Rename samples
 a) To rename and copy the samples, run:
@@ -79,9 +85,9 @@ a) To rename and copy the samples, run:
 ```
 
 b) Join samples that should go together
- - Go to 04-all_samples and join the .fq files that should go together with the `cat` command
- - Remove partial .fq files that have been joined
- - Remove individuals with too few sequences (optional)
+ - Go to 04-all_samples and join the .fq files that should go together with the `cat` command  
+ - Remove partial .fq files that have been joined  
+ - Remove individuals with too few sequences (optional)  
 
 ## Step 3b - (Optional) Align reads to a reference genome
 a) Install bwa
@@ -92,13 +98,13 @@ c) Index reference genome, run:
 bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
 ```
 
-d) copy files
+d) copy files:
 
 ```
 cp genome.* 01-info_files
 ```
 
-d) Align samples
+e) Align samples:
 
 ```
 for i in $(ls -1 04-all_samples/*.fq)
@@ -118,34 +124,33 @@ a) Prepare population info file
 ./00-scripts/04_prepare_population_map_template.sh
 ```
 
-b) Rename the template file to **population_map.txt** and remove **.fq** extensions in column 1
-c) Open the stacks script in the 00-scripts folder and edit the options
-d) Run the STACKS programs, in order:
- - ustacks (or pstacks for reference assisted)
+b) Open the stacks script in the 00-scripts folder and edit the options
+c) Run the STACKS programs, in order:
+ - ustacks (or pstacks for reference assisted):
 
 ```
 ./00-scripts/stacks_1a_ustacks.sh
 ```
 
-or (if you are using a reference genome)
+or (if you are using a reference genome):
 
 ```
 ./00-scripts/stacks_1b_pstacks.sh
 ```
 
- - cstacks
+ - cstacks:
 
 ```
 ./00-scripts/stacks_2_cstacks.sh
 ```
 
- - sstacks
+ - sstacks:
 
 ```
 ./00-scripts/stacks_3_sstacks.sh
 ```
 
- - populations or genotypes
+ - populations or genotypes:
 
 ```
 ./00-scripts/stacks_4_populations.sh
@@ -160,9 +165,11 @@ or (if you are using a reference genome)
 
  - Launch the script, example:
 
-# TODO (put real example here)
-
 ```
-./00-scripts/05_filterStacksSNPs.py ./05-stacks/batch_1.sumstats.tsv 2 1 0.6 0.05 -0.3 0.3 8
+./00-scripts/05_new_filterStacksSNPs.py \
+    -i 05-stacks/batch_1.sumstats.tsv \
+    -o filtered.tsv \
+    -P 01-info_files/population_map.txt \
+    -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10
 ```
 
