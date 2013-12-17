@@ -18,8 +18,8 @@ Step 0 - Install and prepare the workflow
 Step 1 - Download raw datafiles (Illumina lanes)  
 Step 2 - Extract individual data with process_radtags  
 Step 3 - Rename samples  
-Step 4 - STACKS pipeline (ustack/pstacks, cstack, sstack, populations/genotypes)  
-Step 5 - Filters  
+Step 4 - STACKS pipeline  
+Step 5 - Filtering the results
 
 # The workflow
 
@@ -73,9 +73,10 @@ b) Launch process_radtags with:
 ./00-scripts/02_process_radtags.sh <trimLength> <enzyme>
 ```
 
-Where:
- - trimLength = length to trim all the sequences  
- - enzyme = name of enzyme (run **process_radtags**, without options, for a list of the supported enzymes)  
+Where:  
+
+ - trimLength = length to trim all the sequences
+ - enzyme = name of enzyme (run **process_radtags**, without options, for a list of the supported enzymes)
 
 ## Step 3a - Rename samples
 a) To rename and copy the samples, run:
@@ -85,9 +86,9 @@ a) To rename and copy the samples, run:
 ```
 
 b) Join samples that should go together
- - Go to 04-all_samples and join the .fq files that should go together with the `cat` command  
- - Remove partial .fq files that have been joined  
- - Remove individuals with too few sequences (optional)  
+ - Go to 04-all_samples and join the .fq files that should go together with the `cat` command
+ - Remove partial .fq files that have been joined
+ - Remove individuals with too few sequences if needed (optional)
 
 ## Step 3b - (Optional) Align reads to a reference genome
 a) Install bwa
@@ -116,7 +117,7 @@ do
 done
 ```
 
-## Step 4 - STACKS (ustack/pstacks, cstack, sstack, populations/genotypes)
+## Step 4 - STACKS pipeline
 a) Prepare population info file
 - To prepare a template of that file, run:
 
@@ -156,7 +157,7 @@ or (if you are using a reference genome):
 ./00-scripts/stacks_4_populations.sh
 ```
 
-## Step 5 - Filters
+## Step 5 - Filtering the results
  - Use ./00-scripts/05_filterStacksSNPs.py to filter your SNPs. To print the documentation, type:
 
 ```
