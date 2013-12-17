@@ -194,5 +194,5 @@ Launch the script, example:
 
 If you use [stacks_workflow] (https://github.com/enormandeau/stacks_workflow) in a publication, please include the following citation to your bibliography:
 
-_Paper under redaction_
+_(Paper under redaction)_
 
