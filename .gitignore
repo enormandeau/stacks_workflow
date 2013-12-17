@@ -5,6 +5,7 @@
 *.log
 *.odt
 *.swp
+*.temp
 *.tsv
 *.vcf
 */population_map*
