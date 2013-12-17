@@ -90,7 +90,7 @@ b) Launch process_radtags with:
 Where:  
 
  - trimLength = length to trim all the sequences. This should be the length of the Illumina reads minus the length of the longest tag or MID.  
- - enzyme = name of enzyme (run **process_radtags**, without options, for a list of the supported enzymes)
+ - enzyme = name of enzyme (run `process_radtags`, without options, for a list of the supported enzymes)
 
 ## Step 3a - Rename samples
 a) To rename and copy the samples, run:
