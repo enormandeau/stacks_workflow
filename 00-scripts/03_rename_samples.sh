@@ -28,17 +28,17 @@ cat $INFO_FILES/lane_info.txt |
             echo "lane: $lane"
             barcode=$(echo $sample_file | perl -pe 's/^.*_sample_//; s/\.fq//')
             echo "barcode: $barcode"
-            grep $lane $INFO_FILES/sample_information.csv #| grep -E "[[:space:]]$barcode[[:space:]]"
-            #sample_info=$(grep $lane $INFO_FILES/sample_information.csv) #| grep -E "[[:space:]]$barcode[[:space:]]"
-            #echo "sample_info: $sample_info"
-            #population=$(echo $sample_info | cut -d " " -f 3)
-            #echo "population: $population"
-            #sample_name=$(echo $sample_info | cut -d " " -f 4)
-            #echo "sample_name: $sample_name"
-            #new_name=$(echo "$population"_"$sample_name".fq)
-            #echo "new_name: $new_name"
+            #grep $lane $INFO_FILES/sample_information.csv | grep -E "[[:space:]]$barcode[[:space:]]"
+            sample_info=$(grep $lane $INFO_FILES/sample_information.csv | grep -E "[[:space:]]$barcode[[:space:]]")
+            echo "sample_info: $sample_info"
+            population=$(echo $sample_info | cut -d " " -f 3)
+            echo "population: $population"
+            sample_name=$(echo $sample_info | cut -d " " -f 4)
+            echo "sample_name: $sample_name"
+            new_name=$(echo "$population"_"$sample_name".fq)
+            echo "new_name: $new_name"
 
-            #cp -l $sample_file $ALL_SAMPLES_FOLDER/$new_name
+            cp -l $sample_file $ALL_SAMPLES_FOLDER/$new_name
             echo
         done
     done
