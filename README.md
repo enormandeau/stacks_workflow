@@ -187,5 +187,5 @@ or (use pstacks instead if you have a reference genome):
 
 If you use stacks_workflow in a publication, you can include the following citation:
 
- - Under redaction
+ - _Paper under redaction_
 
