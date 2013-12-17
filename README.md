@@ -183,10 +183,10 @@ Use ./00-scripts/05_filterStacksSNPs.py to filter your SNPs. To print the docume
 Launch the script, example:
 
 ```{bash}
-./00-scripts/05_new_filterStacksSNPs.py \
-    -i 05-stacks/batch_1.sumstats.tsv \
-    -o filtered.tsv \
-    -P 01-info_files/population_map.txt \
+./00-scripts/05_new_filterStacksSNPs.py \  
+    -i 05-stacks/batch_1.sumstats.tsv \  
+    -o filtered.tsv \  
+    -P 01-info_files/population_map.txt \  
     -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10
 ```
 
