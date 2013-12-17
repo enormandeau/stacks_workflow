@@ -10,6 +10,15 @@ This STACKS Workflow aims at making the use of the STACKS pipeline easier and mo
 
 The workflow has been tested with version 1.10 and earlier versions of STACKS under Linux (Ubuntu 12.04 to 13.10) and MacOSX.
 
+# About the manual
+This manual can be found in 3 places:
+
+ - The **README.md** file in the base directory of **stacks_workflow**  
+ - The **MANUAL.pdf** file, also in the base directory of **stacks_workflow**  
+ - Online at: https://github.com/enormandeau/stacks_workflow
+
+The online version is especially nicelly formatted. We suggest that you use either the online or the .pdf version. Using the text version is also riskier since there is always a risk of unvoluntarily modifying and corrupting the file.
+
 # Licence
 The STACKS workflow is licensed under the GPL3 license. See the LICENCE file for more details.
 
