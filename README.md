@@ -13,9 +13,9 @@ The workflow has been tested with version 1.10 and earlier versions of STACKS un
 # About the manual
 This manual can be found in 3 places:
 
- - The **README.md** file in the base directory of **stacks_workflow**  
- - The **MANUAL.pdf** file, also in the base directory of **stacks_workflow**  
  - Online at: https://github.com/enormandeau/stacks_workflow
+ - The **MANUAL.pdf** file, also in the base directory of **stacks_workflow**  
+ - The **README.md** file in the base directory of **stacks_workflow**  
 
 The online version is especially nicelly formatted. We suggest that you use either the online or the .pdf version. Using the text version is also riskier since there is always a risk of unvoluntarily modifying and corrupting the file.
 
