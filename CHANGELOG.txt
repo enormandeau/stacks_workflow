@@ -1,7 +1,10 @@
 List of changes
 
 v0.1.3
-- 2013-12-11 Removed MANUAL.pdf
+- 2013-12-17 Fixed bug in 03_rename_samples.sh
+- 2013-12-17 Improved documentation
+- 2013-12-11 Added automatically generated MANUAL.pdf (created with pandoc)
+- 2013-12-11 Removed old MANUAL.pdf (created manually from MANUAL.odt)
 - 2013-12-10 Cleaned up documentation
 - 2013-12-10 Remove unneaded utility scripts
 - 2013-12-02 Put documentation in README.md

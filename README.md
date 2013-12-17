@@ -174,3 +174,9 @@ or (if you are using a reference genome):
     -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10
 ```
 
+## How to cite stacks_workflow
+
+If you use stacks_workflow in a publication, you can include the following citation:
+
+ - Under redaction
+
