@@ -62,7 +62,6 @@ b) Prepare the **lane_info.txt** file automatically
 a) Prepare the **sample_information.csv** file using the same format as found in the **example_sample_information.csv** file in the **01-info_files** folder. This file will be used to extract the samples and rename the sample files in a more intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (eg: Pop01 and pop01), since these will be treated as two different populations.
 
 b) Launch process_radtags with:
- ### TODO use discarted reads at each step rather than treating the whole file each time
 
 ```
 ./00-scripts/02_process_radtags.sh <trimLength> <enzyme>
