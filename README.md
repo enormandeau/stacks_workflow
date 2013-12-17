@@ -47,7 +47,7 @@ sudo make install
 ```
 
 ## Step 1 - Download raw datafiles (Illumina lanes)
-a) Put them in the **raw** folder of the stacks_workflow folder
+a) Put them in the **02-raw** folder of the stacks_workflow folder
  - NOTE: All file names MUST end with **.fastq.gz**
 
 b) Prepare the **lane_info.txt** file automatically
