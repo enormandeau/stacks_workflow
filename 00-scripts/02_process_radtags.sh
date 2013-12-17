@@ -9,24 +9,25 @@ ENZYME=$2 # Name of the enzyme (run 'process_radtags' without options for list)
 cat $INFO_FILES/lane_info.txt |
 while read f
 do
-    grep -E "^$f" $INFO_FILES/sample_information.csv | \
+    grep -vE "^$" $INFO_FILES/sample_information.csv | \
+        grep -v "Barcode" | \
         cut -f 2 > $INFO_FILES/barcodes.txt
 
     # Prepare bacode_lengths.txt from barcodes.txt 
-    perl -ne 'chomp; print length."\n"' $INFO_FILES/barcodes.txt |
+    perl -ne 'chomp; print length."\n"' $INFO_FILES/barcodes.txt | \
         sort -un > $INFO_FILES/barcode_lengths.txt
 
     # Create barcode files, eg: barcodes_4.txt, barcodes_5.txt ...
-    cat $INFO_FILES/barcode_lengths.txt |
+    cat $INFO_FILES/barcode_lengths.txt | \
     while read b
     do
         perl -sane 'chomp; if (length eq $b) {print $_."\n"}'\
-            -- -b=$b $INFO_FILES/barcodes.txt |
+            -- -b=$b $INFO_FILES/barcodes.txt | \
         sort -u > $INFO_FILES/barcodes_$b".txt"
     done
 
     # Extract reads for each individuals using barcodes
-    cat $INFO_FILES/barcode_lengths.txt |
+    cat $INFO_FILES/barcode_lengths.txt | \
     while read b
     do
         mkdir 03-samples/$f
@@ -36,7 +37,7 @@ do
             --filter_illumina 3 -E phred33 -e $ENZYME
     done
 
-    rm $INFO_FILES/barcode_lengths.txt 2> /dev/null
-    rm $INFO_FILES/barcodes*.txt 2> /dev/null
+    #rm $INFO_FILES/barcode_lengths.txt 2> /dev/null
+    #rm $INFO_FILES/barcodes*.txt 2> /dev/null
 done
 

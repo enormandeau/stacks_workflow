@@ -1,6 +1,5 @@
 # STACKS_WORKFLOW
 
-
 An integrated workflow standardizing STACKS analyses on RAD/GBS data
 
 # About STACKS
@@ -57,11 +56,10 @@ b) Prepare the **lane_info.txt** file automatically
 ```
 ./00-scripts/01_prepare_lane_info.sh
 ```
-
-c) Prepare the **sample_information.csv** file using the same format as found in the **example_sample_information.csv** file. This file will be used to extract the samples and rename the sample files in a more intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (eg: Pop01 and pop01), since these will be treated as two different populations.
  
 ## Step 2 - Extract individual data with process_radtags  
-a) Prepare a sample information file **sample_information.csv** and put it in the **01-info_files folder**. This file should contain one line per sample and two columns. The first column contains the exact name of the lane in which the individual is found and the second column contains the barcode sequence of that individual.
+
+a) Prepare the **sample_information.csv** file using the same format as found in the **example_sample_information.csv** file in the **01-info_files** folder. This file will be used to extract the samples and rename the sample files in a more intelligible manner. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample. The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (eg: Pop01 and pop01), since these will be treated as two different populations.
 
 b) Launch process_radtags with:
  ### TODO use discarted reads at each step rather than treating the whole file each time
@@ -104,7 +102,13 @@ cp genome.* 01-info_files
 d) Align samples
 
 ```
-for i in $(ls -1 04-all_samples/*.fq); do name=$(basename $i); bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome $i | bwa samse -r "@RG\tID:'$name'\tSM:'$name'\tPL:Illumina" ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; done
+for i in $(ls -1 04-all_samples/*.fq)
+do
+    name=$(basename $i)
+    bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome $i | \
+    bwa samse -r "@RG\tID:'$name'\tSM:'$name'\tPL:Illumina" \
+        ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; \
+done
 ```
 
 ## Step 4 - STACKS (ustack/pstacks, cstack, sstack, populations/genotypes)
@@ -156,6 +160,8 @@ or (if you are using a reference genome)
 ```
 
  - Launch the script, example:
+
+# TODO (put real example here)
 
 ```
 ./00-scripts/05_filterStacksSNPs.py ./05-stacks/batch_1.sumstats.tsv 2 1 0.6 0.05 -0.3 0.3 8
