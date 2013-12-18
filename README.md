@@ -137,7 +137,7 @@ a) Prepare population info file
 To prepare a template of that file, run:
 
 ```{bash}
-./00-scripts/04_prepare_population_map_template.sh
+./00-scripts/04_prepare_population_map.sh
 ```
 
 b) Open the stacks script in the 00-scripts folder and edit the options of the `stacks_*` scripts.  

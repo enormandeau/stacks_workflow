@@ -37,7 +37,7 @@ do
             --filter_illumina 3 -E phred33 -e $ENZYME
     done
 
-    #rm $INFO_FILES/barcode_lengths.txt 2> /dev/null
-    #rm $INFO_FILES/barcodes*.txt 2> /dev/null
+    rm $INFO_FILES/barcode_lengths.txt 2> /dev/null
+    rm $INFO_FILES/barcodes*.txt 2> /dev/null
 done
 
