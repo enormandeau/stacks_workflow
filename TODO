@@ -5,14 +5,12 @@ Process radtags
     
 Global
 - Keep log and error log of all scripts (use tee)
-- Separate output of stacks programs in different folders
-- Add workflow flowchart
 
 Documentation
+- Create and add Stacks_workflow logo
 - Add know-how section
     - Testing different trim lengths to keep more reads
     - Testing different parameters for STACKS scripts
     - Filtering
     - Preparing files for population genetics analyses
-- Automatically create MANUAL.html from the git repository
 
