@@ -1,9 +1,8 @@
-
 aside, footer, header, nav, section { display:block; }
 
 body {
     background-color: white;
-	width:940px;
+	width:800px;
 	margin:0 auto;
     font-size:16px;
     font-family:'Pontano Sans', sans-serif;
@@ -13,35 +12,41 @@ pre {
     background-color: #F8F8F8;
     border: 1px solid #CCC;
     font-size: 13px;
-    line-height: 19px;
+    line-height: 16px;
     overflow: auto;
     padding: 6px 10px;
     border-radius: 3px;
 }
 
-
-h1, h2 {
+h1 {
     font-family:'Source Sans Pro', sans-serif;
-    color:#cc6600;
-    padding-top:15px;
+    color:#005599;
+    padding-top:16px;
+    font-size:24px;
+}
+
+h2 {
+    font-family:'Source Sans Pro', sans-serif;
+    color:#003366;
+    padding-top:12px;
+    font-size:16px;
 }
 
 #content #pre-stylish code {
- display: block;
- padding: 0.5em 1em;
- border: 1px solid #bebab0;
+    display: block;
+    padding: 0.5em 10em;
+    border: 1px solid #bebab0;
 }
 
 .email {
     font-family: monospace;
 }
 
-
 header#masthead {
     margin:0;
     padding:20px 0;
     border-bottom:1px solid;
-    font-size:22px;
+    font-size:16px;
 }
 
 header#masthead img {
@@ -49,7 +54,7 @@ header#masthead img {
 }
 
 footer#mastfoot {
-    width:940px;
+    width:800px;
     overflow:auto;
     margin:0 auto 60px auto;
     font-size:12px;
@@ -62,14 +67,13 @@ footer#mastfoot img {
 
 nav#global {
     display:inline;
-    font-size:22px;
+    font-size:16px;
     letter-spacing:1px;
 }
 
 #name {
     font-weight:bold;
 }
-
 
 #affiliations {
     font-size:12px;
@@ -81,7 +85,7 @@ nav#global {
 
 #content {
     float:left;
-    width:740px;
+    width:600px;
     margin:0 0 35px 0;
     text-align:left;
 }
@@ -97,12 +101,12 @@ nav#global {
 }
 
 #content section h1 {
-    font-size:22px;
+    font-size:16px;
     font-weight:normal;
 }
 
 #content section h2 {
-    font-size:16px;
+    font-size:14px;
     font-weight:normal;
     margin-left:20px;
     margin-top:0px;
@@ -138,3 +142,4 @@ nav#global {
 #awardslist li {
     list-style:none;
 } 
+
