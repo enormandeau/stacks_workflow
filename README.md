@@ -2,15 +2,15 @@
 
 An integrated workflow to streamline STACKS analyses on RAD/GBS data
 
-# About STACKS
+## About STACKS
 The [STACKS analysis pipeline](http://creskolab.uoregon.edu/stacks/) is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. Upon starting to use STACKS, it is highly suggested to read the two official STACKS papers. These articles can be found [here](http://dx.doi.org/10.1111/mec.12354) and [here](http://www.g3journal.org/content/1/3/171.full).
 
-# About Stacks_workflow
+## About Stacks_workflow
 This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people tasked with analysing GBS or RAD data and possessing limited UNIX/Linux experience can jump on the analysis wagon faster. It was developed with the needs of our research group in mind with an emphasis on non-model species studies. We make no claim about its usefulness to other groups or in other contexts, but we still believe it may be of use to some.
 
 Stacks_workflow has been tested with version 1.10 and earlier versions of STACKS under Linux (Ubuntu 12.04 to 13.10) and MacOSX.
 
-# About the manual
+## About the manual
 This manual can be found in 3 places:
 
  - Online at: [https://github.com/enormandeau/stacks_workflow](https://github.com/enormandeau/stacks_workflow)
@@ -19,10 +19,10 @@ This manual can be found in 3 places:
 
 The online and **MANUAL.html** versions are especially nicelly formatted. We suggest that you use them rather than using the README.md file directly. Using the text version is more likely to lead to errors because of the risk of involuntarily modifying some of the commands.
 
-# Licence
+## Licence
 The Stacks_workflow is licensed under the GPL3 license. See the LICENCE file for more details.
 
-# Overview of the steps
+## Overview of the steps
 Step 0 - Install and prepare Stacks_workflow  
 Step 1 - Download raw datafiles (Illumina lanes)  
 Step 2 - Extract individual data with process_radtags  
@@ -164,7 +164,7 @@ To use it with options, use the following format:
     -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10
 ```
 
-## How to cite stacks_workflow
+# How to cite stacks_workflow
 
 If you use [stacks_workflow](https://github.com/enormandeau/stacks_workflow) in a publication, please include the following citation to your bibliography:
 
