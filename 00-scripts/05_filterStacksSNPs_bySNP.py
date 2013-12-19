@@ -2,7 +2,7 @@
 """Filter sumstats.tsv files from STACKS
 
 To get detailed list of options, run:
-    python 05_bySNP_filterStacksSNPs.py -h
+    python 05_filterStacksSNPs_bySNP.py -h
 """
 
 # Importing modules
@@ -83,7 +83,7 @@ def filter_empty_loci(loci):
 def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, use_percent, header):
     """Remove snps that do not have enough individuals for all populations
     """
-    with open("01_filtered_number_individuals.tsv", "w") as out_f:
+    with open("06-filters/01_filtered_number_individuals.tsv", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -111,7 +111,7 @@ def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, us
 def filter_maf(loci, maf_global, maf_population, criterion_global, header):
     """Remove SNPs that do not have high enough global or population-wise MAFs
     """
-    with open("02_filtered_maf", "w") as out_f:
+    with open("06-filters/02_filtered_maf", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -137,7 +137,7 @@ def filter_heterozygozity(loci, max_hetero, joker, header):
     """Remove all loci where one population in one locus has too many
     heterozygous individuals
     """
-    with open("03_filtered_heterozygozity", "w") as out_f:
+    with open("06-filters/03_filtered_heterozygozity", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -160,7 +160,7 @@ def filter_fis(loci, min_fis, max_fis, joker, header):
     """Remove all loci where the Fis value of one population in one locus is
     outside the (min_fis, max_fis) range
     """
-    with open("04_filtered_fis", "w") as out_f:
+    with open("06-filters/04_filtered_fis", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -182,7 +182,7 @@ def filter_fis(loci, min_fis, max_fis, joker, header):
 def filter_snp_number(loci, max_snps, header):
     """Remove all loci with too many snps
     """
-    with open("05_filtered_snp_numbers", "w") as out_f:
+    with open("06-filters/05_filtered_snp_numbers", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -228,7 +228,7 @@ if __name__ == "__main__":
     parser.add_argument('-l', '--list_of_populations', type=str,
             help = 'list of populations to remove or keep with -r of -k (string, no spaces, separaged by comas, eg: 1,2,3,7)')
     parser.add_argument('-p', '--min_presence', type=int, default=0,
-            help = 'minimum number of individuals to keep locus (int, 0 to 100, default: 0)')
+            help = 'minimum number of individuals to keep locus (int, default: 0)')
     parser.add_argument('-x', '--min_presence_joker_populations', type=int, default=0,
             help = 'number of populations where it is permitted that the -p threshold does not pass, (int, 0 or more, default: 0')
     parser.add_argument('--use_percent', action="store_true",
@@ -238,9 +238,9 @@ if __name__ == "__main__":
     parser.add_argument('-y', '--max_hetero_joker', type=int, default=0,
             help = 'number of populations where it is permitted that the -H threshold does not pass, (int, 0 or more, default: 0')
     parser.add_argument('-a', '--maf_global', type=float, default=0.05,
-            help = 'minimum minor allele frequency, global (float, 0 to 1, default: 0.05)')
+            help = 'minimum minor allele frequency that must be respected in all populations to retain locus (float, 0 to 1, default: 0.05)')
     parser.add_argument('-A', '--maf_population', type=float, default=0.1,
-            help = 'minimum minor allele frequency, locus (float, 0 to 1, default: 0.1)')
+            help = 'minimum minor allele frequency that must be found in at least one population to retain locus (float, 0 to 1, default: 0.1)')
     parser.add_argument('-f', '--min_fis', type=float, default=-1,
             help = 'minimum Fis value (float, -1 to 1, default: -1)')
     parser.add_argument('-F', '--max_fis', type=float, default=1,

@@ -157,7 +157,7 @@ Or, if you have a reference genome:
 To use it with options, use the following format:
 
 ```
-./00-scripts/05_new_filterStacksSNPs.py \  
+./00-scripts/05_filterStacksSNPs.py \  
     -i 05-stacks/batch_1.sumstats.tsv \  
     -o filtered.tsv \  
     -P 01-info_files/population_map.txt \  
