@@ -1,6 +1,9 @@
 List of changes
 
 v0.1.3
+- 2013-12-19 Renamed and improved filtering script
+- 2013-12-18 Auto-generation of MANUAL.html
+- 2013-12-18 Added STACKS workflow diagram
 - 2013-12-17 Fixed bug in 03_rename_samples.sh
 - 2013-12-17 Improved documentation
 - 2013-12-11 Added automatically generated MANUAL.pdf (created with pandoc)
