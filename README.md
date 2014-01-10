@@ -17,7 +17,7 @@ This manual can be found in 3 places:
  - In the **MANUAL.html** file found in the base directory of **stacks_workflow**  
  - In the **README.md** file, also found in the base directory of **stacks_workflow**  
 
-The online and **MANUAL.html** versions are especially nicelly formatted. We suggest that you use them rather than using the README.md file directly. Using the text version is more likely to lead to errors because of the risk of involuntarily modifying some of the commands.
+The online and **MANUAL.html** versions are especially nicelly formatted. We suggest that you use them rather than using the README.md file directly. Using the text version is more likely to lead to errors since it is easy to involuntarily modify some of the commands without noticing.
 
 ## Licence
 The Stacks_workflow is licensed under the GPL3 license. See the LICENCE file for more details.
@@ -43,12 +43,14 @@ cd ~/Desktop
 wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
 unzip master.zip
 ```
+
 Or, if you have **git** installed, you can do the same faster with:
 
 ```
 git clone https://github.com/enormandeau/stacks_workflow
 ```
- the extracted or cloned folder as your working directory for the rest of the project. All the commands in this manual are launched from that directory.
+
+Use the extracted or cloned folder as your working directory for the rest of the project. All the commands in this manual are launched from that directory.
 
 b) Download and install STACKS
 
@@ -61,6 +63,7 @@ b) Download and install STACKS
 make
 sudo make install
 ```
+
 Step 1 - Download raw datafiles (Illumina lanes)
 a) Put them in the **02-raw** folder of the stacks_workflow folder
 
@@ -73,6 +76,7 @@ From the stacks_workflow folder, run:
 ```
 ./00-scripts/01_prepare_lane_info.sh
 ```
+
  Step 2 - Extract individual data with process_radtags  
 
 a) Prepare a file named **sample_information.csv** using the same format found in the **example_sample_information.csv** file in the **01-info_files** folder. Also save this file in the **01-info_files** folder. This file will be used to extract the samples and rename the sample files automatically. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample (do not include the population name or abbreviation in the sample name). The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (e.g.: Pop01 and pop01), since these will be treated as two different populations.
@@ -82,6 +86,7 @@ b) Launch process_radtags with:
 ```
 ./00-scripts/02_process_radtags.sh <trimLength> <enzyme>
 ```
+
 Where:  
 
  - trimLength = length to trim all the sequences. This should be the length of the Illumina reads minus the length of the longest tag or MID.  
@@ -93,6 +98,7 @@ a) To rename and copy the samples, run:
 ```
 ./00-scripts/03_rename_samples.sh
 ```
+
 Join samples that should go together
  - Go to 04-all_samples and join the .fq files that should go together with the `cat` command
  - Remove partial .fq files that have been joined
@@ -106,11 +112,13 @@ c) Index reference genome, run:
 ```
 bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
 ```
+
 copy files:
 
 ```
 cp genome.* 01-info_files
 ```
+
 Align samples:
 
 ```
@@ -122,6 +130,7 @@ do
         ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; \
 done
 ```
+
 Step 4 - STACKS pipeline
 a) Prepare population info file:
 
@@ -138,6 +147,7 @@ c) Run the STACKS programs. If you do not have access to a reference genome, lau
 ./00-scripts/stacks_3_sstacks.sh
 ./00-scripts/stacks_4_populations.sh
 ```
+
 Or, if you have a reference genome:
 
 ```
