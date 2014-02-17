@@ -1,4 +1,5 @@
 #!/bin/bash
+# Change id numbers of individuals
 
 # alleles col 2
 echo "  >>> treating alleles"
