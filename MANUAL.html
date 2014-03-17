@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -21,14 +22,14 @@
 <p>This manual can be found in 3 places:</p>
 <ul>
 <li>Online at: <a href="https://github.com/enormandeau/stacks_workflow">https://github.com/enormandeau/stacks_workflow</a></li>
-<li>In the <strong>MANUAL.html</strong> file found in the base directory of <strong>stacks_workflow</strong><br></li>
+<li>In the <strong>MANUAL.html</strong> file found in the base directory of <strong>stacks_workflow</strong><br /></li>
 <li>In the <strong>README.md</strong> file, also found in the base directory of <strong>stacks_workflow</strong></li>
 </ul>
 <p>The online and <strong>MANUAL.html</strong> versions are especially nicelly formatted. We suggest that you use them rather than using the README.md file directly. Using the text version is more likely to lead to errors since it is easy to involuntarily modify some of the commands without noticing.</p>
 <h2 id="licence">Licence</h2>
 <p>The Stacks_workflow is licensed under the GPL3 license. See the LICENCE file for more details.</p>
 <h2 id="overview-of-the-steps">Overview of the steps</h2>
-<p>Step 0 - Install and prepare Stacks_workflow<br>Step 1 - Download raw datafiles (Illumina lanes)<br>Step 2 - Extract individual data with process_radtags<br>Step 3 - Rename samples<br>Step 4 - STACKS pipeline<br>Step 5 - Filtering the results</p>
+<p>Step 0 - Install and prepare Stacks_workflow<br />Step 1 - Download raw datafiles (Illumina lanes)<br />Step 2 - Extract individual data with process_radtags<br />Step 3 - Rename samples<br />Step 4 - STACKS pipeline<br />Step 5 - Filtering the results</p>
 <h1 id="the-workflow">The workflow</h1>
 <h2 id="step-0---install-and-prepare-stacks_workflow">Step 0 - Install and prepare Stacks_workflow</h2>
 <ol type="a">
@@ -67,7 +68,7 @@ sudo make install</code></pre>
 <pre><code>./00-scripts/02_process_radtags.sh &lt;trimLength&gt; &lt;enzyme&gt;</code></pre>
 <p>Where:</p>
 <ul>
-<li>trimLength = length to trim all the sequences. This should be the length of the Illumina reads minus the length of the longest tag or MID.<br></li>
+<li>trimLength = length to trim all the sequences. This should be the length of the Illumina reads minus the length of the longest tag or MID.<br /></li>
 <li>enzyme = name of enzyme (run <strong>process_radtags</strong>, without options, for a list of the supported enzymes)</li>
 </ul>
 <h2 id="step-3a---rename-samples">Step 3a - Rename samples</h2>
@@ -96,7 +97,7 @@ done</code></pre>
 <p>Step 4 - STACKS pipeline a) Prepare population info file:</p>
 <pre><code>./00-scripts/04_prepare_population_map.sh</code></pre>
 <ol start="2" type="a">
-<li>Open the stacks script in the 00-scripts folder and edit the options of the <strong>stacks_</strong> scripts.<br></li>
+<li>Open the stacks script in the 00-scripts folder and edit the options of the <strong>stacks_</strong> scripts.<br /></li>
 <li>Run the STACKS programs. If you do not have access to a reference genome, launch the following commands:</li>
 </ol>
 <pre><code>./00-scripts/stacks_1a_ustacks.sh
@@ -117,8 +118,5 @@ done</code></pre>
     -o filtered.tsv \  
     -P 01-info_files/population_map.txt \  
     -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10</code></pre>
-<h1 id="how-to-cite-stacks_workflow">How to cite stacks_workflow</h1>
-<p>If you use <a href="https://github.com/enormandeau/stacks_workflow">stacks_workflow</a> in a publication, please include the following citation to your bibliography:</p>
-<p><em>(Paper under redaction)</em></p>
 </body>
 </html>

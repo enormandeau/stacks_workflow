@@ -174,11 +174,3 @@ To use it with options, use the following format:
     -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10
 ```
 
-# How to cite stacks_workflow
-
-If you use [stacks_workflow](https://github.com/enormandeau/stacks_workflow) in a publication, please include the following citation to your bibliography:
-
-_(Paper under redaction)_
-  
-  
-  
