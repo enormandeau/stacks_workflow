@@ -64,7 +64,7 @@ make
 sudo make install
 ```
 
-Step 1 - Download raw datafiles (Illumina lanes)
+## Step 1 - Download raw datafiles (Illumina lanes)
 a) Put them in the **02-raw** folder of the stacks_workflow folder
 
 **NOTE**: All file names MUST end with **.fastq.gz**
@@ -77,7 +77,7 @@ From the stacks_workflow folder, run:
 ./00-scripts/01_prepare_lane_info.sh
 ```
 
- Step 2 - Extract individual data with process_radtags  
+## Step 2 - Extract individual data with process_radtags  
 
 a) Prepare a file named **sample_information.csv** using the same format found in the **example_sample_information.csv** file in the **01-info_files** folder. Also save this file in the **01-info_files** folder. This file will be used to extract the samples and rename the sample files automatically. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample (do not include the population name or abbreviation in the sample name). The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (e.g.: Pop01 and pop01), since these will be treated as two different populations.
 
@@ -131,7 +131,7 @@ do
 done
 ```
 
-Step 4 - STACKS pipeline
+## Step 4 - STACKS pipeline
 a) Prepare population info file:
 
 ```

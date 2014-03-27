@@ -53,14 +53,17 @@ unzip master.zip</code></pre>
 <pre><code>./configure
 make
 sudo make install</code></pre>
-<p>Step 1 - Download raw datafiles (Illumina lanes) a) Put them in the <strong>02-raw</strong> folder of the stacks_workflow folder</p>
+<h2 id="step-1---download-raw-datafiles-illumina-lanes">Step 1 - Download raw datafiles (Illumina lanes)</h2>
+<ol type="a">
+<li>Put them in the <strong>02-raw</strong> folder of the stacks_workflow folder</li>
+</ol>
 <p><strong>NOTE</strong>: All file names MUST end with <strong>.fastq.gz</strong></p>
 <ol start="2" type="a">
 <li>Prepare the <strong>lane_info.txt</strong> file automatically</li>
 </ol>
 <p>From the stacks_workflow folder, run:</p>
 <pre><code>./00-scripts/01_prepare_lane_info.sh</code></pre>
-<p>Step 2 - Extract individual data with process_radtags</p>
+<h2 id="step-2---extract-individual-data-with-process_radtags">Step 2 - Extract individual data with process_radtags</h2>
 <ol type="a">
 <li><p>Prepare a file named <strong>sample_information.csv</strong> using the same format found in the <strong>example_sample_information.csv</strong> file in the <strong>01-info_files</strong> folder. Also save this file in the <strong>01-info_files</strong> folder. This file will be used to extract the samples and rename the sample files automatically. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample (do not include the population name or abbreviation in the sample name). The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (e.g.: Pop01 and pop01), since these will be treated as two different populations.</p></li>
 <li><p>Launch process_radtags with:</p></li>
@@ -94,7 +97,10 @@ do
     bwa samse -r &quot;@RG\tID:&#39;$name&#39;\tSM:&#39;$name&#39;\tPL:Illumina&quot; \
         ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; \
 done</code></pre>
-<p>Step 4 - STACKS pipeline a) Prepare population info file:</p>
+<h2 id="step-4---stacks-pipeline">Step 4 - STACKS pipeline</h2>
+<ol type="a">
+<li>Prepare population info file:</li>
+</ol>
 <pre><code>./00-scripts/04_prepare_population_map.sh</code></pre>
 <ol start="2" type="a">
 <li>Open the stacks script in the 00-scripts folder and edit the options of the <strong>stacks_</strong> scripts.<br /></li>
