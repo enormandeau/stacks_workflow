@@ -8,7 +8,7 @@ The [STACKS analysis pipeline](http://creskolab.uoregon.edu/stacks/) is the de f
 ## About Stacks_workflow
 This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people tasked with analysing GBS or RAD data and possessing limited UNIX/Linux experience can jump on the analysis wagon faster. It was developed with the needs of our research group in mind with an emphasis on non-model species studies. We make no claim about its usefulness to other groups or in other contexts, but we still believe it may be of use to some.
 
-Stacks_workflow has been tested with version 1.10 and earlier versions of STACKS under Linux (Ubuntu 12.04 to 13.10) and MacOSX.
+Stacks_workflow has been tested with version 1.17 and earlier versions of STACKS under Linux (Ubuntu 12.04 to 13.10) and MacOSX.
 
 ## About the manual
 This manual can be found in 3 places:
