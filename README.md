@@ -1,6 +1,6 @@
 # Stacks_workflow
 
-An integrated workflow to streamline STACKS analyses on RAD/GBS data
+Stacks_workflow is an integrated workflow to streamline STACKS analyses on RAD/GBS data
 
 ## About STACKS
 The [STACKS analysis pipeline](http://creskolab.uoregon.edu/stacks/) is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. Upon starting to use STACKS, it is highly suggested to read the two official STACKS papers. These articles can be found [here](http://dx.doi.org/10.1111/mec.12354) and [here](http://www.g3journal.org/content/1/3/171.full).
