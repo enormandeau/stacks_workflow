@@ -9,12 +9,13 @@ ENZYME=$2 # Name of the enzyme (run 'process_radtags' without options for list)
 cat $INFO_FILES/lane_info.txt |
 while read f
 do
-    grep -vE "^$" $INFO_FILES/sample_information.csv | \
+    grep -vE "^$" $INFO_FILES/sample_information.csv  | \
+        grep "$f" | \
         grep -v "Barcode" | \
         cut -f 2 > $INFO_FILES/barcodes.txt
 
     # Prepare bacode_lengths.txt from barcodes.txt 
-    perl -ne 'chomp; print length."\n"' $INFO_FILES/barcodes.txt | \
+    perl -ne 'chomp; print length()."\n"' $INFO_FILES/barcodes.txt | \
         sort -un > $INFO_FILES/barcode_lengths.txt
 
     # Create barcode files, eg: barcodes_4.txt, barcodes_5.txt ...
@@ -35,7 +36,7 @@ do
             -i gzfastq \
             -f 02-raw/$f".fastq.gz" \
             -o 03-samples/$f \
-            -b $INFO_FILES/barcodes_"$b".txt \
+            -b $INFO_FILES/barcodes_$b".txt" \
             -c -q -r -t $TRIM_LENGTH \
             --barcode_dist 2 \
             --filter_illumina 3 \
