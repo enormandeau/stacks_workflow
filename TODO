@@ -1,6 +1,6 @@
 Process radtags
 - Use the -D option to filter recursively on kmer lengths
-- Run the files with the most barcodes first (= faster)
+- Run the files with the most barcodes first (faster)
 - When finished, rename log file with date and barcode length
     
 Global
