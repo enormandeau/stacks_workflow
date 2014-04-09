@@ -29,7 +29,8 @@ cat $INFO_FILES/lane_info.txt |
             sample_name=$(echo $sample_info | cut -d " " -f 4)
             new_name=$(echo "$population"_"$sample_name".fq)
 
-            cp -l $sample_file $ALL_SAMPLES_FOLDER/$new_name
+            #cp -l $sample_file $ALL_SAMPLES_FOLDER/$new_name
+            ln $sample_file $ALL_SAMPLES_FOLDER/$new_name
         done
     done
 

@@ -2,32 +2,22 @@
 
 ## Table of Contents
 
-- Subject 1
-- Subject 2
-- Subject 3
-- Subject 4
+- Spacial analysis
+- Clustering analysis
 
-## Subject 1
+## Spacial analysis
 
 Description
 
-Name of folder
+Possible choices (software, approaches...)
 
-## Subject 2
+Name of folders to consult
 
-Description
-
-Name of folder
-
-## Subject 3
+## Clustering analysis
 
 Description
 
-Name of folder
+Possible choices (software, approaches...)
 
-## Subject 4
-
-Description
-
-Name of folder
+Name of folders to consult
 
