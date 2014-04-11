@@ -39,10 +39,10 @@ do
             -b $INFO_FILES/barcodes_$b".txt" \
             -c -q -r -t $TRIM_LENGTH \
             --barcode_dist 2 \
-            --filter_illumina 3 \
             -E phred33 \
             -e $ENZYME
             mv 03-samples/$f/process_radtags.log 03-samples/$f/process_radtags_b$b".log" 2> /dev/null
+            #--filter_illumina 3 \
     done
 
 #process_radtags [-f in_file | -p in_dir [-P] | -1 pair_1 -2 pair_2] -b barcode_file -o out_dir -e enz [-c] [-q] [-r] [-t len] [-D] [-w size] [-s lim] [-h]
