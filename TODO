@@ -4,7 +4,7 @@ Process radtags
 - When finished, rename log file with date and barcode length
     
 Global
-- Keep log and error log of all scripts (use tee)
+- Keep log and error of all scripts (use tee)
 
 Documentation
 - Create and add Stacks_workflow logo
