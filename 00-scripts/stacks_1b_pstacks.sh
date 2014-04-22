@@ -25,5 +25,5 @@ do
     pstacks $t $o $i $m $p $max_locus_stacks $model_type $alpha $bound_low \
         $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
-done
+done 2>&1 | tee stacks_1b_pstacks.log
 

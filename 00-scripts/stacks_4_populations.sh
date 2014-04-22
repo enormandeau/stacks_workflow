@@ -70,7 +70,7 @@ vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
 populations $b $P $M $r $m $g $V $B $W $s $e $t $r $p $m $a $f $p_value_cutoff \
     $k $window_size $bootstrap $bootstrap_reps $genomic $vcf $genepop \
     $structure $phase $beagle $plink $phylip $phylip_var \
-    $write_single_snp $log_fst_comp
+    $write_single_snp $log_fst_comp 2>&1 | stacks_4_populations.log
 
 #TODO experiment with the m option
 # m: 4 6 8 10
