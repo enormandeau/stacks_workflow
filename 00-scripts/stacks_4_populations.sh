@@ -1,6 +1,8 @@
 #!/bin/bash
 # Launch populations
 
+# test comment
+
 # Options: Comment out options that you do not wish to use
 b="-b 1"            # b: Batch ID to examine when exporting from the catalog
 P="-P 05-stacks"    # P: path to the Stacks output files.
