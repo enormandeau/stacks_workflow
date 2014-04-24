@@ -16,6 +16,8 @@ M="-M 01-info_files/population_map.txt"  #M: path to the population map, a tab
 #e="-e ENZYME"      # e: restriction enzyme, required if generating 'genomic'
                     #  output
 t="-t 16"           # t: number of threads to run in parallel sections of code
+#v="-v"             # v: print program version.
+#h="-h"             # h: display this help message.
 
 # Data filtering
 r="-r 0.2"          # r: minimum percentage of individuals in a population
@@ -39,16 +41,34 @@ m="-m 6"            # m: specify a minimum stack depth required for individuals
 
 
 # Bootstrap resampling
-#bootstrap="--bootstrap"                 # --bootstrap [exact|approx]: enable
-                    #   bootstrap resampling for population statistics
-                    #   (reference genome required)
-#bootstrap_reps="--bootstrap_reps 100"   #--bootstrap_reps [num]: number of
-                    #   bootstrap resamplings to calculate (default 100)
+#bootstrap="--bootstrap"               # turn on broostrap resampling
+                                       # for all smoothed statistics.
+#bootstrap_pifis="--bootstrap_pifis"   # turn on boostrap resampling
+                                       # for smoothed SNP-based Pi 
+                                       # and Fis calculations.
+#bootstrap_fst="--bootstrap_fst"       # turn on boostrap resampling 
+                                       # for smoothed Fst calculations 
+                                       # based on pairwise population 
+                                       # comparison of SNPs.
+#bootstrap_div="--bootstrap_div"       # turn on boostrap resampling 
+                                       # for smoothed haplotype diveristy
+                                       # and gene diversity calculations
+                                       # based on haplotypes.
+#bootstrap_phist="--bootstrap_phist"   # turn on boostrap resampling
+                                       # for smoothed Phi_st calculations 
+                                       # based on haplotypes.
+#bootstrap_reps="--bootstrap_reps 100" # number of bootstrap resamplings
+                                       # to calculate (default 100).
+#bootstrap_wl="--bootstrap_wl [path]"  # only bootstrap loci contained
+                                       # in this whitelist.
+
 
 # file output options
 #genomic="--genomic"        # --genomic: output each nucleotide position
                             #   (fixed or polymorphic) in all population members
                             #   to a file
+#fasta="--fasta"            # output full sequence for each allele,
+                            # from each sample locus in FASTA format.
 vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
 #genepop="--genepop"        # --genepop: output results in GenePop format
 #structure="--structure"    # --structure: output results in Structure format
@@ -64,11 +84,15 @@ vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
 #write_single_snp="--write_single_snp"  #--write_single_snp: write only the
                             #   first SNP per locus in Genepop and Structure
                             #   outputs
+
+
+# Debugging
 #log_fst_comp="--log_fst_comp"  # log components of Fst calculations to a file.
 
 # Launch populations
-populations $b $P $M $r $m $g $V $B $W $s $e $t $r $p $m $a $f $p_value_cutoff \
-    $k $window_size $bootstrap $bootstrap_reps $genomic $vcf $genepop \
+populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f $p_value_cutoff \
+    $k $window_size $bootstrap $bootstrap_pifis $bootstrap_fst $bootstrap_div \
+    $bootstrap_phist $bootstrap_reps $bootstrap_wl $genomic $fasta $vcf $genepop \
     $structure $phase $beagle $plink $phylip $phylip_var \
     $write_single_snp $log_fst_comp 2>&1 | stacks_4_populations.log
 
