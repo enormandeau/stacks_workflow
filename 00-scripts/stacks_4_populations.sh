@@ -1,8 +1,6 @@
 #!/bin/bash
 # Launch populations
 
-# test comment
-
 # Options: Comment out options that you do not wish to use
 b="-b 1"            # b: Batch ID to examine when exporting from the catalog
 P="-P 05-stacks"    # P: path to the Stacks output files.
@@ -41,7 +39,6 @@ m="-m 6"            # m: specify a minimum stack depth required for individuals
 #window_size="--window_size 150Kb"       # --window_size [num]: distance over
                     #   which to average values (sigma, default 150Kb)
 
-
 # Bootstrap resampling
 #bootstrap="--bootstrap"               # turn on broostrap resampling
                                        # for all smoothed statistics.
@@ -64,7 +61,6 @@ m="-m 6"            # m: specify a minimum stack depth required for individuals
 #bootstrap_wl="--bootstrap_wl [path]"  # only bootstrap loci contained
                                        # in this whitelist.
 
-
 # file output options
 #genomic="--genomic"        # --genomic: output each nucleotide position
                             #   (fixed or polymorphic) in all population members
@@ -86,7 +82,6 @@ vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
 #write_single_snp="--write_single_snp"  #--write_single_snp: write only the
                             #   first SNP per locus in Genepop and Structure
                             #   outputs
-
 
 # Debugging
 #log_fst_comp="--log_fst_comp"  # log components of Fst calculations to a file.
