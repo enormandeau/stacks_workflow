@@ -1,5 +1,6 @@
-Global
-- Keep log and error of all scripts (use tee)
+Use compressed files throughout pipeline
+- Compress output of process_radtag
+- Verify that other parts are working
 
 Process radtags
 - Use the -D option to filter recursively on kmer lengths
