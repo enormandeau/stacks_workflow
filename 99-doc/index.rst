@@ -6,9 +6,8 @@
 Stacks workflow tutorial
 ========================
 
-
-Made by Eric Normandeau with the collaboration of Thierry Gosselin, Jeremy Gaudin, Laura Benestan and Charles Perrier ***(C'Est ok avec toi??)**
-
+By Eric Normandeau with the collaboration of Thierry Gosselin, Jeremy Gaudin,
+Laura Benestan and Charles Perrier.
 
 Contents:
 
