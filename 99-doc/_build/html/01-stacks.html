@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Stacks workflow tutorial &mdash; Stacks workflow tutorial 1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Stacks workflow tutorial 1.0 documentation" href="index.html"/>
+        <link rel="next" title="2. Install and prepare Stacks_workflow" href="02-Step_2.html"/>
+        <link rel="prev" title="Stacks workflow tutorial" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">1. Stacks workflow tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Install and prepare Stacks_workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#id1">2.2. 2. Download and install STACKS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Download your raw datafiles (Illumina lanes)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#put-your-raw-files-in-the-02-raw-folder-of-the-stacks-workflow-folder">3.1. Put your raw files in the <tt class="docutils literal"><span class="pre">02-raw</span></tt> folder of the stacks_workflow folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#prepare-the-lane-info-txt-file-automatically">3.2. Prepare the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file automatically</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with process_radtags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="05-Step_5.html">5. Rename samples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#to-rename-and-copy-the-samples-run">5.1. To rename and copy the samples, run:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#id1">6.1. Install bwa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#index-reference-genome-run">6.3. Index reference genome, run:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#align-samples">6.4. Align samples:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="07-Step_7.html">7. STACKS pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#prepare-population-info-file">7.1. Prepare population info file:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#edit-script-folder">7.2. Edit script folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="08-Step_8.html">8. Filtering the results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-conclusion.html">9. Conclusion</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Stacks workflow tutorial</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>1. Stacks workflow tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/01-stacks.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="stacks-workflow-tutorial">
+<h1>1. Stacks workflow tutorial<a class="headerlink" href="#stacks-workflow-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This workflow aims at making the use of the STACKS pipeline easier and more structured so that people tasked with analysing GBS or RAD data and possessing limited UNIX/Linux experience can jump on the analysis wagon faster.</p>
+<p>It was developed with the needs of our research group in mind with an emphasis on non-model species studies. We make no claim about its usefulness to other groups or in other contexts, but we still believe it may be of use to some.</p>
+<p>This workflow has been tested with version 1.19 and earlier versions of STACKS under Linux (Ubuntu 12.04 to 13.10) and MacOSX (10.9 Mavericks).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>About STACKS</strong></p>
+<p>The <a class="reference external" href="http://creskolab.uoregon.edu/stacks/">STACKS analysis pipeline</a> is the de facto tool for SNP discovery in Genotyping-by-Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies, with and without a reference genome. Here is diagram of Stacks pipeline:</p>
+<a class="reference internal image-reference" href="_images/stacks_diagram.png"><img alt="_images/stacks_diagram.png" src="_images/stacks_diagram.png" style="width: 500pt;" /></a>
+<p><strong>Upon starting to use STACKS, it is highly suggested to read the two official STACKS papers:</strong></p>
+<p><a class="reference external" href="http://www.g3journal.org/content/1/3/171.full">Catchen, J. M., Amores, A., Hohenlohe, P. A., Cresko, W. A., Postlethwait, J. H., &amp; De Koning, D. J. (2011). Stacks: Building and Genotyping Loci De Novo From Short-Read Sequences. G3, 1(3), 171–182. doi:10.1534/g3.111.000240</a></p>
+<p class="last"><a class="reference external" href="http://onlinelibrary.wiley.com/doi/10.1111/mec.12354/abstract">Catchen, J. M., Hohenlohe, P. A., Bassham, S., Amores, A., &amp; Cresko, W. A. (2013). Stacks: an analysis tool set for population genomics. Molecular Ecology, 22(11), 3124–3140. doi:10.1111/mec.12354</a></p>
+</div>
+<p><strong>Overview of the steps</strong></p>
+<p>Step 1: Read the papers!</p>
+<p>Step 2: Install and prepare Stacks_workflow</p>
+<p>Step 3: Download your raw datafiles (Illumina lanes)</p>
+<p>Step 4: Extract individual data with process_radtags</p>
+<p>Step 5: Rename samples</p>
+<p>Step 6: Align reads to a reference genome (optional)</p>
+<p>Step 7: STACKS pipeline</p>
+<p>Step 8: Filtering the results</p>
+<p><strong>The tutorial can be found in 3 places:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/enormandeau/stacks_workflow">Github</a></li>
+<li><a href="#id1"><span class="problematic" id="id2">`Read the docs &lt;&gt;`_</span></a> ** will come soon **</li>
+</ul>
+</div></blockquote>
+<p><strong>Licence:</strong></p>
+<p>The Stacks_workflow is licensed under the GPL3 license. See the LICENCE file for more details.</p>
+<p>Made by Eric Normandeau with the collaboration of Thierry Gosselin, Jeremy Gaudin, Laura Benestan and Charles Perrier <strong>*(C&#8217;Est ok avec toi??)*</strong></p>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02-Step_2.html" class="btn btn-neutral float-right" title="2. Install and prepare Stacks_workflow"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Stacks workflow tutorial"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      Last updated on May 06, 2014.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
