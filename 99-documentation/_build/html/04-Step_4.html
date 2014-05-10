@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Extract individual data with process_radtags &mdash; Stacks workflow tutorial 1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Stacks workflow tutorial 1.0 documentation" href="index.html"/>
+        <link rel="next" title="5. Rename samples" href="05-Step_5.html"/>
+        <link rel="prev" title="3. Download your raw datafiles (Illumina or prepared IonProton lanes)" href="03-Step_3.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#where-to-find-this-tutorial">1.3. Where to find this tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#licence">1.4. Licence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Install Stacks_workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-stacks">2.2. Download and install STACKS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Download your raw datafiles (Illumina or prepared IonProton lanes)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#put-your-raw-files-in-the-02-raw-folder-of-the-stacks-workflow-folder">3.1. Put your raw files in the <tt class="docutils literal"><span class="pre">02-raw</span></tt> folder of the stacks_workflow folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#prepare-the-lane-info-txt">3.2. Prepare the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="05-Step_5.html">5. Rename samples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#rename-and-copy-the-samples">5.1. Rename and copy the samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#join-samples-that-should-go-together">5.2. Join samples that should go together</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#install-bwa">6.1. Install bwa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#index-the-reference-genome">6.3. Index the reference genome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#align-samples">6.4. Align samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="07-Step_7.html">7. STACKS pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#prepare-population-info-file">7.1. Prepare population info file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#edit-script-parameters">7.2. Edit script parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="08-Step_8.html">8. Filtering the results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-conclusion.html">9. Conclusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="09-conclusion.html#running-into-problems">9.1. Running into problems</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Stacks workflow tutorial</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/04-Step_4.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="extract-individual-data-with-process-radtags">
+<h1>4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt><a class="headerlink" href="#extract-individual-data-with-process-radtags" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prepare-a-file-named-sample-information-csv">
+<h2>4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt><a class="headerlink" href="#prepare-a-file-named-sample-information-csv" title="Permalink to this headline">¶</a></h2>
+<p>Using the same format found in the <tt class="docutils literal"><span class="pre">example_sample_information.csv</span></tt> file in
+the <tt class="docutils literal"><span class="pre">01-info_files</span></tt> folder.</p>
+<p>Save this file in the <tt class="docutils literal"><span class="pre">01-info_files</span></tt> folder.</p>
+<p>The <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt> file will be used to extract the samples and
+rename the extracted sample files automatically.</p>
+<p>The first column <strong>MUST</strong> contain the <strong>EXACT</strong> name of the data file for the
+lane of each sample.</p>
+<p>The second column contains the barcode sequence of each sample.</p>
+<p>The third column contains the population name of each sample.</p>
+<p>The fourth column contains the name of the sample (do not include the
+population name or abbreviation in the sample name).</p>
+<p>The fifth column contains a number identifying the populations.</p>
+<p>Columns three and four are treated as text, so they can contain either text or
+numbers. Other columns can be present after the fifth one and will be ignored.
+However, it is crucial that the five first columns respect the format in the
+example file exactly. Be especially careful not to include errors in this file,
+for example mixing lower and capital letters in population or sample names
+(e.g.: Pop01 and pop01), since these will be treated as two different
+populations.</p>
+</div>
+<div class="section" id="launch-process-radtags-with">
+<h2>4.2. Launch process_radtags with:<a class="headerlink" href="#launch-process-radtags-with" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/02_process_radtags.sh &lt;trimLength&gt; &lt;enzyme&gt;
+</pre></div>
+</div>
+<p>Where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>trimLength</strong> = length to trim all the sequences. This should be the length
+of the Illumina reads minus the length of the longest tag or MID.</li>
+<li><strong>enzyme</strong> = name of enzyme (run <tt class="docutils literal"><span class="pre">process_radtags</span></tt>, without options, for a
+list of the supported enzymes)</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="05-Step_5.html" class="btn btn-neutral float-right" title="5. Rename samples"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="03-Step_3.html" class="btn btn-neutral" title="3. Download your raw datafiles (Illumina or prepared IonProton lanes)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      Last updated on May 09, 2014.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

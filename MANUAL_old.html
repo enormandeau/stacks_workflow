@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="manual.css">
+</head>
+<body>
+<h1 id="stacks_workflow">Stacks_workflow</h1>
+<p>An integrated workflow to streamline STACKS analyses on RAD/GBS data</p>
+<h2 id="about-stacks">About STACKS</h2>
+<p>The <a href="http://creskolab.uoregon.edu/stacks/">STACKS analysis pipeline</a> is the de facto tool for SNP discovery in Genotyping By Sequencing (GBS) and Restriction-site Associated DNA sequencing (RAD) studies when no reference genome is available. Upon starting to use STACKS, it is highly suggested to read the two official STACKS papers. These articles can be found <a href="http://dx.doi.org/10.1111/mec.12354">here</a> and <a href="http://www.g3journal.org/content/1/3/171.full">here</a>.</p>
+<h2 id="about-stacks_workflow">About Stacks_workflow</h2>
+<p>This STACKS Workflow aims at making the use of the STACKS pipeline easier and more structured so that people tasked with analysing GBS or RAD data and possessing limited UNIX/Linux experience can jump on the analysis wagon faster. It was developed with the needs of our research group in mind with an emphasis on non-model species studies. We make no claim about its usefulness to other groups or in other contexts, but we still believe it may be of use to some.</p>
+<p>Stacks_workflow has been tested with version 1.17 and earlier versions of STACKS under Linux (Ubuntu 12.04 to 13.10) and MacOSX.</p>
+<h2 id="about-the-manual">About the manual</h2>
+<p>This manual can be found in 3 places:</p>
+<ul>
+<li>Online at: <a href="https://github.com/enormandeau/stacks_workflow">https://github.com/enormandeau/stacks_workflow</a></li>
+<li>In the <strong>MANUAL.html</strong> file found in the base directory of <strong>stacks_workflow</strong><br /></li>
+<li>In the <strong>README.md</strong> file, also found in the base directory of <strong>stacks_workflow</strong></li>
+</ul>
+<p>The online and <strong>MANUAL.html</strong> versions are especially nicelly formatted. We suggest that you use them rather than using the README.md file directly. Using the text version is more likely to lead to errors since it is easy to involuntarily modify some of the commands without noticing.</p>
+<h2 id="licence">Licence</h2>
+<p>The Stacks_workflow is licensed under the GPL3 license. See the LICENCE file for more details.</p>
+<h2 id="overview-of-the-steps">Overview of the steps</h2>
+<p>Step 0 - Install and prepare Stacks_workflow<br />Step 1 - Download raw datafiles (Illumina lanes)<br />Step 2 - Extract individual data with process_radtags<br />Step 3 - Rename samples<br />Step 4 - STACKS pipeline<br />Step 5 - Filtering the results</p>
+<h1 id="the-workflow">The workflow</h1>
+<h2 id="step-0---install-and-prepare-stacks_workflow">Step 0 - Install and prepare Stacks_workflow</h2>
+<ol type="a">
+<li>Download and install the most recent version of this workflow</li>
+</ol>
+<p>From terminal, run:</p>
+<pre><code>cd ~/Desktop
+wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
+unzip master.zip</code></pre>
+<p>Or, if you have <strong>git</strong> installed, you can do the same faster with:</p>
+<pre><code>git clone https://github.com/enormandeau/stacks_workflow</code></pre>
+<p>Use the extracted or cloned folder as your working directory for the rest of the project. All the commands in this manual are launched from that directory.</p>
+<ol start="2" type="a">
+<li>Download and install STACKS</li>
+</ol>
+<ul>
+<li>http://creskolab.uoregon.edu/stacks/</li>
+<li>Unzip the archive</li>
+<li>From within the STACKS folder, run:</li>
+</ul>
+<pre><code>./configure
+make
+sudo make install</code></pre>
+<h2 id="step-1---download-raw-datafiles-illumina-lanes">Step 1 - Download raw datafiles (Illumina lanes)</h2>
+<ol type="a">
+<li>Put them in the <strong>02-raw</strong> folder of the stacks_workflow folder</li>
+</ol>
+<p><strong>NOTE</strong>: All file names MUST end with <strong>.fastq.gz</strong></p>
+<ol start="2" type="a">
+<li>Prepare the <strong>lane_info.txt</strong> file automatically</li>
+</ol>
+<p>From the stacks_workflow folder, run:</p>
+<pre><code>./00-scripts/01_prepare_lane_info.sh</code></pre>
+<h2 id="step-2---extract-individual-data-with-process_radtags">Step 2 - Extract individual data with process_radtags</h2>
+<ol type="a">
+<li><p>Prepare a file named <strong>sample_information.csv</strong> using the same format found in the <strong>example_sample_information.csv</strong> file in the <strong>01-info_files</strong> folder. Also save this file in the <strong>01-info_files</strong> folder. This file will be used to extract the samples and rename the sample files automatically. The first column contains the EXACT name of the data file for the lane of each sample. The second column contains the barcode sequence of each sample. The third column contains the population name of each sample. The fourth column contains the name of the sample (do not include the population name or abbreviation in the sample name). The fifth column contains a number identifying the populations. Columns three and four are treated as text, so they can contain either text or numbers. Other columns can be present after the fifth one and will be ignored. However, it is crucial that the five first columns respect the format in the example file exactly. Be especially careful not to include errors in this file, for example mixing lower and capital letters in population or sample names (e.g.: Pop01 and pop01), since these will be treated as two different populations.</p></li>
+<li><p>Launch process_radtags with:</p></li>
+</ol>
+<pre><code>./00-scripts/02_process_radtags.sh &lt;trimLength&gt; &lt;enzyme&gt;</code></pre>
+<p>Where:</p>
+<ul>
+<li>trimLength = length to trim all the sequences. This should be the length of the Illumina reads minus the length of the longest tag or MID.<br /></li>
+<li>enzyme = name of enzyme (run <strong>process_radtags</strong>, without options, for a list of the supported enzymes)</li>
+</ul>
+<h2 id="step-3a---rename-samples">Step 3a - Rename samples</h2>
+<ol type="a">
+<li>To rename and copy the samples, run:</li>
+</ol>
+<pre><code>./00-scripts/03_rename_samples.sh</code></pre>
+<p>Join samples that should go together - Go to 04-all_samples and join the .fq files that should go together with the <code>cat</code> command - Remove partial .fq files that have been joined - Remove individuals with too few sequences if needed (optional)</p>
+<h2 id="step-3b---optional-align-reads-to-a-reference-genome">Step 3b - (Optional) Align reads to a reference genome</h2>
+<ol type="a">
+<li>Install bwa</li>
+<li>Download reference genome to the 01-info_files</li>
+<li>Index reference genome, run:</li>
+</ol>
+<pre><code>bwa index -p genome -a bwtsw ./01-info_files/&lt;genome reference&gt;</code></pre>
+<p>copy files:</p>
+<pre><code>cp genome.* 01-info_files</code></pre>
+<p>Align samples:</p>
+<pre><code>for i in $(ls -1 04-all_samples/*.fq)
+do
+    name=$(basename $i)
+    bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome $i | \
+    bwa samse -r &quot;@RG\tID:&#39;$name&#39;\tSM:&#39;$name&#39;\tPL:Illumina&quot; \
+        ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; \
+done</code></pre>
+<h2 id="step-4---stacks-pipeline">Step 4 - STACKS pipeline</h2>
+<ol type="a">
+<li>Prepare population info file:</li>
+</ol>
+<pre><code>./00-scripts/04_prepare_population_map.sh</code></pre>
+<ol start="2" type="a">
+<li>Open the stacks script in the 00-scripts folder and edit the options of the <strong>stacks_</strong> scripts.<br /></li>
+<li>Run the STACKS programs. If you do not have access to a reference genome, launch the following commands:</li>
+</ol>
+<pre><code>./00-scripts/stacks_1a_ustacks.sh
+./00-scripts/stacks_2_cstacks.sh
+./00-scripts/stacks_3_sstacks.sh
+./00-scripts/stacks_4_populations.sh</code></pre>
+<p>Or, if you have a reference genome:</p>
+<pre><code>./00-scripts/stacks_1b_pstacks.sh
+./00-scripts/stacks_2_cstacks.sh
+./00-scripts/stacks_3_sstacks.sh
+./00-scripts/stacks_4_populations.sh</code></pre>
+<h2 id="step-5---filtering-the-results">Step 5 - Filtering the results</h2>
+<p><strong>Stacks_workflow</strong> includes a script to filter your SNPs. To print the documentation of the filtering script, launch it without options:</p>
+<pre><code>./00-scripts/05_filterStacksSNPs.py</code></pre>
+<p>To use it with options, use the following format:</p>
+<pre><code>./00-scripts/05_filterStacksSNPs.py \  
+    -i 05-stacks/batch_1.sumstats.tsv \  
+    -o filtered.tsv \  
+    -P 01-info_files/population_map.txt \  
+    -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10</code></pre>
+<p><br> <br></p>
+</body>
+</html>

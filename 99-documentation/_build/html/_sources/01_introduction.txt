@@ -1,0 +1,6 @@
+Template
+========
+
+Use Re-Structured text to fill this file and any other file linked to in
+``index.rst``.
+
