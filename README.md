@@ -1,6 +1,6 @@
 # Stacks Workflow
 
-An integrated workflow around the STACKS software to streamline RAD and GBS analyses.
+An integrated workflow around the [STACKS software pipeline](http://creskolab.uoregon.edu/stacks/) to help streamline RAD and GBS analyses.
 
 ## Documentation
 
