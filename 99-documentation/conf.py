@@ -14,7 +14,7 @@
 
 import sys
 import os
-import sphinx_rtd_theme
+#import sphinx_rtd_theme
 
 # on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
@@ -105,7 +105,7 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #html_theme = 'default'
-html_theme = "sphinx_rtd_theme"
+#html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -114,7 +114,7 @@ html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+#html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 
 # The name for this set of Sphinx documents.  If None, it defaults to
@@ -253,7 +253,6 @@ texinfo_documents = [
    u'Eric Normandeau', 'Stacks workflow tutorial', 'One line description of project.',
    'Miscellaneous'),
 ]
-
 # Documents to append as an appendix to all manuals.
 #texinfo_appendices = []
 
@@ -276,7 +275,7 @@ epub_publisher = u'Eric Normandeau'
 epub_copyright = u'2014, Eric Normandeau'
 
 # The basename for the epub file. It defaults to the project name.
-#epub_basename = u'Stacks workflow tutorial'
+#epub_basename = u'GBS_cloud'
 
 # The HTML theme for the epub output. Since the default themes are not optimized
 # for small screen space, using the same theme for HTML and epub output is
