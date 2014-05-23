@@ -96,3 +96,7 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f $p_value_cu
 #TODO experiment with the m option
 # m: 4 6 8 10
 
+# Correct formating of integers in 8th column of 05-stacks/batch_1.sumstats.tsv
+
+perl -i.bak -pe 's/\.0000//' 05-stacks/batch_1.sumstats.tsv
+
