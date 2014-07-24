@@ -225,14 +225,14 @@ if __name__ == "__main__":
             help = 'number of populations where it is permitted that the -p threshold does not pass, (int, 0 or more, default: 0')
     parser.add_argument('--use_percent', action="store_true",
             help = 'whether to use percentage (float, 0 to 100, default 0) instead of minimal number of individuals')
-    parser.add_argument('-H', '--max_hetero', type=float, default=1,
-            help = 'maximum proportion of heterozygous individuals (float, 0 to 1, default: 1)')
-    parser.add_argument('-y', '--max_hetero_joker', type=int, default=0,
-            help = 'number of populations where it is permitted that the -H threshold does not pass, (int, 0 or more, default: 0')
     parser.add_argument('-a', '--maf_global', type=float, default=0.0,
             help = 'minimum minor allele frequency that must be respected in all populations to retain locus (float, 0 to 1, default: 0)')
     parser.add_argument('-A', '--maf_population', type=float, default=0.0,
             help = 'minimum minor allele frequency that must be found in at least one population to retain locus (float, 0 to 1, default: 0)')
+    parser.add_argument('-H', '--max_hetero', type=float, default=1,
+            help = 'maximum proportion of heterozygous individuals (float, 0 to 1, default: 1)')
+    parser.add_argument('-y', '--max_hetero_joker', type=int, default=0,
+            help = 'number of populations where it is permitted that the -H threshold does not pass, (int, 0 or more, default: 0')
     parser.add_argument('-f', '--min_fis', type=float, default=-1,
             help = 'minimum Fis value (float, -1 to 1, default: -1)')
     parser.add_argument('-F', '--max_fis', type=float, default=1,
