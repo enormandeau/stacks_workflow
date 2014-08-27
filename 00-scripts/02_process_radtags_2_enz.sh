@@ -41,8 +41,8 @@ do
             -c -q -r -t $TRIM_LENGTH \
             --barcode_dist 2 \
             -E phred33 \
-            -renz_1 $ENZYME1 \
-            -renz_2 $ENZYME2
+            --renz_1 $ENZYME1 \
+            --renz_2 $ENZYME2
 
         mv 03-samples/$f/process_radtags.log 03-samples/$f/process_radtags_b$b".log" 2> /dev/null
         #--filter_illumina 3 \
