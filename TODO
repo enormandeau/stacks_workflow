@@ -1,3 +1,4 @@
+Parallelize process_radtags, ustacks, and sstacks
 Use compressed files throughout pipeline
 - Compress output of process_radtag
 - Verify that other parts are working
