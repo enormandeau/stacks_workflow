@@ -3,7 +3,7 @@
 
 # Options: Comment out options that you do not wish to use
 b="-b 1"            # b: Batch ID to examine when exporting from the catalog
-P="-P 05-stacks"    # P: path to the Stacks output files.
+P="-P 05-stacks_rx"    # P: path to the Stacks output files.
 M="-M 01-info_files/population_map.txt"  #M: path to the population map, a tab
                     #   separated file describing which individuals belong in
                     #   which population
@@ -96,7 +96,7 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f $p_value_cu
 #TODO experiment with the m option
 # m: 4 6 8 10
 
-# Correct formating of integers in 8th column of 05-stacks/batch_1.sumstats.tsv
+# Correct formating of integers in 8th column of 05-stacks_rx/batch_1.sumstats.tsv
 
-perl -i.bak -pe 's/\.0000//' 05-stacks/batch_1.sumstats.tsv
+perl -i.bak -pe 's/\.0000//' 05-stacks_rx/batch_1.sumstats.tsv
 
