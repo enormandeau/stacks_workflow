@@ -46,3 +46,6 @@ cat 05-stacks_rx/batch_1.rxstacks_lnls.tsv | \
     awk '{bucket=(int($2)); lnls[bucket] += 1} END { for (bucket in lnls) print bucket, "\t", lnls[bucket]}' | \
     sort -n > rxstacks_log_likelihoods.tsv
 
+# Create figure
+R -q -e 'source("./00-scripts/utility_scripts/plot_log_likelihoods.r")' 2>&1 > /dev/null
+
