@@ -2,7 +2,7 @@
 # Launch sstacks to treat all the samples indivually
 
 # OPTIONS: Comment out options that you do not wish to use
-p="-p 16"                  # p: enable parallel execution with num_threads
+p="-p 8"                  # p: enable parallel execution with num_threads
                            #   threads
 b="-b 1"                   # b: MySQL ID of this batch
 c="-c 05-stacks_rx/batch_1"   # c: TSV file from which to load the catalog loci

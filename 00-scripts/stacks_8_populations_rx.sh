@@ -15,22 +15,22 @@ M="-M 01-info_files/population_map.txt"  #M: path to the population map, a tab
                              #   to include in the export
 #e="-e ENZYME"      # e: restriction enzyme, required if generating 'genomic'
                     #  output
-t="-t 16"           # t: number of threads to run in parallel sections of code
+t="-t 8"           # t: number of threads to run in parallel sections of code
 #v="-v"             # v: print program version.
 #h="-h"             # h: display this help message.
 
 # Data filtering
-r="-r 0.2"          # r: minimum percentage of individuals in a population
+r="-r 0.7"          # r: minimum percentage of individuals in a population
                     #  required to process a locus for that population
-#p="-p 1"           # p: minimum number of populations a locus must be present
+p="-p 3"           # p: minimum number of populations a locus must be present
                     #   in order to process a locus
 m="-m 6"            # m: specify a minimum stack depth required for individuals
                     #   at a locus
-#a="-a 0.05"        # a: specify a minimum minor allele frequency required
+a="-a 0.01"        # a: specify a minimum minor allele frequency required
                     #   before calculating Fst at a locus (0 < a < 0.5)
-#f="-f p_value"     # f: specify a correction to be applied to Fst values:
+f="-f p_value"     # f: specify a correction to be applied to Fst values:
                     #   'p_value', 'bonferroni_win', or 'bonferroni_gen'
-#p_value_cutoff="--p_value_cutoff 0.05"   # --p_value_cutoff [num]: required
+p_value_cutoff="--p_value_cutoff 0.05"   # --p_value_cutoff [num]: required
                     #   p-value to keep an Fst measurement (0.05 by default)
                     #   Also used as base for Bonferroni correction
 

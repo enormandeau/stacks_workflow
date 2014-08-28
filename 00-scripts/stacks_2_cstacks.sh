@@ -11,11 +11,10 @@ o="-o 05-stacks"    # o: output path to write results
 #m="-m"             # m: include tags in catalog that match more than one entry
 n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
-p="-p 16"           # p: enable parallel execution with num_threads threads
+p="-p 8"           # p: enable parallel execution with num_threads threads
 #catalog="--catalog PATH"
 #report_mmatches="--report_mmatches"    # --report_mmatches: report query loci
                     #   that match more than one catalog locus
-
 
 # -=( DO NOT MODIFY THE FOLLWING OPTION! )=-
 # This will automatically create the list of filenames for cstacks
@@ -24,7 +23,4 @@ s="$(for file in $(ls -1 05-stacks/*.tags.tsv | perl -pe 's/\.tags\.tsv//'); do 
 
 # Run cstacks
 cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee stacks_2_cstacks.log
-
-#TODO experiment with the n option
-# n: 0 1 2
 
