@@ -91,10 +91,7 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f $p_value_cu
     $k $window_size $bootstrap $bootstrap_pifis $bootstrap_fst $bootstrap_div \
     $bootstrap_phist $bootstrap_reps $bootstrap_wl $genomic $fasta $vcf $genepop \
     $structure $phase $beagle $plink $phylip $phylip_var \
-    $write_single_snp $log_fst_comp 2>&1 | tee stacks_4_populations.log
-
-#TODO experiment with the m option
-# m: 4 6 8 10
+    $write_single_snp $log_fst_comp 2>&1 | tee stacks_8_populations_rx.log
 
 # Correct formating of integers in 8th column of 05-stacks_rx/batch_1.sumstats.tsv
 

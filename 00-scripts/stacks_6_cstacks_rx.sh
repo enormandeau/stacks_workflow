@@ -23,8 +23,5 @@ p="-p 8"           # p: enable parallel execution with num_threads threads
 s="$(for file in $(ls -1 05-stacks_rx/*.tags.tsv | perl -pe 's/\.tags\.tsv//'); do echo -s $file; done)"
 
 # Run cstacks
-cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee stacks_2_cstacks.log
-
-#TODO experiment with the n option
-# n: 0 1 2
+cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee stacks_6_cstacks_rx.log
 

@@ -1,6 +1,5 @@
 #!/bin/bash
-# Automatically extract information about sequencing
-# lanes present in the raw data folder
+# Extract information about the lanes in the 02-raw folder
 
 for i in $(ls -1 02-raw/*.fastq.gz)
 do

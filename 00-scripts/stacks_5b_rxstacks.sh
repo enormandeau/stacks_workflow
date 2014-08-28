@@ -39,12 +39,12 @@ alpha="--alpha 0.1"  #chi square significance level required to call a
 ###For the Bounded SNP model:
 bound_low="--bound_low 0"      #lower bound for epsilon, the error rate,
                                #between 0 and 1.0 (default 0).
-bound_high="--bound_high 0.1" #upper bound for epsilon, the error rate,
+bound_high="--bound_high 1" #upper bound for epsilon, the error rate,
                                #between 0 and 1.0 (default 1).
 
 ###Logging Options:
 #verbose="--verbose"  #extended logging, including coordinates of all changed 
                      #nucleotides (forces single-threaded execution).
 
-rxstacks $b $P $o $t $v $h $lnl_filter $lnl_lim $lnl_dist $conf_filter $conf_lim $prune_haplo $max_haplo_cnt $model_type $alpha $bound_low $bound_high $verbose
+rxstacks $b $P $o $t $v $h $lnl_filter $lnl_lim $lnl_dist $conf_filter $conf_lim $prune_haplo $max_haplo_cnt $model_type $alpha $bound_low $bound_high $verbose | tee stacks_5b_rxstacks.log
 

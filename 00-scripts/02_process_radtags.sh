@@ -1,5 +1,5 @@
 #!/bin/bash
-# Launch 'process_radtags' on all the lanes
+# Launch process_radtags on all the lanes
 
 ### Global variable
 INFO_FILES="01-info_files"
