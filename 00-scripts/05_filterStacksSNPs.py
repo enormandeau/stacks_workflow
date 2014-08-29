@@ -83,7 +83,7 @@ def filter_empty_loci(loci):
 def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, use_percent, header):
     """Remove snps that do not have enough individuals for all populations
     """
-    with open("06-filters/01_filtered_number_individuals.tsv", "w") as out_f:
+    with open("06-post_stacks_analyses/01_filtered_number_individuals.tsv", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -111,7 +111,7 @@ def filter_number_individuals(loci, min_presence, num_ind_per_pop, criterion, us
 def filter_maf(loci, maf_global, maf_population, criterion_global, header):
     """Remove SNPs that do not have high enough global or population-wise MAFs
     """
-    with open("06-filters/02_filtered_maf", "w") as out_f:
+    with open("06-post_stacks_analyses/02_filtered_maf", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -137,7 +137,7 @@ def filter_heterozygozity(loci, max_hetero, joker, header):
     """Remove all loci where one population in one locus has too many
     heterozygous individuals
     """
-    with open("06-filters/03_filtered_heterozygozity", "w") as out_f:
+    with open("06-post_stacks_analyses/03_filtered_heterozygozity", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -156,7 +156,7 @@ def filter_fis(loci, min_fis, max_fis, joker, header):
     """Remove all loci where the Fis value of one population in one locus is
     outside the (min_fis, max_fis) range
     """
-    with open("06-filters/04_filtered_fis", "w") as out_f:
+    with open("06-post_stacks_analyses/04_filtered_fis", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:
@@ -174,7 +174,7 @@ def filter_fis(loci, min_fis, max_fis, joker, header):
 def filter_snp_number(loci, max_snps, header):
     """Remove all loci with too many snps
     """
-    with open("06-filters/05_filtered_snp_numbers", "w") as out_f:
+    with open("06-post_stacks_analyses/05_filtered_snp_numbers", "w") as out_f:
         for h in header:
             out_f.write(h)
         for locus in loci:

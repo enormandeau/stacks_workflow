@@ -20,7 +20,7 @@ t="-t 8"           # t: number of threads to run in parallel sections of code
 #h="-h"             # h: display this help message.
 
 # Data filtering
-r="-r 0.7"          # r: minimum percentage of individuals in a population
+r="-r 0.3"          # r: minimum percentage of individuals in a population
                     #  required to process a locus for that population
 p="-p 3"           # p: minimum number of populations a locus must be present
                     #   in order to process a locus
