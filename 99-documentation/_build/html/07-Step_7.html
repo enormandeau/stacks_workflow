@@ -147,12 +147,13 @@
 </div>
 <div class="section" id="edit-script-parameters">
 <h2>7.2. Edit script parameters<a class="headerlink" href="#edit-script-parameters" title="Permalink to this headline">¶</a></h2>
-<p>You will need to go through the scripts named <tt class="docutils literal"><span class="pre">stacks_*</span></tt> in the <tt class="docutils literal"><span class="pre">00-scripts</span>
-<span class="pre">folder</span></tt> and edit the options.</p>
+<p>You will need to go through all the scripts named <tt class="docutils literal"><span class="pre">stacks_*</span></tt> in the
+<tt class="docutils literal"><span class="pre">00-scripts</span> <span class="pre">folder</span></tt> and edit the options to suite your needs.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Choosing appropriate parameters for your study is crucial in order to generate
-meaninful and optimal results.</p>
+<p class="last">This step is crucial. Choosing appropriate parameters for your study is
+crucial in order to generate meaninful and optimal results. Read the STACKS
+documentation on their website to learn more about the different options.</p>
 </div>
 </div>
 <div class="section" id="run-the-stacks-programs">
@@ -162,13 +163,33 @@ meaninful and optimal results.</p>
 ./00-scripts/stacks_2_cstacks.sh
 ./00-scripts/stacks_3_sstacks.sh
 ./00-scripts/stacks_4_populations.sh
+./00-scripts/stacks_5a_rxstacks_likelihoods.sh
+</pre></div>
+</div>
+<p>Visualize the distribution of log likelihoods in
+<tt class="docutils literal"><span class="pre">rxstacks_log_likelihoods.png</span></tt> and choose a cutoff to use in the next script
+(<tt class="docutils literal"><span class="pre">./00-scripts/stacks_5b_rxstacks.sh</span></tt>). Then launch:</p>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/stacks_5b_rxstacks.sh
+./00-scripts/stacks_6_cstacks_rx.sh
+./00-scripts/stacks_7_sstacks_rx.sh
+./00-scripts/stacks_8_populations_rx.sh
 </pre></div>
 </div>
 <p>Or, if you have a reference genome:</p>
-<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/stacks_1b_pstacks.sh
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/stacks_1b_ustacks.sh
 ./00-scripts/stacks_2_cstacks.sh
 ./00-scripts/stacks_3_sstacks.sh
 ./00-scripts/stacks_4_populations.sh
+./00-scripts/stacks_5a_rxstacks_likelihoods.sh
+</pre></div>
+</div>
+<p>Visualize the distribution of log likelihoods in
+<tt class="docutils literal"><span class="pre">rxstacks_log_likelihoods.png</span></tt> and choose a cutoff to use in the next script
+(<tt class="docutils literal"><span class="pre">./00-scripts/stacks_5b_rxstacks.sh</span></tt>). Then launch:</p>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/stacks_5b_rxstacks.sh
+./00-scripts/stacks_6_cstacks_rx.sh
+./00-scripts/stacks_7_sstacks_rx.sh
+./00-scripts/stacks_8_populations_rx.sh
 </pre></div>
 </div>
 </div>
@@ -192,7 +213,7 @@ meaninful and optimal results.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Sep 01, 2014.
+      Last updated on Sep 12, 2014.
     </p>
   </div>
 

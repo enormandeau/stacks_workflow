@@ -34,10 +34,10 @@ Download and install `STACKS <http://creskolab.uoregon.edu/stacks/>`_
 .. code-block:: bash
 
  # You can modify the version number as needed
- wget http://creskolab.uoregon.edu/stacks/source/stacks-1.19.tar.gz
+ wget http://creskolab.uoregon.edu/stacks/source/stacks-1.20.tar.gz
 
- tar -xvf stacks-1.19.tar.gz
- cd stacks-1.19
+ tar -xvf stacks-1.20.tar.gz
+ cd stacks-1.20
  
  # Install the binaries in /usr/local/bin
  ./configure
@@ -46,15 +46,15 @@ Download and install `STACKS <http://creskolab.uoregon.edu/stacks/>`_
  
  # Remove the folder and gz file
  cd ..
- sudo rm -R stacks-1.19 stacks-1.19.tar.gz
+ sudo rm -R stacks-1.20 stacks-1.20.tar.gz
  
 Test the installation
 ---------------------
  
 .. code-block:: bash
 
- populations
+ cstacks
 
-This will output the help of the populations program. You will also be able to
-confirm STACKS' version number.
+This will output the help of the cstacks program. You will also be able to
+confirm the version number of your STACKS installation.
 

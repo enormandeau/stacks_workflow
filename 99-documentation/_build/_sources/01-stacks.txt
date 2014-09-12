@@ -50,7 +50,6 @@ Overview of the steps
 Where to find this tutorial
 ===========================
 
- - Online on the `Read the Docs <>`_ website. (**COMING SOON**)
  - In the pipeline folder itself. Go to `Github
    <https://github.com/enormandeau/stacks_workflow>`_, download the whole
    repository and open the file named ``MANUAL.html`` in your web browser.
