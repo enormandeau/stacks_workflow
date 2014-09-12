@@ -5,9 +5,11 @@ Filtering the results
 documentation of the filtering script, launch it without options:
 
 .. code-block:: bash
- ./00-scripts/05_filterStacksSNPs.py
+ ./00-scripts/05_filterStacksSNPs.py --help
 
 The following example shows how to use the script with some of the options.
+These options are only for demonstration purpose. Choose your threshold values
+carefully.
 
 .. code-block:: bash
 
