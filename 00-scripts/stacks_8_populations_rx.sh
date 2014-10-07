@@ -2,43 +2,51 @@
 # Launch populations
 
 # Options: Comment out options that you do not wish to use
-b="-b 1"            # b: Batch ID to examine when exporting from the catalog
-P="-P 05-stacks_rx"    # P: path to the Stacks output files.
-M="-M 01-info_files/population_map.txt"  #M: path to the population map, a tab
-                    #   separated file describing which individuals belong in
-                    #   which population
-#s="-s file_for_sql"  #s: output a file to import results into an SQL
-                      #   database
-#B="-B blacklist_file.txt"   # B: specify a file containing Blacklisted markers
-                             #   to be excluded from the export
-#W="-W whitelist_file.txt"   # W: specify a file containing Whitelisted markers
-                             #   to include in the export
-#e="-e ENZYME"      # e: restriction enzyme, required if generating 'genomic'
-                    #  output
-t="-t 8"           # t: number of threads to run in parallel sections of code
-#v="-v"             # v: print program version.
-#h="-h"             # h: display this help message.
+b="-b 1"               # Batch ID to examine when exporting from the catalog
+P="-P 05-stacks_rx"    # Path to the Stacks output files.
+M="-M 01-info_files/population_map_312.txt"  # Path to the population map, a 
+                                             # tab separated file describing 
+                                             # which individuals belong in
+                                             # which population
+#s="-s file_for_sql"  # Output a file to import results into an SQL database
+#B="-B blacklist_file.txt"   # Specify a file containing Blacklisted markers
+                             # to be excluded from the export
+#W="-W whitelist_file.txt"   # Specify a file containing Whitelisted markers
+                             # to include in the export
+#e="-e ENZYME"   # Restriction enzyme, required if generating 'genomic' output
+t="-t 104"       # Number of threads to run in parallel sections of code
+#v="-v"          # Print program version.
+#h="-h"          # Display this help message.
 
 # Data filtering
-r="-r 0.3"          # r: minimum percentage of individuals in a population
-                    #  required to process a locus for that population
-p="-p 3"           # p: minimum number of populations a locus must be present
-                    #   in order to process a locus
-m="-m 6"            # m: specify a minimum stack depth required for individuals
-                    #   at a locus
-a="-a 0.01"        # a: specify a minimum minor allele frequency required
-                    #   before calculating Fst at a locus (0 < a < 0.5)
-f="-f p_value"     # f: specify a correction to be applied to Fst values:
-                    #   'p_value', 'bonferroni_win', or 'bonferroni_gen'
-p_value_cutoff="--p_value_cutoff 0.05"   # --p_value_cutoff [num]: required
-                    #   p-value to keep an Fst measurement (0.05 by default)
-                    #   Also used as base for Bonferroni correction
+r="-r 0.8"          # Minimum percentage of individuals in a population
+                    # required to process a locus for that population
+p="-p xx"            # Minimum number of populations a locus must be present
+                    # in order to process a locus
+m="-m xx"            # Specify a minimum stack depth required for individuals
+                    # at a locus
+a="-a 0.05"         # Specify a minimum minor allele frequency required
+                    # before calculating Fst at a locus (0 < a < 0.5)
+f="-f p_value"      # Specify a correction to be applied to Fst values:
+                    # 'p_value', 'bonferroni_win', or 'bonferroni_gen'
+p_value_cutoff="--p_value_cutoff 0.05"   # Required p-value to keep an Fst 
+                                         # measurement (0.05 by default). Also 
+                                         # used as base for Bonferroni 
+                                         # correction
+lnl_lim="--lnl_lim -5"   # Filter loci with log likelihood values below this 
+                          # threshold.
+#write_single_snp="--write_single_snp"  # write only the first SNP per locus in
+                                        # Genepop and Structure outputs
+#write_random_snp="--write_random_snp"  # Restrict data analysis to one random
+                                        # SNP per locus.
+
+#Fstats:
+fstats="--fstats"     # Enable SNP and haplotype-based F statistics
 
 # Kernel-smoothing algorithm
-#k="-k"             # k: enable kernel-smoothed Pi, Fis, and Fst calculations
-#window_size="--window_size 150Kb"       # --window_size [num]: distance over
-                    #   which to average values (sigma, default 150Kb)
-
+#k="-k"                # enable kernel-smoothed Pi, Fis, Fst, Fst', and Phi_st calculations
+#window_size="--window_size 150Kb"       # distance over which to average values  
+                                         #(sigma, default 150Kb)
 # Bootstrap resampling
 #bootstrap="--bootstrap"               # turn on broostrap resampling
                                        # for all smoothed statistics.
@@ -62,38 +70,35 @@ p_value_cutoff="--p_value_cutoff 0.05"   # --p_value_cutoff [num]: required
                                        # in this whitelist.
 
 # file output options
-#genomic="--genomic"        # --genomic: output each nucleotide position
-                            #   (fixed or polymorphic) in all population members
-                            #   to a file
-#fasta="--fasta"            # output full sequence for each allele,
-                            # from each sample locus in FASTA format.
-vcf="--vcf"                 # --vcf: output results in Variant Call Format (VCF)
-#genepop="--genepop"        # --genepop: output results in GenePop format
-#structure="--structure"    # --structure: output results in Structure format
-#phase="--phase"            # --phase: output genotypes in PHASE/fastPHASE format.
-#beagle="--beagle"          # --beagle: output genotypes in Beagle format.
-#plink="--plink"            # --plink: output genotypes in PLINK format.
-
-#phylip="--phylip"          # --phylip: output nucleotides that are fixed-within
-                            #   and variant among populations in Phylip format
-                            #   for phylogenetic tree construction
-#phylip_var="--phylip_var"  # --phylip_var: include variable sites in the phylip
-                            #   output
-#write_single_snp="--write_single_snp"  #--write_single_snp: write only the
-                            #   first SNP per locus in Genepop and Structure
-                            #   outputs
+#genomic="--genomic"              # Output each nucleotide position
+                                  # (fixed or polymorphic) in all population
+                                  # members to a file
+#fasta="--fasta"                  # Output full sequence for each allele,
+                                  # from each sample locus in FASTA format.
+vcf="--vcf"                       # Output results in Variant Call Format (VCF)
+#genepop="--genepop"              # Output results in GenePop format
+#structure="--structure"          # Output results in Structure format
+#phase="--phase"                  # Output genotypes in PHASE/fastPHASE format.
+#fastphase="--fastphase"          # Output genotypes in fastPHASE format
+#beagle="--beagle"                # Output genotypes in Beagle format.
+#beagle_phased="--beagle_phased"  # Output haplotypes in Beagle format.
+plink="--plink"                   # Output genotypes in PLINK format.
+#phylip="--phylip"                # Output nucleotides that are fixed-within
+                                  # and variant among populations in Phylip 
+                                  # format for phylogenetic tree construction
+#phylip_var="--phylip_var"        # Include variable sites in the phylip output
+#hzar="--hzar"                    # Output genotypes in Hybrid Zone Analysis 
+                                  # using R (HZAR) format.
 
 # Debugging
 #log_fst_comp="--log_fst_comp"  # log components of Fst calculations to a file.
 
 # Launch populations
-populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f $p_value_cutoff \
-    $k $window_size $bootstrap $bootstrap_pifis $bootstrap_fst $bootstrap_div \
-    $bootstrap_phist $bootstrap_reps $bootstrap_wl $genomic $fasta $vcf $genepop \
-    $structure $phase $beagle $plink $phylip $phylip_var \
-    $write_single_snp $log_fst_comp 2>&1 | tee stacks_8_populations_rx.log
 
-# Correct formating of integers in 8th column of 05-stacks_rx/batch_1.sumstats.tsv
+populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f \ $p_value_cutoff $lnl_lim $fstats $k $window_size $bootstrap $bootstrap_pifis \ $bootstrap_fst $bootstrap_div $bootstrap_phist $bootstrap_reps $bootstrap_wl \ $genomic $fasta $vcf $genepop $structure $phase $fastphase $beagle \ $beagle_phased $plink $phylip $phylip_var $hzar $write_single_snp \ $write_random_snp $log_fst_comp 2>&1 | tee stacks_populations_rx.log
+
+# Correct formating of integers in 8th column of 
+# 05-stacks_rx/batch_1.sumstats.tsv
 
 perl -i.bak -pe 's/\.0000//' 05-stacks_rx/batch_1.sumstats.tsv
 
