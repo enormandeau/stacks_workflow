@@ -105,8 +105,4 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f \
     $beagle_phased $plink $phylip $phylip_var $hzar $write_single_snp \
     $write_random_snp $log_fst_comp 2>&1 | tee stacks_populations.log
 
-# Correct formating of integers in 8th column of 
-# 05-stacks/batch_1.sumstats.tsv
-
-perl -i.bak -pe 's/\.0000//' 05-stacks/batch_1.sumstats.tsv
 
