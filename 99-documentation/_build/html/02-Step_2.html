@@ -67,7 +67,8 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">2. Install Stacks_workflow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#download-and-install-stacks">2.2. Download and install STACKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#personal-computer-setup">2.2. Personal computer setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-and-install-stacks">2.3. Download and install STACKS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Download your raw datafiles (Illumina or prepared IonProton lanes)</a><ul>
@@ -98,7 +99,10 @@
 <li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="08-Step_8.html">8. Filtering the results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Step_8.html">8. Filtering the results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="08-Step_8.html#visualization">8.1. Visualization</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="09-conclusion.html">9. Conclusion</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="09-conclusion.html#running-into-problems">9.1. Running into problems</a></li>
 </ul>
@@ -159,26 +163,35 @@ Mavericks), you can run the following command instead to get a full <tt class="d
 <p>For the rest of the project, use the extracted or cloned folder as your working
 directory. All the commands in this manual are launched from that directory.</p>
 </div>
+<div class="section" id="personal-computer-setup">
+<h2>2.2. Personal computer setup<a class="headerlink" href="#personal-computer-setup" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you prepare your computer to run you GBS analyses. We have also
+prepared a companion tutorial about GBS for cloud computing and computer setup
+for GBA at: &lt;<a class="reference external" href="http://gbs-cloud-tutorial.readthedocs.org/en/latest/">http://gbs-cloud-tutorial.readthedocs.org/en/latest/</a>&gt;`_</p>
+</div>
 <div class="section" id="download-and-install-stacks">
-<h2>2.2. Download and install <a class="reference external" href="http://creskolab.uoregon.edu/stacks/">STACKS</a><a class="headerlink" href="#download-and-install-stacks" title="Permalink to this headline">¶</a></h2>
+<h2>2.3. Download and install <a class="reference external" href="http://creskolab.uoregon.edu/stacks/">STACKS</a><a class="headerlink" href="#download-and-install-stacks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-google-s-sparsehash-class-to-reduce-memory-usage">
+<h3>2.3.1. Install Google&#8217;s SparseHash class to reduce memory usage<a class="headerlink" href="#install-google-s-sparsehash-class-to-reduce-memory-usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span class="c"># You can modify the version number as needed</span>
-wget http://creskolab.uoregon.edu/stacks/source/stacks-1.20.tar.gz
+wget http://creskolab.uoregon.edu/stacks/source/stacks-1.21.tar.gz
 
-tar -xvf stacks-1.20.tar.gz
-<span class="nb">cd </span>stacks-1.20
+tar -xvf stacks-1.21.tar.gz
+<span class="nb">cd </span>stacks-1.21
 
 <span class="c"># Install the binaries in /usr/local/bin</span>
-./configure
+./configure --enable-sparsehash
 make
 sudo make install
 
 <span class="c"># Remove the folder and gz file</span>
 <span class="nb">cd</span> ..
-sudo rm -R stacks-1.20 stacks-1.20.tar.gz
+sudo rm -R stacks-1.20 stacks-1.20.tar.gz sparsehash-2.0.2 sparsehash-2.0.2.tar.gz
 </pre></div>
 </div>
+</div>
 <div class="section" id="test-the-installation">
-<h3>2.2.1. Test the installation<a class="headerlink" href="#test-the-installation" title="Permalink to this headline">¶</a></h3>
+<h3>2.3.2. Test the installation<a class="headerlink" href="#test-the-installation" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre>cstacks
 </pre></div>
 </div>
@@ -206,7 +219,7 @@ confirm the version number of your STACKS installation.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Sep 12, 2014.
+      Last updated on Oct 11, 2014.
     </p>
   </div>
 

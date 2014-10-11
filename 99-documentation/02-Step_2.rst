@@ -31,16 +31,15 @@ directory. All the commands in this manual are launched from that directory.
 Personal computer setup
 =======================
 
-Make sure you prepare your computer to run GBS
-We have a companion tutorial on cloud computing
-and computer setup <http://gbs-cloud-tutorial.readthedocs.org/en/latest/>`_
-
-
+Make sure you prepare your computer to run you GBS analyses. We have also
+prepared a companion tutorial about GBS for cloud computing and computer setup
+for GBA at: <http://gbs-cloud-tutorial.readthedocs.org/en/latest/>`_
 
 Download and install `STACKS <http://creskolab.uoregon.edu/stacks/>`_
 =====================================================================
 
-# First, you need to install Google's SparseHash class to lower memory usage.
+Install Google's SparseHash class to reduce memory usage
+--------------------------------------------------------
 
 .. code-block:: bash
  wget http://sparsehash.googlecode.com/files/sparsehash-2.0.2.tar.gz

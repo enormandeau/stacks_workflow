@@ -10,8 +10,8 @@ with an emphasis on non-model species studies. We make no claim about its
 usefulness to other groups or in other contexts, but we still believe it may be
 of use to some.
 
-This workflow has been tested with version 1.19 and earlier versions of STACKS
-under Linux (Ubuntu 12.04 to 13.10) and MacOSX (10.9 Mavericks).
+This workflow has been tested with version 1.21 and earlier versions of STACKS
+under Linux (Ubuntu 12.04 to 13.10) and MacOSX (10.9 Mavericks and 10.10 Yosemite).
 
 About STACKS
 ============
@@ -35,6 +35,13 @@ About STACKS
  (2013). Stacks: an analysis tool set for population genomics. Molecular
  Ecology, 22(11), 3124–3140. doi:10.1111/mec.12354
  <http://onlinelibrary.wiley.com/doi/10.1111/mec.12354/abstract>`_
+ 
+ Also very useful paper to read before attempting to run Stacks:
+ 
+ `Mastretta Yanes A, Arrigo N, Alvarez N et al. (2014) RAD sequencing,
+ genotyping error estimation and de novo assembly optimization for population 
+ genetic inference. Molecular Ecology Resources, n/a–n/a.
+ <http://onlinelibrary.wiley.com/doi/10.1111/1755-0998.12291/abstract;jsessionid=A32722E1462A2A2714EE53A6FD4C7194.f04t04>`_
  
 Overview of the steps
 =====================

@@ -28,25 +28,44 @@ This will make it easier to update to the most recent version of the workflow, w
 For the rest of the project, use the extracted or cloned folder as your working
 directory. All the commands in this manual are launched from that directory.
 
+Personal computer setup
+=======================
+
+Make sure you prepare your computer to run you GBS analyses. We have also
+prepared a companion tutorial about GBS for cloud computing and computer setup
+for GBA at: <http://gbs-cloud-tutorial.readthedocs.org/en/latest/>`_
+
 Download and install `STACKS <http://creskolab.uoregon.edu/stacks/>`_
 =====================================================================
+
+Install Google's SparseHash class to reduce memory usage
+--------------------------------------------------------
+
+.. code-block:: bash
+ wget http://sparsehash.googlecode.com/files/sparsehash-2.0.2.tar.gz
+
+ tar -xvf sparsehash-2.0.2.tar.gz
+ cd sparsehash-2.0.2
+ ./configure
+ make
+ sudo make install
 
 .. code-block:: bash
 
  # You can modify the version number as needed
- wget http://creskolab.uoregon.edu/stacks/source/stacks-1.20.tar.gz
+ wget http://creskolab.uoregon.edu/stacks/source/stacks-1.21.tar.gz
 
- tar -xvf stacks-1.20.tar.gz
- cd stacks-1.20
+ tar -xvf stacks-1.21.tar.gz
+ cd stacks-1.21
  
  # Install the binaries in /usr/local/bin
- ./configure
+ ./configure --enable-sparsehash
  make
  sudo make install
  
  # Remove the folder and gz file
  cd ..
- sudo rm -R stacks-1.20 stacks-1.20.tar.gz
+ sudo rm -R stacks-1.20 stacks-1.20.tar.gz sparsehash-2.0.2 sparsehash-2.0.2.tar.gz
  
 Test the installation
 ---------------------
