@@ -154,20 +154,15 @@
 <div class="highlight-bash"><div class="highlight"><pre>bwa index -p genome -a bwtsw ./01-info_files/&lt;genome reference&gt;
 </pre></div>
 </div>
-<p>copy files:</p>
-<div class="highlight-bash"><div class="highlight"><pre>cp genome.* 01-info_files
+<p>Where <cite>&lt;genome reference&gt;</cite> is the name of the genome reference file.</p>
+<p>Move the index files:</p>
+<div class="highlight-bash"><div class="highlight"><pre>mv genome.* 01-info_files
 </pre></div>
 </div>
 </div>
 <div class="section" id="align-samples">
 <h2>6.4. Align samples<a class="headerlink" href="#align-samples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span class="k">for </span>i in <span class="k">$(</span>ls -1 04-all_samples/*.fq<span class="k">)</span>
-<span class="k">do</span>
-<span class="k">    </span><span class="nv">name</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$i</span><span class="k">)</span>
-    bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome <span class="nv">$i</span> | <span class="se">\</span>
-    bwa samse -r <span class="s2">&quot;@RG\tID:&#39;$name&#39;\tSM:&#39;$name&#39;\tPL:Illumina&quot;</span> <span class="se">\</span>
-        ./01-info_files/genome - <span class="nv">$i</span> ./04ln-all_samples/<span class="nv">$name</span>.sam; <span class="se">\</span>
-<span class="k">done</span>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/bwa_commands.sh
 </pre></div>
 </div>
 </div>
@@ -191,7 +186,7 @@
 
   <div role="contentinfo">
     <p>
-      Last updated on Oct 11, 2014.
+      Last updated on Oct 30, 2014.
     </p>
   </div>
 

@@ -14,22 +14,18 @@ Index the reference genome
 
  bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
 
-copy files:
+Where `<genome reference>` is the name of the genome reference file.
+
+Move the index files:
 
 .. code-block:: bash
 
- cp genome.* 01-info_files
+ mv genome.* 01-info_files
 
 Align samples
 =============
 
 .. code-block:: bash
 
- for i in $(ls -1 04-all_samples/*.fq)
- do
-     name=$(basename $i)
-     bwa aln -n 5 -k 3 -t 2 ./01-info_files/genome $i | \
-     bwa samse -r "@RG\tID:'$name'\tSM:'$name'\tPL:Illumina" \
-         ./01-info_files/genome - $i ./04ln-all_samples/$name.sam; \
- done
+ ./00-scripts/bwa_commands.sh
 
