@@ -4,7 +4,7 @@ Extract individual data with ``process_radtags``
 Prepare a file named ``sample_information.csv``
 ===============================================
 
-Using the same format found in the ``example_sample_information.csv`` file in
+Use the same format found in the ``example_sample_information.csv`` file in
 the ``01-info_files`` folder. 
 
 Save this file in the ``01-info_files`` folder.
@@ -15,14 +15,14 @@ rename the extracted sample files automatically.
 The first column **MUST** contain the **EXACT** name of the data file for the
 lane of each sample. 
 
-The second column contains the barcode sequence of each sample. 
+Notes:
 
-The third column contains the population name of each sample. 
-
-The fourth column contains the name of the sample (do not include the
+- The **columns are separated by tabulation** (even if the extension is .csv)
+- The second column contains the barcode sequence of each sample. 
+- The third column contains the population name of each sample. 
+- The fourth column contains the name of the sample (do not include the
 population name or abbreviation in the sample name). 
-
-The fifth column contains a number identifying the populations. 
+- The fifth column contains a number identifying the populations. 
 
 Columns three and four are treated as text, so they can contain either text or
 numbers. Other columns can be present after the fifth one and will be ignored.
