@@ -53,10 +53,10 @@ Install Google's SparseHash class to reduce memory usage
 .. code-block:: bash
 
  # You can modify the version number as needed
- wget http://creskolab.uoregon.edu/stacks/source/stacks-1.21.tar.gz
+ wget http://creskolab.uoregon.edu/stacks/source/stacks-1.24.tar.gz
 
- tar -xvf stacks-1.21.tar.gz
- cd stacks-1.21
+ tar -xvf stacks-1.24.tar.gz
+ cd stacks-1.24
  
  # Install the binaries in /usr/local/bin
  ./configure --enable-sparsehash

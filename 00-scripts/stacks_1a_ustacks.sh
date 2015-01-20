@@ -2,7 +2,7 @@
 # Launch ustacks to treat all the samples individually
 
 # OPTIONS: Comment out options that you do not wish to use
-t="-t fastq"      # t: input file Type. Supported types: fasta, fastq, gzfasta,
+t="-t gzfastq"      # t: input file Type. Supported types: fasta, fastq, gzfasta,
                   #   or gzfastq
 o="-o 05-stacks"  # o: output path to write results.
 #i="-i 1"         # i: SQL ID to insert into the output to identify this sample
@@ -29,7 +29,7 @@ bound_high="--bound_high 1"
 
 # Launch ustacks for all the individuals
 id=1
-for file in 04-all_samples/*.fq
+for file in 04-all_samples/*.fq.gz
 do
     echo -e "\n\n##### Treating individual $id: $file\n\n"
     ustacks $t $o $i $m $M $N $R $H $p $r $d $max_locus_stacks $model_type \

@@ -6,12 +6,14 @@ population_map.txt
 *.fas
 *.fasta
 *.fq
+*.fq.gz
 *.log
 *.odt
 *.png
 *.swp
 *.temp
 *.tsv
+*.tsv.gz
 *.vcf
 *barcode*
 *list.txt

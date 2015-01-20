@@ -14,37 +14,49 @@ do
         grep -v "Barcode" | \
         cut -f 2 > $INFO_FILES/barcodes.txt
 
-    # Prepare bacode_lengths.txt from barcodes.txt 
-    perl -ne 'chomp; print length()."\n"' $INFO_FILES/barcodes.txt | \
-        sort -un > $INFO_FILES/barcode_lengths.txt
+    # Extract the barcodes of all different lengths at once, STACKS 1.23+
+    mkdir 03-samples/$f 2> /dev/null
+    process_radtags \
+        -i gzfastq \
+        -f 02-raw/$f".fastq.gz" \
+        -o 03-samples/$f \
+        -b $INFO_FILES/barcodes.txt \
+        -c -q -r -t $TRIM_LENGTH \
+        --barcode_dist 2 \
+        -E phred33 \
+        -e $ENZYME
 
-    # Create barcode files, eg: barcodes_4.txt, barcodes_5.txt ...
-    cat $INFO_FILES/barcode_lengths.txt | \
-    while read b
-    do
-        perl -sane 'chomp; if (length eq $b) {print $_."\n"}'\
-            -- -b=$b $INFO_FILES/barcodes.txt | \
-        sort -u > $INFO_FILES/barcodes_$b".txt"
-    done
+    ## Prepare bacode_lengths.txt from barcodes.txt 
+    #perl -ne 'chomp; print length()."\n"' $INFO_FILES/barcodes.txt | \
+    #    sort -un > $INFO_FILES/barcode_lengths.txt
 
-    # Extract reads for each individuals using barcodes
-    cat $INFO_FILES/barcode_lengths.txt | \
-    while read b
-    do
-        mkdir 03-samples/$f
-        process_radtags \
-            -i gzfastq \
-            -f 02-raw/$f".fastq.gz" \
-            -o 03-samples/$f \
-            -b $INFO_FILES/barcodes_$b".txt" \
-            -c -q -r -t $TRIM_LENGTH \
-            --barcode_dist 2 \
-            -E phred33 \
-            -e $ENZYME
+    ## Create barcode files, eg: barcodes_4.txt, barcodes_5.txt ...
+    #cat $INFO_FILES/barcode_lengths.txt | \
+    #while read b
+    #do
+    #    perl -sane 'chomp; if (length eq $b) {print $_."\n"}'\
+    #        -- -b=$b $INFO_FILES/barcodes.txt | \
+    #    sort -u > $INFO_FILES/barcodes_$b".txt"
+    #done
 
-        mv 03-samples/$f/process_radtags.log 03-samples/$f/process_radtags_b$b".log" 2> /dev/null
-        #--filter_illumina 3 \
-    done
+    ## Extract reads for each individuals using barcodes
+    #cat $INFO_FILES/barcode_lengths.txt | \
+    #while read b
+    #do
+    #    mkdir 03-samples/$f
+    #    process_radtags \
+    #        -i gzfastq \
+    #        -f 02-raw/$f".fastq.gz" \
+    #        -o 03-samples/$f \
+    #        -b $INFO_FILES/barcodes_$b".txt" \
+    #        -c -q -r -t $TRIM_LENGTH \
+    #        --barcode_dist 2 \
+    #        -E phred33 \
+    #        -e $ENZYME
+
+    #    mv 03-samples/$f/process_radtags.log 03-samples/$f/process_radtags_b$b".log" 2> /dev/null
+    #    #--filter_illumina 3 \
+    #done
 
 #process_radtags [-f in_file | -p in_dir [-P] | -1 pair_1 -2 pair_2] -b barcode_file -o out_dir -e enz [-c] [-q] [-r] [-t len] [-D] [-w size] [-s lim] [-h]
 #    f: path to the input file if processing single-end sequences.
@@ -65,7 +77,7 @@ do
 #    w: set the size of the sliding window as a fraction of the read length, between 0 and 1 (default 0.15).
 #    s: set the score limit. If the average score within the sliding window drops below this value, the read is discarded
 
-    rm $INFO_FILES/barcode_lengths.txt 2> /dev/null
-    rm $INFO_FILES/barcodes*.txt 2> /dev/null
+    #rm $INFO_FILES/barcode_lengths.txt 2> /dev/null
+    #rm $INFO_FILES/barcodes*.txt 2> /dev/null
 done
 

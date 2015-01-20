@@ -19,7 +19,7 @@ p="-p 8"           # p: enable parallel execution with num_threads threads
 # -=( DO NOT MODIFY THE FOLLWING OPTION! )=-
 # This will automatically create the list of filenames for cstacks
 # s: filename prefix from which to load loci into the catalog
-s="$(for file in $(ls -1 05-stacks/*.tags.tsv | perl -pe 's/\.tags\.tsv//'); do echo -s $file; done)"
+s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Run cstacks
 cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee stacks_2_cstacks.log

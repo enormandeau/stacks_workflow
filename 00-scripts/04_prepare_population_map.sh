@@ -9,7 +9,7 @@ ls -1 $ALL_SAMPLES_FOLDER/ |
 while read i
 do
     echo -e "$i" |
-    perl -pe 's/\.fq//'
+    perl -pe 's/\.fq.gz//'
 done > $INFO_FILES/population_map_temp.txt
 
 cat $INFO_FILES/population_map_temp.txt |

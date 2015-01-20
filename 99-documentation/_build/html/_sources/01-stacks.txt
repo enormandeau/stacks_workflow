@@ -10,8 +10,15 @@ with an emphasis on non-model species studies. We make no claim about its
 usefulness to other groups or in other contexts, but we still believe it may be
 of use to some.
 
-This workflow has been tested with version 1.21 and earlier versions of STACKS
-under Linux (Ubuntu 12.04 to 13.10) and MacOSX (10.9 Mavericks and 10.10 Yosemite).
+This workflow has been tested with version 1.24 and earlier versions of STACKS
+under Linux (Ubuntu 12.04 to 13.10) and MacOSX (10.9 Mavericks and 10.10
+Yosemite).
+
+.. warning::
+
+ The workflow will not work with versions of STACKS older than 1.24 since tags
+ of different lengths can now be split together and intermediary files are kept
+ in compressed (.gz) format.
 
 About STACKS
 ============
