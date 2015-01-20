@@ -103,6 +103,6 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f \
     $bootstrap_fst $bootstrap_div $bootstrap_phist $bootstrap_reps $bootstrap_wl \
     $genomic $fasta $vcf $genepop $structure $phase $fastphase $beagle \
     $beagle_phased $plink $phylip $phylip_var $hzar $write_single_snp \
-    $write_random_snp $log_fst_comp 2>&1 | tee stacks_populations.log
+    $write_random_snp $log_fst_comp 2>&1 | tee stacks_4_populations.log
 
 
