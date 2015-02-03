@@ -13,7 +13,7 @@ o="-o 05-stacks_rx"           # o: output path to write results
 #x="-x"                    # x: don't verify haplotype of matching locus
 
 # Launch sstacks on all samples
-for file in $(ls -1 05-stacks_rx/*.tags.tsv | grep -v catalog | perl -pe 's/\.tags\.tsv//')
+for file in $(ls -1 05-stacks_rx/*.tags.tsv.gz | grep -v catalog | perl -pe 's/\.tags\.tsv\.gz//')
 do
     sstacks $p $b $c $r $o $g $x $h -s $file
 done 2>&1 | tee stacks_7_sstacks_rx.log
