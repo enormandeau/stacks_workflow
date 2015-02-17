@@ -20,6 +20,13 @@ t="-t 8"       # Number of threads to run in parallel sections of code
 #v="-v"          # Print program version.
 #h="-h"          # Display this help message.
 
+# Merging and Phasing:
+#merge_sites="--merge_sites"    # merge loci that were produced from the same 
+                               # restriction enzyme cutsite
+                               # (requires reference-aligned data).
+#merge_prune_lim="--merge_prune_lim"   # when merging adjacent loci, 
+                                      # if at least X% samples posses both loci 
+                                      # prune the remaining samples out of the analysis.
 # Data filtering
 r="-r 0.8"          # Minimum percentage of individuals in a population
                     # required to process a locus for that population
@@ -72,36 +79,41 @@ lnl_lim="--lnl_lim -5"   # Filter loci with log likelihood values below this
                                        # in this whitelist.
 
 # file output options
-#genomic="--genomic"              # Output each nucleotide position
-                                  # (fixed or polymorphic) in all population
-                                  # members to a file
-#fasta="--fasta"                  # Output full sequence for each allele,
-                                  # from each sample locus in FASTA format.
-#vcf="--vcf"                      # Output results in Variant Call Format (VCF)
-#genepop="--genepop"              # Output results in GenePop format
-#structure="--structure"          # Output results in Structure format
-#phase="--phase"                  # Output genotypes in PHASE/fastPHASE format.
-#fastphase="--fastphase"          # Output genotypes in fastPHASE format
-#beagle="--beagle"                # Output genotypes in Beagle format.
-#beagle_phased="--beagle_phased"  # Output haplotypes in Beagle format.
-#plink="--plink"                  # Output genotypes in PLINK format.
-#phylip="--phylip"                # Output nucleotides that are fixed-within
-                                  # and variant among populations in Phylip 
-                                  # format for phylogenetic tree construction
-#phylip_var="--phylip_var"        # Include variable sites in the phylip output
-#hzar="--hzar"                    # Output genotypes in Hybrid Zone Analysis 
-                                  # using R (HZAR) format.
+#genomic="--genomic"               # Output each nucleotide position
+                                   # (fixed or polymorphic) in all population
+                                   # members to a file
+#fasta="--fasta"                   # Output full sequence for each allele,
+                                   # from each sample locus in FASTA format.
+#vcf="--vcf"                       # Output results in Variant Call Format (VCF)
+#vcf_haplotypes="--vcf_haplotypes" # Output haplotypes in Variant Call Format (VCF).
+#genepop="--genepop"               # Output results in GenePop format
+#structure="--structure"           # Output results in Structure format
+#phase="--phase"                   # Output genotypes in PHASE/fastPHASE format.
+#fastphase="--fastphase"           # Output genotypes in fastPHASE format
+#beagle="--beagle"                 # Output genotypes in Beagle format.
+#beagle_phased="--beagle_phased"   # Output haplotypes in Beagle format.
+#plink="--plink"                   # Output genotypes in PLINK format.
+#phylip="--phylip"                 # Output nucleotides that are fixed-within
+                                   # and variant among populations in Phylip 
+                                   # format for phylogenetic tree construction
+#phylip_var="--phylip_var"         # Include variable sites in the phylip output
+#hzar="--hzar"                     # Output genotypes in Hybrid Zone Analysis 
+                                   # using R (HZAR) format.
 
 # Debugging
-#log_fst_comp="--log_fst_comp"    # log components of Fst calculations to a file.
+#verbose="--verbose"            # turn on additional logging.
+#log_fst_comp="--log_fst_comp"  # log components of Fst calculations to a file.
 
 # Launch populations
 
-populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h $r $p $m $a $f \
-    $p_value_cutoff $lnl_lim $fstats $k $window_size $bootstrap \
-    $bootstrap_pifis $bootstrap_fst $bootstrap_div $bootstrap_phist \
-    $bootstrap_reps $bootstrap_wl $genomic $fasta $vcf $genepop \
-    $structure $phase $fastphase $beagle $beagle_phased $plink \
-    $phylip $phylip_var $hzar $write_single_snp \
-    $write_random_snp $log_fst_comp 2>&1 | tee stacks_8_populations_rx.log
+populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
+    $merge_sites $merge_prune_lim \
+    $r $p $m $a $f $p_value_cutoff $lnl_lim $write_single_snp $write_random_snp \
+    $fstats \
+    $k $window_size \
+    $bootstrap $bootstrap_pifis $bootstrap_fst $bootstrap_div \
+    $bootstrap_phist $bootstrap_reps $bootstrap_wl \
+    $genomic $fasta $vcf $vcf_haplotypes $genepop $structure $phase $fastphase \
+    $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
+    $verbose $log_fst_comp 2>&1 | tee stacks_8_populations_rx.log
 
