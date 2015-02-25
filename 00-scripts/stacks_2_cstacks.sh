@@ -11,7 +11,7 @@ o="-o 05-stacks"    # o: output path to write results
 #m="-m"             # m: include tags in catalog that match more than one entry
 n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
-p="-p 8"           # p: enable parallel execution with num_threads threads
+p="-p 16"           # p: enable parallel execution with num_threads threads
 #catalog="--catalog PATH"
 #report_mmatches="--report_mmatches"    # --report_mmatches: report query loci
                     #   that match more than one catalog locus

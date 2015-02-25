@@ -18,7 +18,7 @@ M="-M 01-info_files/population_map.txt"  # Path to the population map, a
 #W="-W whitelist_file.txt"   # Specify a file containing Whitelisted markers
                              # to include in the export
 #e="-e ENZYME"   # Restriction enzyme, required if generating 'genomic' output
-t="-t 2"         # Number of threads to run in parallel sections of code
+t="-t 16"         # Number of threads to run in parallel sections of code
 #v="-v"          # Print program version.
 #h="-h"          # Display this help message.
 
@@ -30,11 +30,11 @@ t="-t 2"         # Number of threads to run in parallel sections of code
                                       # if at least X% samples posses both loci
                                       # prune the remaining samples out of the analysis.
 # Data filtering
-r="-r 0.8"          # Minimum percentage of individuals in a population
+r="-r 0.7"          # Minimum percentage of individuals in a population
                     # required to process a locus for that population
 p="-p 1"            # Minimum number of populations a locus must be present
                     # in order to process a locus
-m="-m 4"            # Specify a minimum stack depth required for individuals
+m="-m 6"            # Specify a minimum stack depth required for individuals
                     # at a locus
 a="-a 0.05"         # Specify a minimum minor allele frequency required
                     # before calculating Fst at a locus (0 < a < 0.5)

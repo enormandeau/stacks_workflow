@@ -7,7 +7,7 @@
 b="-b 1"              #  b: Batch ID to examine when exporting from the catalog.
 P="-P 05-stacks"      #  P: path to the Stacks output files.
 o="-o 05-stacks_rx"   #  o: output path to write results.
-t="-t 8"              #  t: number of threads to run in parallel sections of code.
+t="-t 16"              #  t: number of threads to run in parallel sections of code.
 #v="-v"               #  v: print program version.
 #h="-h"               #  h: display this help messsage.
 
