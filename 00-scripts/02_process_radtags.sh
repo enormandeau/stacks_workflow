@@ -27,6 +27,6 @@ do
         -e $ENZYME
 
     # Copy log files to ./98_log_files/
-    cp 03-samples/$f/process_radtags.log 98_log_files/process_radtags_"$f".log
+    cp 03-samples/$f/process_radtags.log 98-log_files/process_radtags_"$f".log
 done
 
