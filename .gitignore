@@ -19,7 +19,6 @@ population_map.txt
 *list.txt
 *private*
 *testlog*
-*test*
 *.fastq.gz*
 */population_map*
 */sample_information*
