@@ -17,7 +17,7 @@ cat $INFO_FILES/lane_info.txt |
         done
     done
 
-# Linking files
+# Linking files from 03-samples in 04-all_samples
 cat $INFO_FILES/lane_info.txt |
     while read lane
     do

@@ -16,5 +16,5 @@ o="-o 05-stacks_rx"           # o: output path to write results
 for file in $(ls -1 05-stacks_rx/*.tags.tsv.gz | grep -v catalog | perl -pe 's/\.tags\.tsv\.gz//')
 do
     sstacks $p $b $c $r $o $g $x $h -s $file
-done 2>&1 | tee stacks_7_sstacks_rx.log
+done 2>&1 | tee 98-log_files/stacks_7_sstacks_rx.log
 

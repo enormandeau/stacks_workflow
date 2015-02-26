@@ -35,5 +35,5 @@ do
     ustacks $t $o $i $m $M $N $R $H $p $r $d $max_locus_stacks $model_type \
         $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
-done 2>&1 | tee stacks_1a_ustacks.log
+done 2>&1 | tee 98-log_files/stacks_1a_ustacks.log
 
