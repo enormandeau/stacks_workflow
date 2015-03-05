@@ -4,13 +4,13 @@
 ### Global variable
 INFO_FILES="01-info_files"
 TRIM_LENGTH=$1 # Length to cut reads after process_radtags
-ENZYME=$2 # Name of the enzyme (run 'process_radtags' without options for list)
-
+ENZYME1=$2 # Name of the enzyme (run 'process_radtags' without options for list)
+ENZYME2=$3 # Name of the enzyme (run 'process_radtags' without options for list)
 
 # Write command to file
 echo -e "process_radtags commande used:\n\n\
-$(echo process_radtags.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \
-> 98-log_files/process_radtags_command.log
+$(echo process_radtags_2_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \
+> 98-log_files/process_radtags_2_enzymes_command.log
 
 # Extract reads
 cat $INFO_FILES/lane_info.txt |
@@ -31,10 +31,10 @@ do
         -c -q -r -t $TRIM_LENGTH \
         --barcode_dist 2 \
         -E phred33 \
-        -e $ENZYME
-
+        --renz_1 $ENZYME1 \
+        --renz_2 $ENZYME2
 
     # Copy log files to ./98_log_files/
-    cp 03-samples/$f/process_radtags.log 98-log_files/process_radtags_"$f".log
+    cp 03-samples/$f/process_radtags.log 98-log_files/process_radtags_2_enzymes_"$f".log
 done
 
