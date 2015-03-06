@@ -24,7 +24,7 @@ cp ~/temp.backup/stacks_workflow_test_data/sample_information.csv 01-info_files
 
 # Preparatory scripts
 ./00-scripts/01_prepare_lane_info.sh
-./00-scripts/02_process_radtags.sh 70 sbfI
+./00-scripts/02_process_radtags_2_enzymes.sh 70 pstI mspI
 ./00-scripts/03_rename_samples.sh
 ./00-scripts/04_prepare_population_map.sh
 

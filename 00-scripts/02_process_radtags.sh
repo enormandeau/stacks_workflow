@@ -29,7 +29,7 @@ do
         -o 03-samples/$f \
         -b $INFO_FILES/barcodes.txt \
         -c -q -r -t $TRIM_LENGTH \
-        --barcode_dist 2 \
+        --barcode_dist_1 2 \
         -E phred33 \
         -e $ENZYME
 
