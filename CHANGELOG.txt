@@ -1,4 +1,8 @@
 List of changes
+
+v1.28
+- test
+
 v1.24
 - 2015-01-26 Updated for STACKS version 1.24
 
