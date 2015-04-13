@@ -30,8 +30,6 @@ do
         -b $INFO_FILES/barcodes.txt \
         -c -q -r -t $TRIM_LENGTH \
         --barcode_dist_1 2 \
-        --adapter_1 AGATCGGAAGAGCG \
-        --adapter_mm 1 \
         -E phred33 \
         -e $ENZYME
 
