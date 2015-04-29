@@ -3,12 +3,14 @@ lane_info.txt
 population_map.txt
 *~
 *.bak
+*.doctree
 *.fas
 *.fasta
 *.fq
 *.fq.gz
 *.log
 *.odt
+*.pickle
 *.png
 *.swp
 *.temp

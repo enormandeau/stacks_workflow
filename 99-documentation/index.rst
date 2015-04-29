@@ -6,8 +6,7 @@
 Stacks workflow tutorial
 ************************
 
-By Eric Normandeau, with the collaboration of Thierry Gosselin, Jeremy Gaudin,
-Laura Benestan, and Charles Perrier
+By Eric Normandeau, Thierry Gosselin, Laura Benestan, Charles Perrier, and Jeremy Gaudin.
 
 Contents:
 

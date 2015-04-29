@@ -2,18 +2,24 @@
 
 Implement new features and update documentation.
 
+## Introduction
+- Other papers to read? (01-stacks.rst)
+- Other options to use with ./configure for stacks? (02-Step_2.rst)
+
 ## Data preparation
 - FastQC on raw data
 - Cutadapt
   - Choosing the right primers and cut site
 - FastQC on cleaned data
 - Process radtags
+  - Test different trim lengths
 - Combining samples
 - What to check for at this point
   - Number of sequences per individual
   - Number of good individuals per population
   - Estimation of M parameter with Dan Ilut's code
-- Testing different trim lengths to keep more reads
+
+### Stop here for now ###
 
 ## Scripts and parameters
 - Change defaults to currently used values
@@ -31,8 +37,6 @@ Implement new features and update documentation.
 - Discuss with STACKS group for other ideas
 
 ## Documentation
-- STACKS version 1.29
-- Linux and MacOS versions
 - Add sanity checkpoints with plots
 - Add know-how sections where needed
 

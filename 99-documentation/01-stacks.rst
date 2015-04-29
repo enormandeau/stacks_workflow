@@ -10,23 +10,25 @@ with an emphasis on non-model species studies. We make no claim about its
 usefulness to other groups or in other contexts, but we still believe it may be
 of use to some.
 
-This workflow has been tested with version 1.24 and earlier versions of STACKS
-under Linux (Ubuntu 12.04 to 13.10) and MacOSX (10.9 Mavericks and 10.10
+This workflow has been tested with version 1.29 and earlier versions of STACKS
+under Linux (Ubuntu 12.04 to 14.04) and MacOSX (10.9 Mavericks and 10.10
 Yosemite).
 
 .. warning::
 
- The workflow will not work with versions of STACKS older than 1.24 since tags
- of different lengths can now be split together and intermediary files are kept
- in compressed (.gz) format.
+ The most up-to-date version of the workflow will not work with versions of
+ STACKS older than 1.24 since tags of different lengths can now be split
+ together and intermediary files are kept in compressed (.gz) format. We also
+ recommend to avoid versions 1.22 to 1.28, which contained bugs that seem to
+ have been fixed in version 1.29.
 
 About STACKS
 ============
  
- The `STACKS analysis pipeline <http://creskolab.uoregon.edu/stacks/>`_ is the
- de facto tool for SNP discovery in Genotyping-by-Sequencing (GBS) and
- Restriction-site Associated DNA sequencing (RAD) studies, with and without a
- reference genome. Here is diagram of the STACKS pipeline:
+ The `STACKS analysis pipeline <http://creskolab.uoregon.edu/stacks/>`_ is
+ among the most used tools for SNP discovery in Genotyping by Sequencing (GBS)
+ and Restriction-site Associated DNA sequencing (RAD) studies, with and without
+ a reference genome. Here is diagram of the STACKS pipeline:
  
  .. image:: stacks_diagram.png
 
@@ -54,15 +56,17 @@ Overview of the steps
 =====================
 
  #. Install and prepare Stacks_workflow  
- #. Download your raw datafiles (Illumina lanes)
+ #. Download your raw data files (Illumina lanes or Ion Proton chips)
+ #. Clean the reads and assess their quality
  #. Extract individual data with process_radtags
  #. Rename samples
  #. Align reads to a reference genome (optional)
  #. STACKS pipeline
  #. Filtering the results
+ #. Further analyses
 
-Where to find this tutorial
-===========================
+Where to find this manual
+=========================
 
  - In the pipeline folder itself. Go to `Github
    <https://github.com/enormandeau/stacks_workflow>`_, download the whole
