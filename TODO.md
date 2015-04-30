@@ -8,12 +8,9 @@ Implement new features and update documentation.
 
 ## Data preparation
 - FastQC on raw data
-- Cutadapt
-  - Choosing the right primers and cut site
 - FastQC on cleaned data
-- Process radtags
-  - Test different trim lengths
-- Combining samples
+- How to test different trim lengths with process_radtags
+- Combining samples (simple and complex)
 - What to check for at this point
   - Number of sequences per individual
   - Number of good individuals per population
