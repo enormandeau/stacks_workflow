@@ -56,6 +56,10 @@ directly, you can use the following command (you will need to have installed
 
 .. code-block:: bash
 
+ cat $(ls -1 02-raw/*.fastq.gz | head -1) | \
+    gunzip -c | grep -E "^[ACTG]+$" | head -10000 | cut -c 20- | \
+    awk 'length > 30 {print ">seq_" NR "\n" $_}' > temp.fasta
+
  rm kmer.count.*
  for k in $(seq 12 30)
  do

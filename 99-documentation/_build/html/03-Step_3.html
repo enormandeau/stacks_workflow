@@ -188,7 +188,11 @@ sequencing libraries.</p>
 <p>In order to identify or confirm the potential adapters found in your data
 directly, you can use the following command (you will need to have installed
 <tt class="docutils literal"><span class="pre">jellyfish</span></tt>):</p>
-<div class="highlight-bash"><div class="highlight"><pre>rm kmer.count.*
+<div class="highlight-bash"><div class="highlight"><pre>cat <span class="k">$(</span>ls -1 02-raw/*.fastq.gz | head -1<span class="k">)</span> | <span class="se">\</span>
+   gunzip -c | grep -E <span class="s2">&quot;^[ACTG]+$&quot;</span> | head -10000 | cut -c 20- | <span class="se">\</span>
+   awk <span class="s1">&#39;length &gt; 30 {print &quot;&gt;seq_&quot; NR &quot;\n&quot; $_}&#39;</span> &gt; temp.fasta
+
+rm kmer.count.*
 <span class="k">for </span>k in <span class="k">$(</span>seq 12 30<span class="k">)</span>
 <span class="k">do</span>
 <span class="k">   </span>jellyfish count -m <span class="nv">$k</span> -s 10000 -t 8 --text -o kmer.count.<span class="s2">&quot;$k&quot;</span> temp.fasta
