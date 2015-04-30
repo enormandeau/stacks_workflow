@@ -16,11 +16,11 @@ Yosemite).
 
 .. warning::
 
- The most up-to-date version of the workflow will not work with versions of
- STACKS older than 1.24 since tags of different lengths can now be split
- together and intermediary files are kept in compressed (.gz) format. We also
- recommend to avoid versions 1.22 to 1.28, which contained bugs that seem to
- have been fixed in version 1.29.
+ The most up-to-date version of stacks_workflow (1.29) will not work with
+ versions of STACKS older than 1.24 since tags of different lengths can now be
+ split together and intermediary files are kept in compressed (.gz) format. We
+ also recommend to avoid STACKS versions 1.22 to 1.28, which contained bugs
+ that seem to have been fixed in version 1.29.
 
 About STACKS
 ============
@@ -55,7 +55,7 @@ About STACKS
 Overview of the steps
 =====================
 
- #. Install and prepare Stacks_workflow  
+ #. Install stacks_workflow and STACKS with its dependencies
  #. Download your raw data files (Illumina lanes or Ion Proton chips)
  #. Clean the reads and assess their quality
  #. Extract individual data with process_radtags
