@@ -106,13 +106,14 @@ Python package installer) installed, you can use the following command:
 
 Otherwise, visit their website to download it and install it:
 <https://pypi.python.org/pypi/cutadapt/>`_
+o
 
 Installing jellyfish
 --------------------
 
-Jellyfish is a kmer counter. We will use it to identify the presence of
-adapters in our raw sequences in order to remove them with Cutadapt. To
-install Jellyfish, launch the following commands:
+Jellyfish is a kmer counter. We use it to identify the presence of adapters in
+our raw sequences in order to remove them with Cutadapt. To install Jellyfish,
+launch the following commands:
 
 .. code-block:: bash
 
@@ -130,4 +131,34 @@ install Jellyfish, launch the following commands:
  cd ..
  rm -r jellyfish-2.2.0.tar.gz jellyfish-2.2.0
 
+Installing FastQC
+-----------------
+
+We use FastQC to assess read quality before and after filtering with Cutadapt.
+To install FastQC, visit `this page <http://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc>`_
+and download the version that works with your system (Linux or MacOS). Then
+launch these commands:
+
+**Installing on Linux**
+
+.. code-block:: bash
+
+ # Installing
+ unzip fastqc_v0.11.3_source.zip
+ cd FastQC
+ chmod 755 fastqc
+
+ # Look at the options
+ ./fastqc --help
+
+ # Run FastQC
+ ./fastqc
+
+
+**Installing on MacOS**
+
+.. code-block:: bash
+
+ ### MacOS
+ # ???
 
