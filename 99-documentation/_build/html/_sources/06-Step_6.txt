@@ -1,6 +1,11 @@
 Align reads to a reference genome (optional)
 ********************************************
 
+.. warning::
+
+ The documentation and scripts used with a reference genome have not been
+ updated in a long time. We believe they should not be used at the moment.
+
 Install `bwa <http://bio-bwa.sourceforge.net>`_
 ===============================================
 
