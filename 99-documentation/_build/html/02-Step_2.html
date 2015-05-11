@@ -234,13 +234,14 @@ Python package installer) installed, you can use the following command:</p>
 </pre></div>
 </div>
 <p>Otherwise, visit their website to download it and install it:
-&lt;<a class="reference external" href="https://pypi.python.org/pypi/cutadapt/">https://pypi.python.org/pypi/cutadapt/</a>&gt;`_</p>
+&lt;<a class="reference external" href="https://pypi.python.org/pypi/cutadapt/">https://pypi.python.org/pypi/cutadapt/</a>&gt;`_
+o</p>
 </div>
 <div class="section" id="installing-jellyfish">
 <h3>2.3.5. Installing jellyfish<a class="headerlink" href="#installing-jellyfish" title="Permalink to this headline">¶</a></h3>
-<p>Jellyfish is a kmer counter. We will use it to identify the presence of
-adapters in our raw sequences in order to remove them with Cutadapt. To
-install Jellyfish, launch the following commands:</p>
+<p>Jellyfish is a kmer counter. We use it to identify the presence of adapters in
+our raw sequences in order to remove them with Cutadapt. To install Jellyfish,
+launch the following commands:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="c"># Getting the latest version</span>
 wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.0/jellyfish-2.2.0.tar.gz
 
@@ -254,6 +255,31 @@ sudo make install
 <span class="c"># Cleanup</span>
 <span class="nb">cd</span> ..
 rm -r jellyfish-2.2.0.tar.gz jellyfish-2.2.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-fastqc">
+<h3>2.3.6. Installing FastQC<a class="headerlink" href="#installing-fastqc" title="Permalink to this headline">¶</a></h3>
+<p>We use FastQC to assess read quality before and after filtering with Cutadapt.
+To install FastQC, visit <a class="reference external" href="http://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc">this page</a>
+and download the version that works with your system (Linux or MacOS). Then
+launch these commands:</p>
+<p><strong>Installing on Linux</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Installing</span>
+unzip fastqc_v0.11.3_source.zip
+<span class="nb">cd </span>FastQC
+chmod 755 fastqc
+
+<span class="c"># Look at the options</span>
+./fastqc --help
+
+<span class="c"># Run FastQC</span>
+./fastqc
+</pre></div>
+</div>
+<p><strong>Installing on MacOS</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c">### MacOS</span>
+<span class="c"># ???</span>
 </pre></div>
 </div>
 </div>
@@ -278,7 +304,7 @@ rm -r jellyfish-2.2.0.tar.gz jellyfish-2.2.0
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 30, 2015.
+      Last updated on May 05, 2015.
     </p>
   </div>
 

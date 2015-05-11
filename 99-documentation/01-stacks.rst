@@ -59,7 +59,7 @@ Overview of the steps
  #. Download your raw data files (Illumina lanes or Ion Proton chips)
  #. Clean the reads and assess their quality
  #. Extract individual data with process_radtags
- #. Rename samples
+ #. Rename the sample files
  #. Align reads to a reference genome (optional)
  #. STACKS pipeline
  #. Filtering the results
