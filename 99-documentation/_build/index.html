@@ -81,11 +81,12 @@
 <li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="05-Step_5.html">5. Rename samples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#rename-and-copy-the-samples">5.1. Rename and copy the samples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#join-samples-that-should-go-together">5.2. Join samples that should go together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#deleting-samples-with-too-few-reads">5.2. Deleting samples with too few reads</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
@@ -170,6 +171,7 @@ Benestan, Charles Perrier, and Jeremy Gaudin.</p>
 <li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#test-the-stacks-installation">2.3.3. Test the STACKS installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-cutadapt">2.3.4. Installing Cutadapt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-jellyfish">2.3.5. Installing jellyfish</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-fastqc">2.3.6. Installing FastQC</a></li>
 </ul>
 </li>
 </ul>
@@ -194,11 +196,16 @@ Benestan, Charles Perrier, and Jeremy Gaudin.</p>
 <li class="toctree-l3"><a class="reference internal" href="04-Step_4.html#two-restriction-enzymes">4.2.2. Two restriction enzymes</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="05-Step_5.html">5. Rename samples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#rename-and-copy-the-samples">5.1. Rename and copy the samples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#join-samples-that-should-go-together">5.2. Join samples that should go together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#rename-and-copy-the-samples">5.1. Rename and copy the samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="05-Step_5.html#the-simple-case">5.1.1. The simple case</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-Step_5.html#the-more-complex-case">5.1.2. The more complex case</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#deleting-samples-with-too-few-reads">5.2. Deleting samples with too few reads</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
@@ -211,7 +218,11 @@ Benestan, Charles Perrier, and Jeremy Gaudin.</p>
 <li class="toctree-l1"><a class="reference internal" href="07-Step_7.html">7. STACKS pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#prepare-population-info-file">7.1. Prepare population info file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#edit-script-parameters">7.2. Edit script parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#without-a-reference-genome">7.3.1. Without a reference genome</a></li>
+<li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#with-a-reference-genome">7.3.2. With a reference genome</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="08-Step_8.html">8. Filtering the results</a><ul>
@@ -242,7 +253,7 @@ Benestan, Charles Perrier, and Jeremy Gaudin.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on May 05, 2015.
+      Last updated on May 11, 2015.
     </p>
   </div>
 

@@ -9,6 +9,7 @@
 rm 01-info_files/barcodes.txt 2> /dev/null
 rm 01-info_files/lane_info.txt 2> /dev/null
 rm 01-info_files/population_map.txt 2> /dev/null
+rm 01-info_files/adapters.fasta
 rm 02-raw/*.fastq.gz 2> /dev/null
 rm -r 03-samples/* 2> /dev/null
 rm -r 04-all_samples/* 2> /dev/null
@@ -22,8 +23,15 @@ rm -r 98-log_files/* 2> /dev/null
 cp -l ~/temp.backup/stacks_workflow_test_data/*.fastq.gz 02-raw
 cp ~/temp.backup/stacks_workflow_test_data/sample_information.csv 01-info_files
 
+# Get copy of adapters file
+cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta 
+
 # Preparatory scripts
-./00-scripts/01_prepare_lane_info.sh
+./00-scripts/00_prepare_lane_info.sh
+./00-scripts/01_cutadapt.sh
+
+exit
+
 ./00-scripts/02_process_radtags_2_enzymes.sh 70 pstI mspI
 ./00-scripts/03_rename_samples.sh
 ./00-scripts/04_prepare_population_map.sh

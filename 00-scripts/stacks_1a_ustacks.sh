@@ -19,10 +19,10 @@ r="-r"            # r: enable the Removal algorithm, to drop highly-repetitive
                   #   stacks (and nearby errors) from the algorithm.
 d="-d"            # d: enable the Deleveraging algorithm, used for resolving
                   #   over merged tags.
-#max_locus_stacks="--max_locus_stacks 3"
+max_locus_stacks="--max_locus_stacks 2"
 model_type="--model_type bounded" #--model_type: either 'snp' (default), 'bounded', or 'fixed'
 
-alpha="--alpha 0.05"
+#alpha="--alpha 0.05"
 bound_low="--bound_low 0"
 bound_high="--bound_high 1"
 #bc_err_freq="--bc_err_freq 1"

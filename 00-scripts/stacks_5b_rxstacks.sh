@@ -32,7 +32,7 @@ model_type="--model_type bounded" #either 'snp' (default), 'bounded', or
                                   #'fixed'
 
 ###For the SNP or Bounded SNP model:
-alpha="--alpha 0.1"  #chi square significance level required to call a 
+#alpha="--alpha 0.1"  #chi square significance level required to call a 
                      #heterozygote or homozygote, either 0.1 (default), 0.05, 
                      #0.01, or 0.001.
 

@@ -36,15 +36,15 @@ p="-p 1"            # Minimum number of populations a locus must be present
                     # in order to process a locus
 m="-m 6"            # Specify a minimum stack depth required for individuals
                     # at a locus
-a="-a 0.05"         # Specify a minimum minor allele frequency required
+a="-a 0.0"         # Specify a minimum minor allele frequency required
                     # before calculating Fst at a locus (0 < a < 0.5)
 f="-f p_value"      # Specify a correction to be applied to Fst values:
                     # 'p_value', 'bonferroni_win', or 'bonferroni_gen'
-p_value_cutoff="--p_value_cutoff 0.05"  # Required p-value to keep an Fst
+p_value_cutoff="--p_value_cutoff 0.10"  # Required p-value to keep an Fst
                                         # measurement (0.05 by default). Also
                                         # used as base for Bonferroni
                                         # correction
-lnl_lim="--lnl_lim -5"   # Filter loci with log likelihood values below this
+lnl_lim="--lnl_lim -10"   # Filter loci with log likelihood values below this
                          # threshold.
 #write_single_snp="--write_single_snp"  # write only the first SNP per locus in
                                         # Genepop and Structure outputs

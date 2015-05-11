@@ -3,25 +3,31 @@
 Implement new features and update documentation.
 
 ## Introduction
-- Other papers to read? (01-stacks.rst)
-- Other options to use with ./configure for stacks? (02-Step_2.rst)
+* Other papers to read? (01-stacks.rst)
+* Other options to use with ./configure for stacks? (02-Step_2.rst)
 
 ## Data preparation
+. Installing FastQC on MacOS
 - FastQC on raw data
 - FastQC on cleaned data
-- How to test different trim lengths with process_radtags
-- Combining samples (simple and complex)
-- What to check for at this point
-  - Number of sequences per individual
-  - Number of good individuals per population
-  - Estimation of M parameter with Dan Ilut's code
+
+* Combining samples (simple and complex)
+  * Create and add `complex` script
+
+. What to check for at this point
+  . Number of sequences per individual
+  . Number of good individuals per population
+  . Estimation of M parameter with Dan Ilut's code
 
 ### Stop here for now ###
 
+## Timestamp the logs
+* Add timestamp to log files
+* Add script as run, also with timestamp
+
 ## Scripts and parameters
-- Change defaults to currently used values
+* Test the effect of --lnl-lim (-20, -10, -5)
 - Discuss choosing and testing values
-- Timestamp the logs
 - Copy scripts as they were when run and timestamp
 
 ## Filters

@@ -65,23 +65,24 @@
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#licence">1.4. Licence</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Install Stacks_workflow</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Installing Stacks_workflow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#personal-computer-setup">2.2. Personal computer setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#set-up-for-mac-osx">2.2. Set up for Mac OSX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-stacks">2.3. Download and install STACKS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#download-illumina-lanes-or-ion-proton-chips">3.1. Download Illumina lanes or Ion Proton chips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#put-your-raw-files-in-02-raw-folder">3.2. Put your raw files in <tt class="docutils literal"><span class="pre">02-raw</span></tt> folder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#prepare-lane-info-txt-file">3.3. Prepare <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#use-cutadapt-to-remove-adapters">3.4. Use Cutadapt to remove adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="05-Step_5.html">5. Rename samples</a><ul>
@@ -208,6 +209,16 @@ options, for a list of the supported enzymes)</li>
 </div></blockquote>
 </div>
 </div>
+<div class="section" id="testing-different-trim-lengths">
+<h2>4.3. Testing different trim lengths<a class="headerlink" href="#testing-different-trim-lengths" title="Permalink to this headline">¶</a></h2>
+<p>If you are using Ion Proton data, the effect of the trimLength parameter used
+above on the number of usable SNPs you recover at the end may not be trivial.
+We suggest you run tests with a smaller group of samples to determine what
+length to trim to. For highly variant species, short loci will be more likely
+to contain SNPs and long loci to contain more than one SNP, which is not always
+informative.  Thus, trimming to shorter lengths may be more interesting for
+highly variant species.</p>
+</div>
 </div>
 
 
@@ -228,7 +239,7 @@ options, for a list of the supported enzymes)</li>
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 29, 2015.
+      Last updated on May 11, 2015.
     </p>
   </div>
 
