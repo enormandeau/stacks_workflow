@@ -23,7 +23,7 @@ cat $INFO_FILES/lane_info.txt |
     do
         for sample_file in $(ls -1 $SAMPLES_FOLDER/$lane/*.fq.gz)
         do
-            barcode=$(echo $sample_file | perl -pe 's/^.*_sample_//; s/\.fq.gz//')
+            barcode=$(echo $sample_file | perl -pe 's/^.*_sample_//; s/\.fq\.gz//')
             sample_info=$(grep $lane $INFO_FILES/sample_information.csv | grep -E "[[:space:]]$barcode[[:space:]]")
             population=$(echo $sample_info | cut -d " " -f 3)
             sample_name=$(echo $sample_info | cut -d " " -f 4)
