@@ -23,28 +23,28 @@ Implement new features and update documentation.
 
 ## Timestamp the logs
 * Add timestamp to log files
-* Add script as run, also with timestamp
+* Copy scripts as they were when run and timestamp
 
 ## Scripts and parameters
 * Test the effect of --lnl-lim (-20, -10, -5)
-- Discuss choosing and testing values
-- Copy scripts as they were when run and timestamp
+. Discuss choosing and testing values
 
 ## Filters
-- General purpose filtering script (with Thierry)
+* Implement vcf filtering (use pyVCF)
+. General purpose filtering script (with Thierry)
 
 ## Post STACKS
-- Preparing files for population genetics analyses
-- Add Laura's software suggestions and code examples
-- Format conversion (PGD Spider et. al.)
-- Discuss with STACKS group for other ideas
+. Preparing files for population genetics analyses
+. Add Laura's software suggestions and code examples
+. Format conversion (PGD Spider et. al.)
+. Discuss with STACKS group for other ideas
 
 ## Documentation
-- Add sanity checkpoints with plots
-- Add know-how sections where needed
+. Add sanity checkpoints with plots (ask Laura)
+. Add know-how sections where needed
 
 ## Ion Proton
-- Impact of that technology
+* Discuss impact of that technology
   - Indels
   - Do we lose a high proportion of reads?
   - How to solve this potential problem
