@@ -66,3 +66,15 @@ Where:
  - **enzyme2** = name of the second enzyme (run ``process_radtags``, without
    options, for a list of the supported enzymes)
 
+Testing different trim lengths
+==============================
+
+.. note:
+ If you are using Ion Proton data, the effect of the trimLength parameter used
+ above on the number of usable SNPs you recover at the end may not be trivial.
+ We suggest you run tests with a smaller group of samples to determine what
+ length to trim to. For highly variant species, short loci will be more likely
+ to contain SNPs and long loci to contain more than one SNP, which is not
+ always informative.  Thus, trimming to shorter lengths may be more interesting
+ for highly variant species.
+
