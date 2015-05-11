@@ -211,6 +211,13 @@ options, for a list of the supported enzymes)</li>
 </div>
 <div class="section" id="testing-different-trim-lengths">
 <h2>4.3. Testing different trim lengths<a class="headerlink" href="#testing-different-trim-lengths" title="Permalink to this headline">¶</a></h2>
+<p>If you are using Ion Proton data, the effect of the trimLength parameter used
+above on the number of usable SNPs you recover at the end may not be trivial.
+We suggest you run tests with a smaller group of samples to determine what
+length to trim to. For highly variant species, short loci will be more likely
+to contain SNPs and long loci to contain more than one SNP, which is not always
+informative.  Thus, trimming to shorter lengths may be more interesting for
+highly variant species.</p>
 </div>
 </div>
 
