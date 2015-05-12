@@ -1,5 +1,6 @@
 #!/bin/bash
 # Launch populations
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # IMPORTANT: make sure your read about the available options for 'populations'
 # in the STACKS papers
@@ -117,5 +118,12 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
     $bootstrap_phist $bootstrap_reps $bootstrap_wl \
     $genomic $fasta $vcf $vcf_haplotypes $genepop $structure $phase $fastphase \
     $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
-    $verbose $log_fst_comp 2>&1 | tee 98-log_files/stacks_4_populations.log
+    $verbose $log_fst_comp 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_4_populations.log
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

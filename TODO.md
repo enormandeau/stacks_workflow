@@ -2,22 +2,29 @@
 
 Implement new features and update documentation.
 
+## STACKS v1.30
+- Make sure it works
+  - Especially sstacks
+  - Confirm number of SNPs
+
 ## Introduction
 - Other papers to read? (01-stacks.rst)
 - Other options to use with ./configure for stacks? (02-Step_2.rst)
 
 ## Data preparation
-. Installing FastQC on MacOS
-- FastQC on raw data
-- FastQC on cleaned data
+- FastQC
+  - FastQC on raw data
+  - FastQC on cleaned data
+  . Installing FastQC on MacOS
 . Parallelize cutadapt
 
-. What to check for at this point
-  . Number of sequences per individual
-  . Number of good individuals per population
-  . Estimation of M parameter with Dan Ilut's code
+## What to check for at this point
+. Number of sequences per individual
+. Number of good individuals per population
+* Estimation of M parameter with Dan Ilut's code
 
 ## Timestamp the logs
+(now testing)
 * Add timestamp to log files
 * Copy scripts as they were when run and timestamp
 

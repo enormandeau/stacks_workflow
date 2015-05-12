@@ -1,5 +1,6 @@
 #!/bin/bash
 # Launch sstacks to treat all the samples indivually
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # OPTIONS: Comment out options that you do not wish to use
 p="-p 16"                  # p: enable parallel execution with num_threads
@@ -16,5 +17,12 @@ o="-o 05-stacks"           # o: output path to write results
 for file in $(ls -1 05-stacks/*.tags.tsv.gz | grep -v catalog | perl -pe 's/\.tags\.tsv\.gz//')
 do
     sstacks $p $b $c $r $o $g $x $h -s $file
-done 2>&1 | tee 98-log_files/stacks_3_sstacks.log
+done 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_3_sstacks.log
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

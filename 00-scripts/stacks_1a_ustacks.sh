@@ -1,5 +1,6 @@
 #!/bin/bash
 # Launch ustacks to treat all the samples individually
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # OPTIONS: Comment out options that you do not wish to use
 t="-t gzfastq"      # t: input file Type. Supported types: fasta, fastq, gzfasta,
@@ -35,5 +36,12 @@ do
     ustacks $t $o $i $m $M $N $R $H $p $r $d $max_locus_stacks $model_type \
         $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
-done 2>&1 | tee 98-log_files/stacks_1a_ustacks.log
+done 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_1a_ustacks.log
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

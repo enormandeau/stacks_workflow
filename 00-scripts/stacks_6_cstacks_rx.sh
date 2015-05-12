@@ -1,5 +1,6 @@
 #!/bin/bash
 # Lauch cstacks on all the .tags.tsv files
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # Options
 # Comment out options that you do not wish to use
@@ -23,5 +24,12 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
 s="$(for file in $(ls -1 05-stacks_rx/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Run cstacks
-cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee 98-log_files/stacks_6_cstacks_rx.log
+cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_6_cstacks_rx.log
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

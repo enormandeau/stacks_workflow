@@ -1,5 +1,6 @@
 #!/bin/bash
 # Renaming the extracted sample files
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # Global variables
 INFO_FILES="01-info_files"
@@ -33,4 +34,11 @@ cat $INFO_FILES/lane_info.txt |
             ln $sample_file $ALL_SAMPLES_FOLDER/$new_name
         done
     done
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
