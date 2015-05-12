@@ -25,7 +25,7 @@ do
     mkdir 03-samples/$f 2> /dev/null
     process_radtags \
         -i gzfastq \
-        -f 02-raw/$f".fastq.gz" \
+        -f 02-raw/trimmed/$f".fastq.gz" \
         -o 03-samples/$f \
         -b $INFO_FILES/barcodes.txt \
         -c -q -r -t $TRIM_LENGTH \

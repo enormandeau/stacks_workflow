@@ -3,23 +3,19 @@
 Implement new features and update documentation.
 
 ## Introduction
-* Other papers to read? (01-stacks.rst)
-* Other options to use with ./configure for stacks? (02-Step_2.rst)
+- Other papers to read? (01-stacks.rst)
+- Other options to use with ./configure for stacks? (02-Step_2.rst)
 
 ## Data preparation
 . Installing FastQC on MacOS
 - FastQC on raw data
 - FastQC on cleaned data
-
-* Combining samples (simple and complex)
-  * Create and add `complex` script
+. Parallelize cutadapt
 
 . What to check for at this point
   . Number of sequences per individual
   . Number of good individuals per population
   . Estimation of M parameter with Dan Ilut's code
-
-### Stop here for now ###
 
 ## Timestamp the logs
 * Add timestamp to log files

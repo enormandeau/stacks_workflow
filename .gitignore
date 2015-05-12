@@ -1,5 +1,6 @@
 99-papers/*
 lane_info.txt
+nohup.out
 population_map.txt
 *~
 *.bak

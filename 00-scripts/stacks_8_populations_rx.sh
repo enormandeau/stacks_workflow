@@ -86,8 +86,8 @@ lnl_lim="--lnl_lim -10"   # Filter loci with log likelihood values below this
                                    # members to a file.
 #fasta="--fasta"                   # Output full sequence for each allele,
                                    # from each sample locus in FASTA format.
-#vcf="--vcf"                       # Output results in Variant Call Format (VCF).
-#vcf_haplotypes="--vcf_haplotypes" # Output haplotypes in Variant Call Format (VCF).
+vcf="--vcf"                       # Output results in Variant Call Format (VCF).
+vcf_haplotypes="--vcf_haplotypes" # Output haplotypes in Variant Call Format (VCF).
 #genepop="--genepop"               # Output results in GenePop format
 #structure="--structure"           # Output results in Structure format
 #phase="--phase"                   # Output genotypes in PHASE/fastPHASE format.
