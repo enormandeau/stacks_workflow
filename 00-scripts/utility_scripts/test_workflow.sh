@@ -15,11 +15,9 @@ rm -r 05-stacks/* 2> /dev/null
 rm -r 05-stacks_rx/* 2> /dev/null
 rm -r 98-log_files/* 2> /dev/null
 
-# Get raw data and sample information
+# Get raw data, adapters, and sample information
 cp -l ~/temp.backup/stacks_workflow_test_data/*.fastq.gz 02-raw
 cp ~/temp.backup/stacks_workflow_test_data/sample_information.csv 01-info_files
-
-# Get copy of adapters file
 cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta 
 
 # Preparatory scripts
@@ -34,13 +32,13 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
 ./00-scripts/03_rename_samples_complex.sh
 ./00-scripts/04_prepare_population_map.sh
 
-# STACKS executables
+# Running STACKS
 ./00-scripts/stacks_1a_ustacks.sh
 ./00-scripts/stacks_1b_pstacks.sh
 ./00-scripts/stacks_2_cstacks.sh
 ./00-scripts/stacks_3_sstacks.sh
 ./00-scripts/stacks_4_populations.sh
-#../../00-scripts/stacks_5a_rxstacks_likelihoods.sh
+#../../00-scripts/stacks_5a_rxstacks_likelihoods.sh # Not needed for tests
 ./00-scripts/stacks_5b_rxstacks.sh
 ./00-scripts/stacks_6_cstacks_rx.sh
 ./00-scripts/stacks_7_sstacks_rx.sh
@@ -61,5 +59,4 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
     -s 10
 
 # TODO - Add reporting after tests (number of SNPs...)
-
 
