@@ -1,5 +1,6 @@
 99-papers/*
 98-log_files/*
+99-documentation/_build/_sources/*
 lane_info.txt
 nohup.out
 population_map.txt
