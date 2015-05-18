@@ -3,8 +3,8 @@
 Implement new features and update documentation.
 
 ## STACKS v1.30
-- Make sure it works
-  - Especially sstacks
+* Make sure it works
+  - Especially sstacks (give all samples at once)
   - Confirm number of SNPs
 
 ## Introduction
@@ -16,17 +16,12 @@ Implement new features and update documentation.
   - FastQC on raw data
   - FastQC on cleaned data
   . Installing FastQC on MacOS
-. Parallelize cutadapt
+* Parallelize cutadapt
 
 ## What to check for at this point
 . Number of sequences per individual
 . Number of good individuals per population
-* Estimation of M parameter with Dan Ilut's code
-
-## Timestamp the logs
-(now testing)
-* Add timestamp to log files
-* Copy scripts as they were when run and timestamp
+* Estimation of M parameter with Dan Ilut's code (can we distribute it?)
 
 ## Scripts and parameters
 * Test the effect of --lnl-lim (-20, -10, -5)

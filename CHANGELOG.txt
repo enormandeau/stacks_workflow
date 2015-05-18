@@ -1,7 +1,38 @@
 List of changes
 
-v1.28
-- test
+v1.30
+- 2015-05-12 improved test script layout
+- 2015-05-12 Removed visualization section
+- 2015-05-12 Updated .gitignore and test script
+- 2015-05-12 Added timestamps to logs and script backup
+- 2015-05-12 Added simple/complex sample renaming
+- 2015-05-11 Updated TODO.md
+- 2015-05-11 Updated default params and TODO.md
+- 2015-05-11 Warning about using a reference genome
+- 2015-05-11 Renaming the samples (in progress...)
+- 2015-05-11 Renaming the samples (in progress...)
+- 2015-05-11 Testing different trim lengths
+- 2015-05-11 Testing different trim lengths
+- 2015-05-11 Info about testing different trim lengths
+- 2015-05-11 Info about testing different trim lengths
+- 2015-05-11 Fixed small typo
+- 2015-05-11 Updating documentation (in progress)
+- 2015-04-30 Updated TODO
+- 2015-04-30 Added missing one liner in doc
+- 2015-04-30 Improved DOC; Added Cutadapt section and script
+- 2015-04-30 Improved DOC; Added Cutadapt section and script
+- 2015-04-29 Updating doc - Data preparation
+- 2015-04-29 Minor
+- 2015-04-29 Updated TODO list
+- 2015-04-13 Removed adapter from process_radtags scripts (was dangerous)
+
+v1.29
+- 2015-03-26 Added adapter sequence for GBS
+- 2015-03-26 Fixed bug in 04_prepare_population.map
+- 2015-03-26 Updated --barcode_dist option to --barcode_dist_1
+- 2015-03-26 Updated 00-scripts/02_process_radtags_2_enzymes.sh
+- 2015-03-26 Minor (error in folder name)
+- 2015-03-26 Added test script
 
 v1.24
 - 2015-01-26 Updated for STACKS version 1.24
