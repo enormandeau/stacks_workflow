@@ -61,29 +61,33 @@
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#where-to-find-this-tutorial">1.3. Where to find this tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#where-to-find-this-manual">1.3. Where to find this manual</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#licence">1.4. Licence</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Install Stacks_workflow</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Installing Stacks_workflow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#personal-computer-setup">2.2. Personal computer setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#set-up-for-mac-osx">2.2. Set up for Mac OSX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-stacks">2.3. Download and install STACKS</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Download your raw datafiles (Illumina or prepared IonProton lanes)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#put-your-raw-files-in-the-02-raw-folder-of-the-stacks-workflow-folder">3.1. Put your raw files in the <tt class="docutils literal"><span class="pre">02-raw</span></tt> folder of the stacks_workflow folder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#prepare-the-lane-info-txt">3.2. Prepare the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">5. Rename samples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rename-and-copy-the-samples">5.1. Rename and copy the samples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#join-samples-that-should-go-together">5.2. Join samples that should go together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deleting-samples-with-too-few-reads">5.2. Deleting samples with too few reads</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
@@ -145,23 +149,39 @@
 <h1>5. Rename samples<a class="headerlink" href="#rename-samples" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="rename-and-copy-the-samples">
 <h2>5.1. Rename and copy the samples<a class="headerlink" href="#rename-and-copy-the-samples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/03_rename_samples.sh
+<p>We provide two scripts to rename the extracted samples and move them into the
+<cite>04-all_samples</cite> folder. Use the appropriate one depending on whether some of
+your samples have been sequenced more than once in all your sequencing data.</p>
+<div class="section" id="the-simple-case">
+<h3>5.1.1. The simple case<a class="headerlink" href="#the-simple-case" title="Permalink to this headline">¶</a></h3>
+<p>The approach should be used if your samples have each been sequenced <strong>ONLY
+ONCE</strong> in total. This means each sample is found a maximum of one time in all
+of your sequenced lanes (Illumina) or chips (Ion Proton). This script will
+create soft links from the extracted files found in <cite>03-samples</cite> folder and its
+sub-folders to the <cite>04-all_samples</cite> folder.</p>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/03_rename_samples_simple.sh
 </pre></div>
 </div>
 </div>
-<div class="section" id="join-samples-that-should-go-together">
-<h2>5.2. Join samples that should go together<a class="headerlink" href="#join-samples-that-should-go-together" title="Permalink to this headline">¶</a></h2>
-<p>If you need to combine some samples, for example if some samples were run
-multiple times on different lanes, you will need to combine their different
-files. This step is done manually.</p>
-<blockquote>
-<div><ul class="simple">
-<li>Go to <tt class="docutils literal"><span class="pre">04-all_samples</span></tt> and join the .fq files that should go together with
-the <tt class="docutils literal"><span class="pre">cat</span></tt> command</li>
-<li>Remove partial .fq files that have been joined</li>
-<li>Remove individuals with too few sequences if needed (optional)</li>
-</ul>
-</div></blockquote>
+<div class="section" id="the-more-complex-case">
+<h3>5.1.2. The more complex case<a class="headerlink" href="#the-more-complex-case" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>simple case</cite> approach uses no disk additional space but cannot be used if
+some of your samples have been sequenced more then once, in which case the
+different files for the same sample should be joined. This will double the
+amount of space used by the <cite>03-samples</cite> folder. In this case, use the
+following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/03_rename_samples_complex.sh
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="deleting-samples-with-too-few-reads">
+<h2>5.2. Deleting samples with too few reads<a class="headerlink" href="#deleting-samples-with-too-few-reads" title="Permalink to this headline">¶</a></h2>
+<p>If after splitting your samples you notice that some of have too few reads, you
+can remove these from the <cite>04-all_samples</cite> folder and modify your
+<cite>01-info_files/sample_information.csv</cite> file accordingly. The threshold for the
+minimum number of reads will depend on your project, including on the number of
+expected cut sites generated by your library preparation protocol.</p>
 </div>
 </div>
 
@@ -183,7 +203,7 @@ the <tt class="docutils literal"><span class="pre">cat</span></tt> command</li>
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 29, 2015.
+      Last updated on May 11, 2015.
     </p>
   </div>
 

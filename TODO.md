@@ -2,43 +2,52 @@
 
 Implement new features and update documentation.
 
+## STACKS v1.30
+- Make sure it works
+  - Especially sstacks
+  - Confirm number of SNPs
+
 ## Introduction
 - Other papers to read? (01-stacks.rst)
 - Other options to use with ./configure for stacks? (02-Step_2.rst)
 
 ## Data preparation
-- FastQC on raw data
-- FastQC on cleaned data
-- How to test different trim lengths with process_radtags
-- Combining samples (simple and complex)
-- What to check for at this point
-  - Number of sequences per individual
-  - Number of good individuals per population
-  - Estimation of M parameter with Dan Ilut's code
+- FastQC
+  - FastQC on raw data
+  - FastQC on cleaned data
+  . Installing FastQC on MacOS
+. Parallelize cutadapt
 
-### Stop here for now ###
+## What to check for at this point
+. Number of sequences per individual
+. Number of good individuals per population
+* Estimation of M parameter with Dan Ilut's code
+
+## Timestamp the logs
+(now testing)
+* Add timestamp to log files
+* Copy scripts as they were when run and timestamp
 
 ## Scripts and parameters
-- Change defaults to currently used values
-- Discuss choosing and testing values
-- Timestamp the logs
-- Copy scripts as they were when run and timestamp
+* Test the effect of --lnl-lim (-20, -10, -5)
+. Discuss choosing and testing values
 
 ## Filters
-- General purpose filtering script (with Thierry)
+* Implement vcf filtering (use pyVCF)
+. General purpose filtering script (with Thierry)
 
 ## Post STACKS
-- Preparing files for population genetics analyses
-- Add Laura's software suggestions and code examples
-- Format conversion (PGD Spider et. al.)
-- Discuss with STACKS group for other ideas
+. Preparing files for population genetics analyses
+. Add Laura's software suggestions and code examples
+. Format conversion (PGD Spider et. al.)
+. Discuss with STACKS group for other ideas
 
 ## Documentation
-- Add sanity checkpoints with plots
-- Add know-how sections where needed
+. Add sanity checkpoints with plots (ask Laura)
+. Add know-how sections where needed
 
 ## Ion Proton
-- Impact of that technology
+* Discuss impact of that technology
   - Indels
   - Do we lose a high proportion of reads?
   - How to solve this potential problem

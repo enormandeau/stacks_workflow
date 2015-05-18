@@ -19,10 +19,3 @@ carefully.
     -P 01-info_files/population_map.txt \  
     -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10
 
-Visualization
-=============
-
-We also recommend you look at your data with Stacks Web-based interface. The
-installation instruction are also in the cloud tutorial
-<http://gbs-cloud-tutorial.readthedocs.org/en/latest/09_stacks_web_interface.html>_
-

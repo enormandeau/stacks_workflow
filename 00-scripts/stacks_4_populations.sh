@@ -1,5 +1,6 @@
 #!/bin/bash
 # Launch populations
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # IMPORTANT: make sure your read about the available options for 'populations'
 # in the STACKS papers
@@ -36,15 +37,15 @@ p="-p 1"            # Minimum number of populations a locus must be present
                     # in order to process a locus
 m="-m 6"            # Specify a minimum stack depth required for individuals
                     # at a locus
-a="-a 0.05"         # Specify a minimum minor allele frequency required
+a="-a 0.0"         # Specify a minimum minor allele frequency required
                     # before calculating Fst at a locus (0 < a < 0.5)
 f="-f p_value"      # Specify a correction to be applied to Fst values:
                     # 'p_value', 'bonferroni_win', or 'bonferroni_gen'
-p_value_cutoff="--p_value_cutoff 0.05"  # Required p-value to keep an Fst
+p_value_cutoff="--p_value_cutoff 0.10"  # Required p-value to keep an Fst
                                         # measurement (0.05 by default). Also
                                         # used as base for Bonferroni
                                         # correction
-lnl_lim="--lnl_lim -5"   # Filter loci with log likelihood values below this
+lnl_lim="--lnl_lim -10"   # Filter loci with log likelihood values below this
                          # threshold.
 #write_single_snp="--write_single_snp"  # write only the first SNP per locus in
                                         # Genepop and Structure outputs
@@ -86,8 +87,8 @@ lnl_lim="--lnl_lim -5"   # Filter loci with log likelihood values below this
                                    # members to a file.
 #fasta="--fasta"                   # Output full sequence for each allele,
                                    # from each sample locus in FASTA format.
-#vcf="--vcf"                       # Output results in Variant Call Format (VCF).
-#vcf_haplotypes="--vcf_haplotypes" # Output haplotypes in Variant Call Format (VCF).
+vcf="--vcf"                       # Output results in Variant Call Format (VCF).
+vcf_haplotypes="--vcf_haplotypes" # Output haplotypes in Variant Call Format (VCF).
 #genepop="--genepop"               # Output results in GenePop format
 #structure="--structure"           # Output results in Structure format
 #phase="--phase"                   # Output genotypes in PHASE/fastPHASE format.
@@ -117,5 +118,12 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
     $bootstrap_phist $bootstrap_reps $bootstrap_wl \
     $genomic $fasta $vcf $vcf_haplotypes $genepop $structure $phase $fastphase \
     $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
-    $verbose $log_fst_comp 2>&1 | tee 98-log_files/stacks_4_populations.log
+    $verbose $log_fst_comp 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_4_populations.log
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

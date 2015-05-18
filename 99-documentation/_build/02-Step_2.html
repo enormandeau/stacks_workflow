@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. Install Stacks_workflow &mdash; Stacks workflow tutorial 1.0 documentation</title>
+  <title>2. Installing Stacks_workflow &mdash; Stacks workflow tutorial 1.0 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
 
   
     <link rel="top" title="Stacks workflow tutorial 1.0 documentation" href="index.html"/>
-        <link rel="next" title="3. Download your raw datafiles (Illumina or prepared IonProton lanes)" href="03-Step_3.html"/>
+        <link rel="next" title="3. Prepare your raw datafiles" href="03-Step_3.html"/>
         <link rel="prev" title="1. Stacks workflow tutorial" href="01-stacks.html"/> 
 
   
@@ -61,19 +61,22 @@
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#where-to-find-this-tutorial">1.3. Where to find this tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#where-to-find-this-manual">1.3. Where to find this manual</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#licence">1.4. Licence</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">2. Install Stacks_workflow</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">2. Installing Stacks_workflow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#personal-computer-setup">2.2. Personal computer setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-for-mac-osx">2.2. Set up for Mac OSX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#download-and-install-stacks">2.3. Download and install STACKS</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Download your raw datafiles (Illumina or prepared IonProton lanes)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#put-your-raw-files-in-the-02-raw-folder-of-the-stacks-workflow-folder">3.1. Put your raw files in the <tt class="docutils literal"><span class="pre">02-raw</span></tt> folder of the stacks_workflow folder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#prepare-the-lane-info-txt">3.2. Prepare the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
@@ -130,7 +133,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>2. Install Stacks_workflow</li>
+    <li>2. Installing Stacks_workflow</li>
       <li class="wy-breadcrumbs-aside">
         
           <a href="_sources/02-Step_2.txt" rel="nofollow"> View page source</a>
@@ -141,62 +144,144 @@
 </div>
           <div role="main">
             
-  <div class="section" id="install-stacks-workflow">
-<h1>2. Install Stacks_workflow<a class="headerlink" href="#install-stacks-workflow" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="installing-stacks-workflow">
+<h1>2. Installing Stacks_workflow<a class="headerlink" href="#installing-stacks-workflow" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="download-and-install-the-most-recent-version-of-this-workflow">
 <h2>2.1. Download and install the most recent version of this workflow<a class="headerlink" href="#download-and-install-the-most-recent-version-of-this-workflow" title="Permalink to this headline">¶</a></h2>
-<p>From the terminal, run:</p>
+<div class="section" id="from-the-terminal">
+<h3>2.1.1. From the terminal<a class="headerlink" href="#from-the-terminal" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd</span> ~/Desktop
 wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
 unzip master.zip
 </pre></div>
 </div>
-<p>If <tt class="docutils literal"><span class="pre">git</span></tt> is installed on your computer (Mac user have it pre-installed on
-Mavericks), you can run the following command instead to get a full <tt class="docutils literal"><span class="pre">git</span></tt> repository.</p>
+</div>
+<div class="section" id="using-git">
+<h3>2.1.2. Using git<a class="headerlink" href="#using-git" title="Permalink to this headline">¶</a></h3>
+<p>If <tt class="docutils literal"><span class="pre">git</span></tt> is installed on your computer, you can run the following command
+instead to get a complete <tt class="docutils literal"><span class="pre">git</span></tt> stacks_workflow repository.</p>
 <div class="highlight-bash"><div class="highlight"><pre>git clone https://github.com/enormandeau/stacks_workflow
 </pre></div>
 </div>
-<p>This will make it easier to update to the most recent version of the workflow, which can be accomplished by running the following command from the <tt class="docutils literal"><span class="pre">stacks_workflow</span></tt> directory:</p>
+<p>This will make it easier to update to the most recent version of the workflow,
+which can be accomplished by running the following command from the
+<tt class="docutils literal"><span class="pre">stacks_workflow</span></tt> directory:</p>
 <div class="highlight-bash"><div class="highlight"><pre>git pull
 </pre></div>
 </div>
 <p>For the rest of the project, use the extracted or cloned folder as your working
-directory. All the commands in this manual are launched from that directory.</p>
+directory. <strong>All the commands in this manual are launched from that
+directory.</strong></p>
 </div>
-<div class="section" id="personal-computer-setup">
-<h2>2.2. Personal computer setup<a class="headerlink" href="#personal-computer-setup" title="Permalink to this headline">¶</a></h2>
-<p>Make sure you prepare your computer to run you GBS analyses. We have also
-prepared a companion tutorial about GBS for cloud computing and computer setup
-for GBA at: &lt;<a class="reference external" href="http://gbs-cloud-tutorial.readthedocs.org/en/latest/">http://gbs-cloud-tutorial.readthedocs.org/en/latest/</a>&gt;`_</p>
+</div>
+<div class="section" id="set-up-for-mac-osx">
+<h2>2.2. Set up for Mac OSX<a class="headerlink" href="#set-up-for-mac-osx" title="Permalink to this headline">¶</a></h2>
+<p>If you have a MacOS computer, make sure you prepare your computer to run you
+GBS analyses. Thierry Gosselin prepared a companion tutorial about GBS for
+cloud computing and you should read the section about setting up your MacOS
+computer:
+&lt;<a class="reference external" href="http://gbs-cloud-tutorial.readthedocs.org/en/latest/03_computer_setup.html#mac-osx">http://gbs-cloud-tutorial.readthedocs.org/en/latest/03_computer_setup.html#mac-osx</a>&gt;`_</p>
 </div>
 <div class="section" id="download-and-install-stacks">
 <h2>2.3. Download and install <a class="reference external" href="http://creskolab.uoregon.edu/stacks/">STACKS</a><a class="headerlink" href="#download-and-install-stacks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="install-google-s-sparsehash-class-to-reduce-memory-usage">
-<h3>2.3.1. Install Google&#8217;s SparseHash class to reduce memory usage<a class="headerlink" href="#install-google-s-sparsehash-class-to-reduce-memory-usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># You can modify the version number as needed</span>
-wget http://creskolab.uoregon.edu/stacks/source/stacks-1.24.tar.gz
+<div class="section" id="installing-google-s-sparsehash">
+<h3>2.3.1. Installing Google&#8217;s SparseHash<a class="headerlink" href="#installing-google-s-sparsehash" title="Permalink to this headline">¶</a></h3>
+<p>Google SparseHash is a hash table implementation with a small memory footprint.
+STACKS can (and should) be compiled using it. This will make STACKS use much
+less memory.</p>
+<div class="highlight-bash"><div class="highlight"><pre>wget http://sparsehash.googlecode.com/files/sparsehash-2.0.2.tar.gz
 
-tar -xvf stacks-1.24.tar.gz
-<span class="nb">cd </span>stacks-1.24
-
-<span class="c"># Install the binaries in /usr/local/bin</span>
-./configure --enable-sparsehash
-make
+tar -xvf sparsehash-2.0.2.tar.gz
+<span class="nb">cd </span>sparsehash-2.0.2
+./configure
+make  <span class="c"># Add &#39;-j n&#39; to use n CPUs during the compilation</span>
 sudo make install
-
-<span class="c"># Remove the folder and gz file</span>
-<span class="nb">cd</span> ..
-sudo rm -R stacks-1.20 stacks-1.20.tar.gz sparsehash-2.0.2 sparsehash-2.0.2.tar.gz
 </pre></div>
 </div>
 </div>
-<div class="section" id="test-the-installation">
-<h3>2.3.2. Test the installation<a class="headerlink" href="#test-the-installation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="installing-stacks">
+<h3>2.3.2. Installing STACKS<a class="headerlink" href="#installing-stacks" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Modify the version number as needed</span>
+wget http://creskolab.uoregon.edu/stacks/source/stacks-1.29.tar.gz
+
+tar -xvf stacks-1.29.tar.gz
+<span class="nb">cd </span>stacks-1.29
+
+<span class="c"># Install the binaries in /usr/local/bin</span>
+./configure --enable-sparsehash
+make  <span class="c"># Add &#39;-j n&#39; to use n CPUs during the compilation</span>
+sudo make install
+
+<span class="c"># Remove the temporary install folders and archives</span>
+<span class="nb">cd</span> ..
+sudo rm -R stacks-1.29 stacks-1.29.tar.gz sparsehash-2.0.2 sparsehash-2.0.2.tar.gz
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-the-stacks-installation">
+<h3>2.3.3. Test the STACKS installation<a class="headerlink" href="#test-the-stacks-installation" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre>cstacks
 </pre></div>
 </div>
 <p>This will output the help of the cstacks program. You will also be able to
 confirm the version number of your STACKS installation.</p>
+</div>
+<div class="section" id="installing-cutadapt">
+<h3>2.3.4. Installing Cutadapt<a class="headerlink" href="#installing-cutadapt" title="Permalink to this headline">¶</a></h3>
+<p>There are different ways you can install Cutadapt. If you have <tt class="docutils literal"><span class="pre">pip</span></tt> (a
+Python package installer) installed, you can use the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo pip install --user --upgrade cutadapt
+</pre></div>
+</div>
+<p>Otherwise, visit their website to download it and install it:
+&lt;<a class="reference external" href="https://pypi.python.org/pypi/cutadapt/">https://pypi.python.org/pypi/cutadapt/</a>&gt;`_
+o</p>
+</div>
+<div class="section" id="installing-jellyfish">
+<h3>2.3.5. Installing jellyfish<a class="headerlink" href="#installing-jellyfish" title="Permalink to this headline">¶</a></h3>
+<p>Jellyfish is a kmer counter. We use it to identify the presence of adapters in
+our raw sequences in order to remove them with Cutadapt. To install Jellyfish,
+launch the following commands:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Getting the latest version</span>
+wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.0/jellyfish-2.2.0.tar.gz
+
+<span class="c"># Installing</span>
+tar xvfz jellyfish-2.2.0.tar.gz
+<span class="nb">cd </span>jellyfish-2.2.0
+./configure
+make  <span class="c"># Add &#39;-j n&#39; to use n CPUs during the compilation</span>
+sudo make install
+
+<span class="c"># Cleanup</span>
+<span class="nb">cd</span> ..
+rm -r jellyfish-2.2.0.tar.gz jellyfish-2.2.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-fastqc">
+<h3>2.3.6. Installing FastQC<a class="headerlink" href="#installing-fastqc" title="Permalink to this headline">¶</a></h3>
+<p>We use FastQC to assess read quality before and after filtering with Cutadapt.
+To install FastQC, visit <a class="reference external" href="http://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc">this page</a>
+and download the version that works with your system (Linux or MacOS). Then
+launch these commands:</p>
+<p><strong>Installing on Linux</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Installing</span>
+unzip fastqc_v0.11.3_source.zip
+<span class="nb">cd </span>FastQC
+chmod 755 fastqc
+
+<span class="c"># Look at the options</span>
+./fastqc --help
+
+<span class="c"># Run FastQC</span>
+./fastqc
+</pre></div>
+</div>
+<p><strong>Installing on MacOS</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c">### MacOS</span>
+<span class="c"># ???</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -207,7 +292,7 @@ confirm the version number of your STACKS installation.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="03-Step_3.html" class="btn btn-neutral float-right" title="3. Download your raw datafiles (Illumina or prepared IonProton lanes)"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="03-Step_3.html" class="btn btn-neutral float-right" title="3. Prepare your raw datafiles"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="01-stacks.html" class="btn btn-neutral" title="1. Stacks workflow tutorial"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -219,7 +304,7 @@ confirm the version number of your STACKS installation.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Jan 20, 2015.
+      Last updated on May 05, 2015.
     </p>
   </div>
 

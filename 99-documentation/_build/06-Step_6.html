@@ -61,29 +61,33 @@
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#where-to-find-this-tutorial">1.3. Where to find this tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-stacks.html#where-to-find-this-manual">1.3. Where to find this manual</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#licence">1.4. Licence</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Install Stacks_workflow</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Installing Stacks_workflow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#personal-computer-setup">2.2. Personal computer setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#set-up-for-mac-osx">2.2. Set up for Mac OSX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-stacks">2.3. Download and install STACKS</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Download your raw datafiles (Illumina or prepared IonProton lanes)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#put-your-raw-files-in-the-02-raw-folder-of-the-stacks-workflow-folder">3.1. Put your raw files in the <tt class="docutils literal"><span class="pre">02-raw</span></tt> folder of the stacks_workflow folder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#prepare-the-lane-info-txt">3.2. Prepare the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="05-Step_5.html">5. Rename samples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#rename-and-copy-the-samples">5.1. Rename and copy the samples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#join-samples-that-should-go-together">5.2. Join samples that should go together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-Step_5.html#deleting-samples-with-too-few-reads">5.2. Deleting samples with too few reads</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">6. Align reads to a reference genome (optional)</a><ul>
@@ -143,6 +147,11 @@
             
   <div class="section" id="align-reads-to-a-reference-genome-optional">
 <h1>6. Align reads to a reference genome (optional)<a class="headerlink" href="#align-reads-to-a-reference-genome-optional" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The documentation and scripts used with a reference genome have not been
+updated in a long time. We believe they should not be used at the moment.</p>
+</div>
 <div class="section" id="install-bwa">
 <h2>6.1. Install <a class="reference external" href="http://bio-bwa.sourceforge.net">bwa</a><a class="headerlink" href="#install-bwa" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -186,7 +195,7 @@
 
   <div role="contentinfo">
     <p>
-      Last updated on Jan 20, 2015.
+      Last updated on May 11, 2015.
     </p>
   </div>
 

@@ -1,15 +1,16 @@
 #!/bin/bash
 # Launch process_radtags on all the lanes
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 ### Global variable
 INFO_FILES="01-info_files"
 TRIM_LENGTH=$1 # Length to cut reads after process_radtags
-ENZYME=$2 # Name of the enzyme (run 'process_radtags' without options for list)
+ENZYME=$2  # Name of the enzyme (run 'process_radtags' without options for list)
 
 
 # Write command to file
 echo -e "process_radtags commande used:\n\n\
-$(echo process_radtags.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \
+    $(echo process_radtags.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \
 > 98-log_files/process_radtags_command.log
 
 # Extract reads
@@ -25,7 +26,7 @@ do
     mkdir 03-samples/$f 2> /dev/null
     process_radtags \
         -i gzfastq \
-        -f 02-raw/$f".fastq.gz" \
+        -f 02-raw/trimmed/$f".fastq.gz" \
         -o 03-samples/$f \
         -b $INFO_FILES/barcodes.txt \
         -c -q -r -t $TRIM_LENGTH \
@@ -35,6 +36,13 @@ do
 
 
     # Copy log files to ./98_log_files/
-    cp 03-samples/$f/process_radtags.log 98-log_files/process_radtags_"$f".log
+    cp 03-samples/$f/process_radtags.log 98-log_files/"$TIMESTAMP"_02_process_radtags_"$f".log
 done
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

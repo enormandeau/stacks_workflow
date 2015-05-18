@@ -1,5 +1,6 @@
 #!/bin/bash
 # Create population map file
+TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # Global variables
 INFO_FILES="01-info_files"
@@ -28,4 +29,11 @@ grep -v "#" $INFO_FILES/sample_information.csv | \
 #done > $INFO_FILES/population_map.txt
 
 rm $INFO_FILES/population_map_temp.txt 2> /dev/null
+
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

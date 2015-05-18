@@ -23,7 +23,8 @@ You will need to go through all the scripts named ``stacks_*`` in the
 Run the STACKS programs
 =======================
 
-If you do not have access to a reference genome, launch the following commands:
+Without a reference genome
+--------------------------
 
 .. code-block:: bash
 
@@ -44,7 +45,14 @@ Visualize the distribution of log likelihoods in
  ./00-scripts/stacks_7_sstacks_rx.sh
  ./00-scripts/stacks_8_populations_rx.sh
 
-Or, if you have a reference genome:
+With a reference genome
+-----------------------
+
+.. warning::
+
+ The documentation and scripts used with a reference genome have not been
+ updated in a long time. We believe they should not be used at the moment.
+
 
 .. code-block:: bash
 
