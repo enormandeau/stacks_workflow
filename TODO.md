@@ -1,11 +1,9 @@
 # stacks_workflow revamp
-
-Implement new features and update documentation.
+Features and documentation updates.
 
 ## STACKS v1.30 (1.31 upcoming soon, mostly minor bugfixes)
-* Make sure it works
-  - Especially sstacks (give all samples at once)
-  - Confirm number of SNPs
+* Make sure it works for STACKS v1.30
+* Give sstacks all samples at once
 
 ## Introduction
 - Other papers to read? (01-stacks.rst)
