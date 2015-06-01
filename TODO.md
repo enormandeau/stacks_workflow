@@ -2,7 +2,7 @@
 
 Implement new features and update documentation.
 
-## STACKS v1.30
+## STACKS v1.30 (1.31 upcoming soon, mostly minor bugfixes)
 * Make sure it works
   - Especially sstacks (give all samples at once)
   - Confirm number of SNPs
@@ -29,14 +29,11 @@ Implement new features and update documentation.
 
 ## Filters
 # TODO list for 05_filter_vcf.py
-- Add filters:
-  - Minimum coverage by allele
-    - report % of removed genotypes
-    . WRITE CORRECTED VERSION TO FILTERED FILE
-  - Allele imbalance (correct genotypes?)
-  . Genotype likelihood (>10)
+* Add filters:
   * Fis (calculate from VCF)
   * Output a Whitelist (to rerun populations)
+  - Allele imbalance (correct genotypes?)
+  . Genotype likelihood (>10)
 
 - Look for differences of maf, Fis, Het among SNPs of a same locus (?)
 
