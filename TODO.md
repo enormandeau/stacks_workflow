@@ -21,9 +21,10 @@ Features and documentation updates.
 . Number of good individuals per population
 * Estimation of M parameter with Dan Ilut's code (can we distribute it?)
 
-## Scripts and parameters
-* Test the effect of --lnl-lim (-20, -10, -5)
-. Discuss choosing and testing values
+## Using a reference genome
+* Revive the stacks_1b_pstacks.sh script
+* Test genome assisted STACKS
+  - Use mapping options that work with Illumina AND Ion Proton
 
 ## Filters
 # TODO list for 05_filter_vcf.py
@@ -34,10 +35,7 @@ Features and documentation updates.
   . Genotype likelihood (>10)
 
 - Look for differences of maf, Fis, Het among SNPs of a same locus (?)
-
-# Filtering the haplotype file
 - Remove individuals with more than 2 haplotypes in haplotype file
-
 
 ## Post STACKS
 . Preparing files for population genetics analyses
