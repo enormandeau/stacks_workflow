@@ -19,7 +19,7 @@ carefully.
 
 .. code-block:: bash
 
- ./00-scripts/05_filterStacksSNPs.py \  
+ ./00-scripts/05_filter_vcf.py \  
     -i 05-stacks/batch_1.sumstats.tsv \  
     -o filtered.tsv \  
     -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -s 10
