@@ -145,13 +145,19 @@
   <div class="section" id="filtering-the-results">
 <h1>8. Filtering the results<a class="headerlink" href="#filtering-the-results" title="Permalink to this headline">¶</a></h1>
 <p><tt class="docutils literal"><span class="pre">Stacks_workflow</span></tt> includes a script to filter the VCF file output by STACKS.
-To print the short documentation of the filtering script, launch it without
-options.</p>
+To print the short documentation of the filtering script, launch the script
+without options.</p>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/05_filter_vcf.py
+</pre></div>
+</div>
 <p>For the long documentation, use the -h option.</p>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/05_filter_vcf.py -h
+</pre></div>
+</div>
 <p>The following example shows how to use the script with some of the options.
 These options are only for demonstration purpose. Choose your threshold values
 carefully.</p>
-<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/05_filterStacksSNPs.py <span class="se">\</span>
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/05_filter_vcf.py <span class="se">\</span>
    -i 05-stacks/batch_1.sumstats.tsv <span class="se">\</span>
    -o filtered.tsv <span class="se">\</span>
    -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -s 10
