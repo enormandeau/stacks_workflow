@@ -28,8 +28,21 @@ Implement new features and update documentation.
 . Discuss choosing and testing values
 
 ## Filters
-* Implement vcf filtering (use pyVCF)
-. General purpose filtering script (with Thierry)
+# TODO list for 05_filter_vcf.py
+- Add filters:
+  - Minimum coverage by allele
+    - report % of removed genotypes
+    . WRITE CORRECTED VERSION TO FILTERED FILE
+  - Allele imbalance (correct genotypes?)
+  . Genotype likelihood (>10)
+  * Fis (calculate from VCF)
+  * Output a Whitelist (to rerun populations)
+
+- Look for differences of maf, Fis, Het among SNPs of a same locus (?)
+
+# Filtering the haplotype file
+- Remove individuals with more than 2 haplotypes in haplotype file
+
 
 ## Post STACKS
 . Preparing files for population genetics analyses

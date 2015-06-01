@@ -1,11 +1,17 @@
 Filtering the results
 *********************
 
-``Stacks_workflow`` includes a script to filter your SNPs. To print the
-documentation of the filtering script, launch it without options:
+``Stacks_workflow`` includes a script to filter the VCF file output by STACKS.
+To print the short documentation of the filtering script, launch it without
+options.
 
 .. code-block:: bash
- ./00-scripts/05_filterStacksSNPs.py --help
+ ./00-scripts/05_filter_vcf.py
+
+For the long documentation, use the -h option.
+
+.. code-block:: bash
+ ./00-scripts/05_filter_vcf.py -h
 
 The following example shows how to use the script with some of the options.
 These options are only for demonstration purpose. Choose your threshold values
@@ -16,6 +22,5 @@ carefully.
  ./00-scripts/05_filterStacksSNPs.py \  
     -i 05-stacks/batch_1.sumstats.tsv \  
     -o filtered.tsv \  
-    -P 01-info_files/population_map.txt \  
-    -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -f -0.3 -F 0.8 -s 10
+    -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -s 10
 
