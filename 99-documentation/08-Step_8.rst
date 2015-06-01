@@ -6,11 +6,13 @@ To print the short documentation of the filtering script, launch the script
 without options.
 
 .. code-block:: bash
+
  ./00-scripts/05_filter_vcf.py
 
 For the long documentation, use the -h option.
 
 .. code-block:: bash
+
  ./00-scripts/05_filter_vcf.py -h
 
 The following example shows how to use the script with some of the options.
