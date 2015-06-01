@@ -2,8 +2,8 @@ Filtering the results
 *********************
 
 ``Stacks_workflow`` includes a script to filter the VCF file output by STACKS.
-To print the short documentation of the filtering script, launch it without
-options.
+To print the short documentation of the filtering script, launch the script
+without options.
 
 .. code-block:: bash
  ./00-scripts/05_filter_vcf.py
