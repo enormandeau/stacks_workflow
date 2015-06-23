@@ -1,13 +1,16 @@
-# stacks_workflow revamp
-Features and documentation updates.
+# Stacks Workflow development
+Features and documentation updates
 
-## STACKS v1.30 (1.31 upcoming soon, mostly minor bugfixes)
-* Make sure it works for STACKS v1.30
-* Give sstacks all samples at once
+## STACKS v1.32
+* Make sure it works for STACKS v1.32
+* Add v1.32 tag
+- Give sstacks all samples at once
+- Modify `03_rename_samples_complex.sh` to create links for samples with only
+  one source.
+- Copy and timestamp `population_map.csv` and `sample_information.csv` when used
 
 ## Introduction
 - Other papers to read? (01-stacks.rst)
-- Other options to use with ./configure for stacks? (02-Step_2.rst)
 
 ## Data preparation
 - FastQC
@@ -19,9 +22,9 @@ Features and documentation updates.
 ## What to check for at this point
 . Number of sequences per individual
 . Number of good individuals per population
-* Estimation of M parameter with Dan Ilut's code (can we distribute it?)
+. (?) Estimation of M parameter with Dan Ilut's code (can we distribute it?)
 
-## Using a reference genome
+## Reference genome
 * Revive the stacks_1b_pstacks.sh script
 * Test genome assisted STACKS
   - Use mapping options that work with Illumina AND Ion Proton
@@ -32,13 +35,13 @@ Features and documentation updates.
   * Fis (calculate from VCF)
   * Output a Whitelist (to rerun populations)
   - Allele imbalance (correct genotypes?)
-  . Genotype likelihood (>10)
+  - Genotype likelihood threshold
 
-- Look for differences of maf, Fis, Het among SNPs of a same locus (?)
+- (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 - Remove individuals with more than 2 haplotypes in haplotype file
 
 ## Post STACKS
-. Preparing files for population genetics analyses
+* Preparing files for population genetics analyses
 . Add Laura's software suggestions and code examples
 . Format conversion (PGD Spider et. al.)
 . Discuss with STACKS group for other ideas
