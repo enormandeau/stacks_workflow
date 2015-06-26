@@ -2,12 +2,11 @@
 Features and documentation updates
 
 ## STACKS v1.32
-* Make sure it works for STACKS v1.32
-* Add v1.32 tag
-- Give sstacks all samples at once
-- Modify `03_rename_samples_complex.sh` to create links for samples with only
+* Modify `03_rename_samples_complex.sh` to create links for samples with only
   one source.
-- Copy and timestamp `population_map.csv` and `sample_information.csv` when used
+* Copy and timestamp `population_map.csv` and `sample_information.csv` when used
+* Give sstacks all samples at once
+* Add v1.32 tag
 
 ## Introduction
 - Other papers to read? (01-stacks.rst)
