@@ -61,13 +61,13 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
 #  --- Filtering results ------------------------------------
 #  0     Genotypes removed because of min_allele_coverage
 #  0     SNPs failed: min_presence
-#  3975  SNPs failed: maf_global
-#  4063  SNPs failed: maf_population
-#  769   SNPs failed: heterozygosity
+#  15    SNPs failed: maf_global
+#  18    SNPs failed: maf_population
+#  2     SNPs failed: heterozygosity
 #  0     SNPs failed: max_snp_number
 #  ----------------------------------------------------------
-#  5565  SNPs (4275 loci) in input file
-#  4744  SNPs (85.24%) filtered out
-#  821   SNPs retained
+#  23    SNPs (16 loci) in input file
+#  17    SNPs (73.91%) filtered out
+#  6     SNPs retained
 #  ----------------------------------------------------------
 
