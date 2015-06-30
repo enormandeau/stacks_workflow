@@ -2,11 +2,17 @@
 Features and documentation updates
 
 ## STACKS v1.32
-* Modify `03_rename_samples_complex.sh` to create links for samples with only
-  one source.
 * Copy and timestamp `population_map.csv` and `sample_information.csv` when used
-* Give sstacks all samples at once
+* Modify `03_rename_samples_complex.sh` to create links for samples with only
+  one source to save lots of space in some cases and remove need for 'simple'
+  and 'complex' scripts.
+* Give sstacks all samples at once (faster since catalogue is read only once)
 * Add v1.32 tag
+
+## Reference genome
+* Revive the stacks_1b_pstacks.sh script
+* Test genome assisted STACKS
+  - Use mapping options that work with Illumina AND Ion Proton
 
 ## Introduction
 - Other papers to read? (01-stacks.rst)
@@ -22,11 +28,6 @@ Features and documentation updates
 . Number of sequences per individual
 . Number of good individuals per population
 . (?) Estimation of M parameter with Dan Ilut's code (can we distribute it?)
-
-## Reference genome
-* Revive the stacks_1b_pstacks.sh script
-* Test genome assisted STACKS
-  - Use mapping options that work with Illumina AND Ion Proton
 
 ## Filters
 # TODO list for 05_filter_vcf.py
