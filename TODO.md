@@ -31,6 +31,7 @@ Features and documentation updates
 
 ## Filters
 # TODO list for 05_filter_vcf.py
+* Add figures (eg: distribution of parameters by pop)
 * Add filters:
   * Fis (calculate from VCF)
   * Output a Whitelist (to rerun populations)
