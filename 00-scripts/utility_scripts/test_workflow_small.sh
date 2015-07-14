@@ -30,6 +30,9 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
 # Renaming the samples
 ./00-scripts/03_rename_samples.sh
 
+# Creating the population map
+./00-scripts/04_prepare_population_map.sh
+
 # Running STACKS
 ./00-scripts/stacks_1a_ustacks.sh
 #./00-scripts/stacks_1b_pstacks.sh
