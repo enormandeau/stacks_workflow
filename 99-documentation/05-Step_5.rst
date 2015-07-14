@@ -4,35 +4,17 @@ Rename samples
 Rename and copy the samples
 ===========================
 
-We provide two scripts to rename the extracted samples and move them into the
-`04-all_samples` folder. Use the appropriate one depending on whether some of
-your samples have been sequenced more than once in all your sequencing data.
-
-The simple case
----------------
-
-The approach should be used if your samples have each been sequenced **ONLY
-ONCE** in total. This means each sample is found a maximum of one time in all
-of your sequenced lanes (Illumina) or chips (Ion Proton). This script will
-create soft links from the extracted files found in `03-samples` folder and its
-sub-folders to the `04-all_samples` folder.
+We provide a scripts to rename the extracted samples and move them into the
+`04-all_samples` folder. The script behaves differently for samples that are
+present only once in the `01-info_files/sample_information.csv` and for those
+that are present more than once. If a sample is present only once, a link is
+created, thus using no additional disk space. If it is present more than once,
+all the copies are concatenated into one file, doubling the amount of disk
+space taken by this sample.
 
 .. code-block:: bash
 
- ./00-scripts/03_rename_samples_simple.sh
-
-The more complex case
----------------------
-
-The `simple case` approach uses no disk additional space but cannot be used if
-some of your samples have been sequenced more then once, in which case the
-different files for the same sample should be joined. This will double the
-amount of space used by the `03-samples` folder. In this case, use the
-following command:
-
-.. code-block:: bash
-
- ./00-scripts/03_rename_samples_complex.sh
+ ./00-scripts/03_rename_samples.sh
 
 Deleting samples with too few reads
 ===================================
