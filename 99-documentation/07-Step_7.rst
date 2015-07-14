@@ -73,3 +73,32 @@ Visualize the distribution of log likelihoods in
  ./00-scripts/stacks_7_sstacks_rx.sh
  ./00-scripts/stacks_8_populations_rx.sh
 
+What to do in case of power outages?
+------------------------------------
+
+If your analysis gets interrupted by a power outage or some similar cause, it
+is possible to restart some of the portions of STACKS where they were rather
+than at the beginning. The following scripts can be restarted:
+
+- `stacks_1a_ustacks.sh`
+- `stacks_2_cstacks.sh`
+- `stacks_3_sstacks.sh`
+- `stacks_5b_rxstacks.sh`
+- `stacks_4_populations.sh`
+- `stacks_6_cstacks_rx.sh`
+- `stacks_7_sstacks_rx.sh`
+- `stacks_8_populations_rx.sh`
+
+For `stacks_1a_ustacks.sh`, you will need to keep only the samples that need to
+be treated in `04-all_samples`. You can for example create a folder named
+`treated` in `04-all_samples` and move your treated samples there. You will
+also need to change the `id` variable in the script. For example, if you have
+already treated 40 samples, the `id` variable should be modified to 41.
+
+For `stacks_2_cstacks.sh` and `stacks_6_cstacks_rx.sh`, you will need to write
+the path to the partial catalog and assign it to the `catalog` variable in the
+script. You will also need to move the treated samples into another folder.
+
+For `stacks_3_sstacks.sh`, `stacks_7_sstacks_rx.sh` and `stacks_5b_rxstacks.sh`,
+you will need to move the treated samples into another folder.
+
