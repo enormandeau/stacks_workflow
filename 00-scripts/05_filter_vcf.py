@@ -141,7 +141,10 @@ class Flags(object):
         print "  {}\tSNPs failed: {}".format(cls.max_snp_number_count, "max_snp_number")
         print "----------------------------------------------------------"
         print "  {}\tSNPs ({} loci) in input file".format(cls.total_snps_count, locus_counter)
-        print "  {}\tSNPs ({}%) filtered out".format(cls.total_filtered_count, str(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count))[0:5])
+        try:
+            print "  {}\tSNPs ({}%) filtered out".format(cls.total_filtered_count, str(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count))[0:5])
+        except:
+            print "  {}\tSNPs ({}%) filtered out".format(cls.total_filtered_count, 100)
         print "  {}\tSNPs retained".format(cls.total_kept_count)
         print "----------------------------------------------------------"
 
