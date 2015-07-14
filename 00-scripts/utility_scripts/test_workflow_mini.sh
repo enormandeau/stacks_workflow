@@ -16,7 +16,7 @@ rm -r 05-stacks_rx/* 2> /dev/null
 rm -r 98-log_files/* 2> /dev/null
 
 # Get raw data, adapters, and sample information
-cp -l ~/temp.backup/stacks_workflow_test_data/*_small_*.fastq.gz 02-raw/data.fastq.gz
+cp -l ~/temp.backup/stacks_workflow_test_data/*_mini_*.fastq.gz 02-raw/data.fastq.gz
 cp ~/temp.backup/stacks_workflow_test_data/sample_information.csv 01-info_files
 cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta 
 
@@ -54,20 +54,4 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
     -A 0.1 \
     -H 0.5 -y 1 \
     -s 10
-
-### Filtering should give approximately the following:
-
-#  >>> Treating: 05-stacks_rx/batch_1.vcf (2 populations) <<<
-#  --- Filtering results ------------------------------------
-#  0     Genotypes removed because of min_allele_coverage
-#  0     SNPs failed: min_presence
-#  15    SNPs failed: maf_global
-#  18    SNPs failed: maf_population
-#  2     SNPs failed: heterozygosity
-#  0     SNPs failed: max_snp_number
-#  ----------------------------------------------------------
-#  23    SNPs (16 loci) in input file
-#  17    SNPs (73.91%) filtered out
-#  6     SNPs retained
-#  ----------------------------------------------------------
 
