@@ -28,9 +28,7 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
 ./00-scripts/02_process_radtags_2_enzymes.sh 70 pstI mspI
 
 # Renaming the samples
-#./00-scripts/03_rename_samples_simple.sh
-./00-scripts/03_rename_samples_complex.sh
-./00-scripts/04_prepare_population_map.sh
+./00-scripts/03_rename_samples.sh
 
 # Running STACKS
 ./00-scripts/stacks_1a_ustacks.sh
