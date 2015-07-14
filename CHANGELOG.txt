@@ -1,5 +1,13 @@
 List of changes
 
+v1.32
+- 2015-06-14 Created a unified 03_rename_sample.sh script
+- 2015-06-14 Copying population_map.txt and sample_information.csv
+- 2015-06-08 Added link to Bernatchez Lab in documentation
+- 2015-06-03 Removed old utility scripts
+- 2015-06-01 Improved documentation
+- 2015-06-01 Added VCF filter script
+
 v1.30
 - 2015-05-12 improved test script layout
 - 2015-05-12 Removed visualization section

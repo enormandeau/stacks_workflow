@@ -1,13 +1,6 @@
 # Stacks Workflow development
 Features and documentation updates
 
-## STACKS v1.32
-* Modify `03_rename_samples_complex.sh` to create links for samples with only
-  one source to save lots of space in some cases and remove need for 'simple'
-  and 'complex' scripts.
-* Give sstacks all samples at once (faster since catalogue is read only once)
-* Add v1.32 tag
-
 ## Filters
 # TODO list for 05_filter_vcf.py
 * Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
@@ -24,6 +17,7 @@ Features and documentation updates
 
 ## Paralelization
 - Paralelize long steps that can use only one CPU
+. Give sstacks all samples at once (faster since catalogue is read only once)
 
 ## Reference genome
 * Revive the stacks_1b_pstacks.sh script
