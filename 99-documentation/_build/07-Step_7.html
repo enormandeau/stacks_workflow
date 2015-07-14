@@ -206,6 +206,32 @@ updated in a long time. We believe they should not be used at the moment.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="what-to-do-in-case-of-power-outages">
+<h3>7.3.3. What to do in case of power outages?<a class="headerlink" href="#what-to-do-in-case-of-power-outages" title="Permalink to this headline">¶</a></h3>
+<p>If your analysis gets interrupted by a power outage or some similar cause, it
+is possible to restart some of the portions of STACKS where they were rather
+than at the beginning. The following scripts can be restarted:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">stacks_1a_ustacks.sh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">stacks_2_cstacks.sh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">stacks_3_sstacks.sh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">stacks_5b_rxstacks.sh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">stacks_4_populations.sh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">stacks_6_cstacks_rx.sh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">stacks_7_sstacks_rx.sh</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">stacks_8_populations_rx.sh</span></tt></li>
+</ul>
+<p>For <tt class="docutils literal"><span class="pre">stacks_1a_ustacks.sh</span></tt>, you will need to keep only the samples that need to
+be treated in <tt class="docutils literal"><span class="pre">04-all_samples</span></tt>. You can for example create a folder named
+<tt class="docutils literal"><span class="pre">treated</span></tt> in <tt class="docutils literal"><span class="pre">04-all_samples</span></tt> and move your treated samples there. You will
+also need to change the <tt class="docutils literal"><span class="pre">id</span></tt> variable in the script. For example, if you have
+already treated 40 samples, the <tt class="docutils literal"><span class="pre">id</span></tt> variable should be modified to 41.</p>
+<p>For <tt class="docutils literal"><span class="pre">stacks_2_cstacks.sh</span></tt> and <tt class="docutils literal"><span class="pre">stacks_6_cstacks_rx.sh</span></tt>, you will need to write
+the path to the partial catalog and assign it to the <tt class="docutils literal"><span class="pre">catalog</span></tt> variable in the
+script. You will also need to move the treated samples into another folder.</p>
+<p>For <tt class="docutils literal"><span class="pre">stacks_3_sstacks.sh</span></tt>, <tt class="docutils literal"><span class="pre">stacks_7_sstacks_rx.sh</span></tt> and <tt class="docutils literal"><span class="pre">stacks_5b_rxstacks.sh</span></tt>,
+you will need to move the treated samples into another folder.</p>
+</div>
 </div>
 </div>
 
