@@ -43,6 +43,9 @@ done
 SCRIPT=$0
 NAME=$(basename $0)
 LOG_FOLDER="98-log_files"
+INFO_FILES_FOLDER="01-info_files"
+SAMPLE_INFO="sample_information.csv"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+cp $INFO_FILES_FOLDER/$SAMPLE_INFO $LOG_FOLDER/"$TIMESTAMP"_"$SAMPLE_INFO"
 

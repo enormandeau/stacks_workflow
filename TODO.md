@@ -2,7 +2,6 @@
 Features and documentation updates
 
 ## STACKS v1.32
-* Copy and timestamp `population_map.csv` and `sample_information.csv` when used
 * Modify `03_rename_samples_complex.sh` to create links for samples with only
   one source to save lots of space in some cases and remove need for 'simple'
   and 'complex' scripts.
@@ -22,6 +21,9 @@ Features and documentation updates
 
 - (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 - (?) Remove individuals with more than 2 haplotypes in haplotype file
+
+## Paralelization
+- Paralelize long steps that can use only one CPU
 
 ## Reference genome
 * Revive the stacks_1b_pstacks.sh script

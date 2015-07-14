@@ -124,6 +124,9 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
 SCRIPT=$0
 NAME=$(basename $0)
 LOG_FOLDER="98-log_files"
+INFO_FILES_FOLDER="01-info_files"
+POP_MAP="population_map.txt"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+cp $INFO_FILES_FOLDER/$POP_MAP $LOG_FOLDER/"$TIMESTAMP"_"$POP_MAP"
 
