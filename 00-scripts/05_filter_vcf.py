@@ -136,8 +136,8 @@ class Flags(object):
         print "  {}\tSNPs failed: {}".format(cls.maf_global_count, "maf_global")
         print "  {}\tSNPs failed: {}".format(cls.maf_population_count, "maf_population")
         print "  {}\tSNPs failed: {}".format(cls.heterozygosity_count, "heterozygosity")
-        #print "  {}\tSNPs failed: {}".format(cls.min_fis_count, "min_fis")
-        #print "  {}\tSNPs failed: {}".format(cls.max_fis_count, "max_fis")
+        print "  {}\tSNPs failed: {}".format(cls.min_fis_count, "min_fis")
+        print "  {}\tSNPs failed: {}".format(cls.max_fis_count, "max_fis")
         print "  {}\tSNPs failed: {}".format(cls.max_snp_number_count, "max_snp_number")
         print "----------------------------------------------------------"
         print "  {}\tSNPs ({} loci) in input file".format(cls.total_snps_count, locus_counter)
@@ -349,21 +349,70 @@ def test_heterozygosity(locus, pop_info, max_hetero, max_hetero_joker):
             snp.flags.heterozygosity = False
             Flags.heterozygosity_count += 1
 
-# TODO Fis min
-def test_fis_min(locus, pop_info, min_fis):
-    """NOT IMPLEMENTED YET.
-
-    Test that the minimum Fis value of all the populations is high enough
+# Fis
+def test_fis(locus, pop_info, min_fis, max_fis):
+    """Test if each population passes minimum and maximum Fis filter
     """
-    pass
+    for snp in locus:
+        # Get Sample objects for each populations for that SNP
+        populations = {}
 
-# TODO Fis max
-def test_fis_max(locus, pop_info, max_fis):
-    """NOT IMPLEMENTED YET.
+        for pop in pop_info:
+            populations[pop] = [snp.samples[i] for i in pop_info[pop]]
 
-    Test that the maximum Fis value of all the populations is low enough
-    """
-    pass
+        # Test if SNP meets minimum criterion for all pops
+        pops_passing_min_fis = 0
+        pops_passing_max_fis = 0
+
+        for pop in populations:
+            allele_count = defaultdict(int)
+            num_samples = 0
+            num_hetero = 0
+
+            #print pop
+
+            for sample in populations[pop]:
+                if sample.genotype != "./.":
+                    num_samples += 1
+                    if sample.genotype in ["1/0", "0/1"]:
+                        num_hetero += 1
+                    a1, a2 = sample.genotype.split("/")
+                    allele_count[a1] += 1
+                    allele_count[a2] += 1
+
+            num_alleles = num_samples * 2.0
+            #print allele_count
+            p = float(allele_count["0"]) / num_alleles
+            q = float(allele_count["1"]) / num_alleles
+            expected_hetero_freq = 2.0 * p * q
+            observed_hetero_freq = float(num_hetero) / num_samples
+
+            try:
+                fis = (expected_hetero_freq - observed_hetero_freq) / expected_hetero_freq
+            except:
+                fis = 0.0
+            #print "Fis:", str(fis)[0:5], "\tExp:", expected_hetero_freq, "\tObs:", observed_hetero_freq
+            #print str(fis)[0:7]
+
+            # TODO
+            # Calculate Fis value for pop
+            # Test if pop passes min_fis and max_fis
+
+            # Modify flag if pop fails min_fis
+            if fis >= min_fis:
+                pops_passing_min_fis += 1
+
+            # Modify flag if pop fails max_fis
+            if fis <= max_fis:
+                pops_passing_max_fis += 1
+
+        if pops_passing_min_fis < len(pop_info):
+            snp.flags.min_fis = False
+            Flags.min_fis_count += 1
+
+        if pops_passing_max_fis < len(pop_info):
+            snp.flags.max_fis = False
+            Flags.max_fis_count += 1
 
 # Max number of SNPs (before or after filtering for the others?)
 def test_max_snp_number(locus, pop_info, max_snp_number):
@@ -466,7 +515,7 @@ if __name__ == '__main__':
             locus_counter = 1
             report_every = 10000
             max_loci = 9999999999
-            #max_loci = 10
+            #max_loci = 1000
 
             # Iterate over the loci and filter the SNPs
             for locus in locus_iterator(args.input_file):
@@ -509,9 +558,7 @@ if __name__ == '__main__':
                                     args.max_hetero_joker
                                    )
 
-                test_fis_min(locus, pop_info, args.min_fis)
-
-                test_fis_max(locus, pop_info, args.max_fis)
+                test_fis(locus, pop_info, args.min_fis, args.max_fis)
 
                 test_max_snp_number(locus, pop_info, args.max_snp_number)
 

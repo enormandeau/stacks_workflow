@@ -3,14 +3,13 @@ Features and documentation updates
 
 ## Filters
 # TODO list for 05_filter_vcf.py
-* Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
 * Add filters:
-  * Fis (calculate from VCF)
   * Output a Whitelist (to rerun populations)
   - Maximum allele coverage
   - Allele imbalance (correct genotypes?)
   - Genotype likelihood threshold
   - SNPs with more than 2 alleles
+* Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
 
 - (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 - (?) Remove individuals with more than 2 haplotypes in haplotype file
