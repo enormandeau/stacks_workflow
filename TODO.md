@@ -4,31 +4,30 @@ Features and documentation updates
 ## Filters
 # TODO list for 05_filter_vcf.py
 * Add filters:
-  * Output a Whitelist (to rerun populations)
   - Maximum allele coverage
-  - Allele imbalance (correct genotypes?)
   - Genotype likelihood threshold
-  - SNPs with more than 2 alleles
+  - Allele imbalance (correct genotypes?)
+  * Output a Whitelist (to rerun populations)
 * Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
-
-- (?) Look for differences of maf, Fis, Het among SNPs of a same locus
-- (?) Remove individuals with more than 2 haplotypes in haplotype file
-
-## Paralelization
-- Paralelize long steps that can use only one CPU
-. Give sstacks all samples at once (faster since catalogue is read only once)
+. (?) Look for differences of maf, Fis, Het among SNPs of a same locus
+. (?) Remove individuals with more than 2 haplotypes in haplotype file
+. Remove SNPs with more than 2 alleles (not sure how to do this)
 
 ## Reference genome
-* Revive the stacks_1b_pstacks.sh script
+* Revive `stacks_1b_pstacks.sh`
 * Test genome assisted STACKS
   - Use mapping options that work with Illumina AND Ion Proton
 
+## Paralelization
+- Paralelize long steps that can use only one CPU
+  * Cutadapt
+. Give sstacks all samples at once (faster since catalogue is read only once)
+
 ## Data preparation
 - FastQC
-  - FastQC on raw data
-  - FastQC on cleaned data
+  - FastQC on raw data (use small subset)
+  - FastQC on cleaned data (use small subset)
   . Installing FastQC on MacOS
-* Parallelize cutadapt
 
 ## Post STACKS
 * Preparing files for population genetics analyses
