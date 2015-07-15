@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """Filtering VCF files output by STACKS
 
-WARNING! will not work properly with STACKS versions older to v1.30)
+WARNING! will not work properly with STACKS versions older to v1.30 because the
+minor allele counts in the VCF file were not correct.
 """
 
 # Import
@@ -83,6 +84,7 @@ class Flags(object):
     # Counters for the number of filtered SNPs by reason
     # These are used by the class method 'report_filters'
     min_allele_coverage_count = 0
+    max_allele_coverage_count = 0
     min_presence_count = 0
     maf_global_count = 0
     maf_population_count = 0
@@ -96,6 +98,7 @@ class Flags(object):
 
     def __init__(self):
         self.min_allele_coverage = True
+        self.max_allele_coverage = True
         self.min_presence = True
         self.maf_global = True
         self.maf_population = True
@@ -110,6 +113,7 @@ class Flags(object):
         Flags.total_snps_count += 1
         passing = (
                    self.min_allele_coverage and
+                   self.max_allele_coverage and
                    self.min_presence and
                    (self.maf_global or self.maf_population) and
                    self.heterozygosity and
@@ -138,6 +142,7 @@ class Flags(object):
         print "  {}\tSNPs failed: {}".format(cls.heterozygosity_count, "heterozygosity")
         print "  {}\tSNPs failed: {}".format(cls.min_fis_count, "min_fis")
         print "  {}\tSNPs failed: {}".format(cls.max_fis_count, "max_fis")
+        print "  {}\tSNPs failed: {}".format(cls.max_allele_coverage_count, "max_allele_coverage")
         print "  {}\tSNPs failed: {}".format(cls.max_snp_number_count, "max_snp_number")
         print "----------------------------------------------------------"
         print "  {}\tSNPs ({} loci) in input file".format(cls.total_snps_count, locus_counter)
@@ -223,6 +228,15 @@ def write_locus(locus, handle):
     for snp in locus:
         if snp.flags.pass_filters():
             handle.write("\t".join(snp.line) + "\n")
+
+def median(lst):
+    lst = sorted(lst)
+    if len(lst) < 1:
+            return None
+    if len(lst) %2 == 1:
+            return lst[((len(lst)+1)/2)-1]
+    else:
+            return float(sum(lst[(len(lst)/2)-1:(len(lst)/2)+1]))/2.0
 
 ## Filter functions
 def test_min_allele_coverage(locus, pop_info, min_allele_coverage):
@@ -369,8 +383,6 @@ def test_fis(locus, pop_info, min_fis, max_fis):
             num_samples = 0
             num_hetero = 0
 
-            #print pop
-
             for sample in populations[pop]:
                 if sample.genotype != "./.":
                     num_samples += 1
@@ -381,7 +393,6 @@ def test_fis(locus, pop_info, min_fis, max_fis):
                     allele_count[a2] += 1
 
             num_alleles = num_samples * 2.0
-            #print allele_count
             p = float(allele_count["0"]) / num_alleles
             q = float(allele_count["1"]) / num_alleles
             expected_hetero_freq = 2.0 * p * q
@@ -391,12 +402,6 @@ def test_fis(locus, pop_info, min_fis, max_fis):
                 fis = (expected_hetero_freq - observed_hetero_freq) / expected_hetero_freq
             except:
                 fis = 0.0
-            #print "Fis:", str(fis)[0:5], "\tExp:", expected_hetero_freq, "\tObs:", observed_hetero_freq
-            #print str(fis)[0:7]
-
-            # TODO
-            # Calculate Fis value for pop
-            # Test if pop passes min_fis and max_fis
 
             # Modify flag if pop fails min_fis
             if fis >= min_fis:
@@ -414,7 +419,23 @@ def test_fis(locus, pop_info, min_fis, max_fis):
             snp.flags.max_fis = False
             Flags.max_fis_count += 1
 
-# Max number of SNPs (before or after filtering for the others?)
+# Maximum allele coverage
+def test_max_allele_coverage(locus, pop_info, max_allele_coverage):
+    """Test if median coverage of SNP is above max_allele_coverage
+    """
+    for snp in locus:
+        coverages = []
+        for sample in snp.samples:
+            # calculate allele coverage for both alleles
+            # change genotypes that do not meet threshold to '0/0'
+            if sample.genotype != "./.":
+                coverages.append(sample.depth)
+
+        if median(coverages) >= max_allele_coverage:
+            snp.flags.max_allele_coverage = False
+            Flags.max_allele_coverage_count += 1
+
+# Max number of SNPs
 def test_max_snp_number(locus, pop_info, max_snp_number):
     """Test if there are too many SNPs at one locus
     """
@@ -438,6 +459,8 @@ if __name__ == '__main__':
             help = "output VCF file")
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
             help = "minimum allele depth to keep a genotype (otherwise modified to '0/0') (int, default: 0)")
+    parser.add_argument("-C", "--max_allele_coverage", type=int, default=0,
+            help = "maximum median allele depth to keep a SNP (int, default: 10000)")
     parser.add_argument("-p", "--min_presence", type=int, default=0,
             help = "minimum number of individuals per population to keep locus (int, default: 0)")
     parser.add_argument("-x", "--min_presence_joker_populations", type=int, default=0,
@@ -468,6 +491,7 @@ if __name__ == '__main__':
     # Assert proper values for parameters
     assert args.max_snp_number > 0, "max_snp_number must be a non-null integer"
     assert 0 <= args.min_allele_coverage <= 100, "min_allele_coverage must be an integer between 0 and 100"
+    assert 0 <= args.max_allele_coverage <= 1000000, "max_allele_coverage must be an integer between 0 and 100"
     assert 0 <= args.min_presence <= 100, "min_presence must be an integer between 0 and 100" 
     assert args.min_presence_joker_populations >= 0, "min_presence_joker_populations must be an integer that is 0 or more"
     assert 0 <= args.max_hetero <= 1, "max_hetero must be a decimal between 0 and 1"
@@ -515,7 +539,7 @@ if __name__ == '__main__':
             locus_counter = 1
             report_every = 10000
             max_loci = 9999999999
-            #max_loci = 1000
+            #max_loci = 100
 
             # Iterate over the loci and filter the SNPs
             for locus in locus_iterator(args.input_file):
@@ -535,6 +559,7 @@ if __name__ == '__main__':
                                          pop_info,
                                          args.min_allele_coverage
                                         )
+
                 test_min_presence(
                                   locus,
                                   pop_info,
@@ -559,6 +584,12 @@ if __name__ == '__main__':
                                    )
 
                 test_fis(locus, pop_info, args.min_fis, args.max_fis)
+
+                test_max_allele_coverage(
+                                         locus,
+                                         pop_info,
+                                         args.max_allele_coverage
+                                        )
 
                 test_max_snp_number(locus, pop_info, args.max_snp_number)
 
