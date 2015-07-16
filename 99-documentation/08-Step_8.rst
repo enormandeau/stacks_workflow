@@ -24,5 +24,6 @@ carefully.
  ./00-scripts/05_filter_vcf.py \  
     -i 05-stacks/batch_1.sumstats.tsv \  
     -o filtered.tsv \  
-    -p 2 -x 1 -H 0.7 -a 0.05 -A 0 -s 10
+    -c 2 -l 10 -I 8 -C 50 -p 70 --use_percent \
+    -a 0.01 -A 0.05 -H 0.5 -f -0.2 -F 0.1 -s 10
 
