@@ -6,6 +6,7 @@ nohup.out
 population_map.txt
 *~
 *.bak
+*.backup
 *.doctree
 *.fas
 *.fasta
