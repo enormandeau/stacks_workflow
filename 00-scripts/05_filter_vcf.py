@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """Filtering VCF files output by STACKS
 
-WARNING! will not work properly with STACKS versions older to v1.30 because the
-minor allele counts in the VCF file were not correct.
+WARNING! will not work properly with STACKS versions older to v1.30 since the
+minor allele counts in the VCF file created by STACKS were not reported
+properly at that time.
 """
 
 # Import
@@ -12,7 +13,7 @@ import sys
 
 # Classes
 class Sample(object):
-    """Genotype informantion of one sample
+    """Genotype information of one sample
     """
     def __init__(self, info):
         self.info = info.split(":")
@@ -30,6 +31,11 @@ class Sample(object):
         except:
             self.alt = 0
 
+        try:
+            self.imbalance = float(self.ref) / float(self.alt)
+        except:
+            self.imbalance = 0
+
         self.likelihood = self.info[3].split(",")[1]
 
         try:
@@ -42,7 +48,8 @@ class Sample(object):
             str(self.depth),
             str(self.ref),
             str(self.alt),
-            str(self.likelihood)])
+            str(self.likelihood),
+            str(self.imbalance)])
 
 class SNP(object):
     def __init__(self, line):
@@ -78,7 +85,7 @@ class SNP(object):
                           "\t".join([str(x) for x in self.samples])
                          ])
 class Flags(object):
-    """Flags used for filtering
+    """Flags used for filtering each SNP
     """
 
     # Counters for the number of filtered SNPs by reason
@@ -86,18 +93,24 @@ class Flags(object):
     min_allele_coverage_count = 0
     max_allele_coverage_count = 0
     min_presence_count = 0
-    maf_global_count = 0
-    maf_population_count = 0
-    heterozygosity_count = 0
+    min_maf_global_count = 0
+    min_maf_population_count = 0
+    max_heterozygosity_count = 0
     min_fis_count = 0
     max_fis_count = 0
+    max_imbalance_count = 0
+    min_likelihood_count = 0
     max_snp_number_count = 0
     total_snps_count = 0
-    total_kept_count = 0
+    total_good_snps_count = 0
     total_filtered_count = 0
 
     def __init__(self):
+        """Initialize flag values for new SNP flags
+        """
         self.min_allele_coverage = True
+        self.max_imbalance = True
+        self.min_likelihood = True
         self.max_allele_coverage = True
         self.min_presence = True
         self.maf_global = True
@@ -123,40 +136,43 @@ class Flags(object):
                   )
 
         if passing:
-            Flags.total_kept_count += 1
+            Flags.total_good_snps_count += 1
         else:
             Flags.total_filtered_count += 1
 
         return passing
 
     @classmethod
-    def report_filters(cls, locus_counter):
-        """Print a report about the numbers of SNPs that were filtered by
-        each of the filters
+    def report_filters(cls, locus_counter, total_good_loci):
+        """Print report about the numbers of SNPs that didn't pass each of the
+        filters
         """
-        print "--- Filtering results ------------------------------------"
-        print "  {}\tGenotypes removed because of {}".format(cls.min_allele_coverage_count, "min_allele_coverage")
-        print "  {}\tSNPs failed: {}".format(cls.min_presence_count, "min_presence")
-        print "  {}\tSNPs failed: {}".format(cls.maf_global_count, "maf_global")
-        print "  {}\tSNPs failed: {}".format(cls.maf_population_count, "maf_population")
-        print "  {}\tSNPs failed: {}".format(cls.heterozygosity_count, "heterozygosity")
-        print "  {}\tSNPs failed: {}".format(cls.min_fis_count, "min_fis")
-        print "  {}\tSNPs failed: {}".format(cls.max_fis_count, "max_fis")
-        print "  {}\tSNPs failed: {}".format(cls.max_allele_coverage_count, "max_allele_coverage")
-        print "  {}\tSNPs failed: {}".format(cls.max_snp_number_count, "max_snp_number")
-        print "----------------------------------------------------------"
-        print "  {}\tSNPs ({} loci) in input file".format(cls.total_snps_count, locus_counter)
+        print "================================================="
+        print "  {} Genotypes removed  ({})".format(pad(cls.min_allele_coverage_count), "min_allele_coverage")
+        print "  {} Genotypes removed  ({})".format(pad(cls.max_imbalance_count), "max_imbalance")
+        print "  {} Genotypes removed  ({})".format(pad(cls.min_likelihood_count), "min_likelihood")
+        print "  {} SNPs failed        ({})".format(pad(cls.max_allele_coverage_count), "max_allele_coverage")
+        print "  {} SNPs failed        ({})".format(pad(cls.min_presence_count), "min_presence")
+        print "  {} SNPs failed        ({})".format(pad(cls.min_maf_global_count), "maf_global")
+        print "  {} SNPs failed        ({})".format(pad(cls.min_maf_population_count), "maf_population")
+        print "  {} SNPs failed        ({})".format(pad(cls.max_heterozygosity_count), "heterozygosity")
+        print "  {} SNPs failed        ({})".format(pad(cls.min_fis_count), "min_fis")
+        print "  {} SNPs failed        ({})".format(pad(cls.max_fis_count), "max_fis")
+        print "  {} SNPs failed        ({})".format(pad(cls.max_snp_number_count), "max_snp_number")
+        print "-------------------------------------------------"
+        print "  {} SNPs ({} loci) in input file".format(pad(cls.total_snps_count), locus_counter)
         try:
-            print "  {}\tSNPs ({}%) filtered out".format(cls.total_filtered_count, str(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count))[0:5])
+            print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), str(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count))[0:5])
         except:
-            print "  {}\tSNPs ({}%) filtered out".format(cls.total_filtered_count, 100)
-        print "  {}\tSNPs retained".format(cls.total_kept_count)
-        print "----------------------------------------------------------"
+            print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), 100)
+        print "  {} SNPs ({} loci) retained".format(pad(cls.total_good_snps_count), total_good_loci)
+        print "================================================="
 
     def format_filters(self):
         """Format the flag information for printing in filter file
         """
         return "\t".join([
+                          str(self.max_allele_coverage),
                           str(self.min_presence),
                           str(self.maf_global),
                           str(self.maf_population),
@@ -174,7 +190,7 @@ def get_pop_info(line):
 
     l = [x.split("_")[0] for x in line.split("\t")[9:]]
     unique_pops = sorted(list(set(l)))
-    print "(" + str(len(unique_pops)) + " populations) <<<"
+    print "(" + str(len(unique_pops)) + " populations)"
     pop_dict = {}
 
     for p in unique_pops:
@@ -229,6 +245,20 @@ def write_locus(locus, handle):
         if snp.flags.pass_filters():
             handle.write("\t".join(snp.line) + "\n")
 
+def write_whitelist(locus, handle):
+    """Output ID of loci with good SNPs
+    """
+    global total_good_loci
+
+    for snp in locus:
+        passed = False
+        if snp.flags.pass_filters():
+            passed = True
+
+    if passed:
+        handle.write(str(snp.locus_id) + "\n")
+        total_good_loci += 1
+
 def median(lst):
     lst = sorted(lst)
     if len(lst) < 1:
@@ -237,6 +267,19 @@ def median(lst):
             return lst[((len(lst)+1)/2)-1]
     else:
             return float(sum(lst[(len(lst)/2)-1:(len(lst)/2)+1]))/2.0
+
+def pad(text, char=" ", min_length=6):
+    """Pad text with char to min_length
+    """
+    # Will crash if not possible
+    text = str(text)
+    char = str(char)
+
+    if len(text) >= min_length:
+        return text
+    else:
+        missing_length = min_length - len(text)
+        return missing_length * char + text
 
 ## Filter functions
 def test_min_allele_coverage(locus, pop_info, min_allele_coverage):
@@ -250,6 +293,28 @@ def test_min_allele_coverage(locus, pop_info, min_allele_coverage):
                 if sample.alt < min_allele_coverage or sample.ref < min_allele_coverage:
                     sample.genotype = "./."
                     Flags.min_allele_coverage_count += 1
+
+# Max imbalance
+def test_max_imbalance(locus, pop_info, max_imbalance):
+    """Test if each heterozygote's genotype has a low enough allelic imbalance
+    """
+    for snp in locus:
+        for sample in snp.samples:
+            if sample.genotype in ["0/1", "1/0"]:
+                if sample.imbalance > max_imbalance:
+                    sample.genotype = "./."
+                    Flags.max_imbalance_count += 1
+
+# Min likelihood
+def test_min_likelihood(locus, pop_info, min_likelihood):
+    """Test if each genotype's likelihood is high enough
+    """
+    for snp in locus:
+        for sample in snp.samples:
+            if sample.genotype != "./.":
+                if sample.likelihood < min_likelihood:
+                    sample.genotype = "./."
+                    Flags.min_likelihood_count += 1
 
 # Min presence
 def test_min_presence(locus, pop_info, min_presence, joker, percent):
@@ -295,7 +360,7 @@ def test_maf_global(locus, maf_global):
     for snp in locus:
         if snp.global_maf < maf_global:
             snp.flags.maf_global = False
-            Flags.maf_global_count += 1
+            Flags.min_maf_global_count += 1
 
 # Maf population
 def test_maf_population(locus, pop_info, maf_population):
@@ -317,9 +382,10 @@ def test_maf_population(locus, pop_info, maf_population):
                     a1, a2 = sample.genotype.split("/")
                     allele_count[a1] += 1
                     allele_count[a2] += 1
-            minimum = min(allele_count.values())
-            total = sum(allele_count.values())
+
             if len(allele_count.values()) > 1:
+                minimum = min(allele_count.values())
+                total = sum(allele_count.values())
                 maf = float(minimum) / total
             else:
                 maf = 0
@@ -329,7 +395,7 @@ def test_maf_population(locus, pop_info, maf_population):
 
         if pops_passing < 1:
             snp.flags.maf_population = False
-            Flags.maf_population_count += 1
+            Flags.min_maf_population_count += 1
 
 # Heterozygosity
 def test_heterozygosity(locus, pop_info, max_hetero, max_hetero_joker):
@@ -354,14 +420,17 @@ def test_heterozygosity(locus, pop_info, max_hetero, max_hetero_joker):
                     if sample.genotype in ["0/1", "1/0"]:
                         num_hetero += 1
 
-            proportion = float(num_hetero) / num_genotypes
+            if num_genotypes > 0:
+                proportion = float(num_hetero) / num_genotypes
+            else:
+                proportion = 0.0
 
             if proportion <= max_hetero:
                 pops_passing += 1
 
         if pops_passing < (len(populations) - max_hetero_joker):
             snp.flags.heterozygosity = False
-            Flags.heterozygosity_count += 1
+            Flags.max_heterozygosity_count += 1
 
 # Fis
 def test_fis(locus, pop_info, min_fis, max_fis):
@@ -386,21 +455,24 @@ def test_fis(locus, pop_info, min_fis, max_fis):
             for sample in populations[pop]:
                 if sample.genotype != "./.":
                     num_samples += 1
-                    if sample.genotype in ["1/0", "0/1"]:
+                    if sample.genotype in ["0/1", "1/0"]:
                         num_hetero += 1
                     a1, a2 = sample.genotype.split("/")
                     allele_count[a1] += 1
                     allele_count[a2] += 1
 
-            num_alleles = num_samples * 2.0
-            p = float(allele_count["0"]) / num_alleles
-            q = float(allele_count["1"]) / num_alleles
-            expected_hetero_freq = 2.0 * p * q
-            observed_hetero_freq = float(num_hetero) / num_samples
+            if num_samples > 0:
+                num_alleles = num_samples * 2.0
+                p = float(allele_count["0"]) / num_alleles
+                q = float(allele_count["1"]) / num_alleles
+                expected_hetero_freq = 2.0 * p * q
+                observed_hetero_freq = float(num_hetero) / num_samples
 
-            try:
-                fis = (expected_hetero_freq - observed_hetero_freq) / expected_hetero_freq
-            except:
+                try:
+                    fis = (expected_hetero_freq - observed_hetero_freq) / expected_hetero_freq
+                except:
+                    fis = 0.0
+            else:
                 fis = 0.0
 
             # Modify flag if pop fails min_fis
@@ -458,8 +530,12 @@ if __name__ == '__main__':
     parser.add_argument("-o", "--output_file", type=str, required=True,
             help = "output VCF file")
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
-            help = "minimum allele depth to keep a genotype (otherwise modified to '0/0') (int, default: 0)")
-    parser.add_argument("-C", "--max_allele_coverage", type=int, default=0,
+            help = "minimum allele depth to keep a genotype (or modified to '0/0') (int, default: 0)")
+    parser.add_argument("-l", "--min_likelihood", type=float, default=1000.0,
+            help = "minimum genotype likelihood to keep a genotype (or modified to '0/0') (float, 0.0 or more, default 1000.0)")
+    parser.add_argument("-I", "--max_imbalance", type=float, default=1000.0,
+            help = "maximum coverage fold change among alleles in heterozygotes (or modified to '0/0') (float, 0.0 or more, default 1000.0)")
+    parser.add_argument("-C", "--max_allele_coverage", type=int, default=1000,
             help = "maximum median allele depth to keep a SNP (int, default: 10000)")
     parser.add_argument("-p", "--min_presence", type=int, default=0,
             help = "minimum number of individuals per population to keep locus (int, default: 0)")
@@ -471,40 +547,38 @@ if __name__ == '__main__':
             help = "minimum minor allele frequency that must be respected in all populations to retain locus (float, 0 to 1, default: 0)")
     parser.add_argument("-A", "--maf_population", type=float, default=0.0,
             help = "minimum minor allele frequency that must be found in at least one population to retain locus (float, 0 to 1, default: 0)")
-    parser.add_argument("-H", "--max_hetero", type=float, default=1,
+    parser.add_argument("-H", "--max_hetero", type=float, default=1.0,
             help = "maximum proportion of heterozygous individuals (float, 0 to 1, default: 1)")
     parser.add_argument("-y", "--max_hetero_joker", type=int, default=0,
             help = "number of populations where it is permitted that the -H threshold does not pass, (int, 0 or more, default: 0")
-
-    # Not implemented yet
-    parser.add_argument("-f", "--min_fis", type=float, default=-1,
+    parser.add_argument("-f", "--min_fis", type=float, default=-1.0,
             help = "minimum Fis value (float, -1 to 1, default: -1)")
-    parser.add_argument("-F", "--max_fis", type=float, default=1,
+    parser.add_argument("-F", "--max_fis", type=float, default=1.0,
             help = "maximum Fis value (float, -1 to 1, default: 1)")
     parser.add_argument("-z", "--fis_joker", type=int, default=0,
             help = "number of populations where it is permitted that the -f or -F thresholds do not pass, (int, 0 or more, default: 0")
-
     parser.add_argument("-s", "--max_snp_number", type=int, default=999,
-            help = "maximum number of SNPs per locus (int, 0 or more, default: 999)")
+            help = "maximum number of SNPs per locus (int, 1 or more, default: 999)")
     args = parser.parse_args()
 
     # Assert proper values for parameters
     assert args.max_snp_number > 0, "max_snp_number must be a non-null integer"
     assert 0 <= args.min_allele_coverage <= 100, "min_allele_coverage must be an integer between 0 and 100"
-    assert 0 <= args.max_allele_coverage <= 1000000, "max_allele_coverage must be an integer between 0 and 100"
+    assert args.min_likelihood >= 0.0, "min_likelihood must be a floating point number equal to or greater than 0.0"
+    assert args.max_imbalance >= 0.0, "max_imbalance must be a floating point number equal to or greater than 0.0"
+    assert args.max_allele_coverage >= 1, "max_allele_coverage must be an integer equal to or greater than 1"
     assert 0 <= args.min_presence <= 100, "min_presence must be an integer between 0 and 100" 
     assert args.min_presence_joker_populations >= 0, "min_presence_joker_populations must be an integer that is 0 or more"
-    assert 0 <= args.max_hetero <= 1, "max_hetero must be a decimal between 0 and 1"
-    assert 0 <= args.maf_global <= 1.0, "maf_global must be a decimal between 0 and 1.0"
-    assert 0 <= args.maf_population <= 1.0, "maf_population must be a decimal between 0 and 1.0"
-
-    # Not implemented yet
-    assert -1 <= args.min_fis <= 1, "min_fis must be a decimal between -1 and 1"
-    assert -1 <= args.max_fis <= 1, "max_fis must be a decimal between -1 and 1"
+    assert 0 <= args.max_hetero <= 1, "max_hetero must be a floating point number between 0 and 1"
+    assert 0 <= args.maf_global <= 1.0, "maf_global must be a floating point number between 0 and 1.0"
+    assert 0 <= args.maf_population <= 1.0, "maf_population must be a floating point number between 0 and 1.0"
+    assert -1 <= args.min_fis <= 1, "min_fis must be a floating point number between -1 and 1"
+    assert -1 <= args.max_fis <= 1, "max_fis must be a floating point number between -1 and 1"
+    assert args.max_snp_number >= 1, "max_snp_number must be an integer equal to or greater than 1"
 
     # Get header from VCF
     header = []
-    print ">>> Treating: " + args.input_file, 
+    print "Treating: " + args.input_file, 
     with open(args.input_file) as in_file:
         for line in in_file:
             l = line.strip()
@@ -517,85 +591,66 @@ if __name__ == '__main__':
                 break
 
     # Open output files handles
-    with open(args.output_file, "w") as out_file:
-        with open(args.output_file + "_filters.tsv", "w") as filters_file:
+    out_file = open (args.output_file, "w")
+    filters_file = open(args.output_file + "_filters.tsv", "w")
+    whitelist_file = open(args.output_file + "_whitelist.txt", "w")
 
-            # Printing filtered CSV header
-            out_file.writelines(header)
+    # Writing header to filtered CSV file
+    out_file.writelines(header)
 
-            # Printing filters file header
-            filters_file.write("\t".join([
-                                          "Position",
-                                          "ID",
-                                          "MinPresence",
-                                          "MafGlobal",
-                                          "MafPopulation",
-                                          "Hetero",
-                                          "FisMin",
-                                          "FisMax",
-                                          "MaxSnpNumber"
-                                         ]) + "\n")
+    # Writing header to filters report file
+    filters_file.write("\t".join(["Position", "ID", "MaxAlleleCoverage",
+                                  "MinPresence", "MafGlobal", "MafPopulation",
+                                  "Hetero", "FisMin", "FisMax",
+                                  "MaxSnpNumber"]) + "\n")
 
-            locus_counter = 1
-            report_every = 10000
-            max_loci = 9999999999
-            #max_loci = 100
+    # Reporting progress
+    report_every = 999
 
-            # Iterate over the loci and filter the SNPs
-            for locus in locus_iterator(args.input_file):
+    # For debugging purposes
+    locus_counter = 1
+    max_loci = 9999999999
+    max_loci = 100
 
-                if locus_counter >= max_loci:
-                    break
-                else:
-                    locus_counter += 1
+    # Global variable used by Flags.report_filters
+    total_good_loci = 0
 
-                if locus_counter % report_every == 0:
-                    print "  Treating locus number: " + str(locus_counter)
+    # Iterate over the loci and filter the SNPs
+    for locus in locus_iterator(args.input_file):
 
-                # Run filters
-                # The filter functions automatically update SNP flags
-                test_min_allele_coverage(
-                                         locus,
-                                         pop_info,
-                                         args.min_allele_coverage
-                                        )
+        # For debugging purposes
+        if locus_counter >= max_loci:
+            break
+        else:
+            locus_counter += 1
 
-                test_min_presence(
-                                  locus,
-                                  pop_info,
-                                  args.min_presence,
-                                  args.min_presence_joker_populations,
-                                  args.use_percent
-                                 )
-                
-                test_maf_global(locus, args.maf_global)
+        # Reporting progress
+        if locus_counter % report_every == 0:
+            print "  Treating locus number: " + str(locus_counter)
 
-                test_maf_population(
-                                    locus,
-                                    pop_info,
-                                    args.maf_population
-                                   )
+        # Run filters
+        # The filter functions automatically update SNP flags
+        test_min_allele_coverage(locus, pop_info, args.min_allele_coverage)
+        test_max_imbalance(locus, pop_info, args.max_imbalance)
+        test_min_likelihood(locus, pop_info, args.min_likelihood)
+        test_max_allele_coverage(locus, pop_info, args.max_allele_coverage)
 
-                test_heterozygosity(
-                                    locus,
-                                    pop_info,
-                                    args.max_hetero,
-                                    args.max_hetero_joker
-                                   )
+        test_min_presence(locus, pop_info, args.min_presence,
+                          args.min_presence_joker_populations, args.use_percent)
+        test_maf_global(locus, args.maf_global)
+        test_maf_population(locus, pop_info, args.maf_population)
+        test_heterozygosity(locus, pop_info, args.max_hetero, args.max_hetero_joker)
+        test_fis(locus, pop_info, args.min_fis, args.max_fis)
+        test_max_snp_number(locus, pop_info, args.max_snp_number)
 
-                test_fis(locus, pop_info, args.min_fis, args.max_fis)
-
-                test_max_allele_coverage(
-                                         locus,
-                                         pop_info,
-                                         args.max_allele_coverage
-                                        )
-
-                test_max_snp_number(locus, pop_info, args.max_snp_number)
-
-                # Write output
-                write_filters(locus, filters_file)
-                write_locus(locus, out_file)
+        # Write output
+        write_filters(locus, filters_file)
+        write_locus(locus, out_file)
+        write_whitelist(locus, whitelist_file)
 
     # Print filtering report
-    Flags.report_filters(locus_counter)
+    Flags.report_filters(locus_counter, total_good_loci)
+
+    out_file.close()
+    filters_file.close()
+    whitelist_file.close()

@@ -1,13 +1,7 @@
 # Stacks Workflow development
 Features and documentation updates
 
-## Filters
-# TODO list for 05_filter_vcf.py
-* Add filters:
-  - Maximum allele coverage
-  - Genotype likelihood threshold
-  - Allele imbalance (correct genotypes?)
-  * Output a Whitelist (to rerun populations)
+## Filters (`05_filter_vcf.py`)
 * Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
 . (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 . (?) Remove individuals with more than 2 haplotypes in haplotype file
