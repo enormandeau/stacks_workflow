@@ -147,7 +147,7 @@ class Flags(object):
         """Print report about the numbers of SNPs that didn't pass each of the
         filters
         """
-        print "================================================="
+        print "==================================================="
         print "  {} Genotypes removed  ({})".format(pad(cls.min_allele_coverage_count), "min_allele_coverage")
         print "  {} Genotypes removed  ({})".format(pad(cls.max_imbalance_count), "max_imbalance")
         print "  {} Genotypes removed  ({})".format(pad(cls.min_likelihood_count), "min_likelihood")
@@ -159,14 +159,14 @@ class Flags(object):
         print "  {} SNPs failed        ({})".format(pad(cls.min_fis_count), "min_fis")
         print "  {} SNPs failed        ({})".format(pad(cls.max_fis_count), "max_fis")
         print "  {} SNPs failed        ({})".format(pad(cls.max_snp_number_count), "max_snp_number")
-        print "-------------------------------------------------"
+        print "---------------------------------------------------"
         print "  {} SNPs ({} loci) in input file".format(pad(cls.total_snps_count), locus_counter)
         try:
             print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), str(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count))[0:5])
         except:
             print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), 100)
         print "  {} SNPs ({} loci) retained".format(pad(cls.total_good_snps_count), total_good_loci)
-        print "================================================="
+        print "==================================================="
 
     def format_filters(self):
         """Format the flag information for printing in filter file
@@ -529,6 +529,8 @@ if __name__ == '__main__':
             help = "input VCF file")
     parser.add_argument("-o", "--output_file", type=str, required=True,
             help = "output VCF file")
+    parser.add_argument("-g", "--graphs", action="store_true",
+            help = "produce parameter distribution graphs instead of filtering")
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
             help = "minimum allele depth to keep a genotype (or modified to '0/0') (int, default: 0)")
     parser.add_argument("-l", "--min_likelihood", type=float, default=1000.0,
@@ -576,7 +578,7 @@ if __name__ == '__main__':
     assert -1 <= args.max_fis <= 1, "max_fis must be a floating point number between -1 and 1"
     assert args.max_snp_number >= 1, "max_snp_number must be an integer equal to or greater than 1"
 
-    # Get header from VCF
+    # Get header from VCF and population information
     header = []
     print "Treating: " + args.input_file, 
     with open(args.input_file) as in_file:
@@ -589,6 +591,62 @@ if __name__ == '__main__':
                 pop_info = get_pop_info(l)
             else:
                 break
+
+    # Producing graphs
+    if args.graphs:
+        # Use matplotlib vs. export data for R?
+
+        print "Producing beautiful graphs"
+
+        # Defining parameters to gather for graphs
+        parameters = "depth allele_coverage_homo allele_coverage_hetero likelihood imbalance presence maf fis number_snps".split(" ")
+
+        graph_dict = {}
+        for pop in pop_info:
+            graph_dict[pop] = {}
+            for param in parameters:
+                graph_dict[pop][param] = []
+
+        print graph_dict
+
+        # Reporting progress
+        report_every = 100
+
+        # For debugging purposes
+        locus_counter = 1
+        max_loci = 9999999999
+        max_loci = 200
+
+        # Iterate over the loci and filter the SNPs
+        for locus in locus_iterator(args.input_file):
+
+            # For debugging purposes
+            if locus_counter >= max_loci:
+                break
+            else:
+                locus_counter += 1
+
+            # Reporting progress
+            if locus_counter % report_every == 0:
+                print "  Treating locus number: " + str(locus_counter)
+
+            ############################################
+            # Collect data by population for graphs
+            # Refactor calculating parameters as needed
+            ############################################
+            # depth
+            # allele_coverage_homo
+            # allele_coverage_hetero
+            # likelihood
+            # imbalance
+            # presence
+            # maf
+            # fis
+            # number_snps
+            ############################################
+
+        # Finished producing graphs, quiting
+        sys.exit(0)
 
     # Open output files handles
     out_file = open (args.output_file, "w")
@@ -605,7 +663,7 @@ if __name__ == '__main__':
                                   "MaxSnpNumber"]) + "\n")
 
     # Reporting progress
-    report_every = 999
+    report_every = 100
 
     # For debugging purposes
     locus_counter = 1
