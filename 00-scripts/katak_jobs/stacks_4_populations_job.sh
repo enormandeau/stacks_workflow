@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N AX_4_population
+#$ -N 4population
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 4

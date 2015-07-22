@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N OM_8_populations_rx
+#$ -N 8populations_rx
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 4

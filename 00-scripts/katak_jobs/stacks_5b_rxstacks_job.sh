@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N AX_5b_rxstacks
+#$ -N 5brxstacks
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 1

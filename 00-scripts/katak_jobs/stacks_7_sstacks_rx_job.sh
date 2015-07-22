@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N OM_7_sstacks_rx
+#$ -N 7sstacks_rx
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 4
