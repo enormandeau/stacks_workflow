@@ -8,11 +8,13 @@ properly at that time.
 
 # Import
 from collections import defaultdict
+import subprocess
 import argparse
 import pprint
 import numpy
 import math
 import sys
+import os
 
 # Classes
 class Sample(object):
@@ -311,23 +313,18 @@ def get_depth_data(graph_dict, locus, pop_info):
     """Get min, median and max depth by pop and globally
     """
     for snp in locus.snps:
-        # By pop
         for pop in pop_info:
+            # By pop
             samples = [snp.samples[i] for i in pop_info[pop]]
             minimum = min([x.depth for x in samples])
-            med = median([x.depth for x in samples])
+            med = int(median([x.depth for x in samples]))
             maximum = max([x.depth for x in samples])
-            graph_dict[pop]["minDepth"][minimum] += 1
             graph_dict[pop]["medDepth"][med] += 1
             graph_dict[pop]["maxDepth"][maximum] += 1
 
-        # Globally
-        minimum = min([x.depth for x in snp.samples])
-        med = median([x.depth for x in snp.samples])
-        maximum = max([x.depth for x in snp.samples])
-        graph_dict["global"]["minDepth"][minimum] += 1
-        graph_dict["global"]["medDepth"][med] += 1
-        graph_dict["global"]["maxDepth"][maximum] += 1
+            # Globally
+            graph_dict["global"]["medDepth"][med] += 1
+            graph_dict["global"]["maxDepth"][maximum] += 1
         break
 
 # Max allelic_imbalance
@@ -349,7 +346,7 @@ def get_allelic_imbalance_data(graph_dict, locus, pop_info):
         for pop in pop_info:
             samples = [snp.samples[i] for i in pop_info[pop]]
             imbalance = [x.allelic_imbalance for x in samples if x.allelic_imbalance != 0.0]
-            imbalance = [round(math.log(x, 2), 2) for x in imbalance]
+            imbalance = [round(math.log(x, 2), 3) for x in imbalance]
             for i in imbalance:
                 graph_dict[pop]["allImbalance"][i] += 1
                 graph_dict["global"]["allImbalance"][i] += 1
@@ -373,7 +370,7 @@ def get_genotype_likelihood_data(graph_dict, locus, pop_info):
         for pop in pop_info:
             samples = [snp.samples[i] for i in pop_info[pop]]
             likelihood = [x.genotype_likelihood for x in samples]
-            likelihood = [round(x, 1) for x in likelihood]
+            likelihood = [round(x, 3) for x in likelihood]
             for i in likelihood:
                 graph_dict[pop]["genLikelihood"][i] += 1
                 graph_dict["global"]["genLikelihood"][i] += 1
@@ -432,7 +429,7 @@ def get_presence_data(graph_dict, locus, pop_info):
                 num_samples += 1
                 if sample.genotype != "./.":
                     passing += 1
-            proportion_passing = round(float(passing) / num_samples, 3)
+            proportion_passing = round(float(passing) / num_samples, 4)
             graph_dict[pop]["presence"][proportion_passing] += 1
             graph_dict["global"]["presence"][proportion_passing] += 1
 
@@ -449,7 +446,7 @@ def get_maf_global_data(graph_dict, locus, pop_info):
     """Get maf data globally
     """
     for snp in locus.snps:
-        maf = round(snp.global_maf, 2)
+        maf = round(snp.global_maf, 3)
         graph_dict["global"]["mafGlobal"][maf] += 1
 
 
@@ -510,7 +507,7 @@ def get_maf_population_data(graph_dict, locus, pop_info):
             if len(allele_count.values()) > 1:
                 minimum = min(allele_count.values())
                 total = sum(allele_count.values())
-                maf = round(float(minimum) / total, 2)
+                maf = round(float(minimum) / total, 3)
             else:
                 maf = 0.00
 
@@ -577,8 +574,8 @@ def get_heterozygosity_data(graph_dict, locus, pop_info):
             else:
                 proportion = 0.0
 
-            graph_dict[pop]["heterozygosity"][round(proportion, 2)] += 1
-            graph_dict["global"]["heterozygosity"][round(proportion, 2)] += 1
+            graph_dict[pop]["heterozygosity"][round(proportion, 3)] += 1
+            graph_dict["global"]["heterozygosity"][round(proportion, 3)] += 1
 
 # Fis
 def test_fis(locus, pop_info, min_fis, max_fis):
@@ -677,8 +674,8 @@ def get_fis_data(graph_dict, locus, pop_info):
             else:
                 fis = 0.0
                 
-            graph_dict[pop]["fis"][round(fis, 2)] += 1
-            graph_dict["global"]["fis"][round(fis, 2)] += 1
+            graph_dict[pop]["fis"][round(fis, 3)] += 1
+            graph_dict["global"]["fis"][round(fis, 3)] += 1
 
 # Maximum allele coverage
 def test_max_allele_coverage(locus, pop_info, max_allele_coverage):
@@ -716,18 +713,18 @@ if __name__ == '__main__':
     # Parsing user input with 'argparse'
     parser = argparse.ArgumentParser(description=
             """Filter SNPs from STACKS VCF result file
-            (WARNING! will not work properly with STACKS versions older to v1.30)
+            (WARNING! Will not work properly with stacks versions older to v1.30)
             """)
 
     parser.add_argument("-i", "--input_file", type=str, required=True,
             help = "input VCF file")
     parser.add_argument("-o", "--output_file", type=str, required=True,
-            help = "output VCF file")
+            help = "output VCF file or name of directory if you use -g option")
     parser.add_argument("-g", "--graphs", action="store_true",
             help = "produce parameter distribution graphs instead of filtering")
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
             help = "minimum allele depth to keep a genotype (or modified to '0/0') (int, default: 0)")
-    parser.add_argument("-l", "--min_genotype_likelihood", type=float, default=1000.0,
+    parser.add_argument("-l", "--min_genotype_likelihood", type=float, default=-1000.0,
             help = "minimum genotype likelihood to keep a genotype (or modified to '0/0') (float, 0.0 or more, default 1000.0)")
     parser.add_argument("-I", "--max_allelic_imbalance", type=float, default=1000.0,
             help = "maximum coverage fold change among alleles in heterozygotes (or modified to '0/0') (float, 0.0 or more, default 1000.0)")
@@ -762,7 +759,6 @@ if __name__ == '__main__':
     # Assert proper values for parameters
     assert args.max_snp_number > 0, "max_snp_number must be a non-null integer"
     assert 0 <= args.min_allele_coverage <= 100, "min_allele_coverage must be an integer between 0 and 100"
-    assert args.min_genotype_likelihood >= 0.0, "min_genotype_likelihood must be a floating point number equal to or greater than 0.0"
     assert args.max_allelic_imbalance >= 0.0, "max_allelic_imbalance must be a floating point number equal to or greater than 0.0"
     assert args.max_allele_coverage >= 1, "max_allele_coverage must be an integer equal to or greater than 1"
     assert 0 <= args.min_presence <= 100, "min_presence must be an integer between 0 and 100" 
@@ -790,14 +786,13 @@ if __name__ == '__main__':
 
     # Producing graphs
     if args.graphs:
-        # Use matplotlib vs. export data for R?
-        print "Collecting data to produce distribution graphs..."
+        print "  Collecting data to produce distribution graphs..."
 
         # Initializing dictionary
         graph_dict = {}
         for pop in pop_info.keys() + ["global"]:
             graph_dict[pop] = {}
-            graph_dict[pop]["minDepth"] = defaultdict(int)
+            #graph_dict[pop]["minDepth"] = defaultdict(int)
             graph_dict[pop]["medDepth"] = defaultdict(int)
             graph_dict[pop]["maxDepth"] = defaultdict(int)
             graph_dict[pop]["allImbalance"] = defaultdict(int)
@@ -813,10 +808,9 @@ if __name__ == '__main__':
         report_every = 100
         locus_counter = 1
         max_loci = 9999999999
-        #max_loci = 1000
+        #max_loci = 100
 
-        # Iterate over the loci and filter the SNPs
-        #graph_data_file = open(args.output_file + "_graph_data.tsv", "w")
+        # Iterate over the loci and filter the snps
         for locus in locus_iterator(args.input_file):
 
             # For debugging purposes
@@ -828,7 +822,7 @@ if __name__ == '__main__':
             # Reporting progress
             if not args.quiet:
                 if locus_counter % report_every == 0:
-                    print "  Treating locus number: " + str(locus_counter)
+                    print "    Treating locus number: " + str(locus_counter)
 
             # Getting graph data
             get_depth_data(graph_dict, locus, pop_info)
@@ -841,12 +835,36 @@ if __name__ == '__main__':
             get_fis_data(graph_dict, locus, pop_info)
             get_numSNP_data(graph_dict, locus, pop_info)
 
-        # Write graph data
-        #graph_data_file.writelines(graph_data)
-        #graph_data_file.close()
-        pprint.pprint(graph_dict)
+        # Print graph_dict for debugging
+        #pprint.pprint(graph_dict)
+
+        # Create folder with graphs
+        directory = args.output_file
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        # Exporting graph data
+        graph_file = os.path.join(directory, "graph_data.tsv")
+        graph_data_temp = []
+        with open(graph_file, "w") as gfile:
+            for pop in graph_dict:
+                for param in graph_dict[pop]:
+                    for k,v in graph_dict[pop][param].items():
+                        graph_data_temp.append("\t".join([param, pop, str(k), str(v)]) + "\n")
+
+            graph_data_temp.sort()
+
+            gfile.write("\t".join(["Parameter", "Population", "Value", "Count"]) + "\n")
+            for g in graph_data_temp:
+                gfile.write(g)
 
         # Finished producing graphs, quiting
+        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/distribution_graphs.r\")'",
+                shell=True)
+        with open(".temp_graph_folder", "w") as gf:
+            gf.write(directory + "\n")
+
+        print("Distribution graphs were writen in folder:\n    '{}'".format(directory))
         sys.exit(0)
 
     # Filtering
@@ -855,7 +873,7 @@ if __name__ == '__main__':
     filters_file = open(args.output_file + "_filters.tsv", "w")
     whitelist_file = open(args.output_file + "_whitelist.txt", "w")
 
-    # Writing header to filtered CSV file
+    # Writing header to filtered VCF file
     out_file.writelines(header)
 
     # Writing header to filters report file
