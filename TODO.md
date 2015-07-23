@@ -1,8 +1,17 @@
 # Stacks Workflow development
 Features and documentation updates
 
+## STACKS v1.33
+- Create new branch
+  - Read changelog
+  - Validate all the options are the same as in `stacks_workflow`
+  - Modify as needed
+  - Merge when v1.33 is out
+
 ## Filters (`05_filter_vcf.py`)
 * Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
+  - Create and improve graphs
+  - Update documentation
 . (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 . (?) Remove individuals with more than 2 haplotypes in haplotype file
 . Remove SNPs with more than 2 alleles (not sure how to do this)
