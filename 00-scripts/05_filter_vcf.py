@@ -725,7 +725,7 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
             help = "minimum allele depth to keep a genotype (or modified to '0/0') (int, default: 0)")
     parser.add_argument("-l", "--min_genotype_likelihood", type=float, default=-1000.0,
-            help = "minimum genotype likelihood to keep a genotype (or modified to '0/0') (float, 0.0 or more, default 1000.0)")
+            help = "minimum genotype likelihood to keep a genotype (or modified to '0/0') (float, 0.0 or more, default -1000.0)")
     parser.add_argument("-I", "--max_allelic_imbalance", type=float, default=1000.0,
             help = "maximum coverage fold change among alleles in heterozygotes (or modified to '0/0') (float, 0.0 or more, default 1000.0)")
     parser.add_argument("-C", "--max_allele_coverage", type=int, default=1000,
