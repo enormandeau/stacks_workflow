@@ -2,6 +2,8 @@
 # Testing the full stacks_workflow pipeline
 # WARNING! Do not use this script to run your analyses!
 
+echo "Long test should take approximately 1 hour to run"
+
 # Clean directories
 rm 01-info_files/barcodes.txt 2> /dev/null
 rm 01-info_files/lane_info.txt 2> /dev/null

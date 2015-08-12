@@ -37,9 +37,9 @@ p="-p 1"            # Minimum number of populations a locus must be present
                     # in order to process a locus
 m="-m 6"            # Specify a minimum stack depth required for individuals
                     # at a locus
-a="-a 0.0"         # Specify a minimum minor allele frequency required
-                    # before calculating Fst at a locus (0 < a < 0.5)
 f="-f p_value"      # Specify a correction to be applied to Fst values:
+min_maf="-a 0.0"         # Specify a minimum minor allele frequency required
+                    # before calculating Fst at a locus (0 < a < 0.5)
                     # 'p_value', 'bonferroni_win', or 'bonferroni_gen'
 p_value_cutoff="--p_value_cutoff 0.1"  # Required p-value to keep an Fst
                                         # measurement (0.05 by default). Also
@@ -111,14 +111,13 @@ vcf_haplotypes="--vcf_haplotypes" # Output haplotypes in Variant Call Format (VC
 
 populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
     $merge_sites $merge_prune_lim \
-    $r $p $m $a $f $p_value_cutoff $lnl_lim $write_single_snp $write_random_snp \
-    $fstats \
-    $k $window_size \
-    $bootstrap $bootstrap_pifis $bootstrap_fst $bootstrap_div \
-    $bootstrap_phist $bootstrap_reps $bootstrap_wl \
-    $genomic $fasta $vcf $vcf_haplotypes $genepop $structure $phase $fastphase \
-    $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
-    $verbose $log_fst_comp 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_8_populations_rx.log
+    $r $p $m $f $min_maf $p_value_cutoff $lnl_lim $write_single_snp \
+    $write_random_snp $fstats $k $window_size $bootstrap $bootstrap_pifis \
+    $bootstrap_fst $bootstrap_div $bootstrap_phist $bootstrap_reps \
+    $bootstrap_wl $genomic $fasta $vcf $vcf_haplotypes $genepop $structure
+    $phase $fastphase $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
+    $verbose $log_fst_comp 2>&1 |
+        tee 98-log_files/"$TIMESTAMP"_stacks_4_populations.log
 
 # Copy script as it was run
 SCRIPT=$0

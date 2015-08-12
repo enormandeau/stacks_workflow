@@ -14,6 +14,8 @@ n="-n 0"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
 p="-p 16"           # p: enable parallel execution with num_threads threads
 #catalog="--catalog PATH"
+#k_len 31           # k_len: specify k-mer size for matching between catalog loci
+                    # (automatically calculated by default).
 #report_mmatches="--report_mmatches"    # --report_mmatches: report query loci
                     #   that match more than one catalog locus
 

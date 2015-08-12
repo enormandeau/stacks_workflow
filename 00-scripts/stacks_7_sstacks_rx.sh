@@ -7,7 +7,6 @@ p="-p 16"                  # p: enable parallel execution with num_threads
                            #   threads
 b="-b 1"                   # b: MySQL ID of this batch
 c="-c 05-stacks_rx/batch_1"   # c: TSV file from which to load the catalog loci
-#r="-r"                    # r: Load the TSV file of a single sample instead of a catalog
 o="-o 05-stacks_rx"           # o: output path to write results
 #g="-g"                    # g: base matching on genomic location, not sequence
                            #   identity

@@ -2,9 +2,6 @@
 Features and documentation updates
 
 ## STACKS v1.34
-- Read changelog of 1.33 and 1.34
-- Validate all the options are the same as in `stacks_workflow`
-- Modify as needed
 - Create v1.34 tag and push
 
 ## Filters (`05_filter_vcf.py`)
