@@ -88,7 +88,11 @@ with the following command:
 
 .. code-block:: bash
 
- ./00-scripts/01_cutadapt.sh
+ ./00-scripts/01_cutadapt.sh numCPUs
+
+Where `numCPUs` is the number of CPUs you wish to use in parallel. If you do
+not put a number, the script will use only one CPU (for backward
+compatibility).
 
 Scan the cutadapt logs
 ----------------------
