@@ -13,6 +13,7 @@ population_map.txt
 *.fastq.gz*
 *.fq
 *.fq.gz
+*.js
 *.log
 *.odt
 *.pickle
@@ -22,6 +23,7 @@ population_map.txt
 *.temp*
 *.tsv
 *.tsv.gz
+*.ttf
 *.vcf
 */population_map*
 */sample_information*
