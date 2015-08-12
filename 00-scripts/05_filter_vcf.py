@@ -859,10 +859,11 @@ if __name__ == '__main__':
                 gfile.write(g)
 
         # Finished producing graphs, quiting
-        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/distribution_graphs.r\")'",
-                shell=True)
         with open(".temp_graph_folder", "w") as gf:
             gf.write(directory + "\n")
+
+        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/distribution_graphs.r\")'",
+                shell=True)
 
         print("Distribution graphs were writen in folder:\n    '{}'".format(directory))
         sys.exit(0)
