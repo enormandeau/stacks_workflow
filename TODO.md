@@ -1,12 +1,9 @@
 # Stacks Workflow development
 Features and documentation updates
 
-## STACKS v1.34
-- Create v1.34 tag and push
-
-## Filters (`05_filter_vcf.py`)
-* Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
-  - Create and improve graphs
+## Filters
+* Distribution graphs
+  - Improve graphs
   - Update documentation
 . (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 . (?) Remove individuals with more than 2 haplotypes in haplotype file
@@ -15,15 +12,14 @@ Features and documentation updates
 ## Reference genome
 * Revive `stacks_1b_pstacks.sh`
 * Test genome assisted STACKS
-  - Use mapping options that work with Illumina AND Ion Proton
+  - Use mapping options that work well with Illumina AND Ion Proton
 
 ## Paralelization
 - Paralelize long steps that can use only one CPU
-  * Cutadapt
 . Give sstacks all samples at once (faster since catalogue is read only once)
 
 ## Data preparation
-- FastQC
+* FastQC
   - FastQC on raw data (use small subset)
   - FastQC on cleaned data (use small subset)
   . Installing FastQC on MacOS
