@@ -1,12 +1,11 @@
 # Stacks Workflow development
 Features and documentation updates
 
-## STACKS v1.33
-- Create new branch
-  - Read changelog
-  - Validate all the options are the same as in `stacks_workflow`
-  - Modify as needed
-  - Merge when v1.33 is out
+## STACKS v1.34
+- Read changelog of 1.33 and 1.34
+- Validate all the options are the same as in `stacks_workflow`
+- Modify as needed
+- Create v1.34 tag and push
 
 ## Filters (`05_filter_vcf.py`)
 * Add figures (eg: distribution of parameters by pop, MAF, He, Fis, GL, nbSNPs)
