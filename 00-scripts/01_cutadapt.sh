@@ -1,22 +1,23 @@
 #!/bin/bash
 # Removing adapters using cutadapt
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
+NCPU=$1
+
+if [[ -z "$NCPU" ]]
+then
+    NCPU=1
+fi
 
 # Create directory for untrimmed files
 mkdir 02-raw/trimmed 2>/dev/null
 
-for i in $(ls -1 02-raw/*.fastq.gz)
-do
-    name=$(basename $i)
-    echo "--- Cutadapt ---"
-    echo "Name: $name"
-    echo
-    cutadapt -a file:01-info_files/adapters.fasta \
-        -o 02-raw/trimmed/"$name" \
+rm 98-log_files/"$TIMESTAMP"_01_cutadapt"${i%.fastq.gz}".log 2> /dev/null
+ls -1 02-raw/*.fastq.gz |
+parallel -j $NCPU cutadapt -a file:01-info_files/adapters.fasta \
+        -o 02-raw/trimmed/{/} \
         -e 0.2 \
         -m 50 \
-        "$i" 2>&1 | tee 98-log_files/"$TIMESTAMP"_01_cutadapt"${i%.fastq.gz}".log
-done
+        {} '2>&1' '>>' 98-log_files/"$TIMESTAMP"_01_cutadapt"${i%.fastq.gz}".log
 
 # Copy script as it was run
 SCRIPT=$0
