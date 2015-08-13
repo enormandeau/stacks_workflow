@@ -2,7 +2,7 @@
 # Testing the full stacks_workflow pipeline
 # WARNING! Do not use this script to run your analyses!
 
-echo "Mini test should take approximately 1 minute to run"
+echo "Mini test should take approximately 1m 15sec to run"
 
 # Clean directories
 rm 01-info_files/barcodes.txt 2> /dev/null

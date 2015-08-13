@@ -262,6 +262,7 @@ def write_whitelist(locus, handle):
     """Output ID of loci with good SNPs
     """
     global total_good_loci
+    passed = False
 
     for snp in locus.snps:
         passed = False
