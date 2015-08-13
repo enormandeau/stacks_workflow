@@ -13,19 +13,32 @@ for (param in levels(data$Parameter)) {
     xmax = max(a[,3])
     xmin = min(a[,3])
     num.bins = 50
-    if (param == "numSNP") { num.bins = xmax - xmin + 1 }
-    #else if (param == "presence") { num.bins = 20 }
-    else if (param == "allImbalance") { num.bins = 20 }
-    else if (param == "medDepth") { num.bins = xmax - xmin + 1 }
-
     sequence = seq(xmin, xmax, length.out = num.bins + 1)
 
     if (param == "presence") {
         sequence = seq(0, 1, 0.05)
+        xmin = 0
+        xmax = 1
+    } else if (param == "numSNP") {
+        sequence = seq(0, xmax + 1, 1)
+        xmin = 0
+        xmax = xmax + 1
+    } else if (param == "allImbalance") {
+        sequence = seq(10 * round((xmin - 20) / 10), 10 * round((xmax + 20) / 10), 1)
+        xmin = -20
+        xmax = 20
     } else if (param == "fis") {
-        sequence = seq(xmin - 1, xmax + 1, 0.02)
+        sequence = seq(round(xmin - 2), round(xmax + 2), 0.02)
         xmin = -1
         xmax = 1
+    } else if (param == "maxDepth") {
+        sequence = seq(10 * round((xmin - 20) / 10), 10 * round((xmax + 20) / 10), 10)
+        xmin = 0
+        xmax = 400
+    } else if (param == "medDepth") {
+        sequence = seq(2 * round((xmin - 10) / 2), 2 * round((xmax + 10) / 2), 2)
+        xmin = 0
+        xmax = 100
     } else if (param == "genLikelihood") {
         sequence = seq(xmin - 10, xmax + 10, 5)
         xmin = -20
@@ -43,12 +56,17 @@ for (param in levels(data$Parameter)) {
     # Iterate over populations
     for (pop in levels(data$Population)) {
         cat(param, pop, "\n") 
+        if (pop == "global") {
+            subfolder = "global"
+        } else {
+            subfolder = "populations"
+        }
 
         # Produce graph
         a = data[data$Parameter == param & data$Population == pop, ]
 
         if (nrow(a) > 0) {
-            graph_name = paste(folder, "/", param, "_", pop, ".png", sep="")
+            graph_name = paste(folder, "/", subfolder , "/", param, "_", pop, ".png", sep="")
 
             # Opening graph file
             png(graph_name, width=800, height=600)
@@ -62,15 +80,6 @@ for (param in levels(data$Parameter)) {
                      xlim = c(xmin, xmax),
                      breaks = sequence,
                      main = paste(param, "for", pop))
-
-                ## Do custom plots for each type of graph
-                #plot(a[,3:4],
-                #     pch=4,
-                #     col="#00000088",
-                #     cex=0.6,
-                #     main = paste(param, "for", pop))
-                #lines(lowess(a[,4] ~ a[,3], f=0.2), lwd=2, lty=1, col="red")
-
             dev.off()
         }
     }

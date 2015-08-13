@@ -3,8 +3,11 @@ Features and documentation updates
 
 ## Filters
 * Distribution graphs
-  - Improve graphs
+  - Test filters systematically
+    - maxDepth filter leaves values above threshold? (is it not Maximum MEDIAN?)
+    - Confirm `max_num_snps` per locus is not calculated only on SNPs that pass other criteria
   - Update documentation
+  - Create a script to compare the graphs of 2+ filter runs (not easy to have same x-axis)
 . (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 . (?) Remove individuals with more than 2 haplotypes in haplotype file
 . Remove SNPs with more than 2 alleles (not sure how to do this)

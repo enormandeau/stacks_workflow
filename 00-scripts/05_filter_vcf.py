@@ -841,8 +841,17 @@ if __name__ == '__main__':
 
         # Create folder with graphs
         directory = args.output_file
+        subdirectory_1 = os.path.join(directory, "global")
+        subdirectory_2 = os.path.join(directory, "populations")
+
         if not os.path.exists(directory):
             os.makedirs(directory)
+
+        if not os.path.exists(subdirectory_1):
+            os.makedirs(subdirectory_1)
+
+        if not os.path.exists(subdirectory_2):
+            os.makedirs(subdirectory_2)
 
         # Exporting graph data
         graph_file = os.path.join(directory, "graph_data.tsv")
