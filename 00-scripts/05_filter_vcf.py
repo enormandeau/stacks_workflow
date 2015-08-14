@@ -361,6 +361,7 @@ def test_min_genotype_likelihood(locus, pop_info, min_genotype_likelihood):
             if sample.genotype != "./.":
                 if sample.genotype_likelihood < min_genotype_likelihood:
                     sample.genotype = "./."
+                    sample.genotype_likelihood = -9999
                     Flags.min_genotype_likelihood_count += 1
 
 def get_genotype_likelihood_data(graph_dict, locus, pop_info):
@@ -370,7 +371,8 @@ def get_genotype_likelihood_data(graph_dict, locus, pop_info):
         # By pop
         for pop in pop_info:
             samples = [snp.samples[i] for i in pop_info[pop]]
-            likelihood = [x.genotype_likelihood for x in samples]
+            likelihood = [x.genotype_likelihood for x in samples
+                             if x.genotype_likelihood != -9999 and x.genotype != "./."]
             likelihood = [round(x, 3) for x in likelihood]
             for i in likelihood:
                 graph_dict[pop]["genLikelihood"][i] += 1
@@ -510,7 +512,7 @@ def get_maf_population_data(graph_dict, locus, pop_info):
                 total = sum(allele_count.values())
                 maf = round(float(minimum) / total, 3)
             else:
-                maf = 0.00
+                maf = 0.0
 
             graph_dict[pop]["mafPopulation"][maf] += 1
             graph_dict["global"]["mafPopulation"][maf] += 1
@@ -787,7 +789,7 @@ if __name__ == '__main__':
 
     # Producing graphs
     if args.graphs:
-        print "  Collecting data to produce distribution graphs..."
+        print "Collecting data to produce distribution graphs"
 
         # Initializing dictionary
         graph_dict = {}
@@ -872,10 +874,10 @@ if __name__ == '__main__':
         with open(".temp_graph_folder", "w") as gf:
             gf.write(directory + "\n")
 
-        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/distribution_graphs.r\")'",
+        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/distribution_graphs.r\")' > /dev/null",
                 shell=True)
 
-        print("Distribution graphs were writen in folder:\n    '{}'".format(directory))
+        print("Distribution graphs were writen in folder:\n  '{}'".format(directory))
         sys.exit(0)
 
     # Filtering

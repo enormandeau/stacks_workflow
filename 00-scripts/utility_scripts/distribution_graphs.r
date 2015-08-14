@@ -2,7 +2,7 @@
 
 # Get folder name
 folder = read.table(".temp_graph_folder", stringsAsFactors=F)[1,1]
-print(folder)
+#print(folder)
 
 # Get data
 data = read.table(paste(folder, "graph_data.tsv", sep="/"), header=T)
@@ -20,28 +20,28 @@ for (param in levels(data$Parameter)) {
         xmin = 0
         xmax = 1
     } else if (param == "numSNP") {
-        sequence = seq(0, xmax + 1, 1)
+        sequence = seq(0, xmax, 1)
         xmin = 0
-        xmax = xmax + 1
+        xmax = 20
     } else if (param == "allImbalance") {
-        sequence = seq(10 * round((xmin - 20) / 10), 10 * round((xmax + 20) / 10), 1)
+        sequence = seq(10 * round((xmin - 10) / 10), 10 * round((xmax + 10) / 10), 1)
         xmin = -20
         xmax = 20
     } else if (param == "fis") {
-        sequence = seq(round(xmin - 2), round(xmax + 2), 0.02)
+        sequence = seq(xmin - 0.02, xmax + 0.02, 0.02)
         xmin = -1
         xmax = 1
     } else if (param == "maxDepth") {
-        sequence = seq(10 * round((xmin - 20) / 10), 10 * round((xmax + 20) / 10), 10)
+        sequence = seq(10 * round((xmin - 10) / 10), 10 * round((xmax + 20) / 10), 10)
         xmin = 0
         xmax = 400
     } else if (param == "medDepth") {
-        sequence = seq(2 * round((xmin - 10) / 2), 2 * round((xmax + 10) / 2), 2)
+        sequence = seq(2 * round((xmin - 2) / 2), 2 * round((xmax + 10) / 2), 2)
         xmin = 0
         xmax = 100
     } else if (param == "genLikelihood") {
-        sequence = seq(xmin - 10, xmax + 10, 5)
-        xmin = -20
+        sequence = seq(5 * round((xmin - 5) / 5), 5 * round((xmax + 5) / 5), 5)
+        xmin = -5
         xmax = 200
     } else if (param == "heterozygosity") {
         sequence = seq(0, 1, 0.01)
@@ -55,7 +55,7 @@ for (param in levels(data$Parameter)) {
 
     # Iterate over populations
     for (pop in levels(data$Population)) {
-        cat(param, pop, "\n") 
+        #cat(param, pop, "\n") 
         if (pop == "global") {
             subfolder = "global"
         } else {
@@ -69,7 +69,7 @@ for (param in levels(data$Parameter)) {
             graph_name = paste(folder, "/", subfolder , "/", param, "_", pop, ".png", sep="")
 
             # Opening graph file
-            png(graph_name, width=800, height=600)
+            png(graph_name, width=800, height=400)
 
                 x = a[,3]
                 y = a[,4]
