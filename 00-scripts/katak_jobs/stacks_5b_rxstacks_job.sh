@@ -21,8 +21,8 @@
 #./00-scripts/stacks_2_cstacks.sh
 #./00-scripts/stacks_3_sstacks.sh
 #./00-scripts/stacks_4_populations.sh
-./00-scripts/stacks_5a_rxstacks_likelihoods.sh
-#./00-scripts/stacks_5b_rxstacks.sh
+#./00-scripts/stacks_5a_rxstacks_likelihoods.sh
+./00-scripts/stacks_5b_rxstacks.sh
 #./00-scripts/stacks_6_cstacks_rx.sh
 #./00-scripts/stacks_7_sstacks_rx.sh
 #./00-scripts/stacks_8_populations_rx.sh
