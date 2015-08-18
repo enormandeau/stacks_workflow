@@ -37,16 +37,18 @@ class Sample(object):
             self.alt = 0
 
         try:
-            self.allelic_imbalance = float(self.ref) / float(self.alt)
+            maximum = max([self.ref, self.alt])
+            minimum = min([self.ref, self.alt])
+            self.allelic_imbalance = float(maximum) / float(minimum)
         except:
-            self.allelic_imbalance = 0
+            self.allelic_imbalance = 0.0
 
         self.genotype_likelihood = self.info[3].split(",")[1]
 
         try:
             self.genotype_likelihood = float(self.genotype_likelihood)
         except:
-            self.genotype_likelihood = 0
+            self.genotype_likelihood = 0.0
 
     def __repr__(self):
         return "\t".join([self.genotype,
@@ -123,10 +125,6 @@ class Flags(object):
     def __init__(self):
         """Initialize flag values for new SNP flags
         """
-        self.min_allele_coverage = True
-        self.max_allelic_imbalance = True
-        self.min_genotype_likelihood = True
-        self.max_allele_coverage = True
         self.min_presence = True
         self.maf_global = True
         self.maf_population = True
@@ -135,13 +133,13 @@ class Flags(object):
         self.max_fis = True
         self.max_snp_number = True
 
-    def pass_filters(self):
+    def pass_filters(self, add_count=False):
         """Return True if a SNP passes the filters, False otherwise
         """
-        Flags.total_snps_count += 1
+        if add_count:
+            Flags.total_snps_count += 1
+
         passing = (
-                   self.min_allele_coverage and
-                   self.max_allele_coverage and
                    self.min_presence and
                    (self.maf_global or self.maf_population) and
                    self.heterozygosity and
@@ -150,9 +148,9 @@ class Flags(object):
                    self.max_snp_number
                   )
 
-        if passing:
+        if passing and add_count:
             Flags.total_good_snps_count += 1
-        else:
+        elif add_count:
             Flags.total_filtered_count += 1
 
         return passing
@@ -163,21 +161,33 @@ class Flags(object):
         filters
         """
         print "==================================================="
-        print "  {} Genotypes removed  ({})".format(pad(cls.min_allele_coverage_count), "min_allele_coverage")
-        print "  {} Genotypes removed  ({})".format(pad(cls.max_allelic_imbalance_count), "max_allelic_imbalance")
-        print "  {} Genotypes removed  ({})".format(pad(cls.min_genotype_likelihood_count), "min_genotype_likelihood")
-        print "  {} SNPs failed        ({})".format(pad(cls.max_allele_coverage_count), "max_allele_coverage")
-        print "  {} SNPs failed        ({})".format(pad(cls.min_presence_count), "min_presence")
-        print "  {} SNPs failed        ({})".format(pad(cls.min_maf_global_count), "maf_global")
-        print "  {} SNPs failed        ({})".format(pad(cls.min_maf_population_count), "maf_population")
-        print "  {} SNPs failed        ({})".format(pad(cls.max_heterozygosity_count), "heterozygosity")
-        print "  {} SNPs failed        ({})".format(pad(cls.min_fis_count), "min_fis")
-        print "  {} SNPs failed        ({})".format(pad(cls.max_fis_count), "max_fis")
-        print "  {} SNPs failed        ({})".format(pad(cls.max_snp_number_count), "max_snp_number")
+        print "  {} Genotypes removed  ({}  {} )".format(pad(cls.min_allele_coverage_count),
+                "min_allele_coverage", args.min_allele_coverage)
+        print "  {} Genotypes removed  ({}  {} )".format(pad(cls.max_allelic_imbalance_count),
+                "max_allelic_imbalance", args.max_allelic_imbalance)
+        print "  {} Genotypes removed  ({}  {} )".format(pad(cls.min_genotype_likelihood_count),
+                "min_genotype_likelihood", args.min_genotype_likelihood)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_allele_coverage_count),
+                "max_allele_coverage", args.max_allele_coverage)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_presence_count),
+                "min_presence", args.min_presence)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_maf_global_count),
+                "maf_global", args.maf_global)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_maf_population_count),
+                "maf_population", args.maf_population)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_heterozygosity_count),
+                "heterozygosity", args.max_hetero)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_fis_count),
+                "min_fis", args.min_fis)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_fis_count),
+                "max_fis", args.max_fis)
+        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_snp_number_count),
+                "max_snp_number", args.max_snp_number)
         print "---------------------------------------------------"
         print "  {} SNPs ({} loci) in input file".format(pad(cls.total_snps_count), locus_counter)
         try:
-            print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), str(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count))[0:5])
+            print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count),
+                    str(round(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count), 1)))
         except:
             print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), 100)
         print "  {} SNPs ({} loci) retained".format(pad(cls.total_good_snps_count), total_good_loci)
@@ -187,7 +197,6 @@ class Flags(object):
         """Format the flag information for printing in filter file
         """
         return "\t".join([
-                          str(self.max_allele_coverage),
                           str(self.min_presence),
                           str(self.maf_global),
                           str(self.maf_population),
@@ -255,7 +264,7 @@ def write_locus(locus, handle):
     """Output good SNPs to file
     """
     for snp in locus.snps:
-        if snp.flags.pass_filters():
+        if snp.flags.pass_filters(add_count=True):
             handle.write("\t".join(snp.line) + "\n")
 
 def write_whitelist(locus, handle):
@@ -297,16 +306,20 @@ def pad(text, char=" ", min_length=6):
         return missing_length * char + text
 
 ## Filter and data gathering functions
-# Min allelic_imbalance
+# Min allelie coverage
 def test_min_allele_coverage(locus, pop_info, min_allele_coverage):
     """Test if each genotype is backed by enough reads
     """
     for snp in locus.snps:
         for sample in snp.samples:
             # calculate allele coverage for both alleles
-            # change genotypes that do not meet threshold to '0/0'
+            # change genotypes that do not meet threshold to './.'
             if sample.genotype in ["0/1", "1/0"]:
                 if sample.alt < min_allele_coverage or sample.ref < min_allele_coverage:
+                    sample.genotype = "./."
+                    Flags.min_allele_coverage_count += 1
+            elif sample.genotype in ["0/0", "1/1"]:
+                if sample.depth < min_allele_coverage:
                     sample.genotype = "./."
                     Flags.min_allele_coverage_count += 1
 
@@ -327,30 +340,6 @@ def get_depth_data(graph_dict, locus, pop_info):
             graph_dict["global"]["medDepth"][med] += 1
             graph_dict["global"]["maxDepth"][maximum] += 1
         break
-
-# Max allelic_imbalance
-def test_max_allelic_imbalance(locus, pop_info, max_allelic_imbalance):
-    """Test if each heterozygote's genotype has a low enough allelic allelic_imbalance
-    """
-    for snp in locus.snps:
-        for sample in snp.samples:
-            if sample.genotype in ["0/1", "1/0"]:
-                if sample.allelic_imbalance > max_allelic_imbalance:
-                    sample.genotype = "./."
-                    Flags.max_allelic_imbalance_count += 1
-
-def get_allelic_imbalance_data(graph_dict, locus, pop_info):
-    """Get allelic imbalance data by pop and globally
-    """
-    for snp in locus.snps:
-        # By pop
-        for pop in pop_info:
-            samples = [snp.samples[i] for i in pop_info[pop]]
-            imbalance = [x.allelic_imbalance for x in samples if x.allelic_imbalance != 0.0]
-            imbalance = [round(math.log(x, 2), 3) for x in imbalance]
-            for i in imbalance:
-                graph_dict[pop]["allImbalance"][i] += 1
-                graph_dict["global"]["allImbalance"][i] += 1
 
 # Min genotype_likelihood
 def test_min_genotype_likelihood(locus, pop_info, min_genotype_likelihood):
@@ -377,6 +366,30 @@ def get_genotype_likelihood_data(graph_dict, locus, pop_info):
             for i in likelihood:
                 graph_dict[pop]["genLikelihood"][i] += 1
                 graph_dict["global"]["genLikelihood"][i] += 1
+
+# Max allelic_imbalance
+def test_max_allelic_imbalance(locus, pop_info, max_allelic_imbalance):
+    """Test if each heterozygote's genotype has a low enough allelic allelic_imbalance
+    """
+    for snp in locus.snps:
+        for sample in snp.samples:
+            if sample.genotype in ["0/1", "1/0"]:
+                if sample.allelic_imbalance > max_allelic_imbalance:
+                    sample.genotype = "./."
+                    Flags.max_allelic_imbalance_count += 1
+
+def get_allelic_imbalance_data(graph_dict, locus, pop_info):
+    """Get allelic imbalance data by pop and globally
+    """
+    for snp in locus.snps:
+        # By pop
+        for pop in pop_info:
+            samples = [snp.samples[i] for i in pop_info[pop]]
+            imbalance = [x.allelic_imbalance for x in samples if x.allelic_imbalance != 0.0]
+            imbalance = [round(math.log(x, 2), 3) for x in imbalance]
+            for i in imbalance:
+                graph_dict[pop]["allImbalance"][i] += 1
+                graph_dict["global"]["allImbalance"][i] += 1
 
 # Min presence
 def test_min_presence(locus, pop_info, min_presence, joker, percent):
@@ -452,7 +465,6 @@ def get_maf_global_data(graph_dict, locus, pop_info):
         maf = round(snp.global_maf, 3)
         graph_dict["global"]["mafGlobal"][maf] += 1
 
-
 # Maf population
 def test_maf_population(locus, pop_info, maf_population):
     """Test if at least one population has a sufficiently high MAF value
@@ -463,7 +475,7 @@ def test_maf_population(locus, pop_info, maf_population):
         for pop in pop_info:
             populations[pop] = [snp.samples[i] for i in pop_info[pop]]
 
-        # Test if SNP meets minimum criterion for all pops
+        # Test if SNP meets minimum criterion for at least one population
         pops_passing = 0
         for pop in populations:
             allele_count = defaultdict(int)
@@ -688,12 +700,11 @@ def test_max_allele_coverage(locus, pop_info, max_allele_coverage):
         coverages = []
         for sample in snp.samples:
             # calculate allele coverage for both alleles
-            # change genotypes that do not meet threshold to '0/0'
+            # change genotypes that do not meet threshold to './.'
             if sample.genotype != "./.":
                 coverages.append(sample.depth)
 
         if median(coverages) >= max_allele_coverage:
-            snp.flags.max_allele_coverage = False
             Flags.max_allele_coverage_count += 1
 
 # Max number of SNPs
@@ -719,6 +730,8 @@ if __name__ == '__main__':
             (WARNING! Will not work properly with stacks versions older to v1.30)
             """)
 
+    parser.add_argument("-q", "--quiet", action="store_true",
+            help = "do not print progress messages")
     parser.add_argument("-i", "--input_file", type=str, required=True,
             help = "input VCF file")
     parser.add_argument("-o", "--output_file", type=str, required=True,
@@ -726,11 +739,11 @@ if __name__ == '__main__':
     parser.add_argument("-g", "--graphs", action="store_true",
             help = "produce parameter distribution graphs instead of filtering")
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
-            help = "minimum allele depth to keep a genotype (or modified to '0/0') (int, default: 0)")
+            help = "minimum allele coverage (rare allele for heterozygotes, global coverage for homozygotes) to keep a genotype (or modified to './.') (int, default: 0)")
     parser.add_argument("-l", "--min_genotype_likelihood", type=float, default=-1000.0,
-            help = "minimum genotype likelihood to keep a genotype (or modified to '0/0') (float, 0.0 or more, default -1000.0)")
+            help = "minimum genotype likelihood to keep a genotype (or modified to './.') (float, 0.0 or more, default -1000.0)")
     parser.add_argument("-I", "--max_allelic_imbalance", type=float, default=1000.0,
-            help = "maximum coverage fold change among alleles in heterozygotes (or modified to '0/0') (float, 0.0 or more, default 1000.0)")
+            help = "maximum coverage fold change among alleles in heterozygotes (or modified to './.') (float, 0.0 or more, default 1000.0)")
     parser.add_argument("-C", "--max_allele_coverage", type=int, default=1000,
             help = "maximum median allele depth to keep a SNP (int, default: 10000)")
     parser.add_argument("-p", "--min_presence", type=int, default=0,
@@ -755,8 +768,6 @@ if __name__ == '__main__':
             help = "number of populations where it is permitted that the -f or -F thresholds do not pass, (int, 0 or more, default: 0")
     parser.add_argument("-s", "--max_snp_number", type=int, default=999,
             help = "maximum number of SNPs per locus (int, 1 or more, default: 999)")
-    parser.add_argument("-q", "--quiet", action="store_true",
-            help = "do not print progress")
     args = parser.parse_args()
 
     # Assert proper values for parameters
