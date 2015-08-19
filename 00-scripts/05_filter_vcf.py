@@ -593,7 +593,7 @@ def get_heterozygosity_data(graph_dict, locus, pop_info):
             graph_dict["global"]["heterozygosity"][round(proportion, 3)] += 1
 
 # Fis
-def test_fis(locus, pop_info, min_fis, max_fis):
+def test_fis(locus, pop_info, min_fis, max_fis, fis_joker):
     """Test if each population passes minimum and maximum Fis filter
     """
     for snp in locus.snps:
@@ -643,11 +643,11 @@ def test_fis(locus, pop_info, min_fis, max_fis):
             if fis <= max_fis:
                 pops_passing_max_fis += 1
 
-        if pops_passing_min_fis < len(pop_info):
+        if pops_passing_min_fis < len(pop_info) - fis_joker:
             snp.flags.min_fis = False
             Flags.min_fis_count += 1
 
-        if pops_passing_max_fis < len(pop_info):
+        if pops_passing_max_fis < len(pop_info) - fis_joker:
             snp.flags.max_fis = False
             Flags.max_fis_count += 1
 
@@ -782,6 +782,7 @@ if __name__ == '__main__':
     assert 0 <= args.maf_population <= 1.0, "maf_population must be a floating point number between 0 and 1.0"
     assert -1 <= args.min_fis <= 1, "min_fis must be a floating point number between -1 and 1"
     assert -1 <= args.max_fis <= 1, "max_fis must be a floating point number between -1 and 1"
+    assert 0 <= args.fis_joker <= 100, "fis_joker must be an integer contained between 0 and 100"
     assert args.max_snp_number >= 1, "max_snp_number must be an integer equal to or greater than 1"
 
     # Get header from VCF and population information
@@ -940,7 +941,7 @@ if __name__ == '__main__':
         test_maf_global(locus, args.maf_global)
         test_maf_population(locus, pop_info, args.maf_population)
         test_heterozygosity(locus, pop_info, args.max_hetero, args.max_hetero_joker)
-        test_fis(locus, pop_info, args.min_fis, args.max_fis)
+        test_fis(locus, pop_info, args.min_fis, args.max_fis, args.fis_joker)
         test_max_snp_number(locus, pop_info, args.max_snp_number)
 
         # Write output
