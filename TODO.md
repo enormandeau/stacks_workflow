@@ -3,11 +3,14 @@ Features and documentation updates
 
 ## Filters
 * Update documentation
-  * How to create distribution graphs
-  * How to combine two distribution graphs folders
+  - How to create distribution graphs and what graphs are produced where
+  - How to combine two distribution graphs folders
+  - Required python libraires (numpy and PIL --> how to install anaconda and PIL)
+
+## Maybe
 . (?) Look for differences of maf, Fis, Het among SNPs of a same locus
 . (?) Remove individuals with more than 2 haplotypes in haplotype file
-. Remove SNPs with more than 2 alleles (not sure how to do this)
+. Remove SNPs (haplotypes?) with more than 2 alleles (not sure how to do this)
 
 ## Reference genome
 * Revive `stacks_1b_pstacks.sh`
@@ -15,7 +18,7 @@ Features and documentation updates
   - Use mapping options that work well with Illumina AND Ion Proton
 
 ## Paralelization
-- Paralelize long steps that can use only one CPU
+- Paralelize long steps that can use only one CPU or are ineficient
 . Give sstacks all samples at once (faster since catalogue is read only once)
 
 ## Data preparation

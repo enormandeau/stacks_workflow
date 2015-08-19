@@ -2,7 +2,6 @@
 
 # Get folder name
 folder = read.table(".temp_graph_folder", stringsAsFactors=F)[1,1]
-#print(folder)
 
 # Get data
 data = read.table(paste(folder, "graph_data.tsv", sep="/"), header=T)
@@ -56,8 +55,10 @@ for (param in levels(data$Parameter)) {
     # Iterate over populations
     for (pop in levels(data$Population)) {
         #cat(param, pop, "\n") 
+
         if (pop == "global") {
             subfolder = "global"
+
         } else {
             subfolder = "populations"
         }

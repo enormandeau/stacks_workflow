@@ -18,11 +18,16 @@ def combine_images(image_1, image_2, image_out, xdim=800, ydim=800):
     """Combine two images vertically
     """
     i1 = Image.open(image_1)
+    i1_width, i1_height = i1.size
+
     i2 = Image.open(image_2)
-    new_image = Image.new("RGB", (800, 800))
+    i2_width, i2_height = i2.size
+
+    new_image = Image.new("RGB",
+            (max([i1_width, i2_width]), i1_height + i2_height))
 
     new_image.paste(i1, (0, 0))
-    new_image.paste(i2, (0, 400))
+    new_image.paste(i2, (0, i1_height))
     new_image.save(image_out)
 
 def error(message):
@@ -53,6 +58,7 @@ if __name__ == '__main__':
 
     subdirectory_1 = os.path.join(output_folder, "global")
     subdirectory_2 = os.path.join(output_folder, "populations")
+    subdirectory_3 = os.path.join(output_folder, "missing_data")
 
     if not os.path.exists(subdirectory_1):
         os.makedirs(subdirectory_1)
@@ -60,10 +66,14 @@ if __name__ == '__main__':
     if not os.path.exists(subdirectory_2):
         os.makedirs(subdirectory_2)
 
+    if not os.path.exists(subdirectory_3):
+        os.makedirs(subdirectory_3)
+
     # For all images in folder_1, merge with equivalent in folder_2
     wanted = dict()
     wanted["global"] = os.listdir(os.path.join(folder_1, "global"))
     wanted["populations"] = os.listdir(os.path.join(folder_1, "populations"))
+    wanted["missing_data"] = os.listdir(os.path.join(folder_1, "missing_data"))
 
     for w in wanted:
         for f in wanted[w]:

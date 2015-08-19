@@ -207,7 +207,23 @@ class Flags(object):
                          ]) + "\n"
 
 # Functions
-def get_pop_info(line):
+def get_individual_info(line):
+    """Return dictionary of positions in the lines of the VCF file and their
+    corresponding samples ([population, sample]).
+    """
+
+    l = [x.split("_")[0:2] for x in line.split("\t")[9:]]
+    individual_dict = {}
+
+    for i in range(len(l)):
+        population, sample = l[i]
+        individual_dict[i] = [population, sample, 0]
+
+    individual_dict["total"] = 0
+
+    return individual_dict
+
+def get_population_info(line):
     """Return dictionary of population names with a list of their sample
     positions in the lines of the VCF file.
     """
@@ -721,6 +737,20 @@ def get_numSNP_data(graph_dict, locus, pop_info):
     """
     graph_dict["global"]["numSNP"][len(locus.snps)] += 1
 
+def get_individual_coverage(locus, ind_info):
+    """Count the number of missing data per indivual
+    """
+    for snp in locus.snps:
+        ind_info["total"] += 1
+
+        for i in range(len(snp.samples)):
+            sample = snp.samples[i]
+
+            if sample.genotype == "./.":
+                ind_info[i][2] += 1
+
+        break
+
 # Main
 if __name__ == '__main__':
 
@@ -795,7 +825,8 @@ if __name__ == '__main__':
                 header.append(line)
             elif l.startswith("#CHROM"):
                 header.append(line)
-                pop_info = get_pop_info(l)
+                pop_info = get_population_info(l)
+                ind_info = get_individual_info(l)
             else:
                 break
 
@@ -807,7 +838,6 @@ if __name__ == '__main__':
         graph_dict = {}
         for pop in pop_info.keys() + ["global"]:
             graph_dict[pop] = {}
-            #graph_dict[pop]["minDepth"] = defaultdict(int)
             graph_dict[pop]["medDepth"] = defaultdict(int)
             graph_dict[pop]["maxDepth"] = defaultdict(int)
             graph_dict[pop]["allImbalance"] = defaultdict(int)
@@ -849,14 +879,13 @@ if __name__ == '__main__':
             get_heterozygosity_data(graph_dict, locus, pop_info)
             get_fis_data(graph_dict, locus, pop_info)
             get_numSNP_data(graph_dict, locus, pop_info)
-
-        # Print graph_dict for debugging
-        #pprint.pprint(graph_dict)
+            get_individual_coverage(locus, ind_info)
 
         # Create folder with graphs
         directory = args.output_file
         subdirectory_1 = os.path.join(directory, "global")
         subdirectory_2 = os.path.join(directory, "populations")
+        subdirectory_3 = os.path.join(directory, "missing_data")
 
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -866,6 +895,23 @@ if __name__ == '__main__':
 
         if not os.path.exists(subdirectory_2):
             os.makedirs(subdirectory_2)
+
+        if not os.path.exists(subdirectory_3):
+            os.makedirs(subdirectory_3)
+
+        # Write missing data info to file and create figure
+        missing_file = os.path.join(directory, "missing_data.tsv")
+        total = ind_info["total"]
+        del ind_info["total"]
+        with open(missing_file, "w") as mfile:
+            mfile.write("Population\tSample\tProportionMissing\n")
+            for i in sorted(ind_info):
+                ind_info[i][2] = round(float(ind_info[i][2]) / float(total), 3)
+                mfile.write("\t".join([str(x) for x in ind_info[i]]) + "\n")
+
+        # Creating figures of missing data per population and individual
+        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/missing_data_graphs.r\")' > /dev/null",
+                shell=True)
 
         # Exporting graph data
         graph_file = os.path.join(directory, "graph_data.tsv")
