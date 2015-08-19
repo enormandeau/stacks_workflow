@@ -24,9 +24,9 @@ for (param in levels(data$Parameter)) {
         xmin = 0
         xmax = 20
     } else if (param == "allImbalance") {
-        sequence = seq(10 * round((xmin - 10) / 10), 10 * round((xmax + 10) / 10), 1)
-        xmin = -20
-        xmax = 20
+        sequence = seq(10 * round((xmin - 10) / 10), 10 * round((xmax + 10) / 10), 0.2)
+        xmin = 0
+        xmax = 10
     } else if (param == "fis") {
         sequence = seq(xmin - 0.02, xmax + 0.02, 0.02)
         xmin = -1
@@ -64,6 +64,10 @@ for (param in levels(data$Parameter)) {
 
         # Produce graph
         a = data[data$Parameter == param & data$Population == pop, ]
+
+        if (param == "allImbalance") {
+            a[,3] = a[,3] + 0.001
+        }
 
         if (nrow(a) > 0) {
             graph_name = paste(folder, "/", subfolder , "/", param, "_", pop, ".png", sep="")
