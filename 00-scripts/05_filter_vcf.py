@@ -909,10 +909,6 @@ if __name__ == '__main__':
                 ind_info[i][2] = round(float(ind_info[i][2]) / float(total), 3)
                 mfile.write("\t".join([str(x) for x in ind_info[i]]) + "\n")
 
-        # Creating figures of missing data per population and individual
-        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/missing_data_graphs.r\")' > /dev/null",
-                shell=True)
-
         # Exporting graph data
         graph_file = os.path.join(directory, "graph_data.tsv")
         graph_data_temp = []
@@ -933,6 +929,10 @@ if __name__ == '__main__':
             gf.write(directory + "\n")
 
         subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/distribution_graphs.r\")' > /dev/null",
+                shell=True)
+
+        # Creating figures of missing data per population and individual
+        subprocess.call("R -q -e 'source(\"00-scripts/utility_scripts/missing_data_graphs.r\")' > /dev/null",
                 shell=True)
 
         print("Distribution graphs were writen in folder:\n  '{}'".format(directory))
