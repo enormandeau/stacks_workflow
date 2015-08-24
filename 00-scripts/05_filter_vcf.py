@@ -161,27 +161,27 @@ class Flags(object):
         filters
         """
         print "==================================================="
-        print "  {} Genotypes removed  ({}  {} )".format(pad(cls.min_allele_coverage_count),
+        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_allele_coverage_count),
                 "min_allele_coverage", args.min_allele_coverage)
-        print "  {} Genotypes removed  ({}  {} )".format(pad(cls.max_allelic_imbalance_count),
+        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.max_allelic_imbalance_count),
                 "max_allelic_imbalance", args.max_allelic_imbalance)
-        print "  {} Genotypes removed  ({}  {} )".format(pad(cls.min_genotype_likelihood_count),
+        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_genotype_likelihood_count),
                 "min_genotype_likelihood", args.min_genotype_likelihood)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_allele_coverage_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_allele_coverage_count),
                 "max_allele_coverage", args.max_allele_coverage)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_presence_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_presence_count),
                 "min_presence", args.min_presence)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_maf_global_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_maf_global_count),
                 "maf_global", args.maf_global)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_maf_population_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_maf_population_count),
                 "maf_population", args.maf_population)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_heterozygosity_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_heterozygosity_count),
                 "heterozygosity", args.max_hetero)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.min_fis_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_fis_count),
                 "min_fis", args.min_fis)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_fis_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_fis_count),
                 "max_fis", args.max_fis)
-        print "  {} SNPs failed        ({}  {} )".format(pad(cls.max_snp_number_count),
+        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_snp_number_count),
                 "max_snp_number", args.max_snp_number)
         print "---------------------------------------------------"
         print "  {} SNPs ({} loci) in input file".format(pad(cls.total_snps_count), locus_counter)
