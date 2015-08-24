@@ -3,7 +3,7 @@ Features and documentation updates
 
 ## Filters
 * Update documentation
-  - How to create distribution graphs and what graphs are produced where
+  - How to create distribution graphs, what graphs are produced, and where they are
   - How to combine two distribution graphs folders
   - Required python libraires (numpy and PIL --> how to install anaconda and PIL)
 
