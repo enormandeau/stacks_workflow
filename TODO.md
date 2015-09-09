@@ -2,6 +2,7 @@
 Features and documentation updates
 
 ## Filters
+* Fix number of retained loci (currently wrong in both filter and graphics mode)
 * Update documentation
   - How to create distribution graphs, what graphs are produced, and where they are
   - How to combine two distribution graphs folders
