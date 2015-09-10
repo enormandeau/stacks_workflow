@@ -51,47 +51,10 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
 ./00-scripts/05_filter_vcf.py \
     -i 05-stacks_rx/batch_1.vcf \
     -o filtered.vcf \
-    -p 70 \
-    --use_percent \
-    -a 0.05 \
-    -A 0.1 \
+    -c 2 -m 7 -I 4 -l 10 -C 30 \
+    -p 70 --use_percent \
+    -a 0.05 -A 0.1 \
     -H 0.5 -y 1 \
-    -s 10
-
-### Filtering should give approximately the following:
-
-#  Treating: 05-stacks_rx/batch_1.vcf (2 populations)
-#  ===================================================
-#  0 Genotypes removed  (min_allele_coverage)
-#  0 Genotypes removed  (max_allelic_imbalance)
-#  0 Genotypes removed  (min_genotype_likelihood)
-#  0 SNPs failed        (max_allele_coverage)
-#  16 SNPs failed        (min_presence)
-#  18 SNPs failed        (maf_global)
-#  25 SNPs failed        (maf_population)
-#  2 SNPs failed        (heterozygosity)
-#  0 SNPs failed        (min_fis)
-#  0 SNPs failed        (max_fis)
-#  0 SNPs failed        (max_snp_number)
-#  ---------------------------------------------------
-#  78 SNPs (25 loci) in input file
-#  66 SNPs (84.61%) filtered out
-#  12 SNPs (6 loci) retained
-#  ===================================================
-
-### Old filtering script
-
-#  >>> Treating: 05-stacks_rx/batch_1.vcf (2 populations) <<<
-#  --- Filtering results ------------------------------------
-#  0     Genotypes removed because of min_allele_coverage
-#  0     SNPs failed: min_presence
-#  15    SNPs failed: maf_global
-#  18    SNPs failed: maf_population
-#  2     SNPs failed: heterozygosity
-#  0     SNPs failed: max_snp_number
-#  ----------------------------------------------------------
-#  23    SNPs (16 loci) in input file
-#  17    SNPs (73.91%) filtered out
-#  6     SNPs retained
-#  ----------------------------------------------------------
+    -f -0.3 -F 0.1 \
+    -s 6 -q
 
