@@ -108,6 +108,7 @@ class Flags(object):
     # Counters for the number of filtered SNPs by reason
     # These are used by the class method 'report_filters'
     min_allele_coverage_count = 0
+    min_depth_count = 0
     max_allele_coverage_count = 0
     min_presence_count = 0
     min_maf_global_count = 0
@@ -163,6 +164,8 @@ class Flags(object):
         print "==================================================="
         print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_allele_coverage_count),
                 "min_allele_coverage", args.min_allele_coverage)
+        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_depth_count),
+                "min_depth", args.min_depth)
         print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.max_allelic_imbalance_count),
                 "max_allelic_imbalance", args.max_allelic_imbalance)
         print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_genotype_likelihood_count),
@@ -338,6 +341,22 @@ def test_min_allele_coverage(locus, pop_info, min_allele_coverage):
                 if sample.depth < min_allele_coverage:
                     sample.genotype = "./."
                     Flags.min_allele_coverage_count += 1
+
+
+# Min depth
+def test_min_depth(locus, pop_info, min_depth):
+    for snp in locus.snps:
+        for sample in snp.samples:
+            # calculate global genotype coverage for both alleles
+            # change genotypes that do not meet threshold to './.'
+            if sample.genotype in ["0/1", "1/0"]:
+                if sample.depth < min_depth:
+                    sample.genotype = "./."
+                    Flags.min_depth_count += 1
+            elif sample.genotype in ["0/0", "1/1"]:
+                if sample.depth < min_depth:
+                    sample.genotype = "./."
+                    Flags.min_depth_count += 1
 
 def get_depth_data(graph_dict, locus, pop_info):
     """Get min, median and max depth by pop and globally
@@ -770,6 +789,8 @@ if __name__ == '__main__':
             help = "produce parameter distribution graphs instead of filtering")
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
             help = "minimum allele coverage (rare allele for heterozygotes, global coverage for homozygotes) to keep a genotype (or modified to './.') (int, default: 0)")
+    parser.add_argument("-m", "--min_depth", type=int, default=0,
+            help = "minimum depth (global depth by adding coverage of both alleles) to keep a genotype (or modified to './.') (int, default: 0)")
     parser.add_argument("-l", "--min_genotype_likelihood", type=float, default=-1000.0,
             help = "minimum genotype likelihood to keep a genotype (or modified to './.') (float, 0.0 or more, default -1000.0)")
     parser.add_argument("-I", "--max_allelic_imbalance", type=float, default=1000.0,
@@ -979,6 +1000,7 @@ if __name__ == '__main__':
         # Run filters
         # The filter functions automatically update SNP flags
         test_min_allele_coverage(locus, pop_info, args.min_allele_coverage)
+        test_min_depth(locus, pop_info, args.min_depth)
         test_max_allelic_imbalance(locus, pop_info, args.max_allelic_imbalance)
         test_min_genotype_likelihood(locus, pop_info, args.min_genotype_likelihood)
         test_max_allele_coverage(locus, pop_info, args.max_allele_coverage)
