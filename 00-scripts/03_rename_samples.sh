@@ -32,8 +32,8 @@ cat renaming_02.txt |
                 cut -f 1 |
                 while read j
                 do
-                    echo "    Linking: 03-samples/""$j"
-                    ln 03-samples/"$j" "$i"
+                    echo "    Linking: $SAMPLES_FOLDER/""$j"
+                    ln $SAMPLES_FOLDER/"$j" "$i"
                 done
         else
             echo "Merging samples"
@@ -41,8 +41,8 @@ cat renaming_02.txt |
                 cut -f 1 |
                 while read j
                 do
-                    echo "    Copying: 03-samples/""$j"
-                    cat 03-samples/"$j" >> "$i"
+                    echo "    Copying: $SAMPLES_FOLDER/""$j"
+                    cat $SAMPLES_FOLDER/"$j" >> "$i"
                 done
         fi
     done | tee 98-log_files/"$TIMESTAMP"_03_rename_samples_complex.log
