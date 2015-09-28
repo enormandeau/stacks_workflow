@@ -8,8 +8,15 @@ GENOME="parastichopus_parvimensis_genome_contigs"
 # Index genome if not alread done
 # bwa index -p $GENOMEFOLDER/$GENOME $GENOMEFOLDER/$GENOME.fasta
 
-for i in $(ls -1 $DATAFOLDER/*.fq)
+for file in $(ls -1 $DATAFOLDER/*.fq.gz)
 do
+    # Name of uncompressed file
+    i=${file%.gz}
+    echo "Decompression $i"
+
+    # Decompress file
+    gunzip -c $file > $i
+
     name=$(basename $i)
     ind=$(echo $name | cut -d "_" -f 2)
     ID="@RG\tID:ind${ind}\tSM:ind${ind}\tPL:IonProton"
@@ -31,6 +38,7 @@ do
     ## Clean up
     #rm $DATAFOLDER/"${name%.fq}".sam
     #rm $DATAFOLDER/"${name%.fq}".unsorted.bam
+    #rm $i
 
 done
 
