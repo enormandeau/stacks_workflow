@@ -847,6 +847,7 @@ if __name__ == '__main__':
             elif l.startswith("#CHROM"):
                 header.append(line)
                 pop_info = get_population_info(l)
+                assert len(pop_info) > 0, "Input file does not contain a header"
                 ind_info = get_individual_info(l)
             else:
                 break
