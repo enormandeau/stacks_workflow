@@ -11,7 +11,7 @@ ALL_SAMPLES_FOLDER="04-all_samples"
 cat 01-info_files/sample_information.csv |
     grep -vE '^#' |
     cut -f 1-4 |
-    perl -pe 's/\.fastq\.gz//' |
+    perl -pe 's/\.f(ast)*q\.gz//' |
     perl -pe 's/\t/\/sample_/' |
     perl -pe 's/([ACTG]+)\t/\1.fq.gz\t/' |
     perl -pe 's/(\w+)\t(\S+)$/04-all_samples\/\1_\2.fq.gz/' > renaming_01.txt
