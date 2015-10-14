@@ -4,9 +4,12 @@
 lane_info.txt
 nohup.out
 population_map.txt
-*~
+*.amb
+*.ann
 *.backup
 *.bak
+*.bam
+*.bwt
 *.doctree
 *.fas
 *.fasta
@@ -16,8 +19,11 @@ population_map.txt
 *.js
 *.log
 *.odt
+*.pac
 *.pickle
 *.png
+*.sa
+*.sam
 *.swp
 *.temp
 *.temp*
@@ -32,3 +38,4 @@ population_map.txt
 *list.txt
 *private*
 *testlog*
+*~
