@@ -1,9 +1,3 @@
-99-papers/*
-98-log_files/*
-99-documentation/_build/_sources/*
-lane_info.txt
-nohup.out
-population_map.txt
 *.amb
 *.ann
 *.backup
@@ -16,6 +10,7 @@ population_map.txt
 *.fastq.gz*
 *.fq
 *.fq.gz
+*.jpg
 *.js
 *.log
 *.odt
@@ -39,3 +34,9 @@ population_map.txt
 *private*
 *testlog*
 *~
+98-log_files/*
+99-documentation/_build/_sources/*
+99-papers/*
+lane_info.txt
+nohup.out
+population_map.txt
