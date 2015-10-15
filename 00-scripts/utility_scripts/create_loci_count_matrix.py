@@ -75,7 +75,9 @@ if __name__ == '__main__':
     print "  Reduced number of loci by {:2.2f}% ({} to {} loci)".format(100.0 - 100.0 * len(trimmed_dict) / len(matches_dict), len(matches_dict), len(trimmed_dict))
 
     # Normalize matrix per individual depth
+    print "Normalizing per individual depth"
     sample_depth = dict()
+    print "  Calculating total read counts per individual"
     for sample in samples:
         total = 0
         for locus in trimmed_dict:
@@ -83,11 +85,13 @@ if __name__ == '__main__':
 
         sample_depth[sample] = float(total)
 
+    print "  Applying normalization"
     for sample in samples:
         for locus in trimmed_dict:
             trimmed_dict[locus][sample] = 1000000. * trimmed_dict[locus][sample] / sample_depth[sample]
 
     # Writing matrix of counts to file
+    print "Writing output file"
     outfile = open(output_file, "w")
 
     outfile.write("\t".join(samples) + "\n")
