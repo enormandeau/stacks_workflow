@@ -2,10 +2,11 @@
 rm(list=ls())
 
 # Global variables
-proportion.used = 0.2
+proportion.used = 0.5
 data.file = paste("count_matrix", proportion.used, "present.tsv", sep="_")
 heatmap.file = paste("count_figure", proportion.used, "present.jpg", sep="_")
 barplot.file = paste("barplot", proportion.used, "missing.jpg", sep="_")
+histogram.file = paste("histogram", proportion.used, "missing.jpg", sep="_")
 missing.file = paste("proportion", proportion.used, "missing.tsv", sep="_")
 
 # Trick to speedup loading the data
@@ -32,6 +33,10 @@ for (i in 1:ncol(data)) {
 
 jpeg(barplot.file, width=800, height=800)
     barplot(res, ylim=c(0, 1))
+dev.off()
+
+jpeg(histogram.file, width=800, height=800)
+    histogram(res, xlim=c(0, 1), breaks=seq(0, 1, 0.05))
 dev.off()
 
 # Write file with individual proportion of missing data
