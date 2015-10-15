@@ -36,7 +36,7 @@ jpeg(barplot.file, width=800, height=800)
 dev.off()
 
 jpeg(histogram.file, width=800, height=800)
-    histogram(res, xlim=c(0, 1), breaks=seq(0, 1, 0.05))
+    hist(res, xlim=c(0, 1), breaks=seq(0, 1, 0.05))
 dev.off()
 
 # Write file with individual proportion of missing data
