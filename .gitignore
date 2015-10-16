@@ -1,6 +1,7 @@
 *.amb
 *.ann
 *.backup
+*.bai
 *.bak
 *.bam
 *.bwt
