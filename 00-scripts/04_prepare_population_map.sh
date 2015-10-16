@@ -28,7 +28,7 @@ grep -v "#" $INFO_FILES/sample_information.csv | \
 #        cut -f 5)
 #done > $INFO_FILES/population_map.txt
 
-rm $INFO_FILES/population_map_temp.txt 2> /dev/null
+#rm $INFO_FILES/population_map_temp.txt 2> /dev/null
 
 # Copy script as it was run
 SCRIPT=$0
