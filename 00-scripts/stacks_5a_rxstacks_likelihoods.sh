@@ -2,6 +2,13 @@
 # Run rxstacks to extract log likelihoods and determine cutoff
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+
 # OPTIONS: Comment out options that you do not wish to use
 # rxstacks 1.20
 # rxstacks -b batch_id -P path [-o path] [-t threads] [-v] [-h]
@@ -49,11 +56,4 @@ cat 05-stacks_rx/batch_1.rxstacks_lnls.tsv | \
 
 # Create figure
 R -q -e 'source("./00-scripts/utility_scripts/plot_log_likelihoods.r")' 2>&1 > /dev/null
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

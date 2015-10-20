@@ -2,6 +2,13 @@
 # Launch pstacks to treat all the samples individually
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+
 # Options
 # Comment out options that you do not wish to use
 
@@ -27,11 +34,4 @@ do
         $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
 done 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_1b_pstacks.log
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

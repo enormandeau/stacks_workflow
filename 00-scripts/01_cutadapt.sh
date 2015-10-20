@@ -3,6 +3,14 @@
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 NCPU=$1
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+
+# Test if user specified a number of CPUs
 if [[ -z "$NCPU" ]]
 then
     NCPU=1
@@ -18,11 +26,4 @@ parallel -j $NCPU cutadapt -a file:01-info_files/adapters.fasta \
         -e 0.2 \
         -m 50 \
         {} '2>&1' '>>' 98-log_files/"$TIMESTAMP"_01_cutadapt"${i%.fastq.gz}".log
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

@@ -2,6 +2,16 @@
 # Launch process_radtags on all the lanes
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+INFO_FILES_FOLDER="01-info_files"
+SAMPLE_INFO="sample_information.csv"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+cp $INFO_FILES_FOLDER/$SAMPLE_INFO $LOG_FOLDER/"$TIMESTAMP"_"$SAMPLE_INFO"
+
 ### Global variable
 INFO_FILES="01-info_files"
 TRIM_LENGTH=$1 # Length to cut reads after process_radtags
@@ -38,14 +48,4 @@ do
     # Copy log files to ./98_log_files/
     cp 03-samples/$f/process_radtags.log 98-log_files/"$TIMESTAMP"_02_process_radtags_"$f".log
 done
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-INFO_FILES_FOLDER="01-info_files"
-SAMPLE_INFO="sample_information.csv"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
-cp $INFO_FILES_FOLDER/$SAMPLE_INFO $LOG_FOLDER/"$TIMESTAMP"_"$SAMPLE_INFO"
 

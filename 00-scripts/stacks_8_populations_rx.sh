@@ -2,6 +2,16 @@
 # Launch populations
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+INFO_FILES_FOLDER="01-info_files"
+POP_MAP="population_map.txt"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+cp $INFO_FILES_FOLDER/$POP_MAP $LOG_FOLDER/"$TIMESTAMP"_"$POP_MAP"
+
 # IMPORTANT: make sure your read about the available options for 'populations'
 # in the STACKS papers
 
@@ -31,11 +41,11 @@ t="-t 16"         # Number of threads to run in parallel sections of code
                                       # if at least X% samples posses both loci
                                       # prune the remaining samples out of the analysis.
 # Data filtering
-r="-r 0.7"          # Minimum percentage of individuals in a population
+r="-r 0.5"          # Minimum percentage of individuals in a population
                     # required to process a locus for that population
-p="-p 1"            # Minimum number of populations a locus must be present
+p="-p 4"            # Minimum number of populations a locus must be present
                     # in order to process a locus
-m="-m 6"            # Specify a minimum stack depth required for individuals
+m="-m 4"            # Specify a minimum stack depth required for individuals
                     # at a locus
 f="-f p_value"      # Specify a correction to be applied to Fst values:
 min_maf="-a 0.0"         # Specify a minimum minor allele frequency required
@@ -118,14 +128,4 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
     $phase $fastphase $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
     $verbose $log_fst_comp 2>&1 |
         tee 98-log_files/"$TIMESTAMP"_stacks_8_populations.log
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-INFO_FILES_FOLDER="01-info_files"
-POP_MAP="population_map.txt"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
-cp $INFO_FILES_FOLDER/$POP_MAP $LOG_FOLDER/"$TIMESTAMP"_"$POP_MAP"
 
