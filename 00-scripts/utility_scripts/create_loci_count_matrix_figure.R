@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # Global variables
-proportion.used = 0.5
+proportion.used = 0.8
 data.file = paste("count_matrix", proportion.used, "present.tsv", sep="_")
 heatmap.file = paste("count_figure", proportion.used, "present.jpg", sep="_")
 barplot.file = paste("barplot", proportion.used, "missing.jpg", sep="_")
@@ -16,9 +16,11 @@ num.col = ncol(temp)
 rm(temp)
 
 # Load data
+cat("Loading data...\n")
 data = read.table(data.file, header=T, sep="\t", colClasses=classes)
 
 # Use subset to create heatmap
+cat("Creating figures...\n")
 d = log(data[1:400,] + 1)
 
 jpeg(heatmap.file, width=2000, height=2000)
@@ -40,6 +42,7 @@ jpeg(histogram.file, width=800, height=800)
 dev.off()
 
 # Write file with individual proportion of missing data
+cat("Writing output file...\n")
 missing = data.frame(indName=names(data), propMissing=res)
 write.table(missing, missing.file, sep="\t")
 
