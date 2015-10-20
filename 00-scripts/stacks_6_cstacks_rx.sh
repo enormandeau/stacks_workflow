@@ -2,6 +2,13 @@
 # Lauch cstacks on all the .tags.tsv files
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+
 # Options
 # Comment out options that you do not wish to use
 
@@ -10,7 +17,7 @@ o="-o 05-stacks_rx" # o: output path to write results
 #g="-g"             # g: base catalog matching on genomic location, not sequence
                     #   identity
 #m="-m"             # m: include tags in catalog that match more than one entry
-n="-n 0"            # n: number of mismatches allowed between sample tags when
+n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
 p="-p 16"           # p: enable parallel execution with num_threads threads
 #catalog="--catalog PATH"
@@ -26,11 +33,4 @@ s="$(for file in $(ls -1 05-stacks_rx/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.g
 
 # Run cstacks
 cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_6_cstacks_rx.log
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

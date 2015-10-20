@@ -2,6 +2,13 @@
 # Launch rxstacks 
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+
 # OPTIONS: Comment out options that you do not wish to use
 b="-b 1"           #Batch ID to examine when exporting from the catalog.
 P="-P 05-stacks"   #path to the Stacks output files.
@@ -48,11 +55,4 @@ bound_high="--bound_high 1" #upper bound for epsilon, the error rate,
                      #nucleotides (forces single-threaded execution).
 
 rxstacks $b $P $o $t $v $h $lnl_filter $lnl_lim $lnl_dist $conf_filter $conf_lim $prune_haplo $max_haplo_cnt $model_type $alpha $bound_low $bound_high $verbose | tee 98-log_files/"$TIMESTAMP"_stacks_5b_rxstacks.log
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 

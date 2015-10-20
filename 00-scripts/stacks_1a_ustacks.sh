@@ -2,6 +2,13 @@
 # Launch ustacks to treat all the samples individually
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
+# Copy script as it was run
+SCRIPT=$0
+NAME=$(basename $0)
+LOG_FOLDER="98-log_files"
+
+cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+
 # OPTIONS: Comment out options that you do not wish to use
 t="-t gzfastq"    # t: input file Type. Supported types: fasta, fastq, gzfasta,
                   #   or gzfastq
@@ -9,9 +16,9 @@ o="-o 05-stacks"  # o: output path to write results.
 #i="-i 1"         # i: SQL ID to insert into the output to identify this sample
 m="-m 4"          # m: Minimum depth of coverage required to create a stack
                   #   (default 3).
-M="-M 2"          # M: Maximum distance (in nucleotides) allowed between stacks
+M="-M 3"          # M: Maximum distance (in nucleotides) allowed between stacks
                   #   (default 2).
-N="-N 4"          # N: Maximum distance allowed to align secondary reads to
+N="-N 5"          # N: Maximum distance allowed to align secondary reads to
                   #   primary stacks (default: M + 2).
 #R="-R"           # R: retain unused reads.
 H="-H"            # H: disable calling haplotypes from secondary reads.
@@ -39,11 +46,4 @@ do
         $model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
 done 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_1a_ustacks.log
-
-# Copy script as it was run
-SCRIPT=$0
-NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
-
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
