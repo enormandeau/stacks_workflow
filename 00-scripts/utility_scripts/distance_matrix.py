@@ -94,7 +94,8 @@ if __name__ == '__main__':
     with open(output_matrix, "w") as outf:
         outf.write("\t".join(["Sample"] + samples) + "\n")
         for i in xrange(num_samples):
-            outf.write("\t".join([samples[i]] + [str(x) for x in similarity[i:]]) + "\n")
+            print "Sample:", i
+            #outf.write("\t".join([samples[i]] + [str(x) for x in similarity[i:]]) + "\n")
 
     # Plotting
     from matplotlib import pyplot as plt
