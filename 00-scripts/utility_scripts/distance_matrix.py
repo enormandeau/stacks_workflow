@@ -5,7 +5,7 @@ Usage:
     ./00-scripts/utility_scripts/similarity_matrix.py input_vcf output_matrix
 
 Will create an output matrix to use with the R script:
-    ./00-scripts/utility_scripts/plot_distancd_matrix.R
+    ./00-scripts/utility_scripts/plot_distance_matrix.R
 """
 
 # Modules
