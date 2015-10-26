@@ -10,7 +10,7 @@ present only once in the `01-info_files/sample_information.csv` and for those
 that are present more than once. If a sample is present only once, a link is
 created, thus using no additional disk space. If it is present more than once,
 all the copies are concatenated into one file, doubling the amount of disk
-space taken by this sample.
+space taken by this sample (all the individual files PLUS the combined one).
 
 .. code-block:: bash
 

@@ -5,7 +5,6 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Stacks workflow tutorial &mdash; Stacks workflow tutorial 1.0 documentation</title>
@@ -15,6 +14,7 @@
   
 
   
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -34,7 +34,7 @@
         <link rel="next" title="1. Stacks workflow tutorial" href="01-stacks.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
 </head>
 
@@ -46,14 +46,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
         
-
+          <a href="#" class="fa fa-home"> Stacks workflow tutorial</a>
         
-          <a href="#" class="icon icon-home"> Stacks workflow tutorial
-        
-
-        
-        </a>
-
         
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -62,8 +56,6 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
@@ -79,43 +71,22 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="02-Step_2.html">2. Installing Stacks_workflow</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#from-the-terminal">2.1.1. From the terminal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#using-git">2.1.2. Using git</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-the-most-recent-version-of-this-workflow">2.1. Download and install the most recent version of this workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#set-up-for-mac-osx">2.2. Set up for Mac OSX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-stacks">2.3. Download and install STACKS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-google-s-sparsehash">2.3.1. Installing Google&#8217;s SparseHash</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-stacks">2.3.2. Installing STACKS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#test-the-stacks-installation">2.3.3. Test the STACKS installation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-cutadapt">2.3.4. Installing Cutadapt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-jellyfish">2.3.5. Installing jellyfish</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02-Step_2.html#installing-fastqc">2.3.6. Installing FastQC</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="02-Step_2.html#download-and-install-stacks">2.3. Download and install STACKS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="03-Step_3.html#creating-a-file-with-adapters">3.4.1. Creating a file with adapters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03-Step_3.html#running-cutadapt">3.4.2. Running Cutadapt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03-Step_3.html#scan-the-cutadapt-logs">3.4.3. Scan the cutadapt logs</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="04-Step_4.html#one-restriction-enzyme">4.2.1. One restriction enzyme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04-Step_4.html#two-restriction-enzymes">4.2.2. Two restriction enzymes</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
 </li>
@@ -134,12 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="07-Step_7.html">7. STACKS pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#prepare-population-info-file">7.1. Prepare population info file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#edit-script-parameters">7.2. Edit script parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#without-a-reference-genome">7.3.1. Without a reference genome</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#with-a-reference-genome">7.3.2. With a reference genome</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#what-to-do-in-case-of-power-outages">7.3.3. What to do in case of power outages?</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="08-Step_8.html">8. Filtering the results</a></li>
@@ -174,9 +140,7 @@
     <li>Stacks workflow tutorial</li>
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
-          
+          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -256,8 +220,6 @@ Benestan, Charles Perrier, and Jeremy Gaudin.</p>
 <li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#edit-script-parameters">7.2. Edit script parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07-Step_7.html#run-the-stacks-programs">7.3. Run the STACKS programs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#without-a-reference-genome">7.3.1. Without a reference genome</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#with-a-reference-genome">7.3.2. With a reference genome</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07-Step_7.html#what-to-do-in-case-of-power-outages">7.3.3. What to do in case of power outages?</a></li>
 </ul>
 </li>
 </ul>
@@ -277,7 +239,7 @@ Benestan, Charles Perrier, and Jeremy Gaudin.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="01-stacks.html" class="btn btn-neutral float-right" title="1. Stacks workflow tutorial" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="01-stacks.html" class="btn btn-neutral float-right" title="1. Stacks workflow tutorial">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -287,13 +249,13 @@ Benestan, Charles Perrier, and Jeremy Gaudin.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Aug 12, 2015.
+      Last updated on Oct 26, 2015.
     </p>
   </div>
+
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-
+  
 </footer>
-
         </div>
       </div>
 
