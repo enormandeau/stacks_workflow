@@ -14,7 +14,7 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -25,6 +25,8 @@
   
   
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
   
 
   
@@ -44,9 +46,12 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+          <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -56,8 +61,9 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
@@ -74,13 +80,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="">3. Prepare your raw datafiles</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-your-data">3.1. Downloading your data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#copy-your-raw-files">3.2. Copy your raw files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preparing-the-lane-info-txt-file">3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
@@ -92,7 +98,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#install-bwa">6.1. Install bwa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <code class="docutils literal"><span class="pre">01-info_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#index-the-reference-genome">6.3. Index the reference genome</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#align-samples">6.4. Align samples</a></li>
 </ul>
@@ -110,6 +116,7 @@
 </li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -140,7 +147,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="prepare-your-raw-datafiles">
 <h1>3. Prepare your raw datafiles<a class="headerlink" href="#prepare-your-raw-datafiles" title="Permalink to this headline">¶</a></h1>
@@ -151,7 +158,7 @@ service provider.</p>
 </div>
 <div class="section" id="copy-your-raw-files">
 <h2>3.2. Copy your raw files<a class="headerlink" href="#copy-your-raw-files" title="Permalink to this headline">¶</a></h2>
-<p>Put a copy of (or a link to) your raw data files in the <tt class="docutils literal"><span class="pre">02-raw</span></tt> folder of
+<p>Put a copy of (or a link to) your raw data files in the <code class="docutils literal"><span class="pre">02-raw</span></code> folder of
 stacks_workflow.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -160,7 +167,7 @@ work.</p>
 </div>
 </div>
 <div class="section" id="preparing-the-lane-info-txt-file">
-<h2>3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file<a class="headerlink" href="#preparing-the-lane-info-txt-file" title="Permalink to this headline">¶</a></h2>
+<h2>3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file<a class="headerlink" href="#preparing-the-lane-info-txt-file" title="Permalink to this headline">¶</a></h2>
 <p>This file will contains the names of the raw data files and is used by
 stacks_workflow later.  From the stacks_workflow folder, run:</p>
 <div class="highlight-bash"><div class="highlight"><pre>./00-scripts/00_prepare_lane_info.sh
@@ -176,33 +183,33 @@ step is done before we extract the reads for each individual.</p>
 <p>In order to clean your reads properly, you must determine which adapters are
 present in your data and whether a cut site can also be found with it.</p>
 <p>Before running cutadapt, we must create a fasta file containing the adapters
-that are present in our data. This file must be found in the <tt class="docutils literal"><span class="pre">01-info_files/</span></tt>
-folder and be names <tt class="docutils literal"><span class="pre">adapters.fasta</span></tt>. The file named
-<tt class="docutils literal"><span class="pre">example_adapters.fasta</span></tt>, found in the <tt class="docutils literal"><span class="pre">01-info_files/</span></tt> folder should be
+that are present in our data. This file must be found in the <code class="docutils literal"><span class="pre">01-info_files/</span></code>
+folder and be names <code class="docutils literal"><span class="pre">adapters.fasta</span></code>. The file named
+<code class="docutils literal"><span class="pre">example_adapters.fasta</span></code>, found in the <code class="docutils literal"><span class="pre">01-info_files/</span></code> folder should be
 used as a template.</p>
 <p>The best way to know which adapters and potential restriction enzyme cut sites
 are present in your data is probably to ask the people who created your
 sequencing libraries.</p>
 <p>In order to identify or confirm the potential adapters found in your data
 directly, you can use the following command (you will need to have installed
-<tt class="docutils literal"><span class="pre">jellyfish</span></tt>):</p>
-<div class="highlight-bash"><div class="highlight"><pre>cat <span class="k">$(</span>ls -1 02-raw/*.fastq.gz | head -1<span class="k">)</span> | <span class="se">\</span>
-   gunzip -c | grep -E <span class="s2">&quot;^[ACTG]+$&quot;</span> | head -10000 | cut -c 20- | <span class="se">\</span>
-   awk <span class="s1">&#39;length &gt; 30 {print &quot;&gt;seq_&quot; NR &quot;\n&quot; $_}&#39;</span> &gt; temp.fasta
+<code class="docutils literal"><span class="pre">jellyfish</span></code>):</p>
+<div class="highlight-bash"><div class="highlight"><pre>cat <span class="k">$(</span>ls -1 02-raw/*.fastq.gz <span class="p">|</span> head -1<span class="k">)</span> <span class="p">|</span> <span class="se">\</span>
+   gunzip -c <span class="p">|</span> grep -E <span class="s2">&quot;^[ACTG]+</span><span class="nv">$&quot;</span><span class="s2"> | head -10000 | cut -c 20- | \</span>
+<span class="s2">   awk &#39;length &gt; 30 {print &quot;</span>&gt;seq_<span class="s2">&quot; NR &quot;</span><span class="se">\n</span><span class="s2">&quot; </span><span class="nv">$_</span><span class="s2">}&#39; &gt; temp.fasta</span>
 
-rm kmer.count.*
-<span class="k">for </span>k in <span class="k">$(</span>seq 12 30<span class="k">)</span>
-<span class="k">do</span>
-<span class="k">   </span>jellyfish count -m <span class="nv">$k</span> -s 10000 -t 8 --text -o kmer.count.<span class="s2">&quot;$k&quot;</span> temp.fasta
-   perl -pe <span class="s1">&#39;s/^.+\}[^ACTG]+//&#39;</span> kmer.count.<span class="s2">&quot;$k&quot;</span> | awk <span class="s1">&#39;{print $2,$1}&#39;</span> | <span class="se">\</span>
-   sort -nr | head -20 &gt; kmer.count.sorted.<span class="s2">&quot;$k&quot;</span>; <span class="k">done</span>
+<span class="s2">rm kmer.count.*</span>
+<span class="s2">for k in </span><span class="k">$(</span>seq <span class="m">12</span> 30<span class="k">)</span><span class="s2"></span>
+<span class="s2">do</span>
+<span class="s2">   jellyfish count -m </span><span class="nv">$k</span><span class="s2"> -s 10000 -t 8 --text -o kmer.count.&quot;</span><span class="nv">$k</span><span class="s2">&quot; temp.fasta</span>
+<span class="s2">   perl -pe &#39;s/^.+\}[^ACTG]+//&#39; kmer.count.&quot;</span><span class="nv">$k</span><span class="s2">&quot; | awk &#39;{print </span><span class="nv">$2</span><span class="s2">,</span><span class="nv">$1</span><span class="s2">}&#39; | \</span>
+<span class="s2">   sort -nr | head -20 &gt; kmer.count.sorted.&quot;</span><span class="nv">$k</span><span class="s2">&quot;; done</span>
 </pre></div>
 </div>
 <p>Then look at the results with the following command. From the number of
 identical kmers and how they vary from one kmer length to the next, you should
 be able to spot your adapters and potentially a version containing a cut site
 just before it if you used two restriction enzymes in your library preparation.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="k">for </span>i in kmer.count.sorted.*; <span class="k">do </span><span class="nb">echo</span> <span class="nv">$i</span>; cat <span class="nv">$i</span>; <span class="k">done</span> | less
+<div class="highlight-bash"><div class="highlight"><pre><span class="k">for</span> i in kmer.count.sorted.*<span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> cat <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span> <span class="p">|</span> less
 
 <span class="c"># Delete all these files</span>
 rm kmer.count*
@@ -211,16 +218,19 @@ rm kmer.count*
 </div>
 <div class="section" id="running-cutadapt">
 <h3>3.4.2. Running Cutadapt<a class="headerlink" href="#running-cutadapt" title="Permalink to this headline">¶</a></h3>
-<p>Now that the <tt class="docutils literal"><span class="pre">01-info_files/adapters.fasta</span></tt> file contains all the adapters we
+<p>Now that the <code class="docutils literal"><span class="pre">01-info_files/adapters.fasta</span></code> file contains all the adapters we
 wish to remove from our data, we can launch Cutadapt <strong>in single-end mode</strong>
 with the following command:</p>
-<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/01_cutadapt.sh
+<div class="highlight-bash"><div class="highlight"><pre>./00-scripts/01_cutadapt.sh numCPUs
 </pre></div>
 </div>
+<p>Where <cite>numCPUs</cite> is the number of CPUs you wish to use in parallel. If you do
+not put a number, the script will use only one CPU (for backward
+compatibility).</p>
 </div>
 <div class="section" id="scan-the-cutadapt-logs">
 <h3>3.4.3. Scan the cutadapt logs<a class="headerlink" href="#scan-the-cutadapt-logs" title="Permalink to this headline">¶</a></h3>
-<p>The cutadapt log files can be found in the <tt class="docutils literal"><span class="pre">98-log_files</span></tt> folder. Scan them
+<p>The cutadapt log files can be found in the <code class="docutils literal"><span class="pre">98-log_files</span></code> folder. Scan them
 to confirm that cutadapt has done an appropriate job.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -248,7 +258,7 @@ produced by Illumina and Ion Proton sequencers.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="04-Step_4.html" class="btn btn-neutral float-right" title="4. Extract individual data with process_radtags"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="04-Step_4.html" class="btn btn-neutral float-right" title="4. Extract individual data with process_radtags">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="02-Step_2.html" class="btn btn-neutral" title="2. Installing Stacks_workflow"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -260,11 +270,12 @@ produced by Illumina and Ion Proton sequencers.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 14, 2015.
+      Last updated on Oct 26, 2015.
     </p>
   </div>
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
         </div>
       </div>

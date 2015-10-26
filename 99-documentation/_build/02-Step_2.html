@@ -14,7 +14,7 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -25,6 +25,8 @@
   
   
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
   
 
   
@@ -44,9 +46,12 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+          <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -56,8 +61,9 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
@@ -74,13 +80,13 @@
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
@@ -92,7 +98,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#install-bwa">6.1. Install bwa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <code class="docutils literal"><span class="pre">01-info_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#index-the-reference-genome">6.3. Index the reference genome</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#align-samples">6.4. Align samples</a></li>
 </ul>
@@ -110,6 +116,7 @@
 </li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -140,7 +147,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="installing-stacks-workflow">
 <h1>2. Installing Stacks_workflow<a class="headerlink" href="#installing-stacks-workflow" title="Permalink to this headline">¶</a></h1>
@@ -156,14 +163,14 @@ unzip master.zip
 </div>
 <div class="section" id="using-git">
 <h3>2.1.2. Using git<a class="headerlink" href="#using-git" title="Permalink to this headline">¶</a></h3>
-<p>If <tt class="docutils literal"><span class="pre">git</span></tt> is installed on your computer, you can run the following command
-instead to get a complete <tt class="docutils literal"><span class="pre">git</span></tt> stacks_workflow repository.</p>
+<p>If <code class="docutils literal"><span class="pre">git</span></code> is installed on your computer, you can run the following command
+instead to get a complete <code class="docutils literal"><span class="pre">git</span></code> stacks_workflow repository.</p>
 <div class="highlight-bash"><div class="highlight"><pre>git clone https://github.com/enormandeau/stacks_workflow
 </pre></div>
 </div>
 <p>This will make it easier to update to the most recent version of the workflow,
 which can be accomplished by running the following command from the
-<tt class="docutils literal"><span class="pre">stacks_workflow</span></tt> directory:</p>
+<code class="docutils literal"><span class="pre">stacks_workflow</span></code> directory:</p>
 <div class="highlight-bash"><div class="highlight"><pre>git pull
 </pre></div>
 </div>
@@ -226,7 +233,7 @@ confirm the version number of your STACKS installation.</p>
 </div>
 <div class="section" id="installing-cutadapt">
 <h3>2.3.4. Installing Cutadapt<a class="headerlink" href="#installing-cutadapt" title="Permalink to this headline">¶</a></h3>
-<p>There are different ways you can install Cutadapt. If you have <tt class="docutils literal"><span class="pre">pip</span></tt> (a
+<p>There are different ways you can install Cutadapt. If you have <code class="docutils literal"><span class="pre">pip</span></code> (a
 Python package installer) installed, you can use the following command:</p>
 <div class="highlight-bash"><div class="highlight"><pre>sudo pip install --user --upgrade cutadapt
 </pre></div>
@@ -266,7 +273,7 @@ launch these commands:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="c"># Installing</span>
 unzip fastqc_v0.11.3_source.zip
 <span class="nb">cd </span>FastQC
-chmod 755 fastqc
+chmod <span class="m">755</span> fastqc
 
 <span class="c"># Look at the options</span>
 ./fastqc --help
@@ -290,7 +297,7 @@ chmod 755 fastqc
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="03-Step_3.html" class="btn btn-neutral float-right" title="3. Prepare your raw datafiles"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="03-Step_3.html" class="btn btn-neutral float-right" title="3. Prepare your raw datafiles">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="01-stacks.html" class="btn btn-neutral" title="1. Stacks workflow tutorial"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -302,11 +309,12 @@ chmod 755 fastqc
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 14, 2015.
+      Last updated on Oct 26, 2015.
     </p>
   </div>
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
         </div>
       </div>

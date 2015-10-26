@@ -14,7 +14,7 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -25,6 +25,8 @@
   
   
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
   
 
   
@@ -44,9 +46,12 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+          <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -56,8 +61,9 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview-of-the-steps">1.2. Overview of the steps</a></li>
@@ -74,13 +80,13 @@
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
@@ -92,7 +98,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#install-bwa">6.1. Install bwa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <code class="docutils literal"><span class="pre">01-info_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#index-the-reference-genome">6.3. Index the reference genome</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#align-samples">6.4. Align samples</a></li>
 </ul>
@@ -110,6 +116,7 @@
 </li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -140,27 +147,28 @@
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="stacks-workflow-tutorial">
 <h1>1. Stacks workflow tutorial<a class="headerlink" href="#stacks-workflow-tutorial" title="Permalink to this headline">¶</a></h1>
-<p>This workflow aims at making the use of the STACKS pipeline easier and more
-structured so that people tasked with analysing GBS or RAD data and possessing
-limited UNIX/Linux experience can jump on the analysis wagon faster.</p>
-<p>It was developed with the needs of our research group in mind with as well as
-with an emphasis on non-model species studies. We make no claim about its
-usefulness to other groups or in other contexts, but we still believe it may be
-of use to some.</p>
-<p>This workflow has been tested with version 1.29 and earlier versions of STACKS
+<p>This goal of this workflow is to simplify the use of the STACKS program and to
+create a folder architecture and code structure to help people tasked with
+analysing GBS or RAD data and possessing, especially those with limited
+UNIX/Linux experience, to jump on the analysis wagon faster.</p>
+<p>It was developed with the needs of our research group in mind as well as with
+an emphasis on non-model species studies. We make no claim about its usefulness
+to other groups or in other contexts, but we still believe it may be of use to
+some.</p>
+<p>This workflow has been tested with version 1.35 and earlier versions of STACKS
 under Linux (Ubuntu 12.04 to 14.04) and MacOSX (10.9 Mavericks and 10.10
 Yosemite).</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The most up-to-date version of stacks_workflow (1.29) will not work with
-versions of STACKS older than 1.24 since tags of different lengths can now be
-split together and intermediary files are kept in compressed (.gz) format. We
-also recommend to avoid STACKS versions 1.22 to 1.28, which contained bugs
-that seem to have been fixed in version 1.29.</p>
+<p class="last">Stacks_Workflow version 1.29 and up will not work with versions of STACKS
+older than 1.24 since tags of different lengths can now be split together and
+intermediary files are kept in compressed (.gz) format. We also recommend to
+avoid STACKS versions 1.22 to 1.28, which contained bugs that seem to have
+been fixed in version 1.29. Even better, use the latest STACKS version.</p>
 </div>
 <div class="section" id="about-stacks">
 <h2>1.1. About STACKS<a class="headerlink" href="#about-stacks" title="Permalink to this headline">¶</a></h2>
@@ -205,7 +213,7 @@ genetic inference. Molecular Ecology Resources, n/a–n/a.</a></p>
 <blockquote>
 <div><ul class="simple">
 <li>In the pipeline folder itself. Go to <a class="reference external" href="https://github.com/enormandeau/stacks_workflow">Github</a>, download the whole
-repository and open the file named <tt class="docutils literal"><span class="pre">MANUAL.html</span></tt> in your web browser.</li>
+repository and open the file named <code class="docutils literal"><span class="pre">MANUAL.html</span></code> in your web browser.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -222,7 +230,7 @@ for more details.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="02-Step_2.html" class="btn btn-neutral float-right" title="2. Installing Stacks_workflow"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="02-Step_2.html" class="btn btn-neutral float-right" title="2. Installing Stacks_workflow">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Stacks workflow tutorial"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -234,11 +242,12 @@ for more details.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 14, 2015.
+      Last updated on Oct 26, 2015.
     </p>
   </div>
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
         </div>
       </div>

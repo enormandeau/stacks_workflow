@@ -45,7 +45,6 @@ Visualize the distribution of log likelihoods in
  ./00-scripts/stacks_7_sstacks_rx.sh
  ./00-scripts/stacks_8_populations_rx.sh
 
-<--
 With a reference genome
 -----------------------
 
@@ -73,5 +72,4 @@ Visualize the distribution of log likelihoods in
  ./00-scripts/stacks_6_cstacks_rx.sh
  ./00-scripts/stacks_7_sstacks_rx.sh
  ./00-scripts/stacks_8_populations_rx.sh
--->
 
