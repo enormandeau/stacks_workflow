@@ -1,26 +1,27 @@
 Stacks workflow tutorial
 ************************
 
-This workflow aims at making the use of the STACKS pipeline easier and more
-structured so that people tasked with analysing GBS or RAD data and possessing
-limited UNIX/Linux experience can jump on the analysis wagon faster. 
+This goal of this workflow is to simplify the use of the STACKS program and to
+create a folder architecture and code structure to help people tasked with
+analysing GBS or RAD data and possessing, especially those with limited
+UNIX/Linux experience, to jump on the analysis wagon faster. 
 
-It was developed with the needs of our research group in mind with as well as
-with an emphasis on non-model species studies. We make no claim about its
-usefulness to other groups or in other contexts, but we still believe it may be
-of use to some.
+It was developed with the needs of our research group in mind as well as with
+an emphasis on non-model species studies. We make no claim about its usefulness
+to other groups or in other contexts, but we still believe it may be of use to
+some.
 
-This workflow has been tested with version 1.29 and earlier versions of STACKS
+This workflow has been tested with version 1.35 and earlier versions of STACKS
 under Linux (Ubuntu 12.04 to 14.04) and MacOSX (10.9 Mavericks and 10.10
 Yosemite).
 
 .. warning::
 
- The most up-to-date version of stacks_workflow (1.29) will not work with
- versions of STACKS older than 1.24 since tags of different lengths can now be
- split together and intermediary files are kept in compressed (.gz) format. We
- also recommend to avoid STACKS versions 1.22 to 1.28, which contained bugs
- that seem to have been fixed in version 1.29.
+ Stacks_Workflow version 1.29 and up will not work with versions of STACKS
+ older than 1.24 since tags of different lengths can now be split together and
+ intermediary files are kept in compressed (.gz) format. We also recommend to
+ avoid STACKS versions 1.22 to 1.28, which contained bugs that seem to have
+ been fixed in version 1.29. Even better, use the latest STACKS version.
 
 About STACKS
 ============

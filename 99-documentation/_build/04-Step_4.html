@@ -14,7 +14,7 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -25,6 +25,8 @@
   
   
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
   
 
   
@@ -44,9 +46,12 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+          <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -56,8 +61,9 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
@@ -74,13 +80,13 @@
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
@@ -92,7 +98,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#install-bwa">6.1. Install bwa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <code class="docutils literal"><span class="pre">01-info_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#index-the-reference-genome">6.3. Index the reference genome</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#align-samples">6.4. Align samples</a></li>
 </ul>
@@ -110,6 +116,7 @@
 </li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -131,7 +138,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></li>
+    <li>4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></li>
       <li class="wy-breadcrumbs-aside">
         
           <a href="_sources/04-Step_4.txt" rel="nofollow"> View page source</a>
@@ -140,17 +147,17 @@
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="extract-individual-data-with-process-radtags">
-<h1>4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt><a class="headerlink" href="#extract-individual-data-with-process-radtags" title="Permalink to this headline">¶</a></h1>
+<h1>4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code><a class="headerlink" href="#extract-individual-data-with-process-radtags" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="prepare-a-file-named-sample-information-csv">
-<h2>4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt><a class="headerlink" href="#prepare-a-file-named-sample-information-csv" title="Permalink to this headline">¶</a></h2>
-<p>Use the same format found in the <tt class="docutils literal"><span class="pre">example_sample_information.csv</span></tt> file in
-the <tt class="docutils literal"><span class="pre">01-info_files</span></tt> folder.</p>
-<p>Save this file in the <tt class="docutils literal"><span class="pre">01-info_files</span></tt> folder and name it exactly
-<tt class="docutils literal"><span class="pre">sample_information.csv</span></tt>.</p>
-<p>The <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt> file will be used to extract the samples and
+<h2>4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code><a class="headerlink" href="#prepare-a-file-named-sample-information-csv" title="Permalink to this headline">¶</a></h2>
+<p>Use the same format found in the <code class="docutils literal"><span class="pre">example_sample_information.csv</span></code> file in
+the <code class="docutils literal"><span class="pre">01-info_files</span></code> folder.</p>
+<p>Save this file in the <code class="docutils literal"><span class="pre">01-info_files</span></code> folder and name it exactly
+<code class="docutils literal"><span class="pre">sample_information.csv</span></code>.</p>
+<p>The <code class="docutils literal"><span class="pre">sample_information.csv</span></code> file will be used to extract the samples and
 rename the extracted sample files automatically.</p>
 <p>The first column <strong>MUST</strong> contain the <strong>EXACT</strong> name of the data file for the
 lane of each sample.</p>
@@ -183,7 +190,7 @@ populations.</p>
 <div><ul class="simple">
 <li><strong>trimLength</strong> = length to trim all the sequences. This should be the length
 of the Illumina reads minus the length of the longest tag or MID.</li>
-<li><strong>enzyme</strong> = name of enzyme (run <tt class="docutils literal"><span class="pre">process_radtags</span></tt>, without options, for a
+<li><strong>enzyme</strong> = name of enzyme (run <code class="docutils literal"><span class="pre">process_radtags</span></code>, without options, for a
 list of the supported enzymes)</li>
 </ul>
 </div></blockquote>
@@ -198,9 +205,9 @@ list of the supported enzymes)</li>
 <div><ul class="simple">
 <li><strong>trimLength</strong> = length to trim all the sequences. This should be the length
 of the Illumina reads minus the length of the longest tag or MID.</li>
-<li><strong>enzyme1</strong> = name of the first enzyme (run <tt class="docutils literal"><span class="pre">process_radtags</span></tt>, without
+<li><strong>enzyme1</strong> = name of the first enzyme (run <code class="docutils literal"><span class="pre">process_radtags</span></code>, without
 options, for a list of the supported enzymes)</li>
-<li><strong>enzyme2</strong> = name of the second enzyme (run <tt class="docutils literal"><span class="pre">process_radtags</span></tt>, without
+<li><strong>enzyme2</strong> = name of the second enzyme (run <code class="docutils literal"><span class="pre">process_radtags</span></code>, without
 options, for a list of the supported enzymes)</li>
 </ul>
 </div></blockquote>
@@ -224,7 +231,7 @@ highly variant species.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="05-Step_5.html" class="btn btn-neutral float-right" title="5. Rename samples"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="05-Step_5.html" class="btn btn-neutral float-right" title="5. Rename samples">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="03-Step_3.html" class="btn btn-neutral" title="3. Prepare your raw datafiles"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -236,11 +243,12 @@ highly variant species.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 14, 2015.
+      Last updated on Oct 26, 2015.
     </p>
   </div>
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
         </div>
       </div>

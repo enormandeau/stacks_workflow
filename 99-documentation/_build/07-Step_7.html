@@ -14,7 +14,7 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -25,6 +25,8 @@
   
   
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
   
 
   
@@ -44,9 +46,12 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+          <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -56,8 +61,9 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
@@ -74,13 +80,13 @@
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
@@ -92,7 +98,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="06-Step_6.html">6. Align reads to a reference genome (optional)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#install-bwa">6.1. Install bwa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <code class="docutils literal"><span class="pre">01-info_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#index-the-reference-genome">6.3. Index the reference genome</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-Step_6.html#align-samples">6.4. Align samples</a></li>
 </ul>
@@ -110,6 +116,7 @@
 </li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -140,7 +147,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="stacks-pipeline">
 <h1>7. STACKS pipeline<a class="headerlink" href="#stacks-pipeline" title="Permalink to this headline">¶</a></h1>
@@ -152,11 +159,11 @@
 </div>
 <div class="section" id="edit-script-parameters">
 <h2>7.2. Edit script parameters<a class="headerlink" href="#edit-script-parameters" title="Permalink to this headline">¶</a></h2>
-<p>You will need to go through all the scripts named <tt class="docutils literal"><span class="pre">stacks_*</span></tt> in the
-<tt class="docutils literal"><span class="pre">00-scripts</span> <span class="pre">folder</span></tt> and edit the options to suite your needs.</p>
+<p>You will need to go through all the scripts named <code class="docutils literal"><span class="pre">stacks_*</span></code> in the
+<code class="docutils literal"><span class="pre">00-scripts</span> <span class="pre">folder</span></code> and edit the options to suite your needs.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This step is crucial. Choosing appropriate parameters for your study is
+<p class="last">This step is most important. Choosing appropriate parameters for your study is
 crucial in order to generate meaninful and optimal results. Read the STACKS
 documentation on their website to learn more about the different options.</p>
 </div>
@@ -173,8 +180,8 @@ documentation on their website to learn more about the different options.</p>
 </pre></div>
 </div>
 <p>Visualize the distribution of log likelihoods in
-<tt class="docutils literal"><span class="pre">rxstacks_log_likelihoods.png</span></tt> and choose a cutoff to use in the next script
-(<tt class="docutils literal"><span class="pre">./00-scripts/stacks_5b_rxstacks.sh</span></tt>). Then launch:</p>
+<code class="docutils literal"><span class="pre">rxstacks_log_likelihoods.png</span></code> and choose a cutoff to use in the next script
+(<code class="docutils literal"><span class="pre">./00-scripts/stacks_5b_rxstacks.sh</span></code>). Then launch:</p>
 <div class="highlight-bash"><div class="highlight"><pre>./00-scripts/stacks_5b_rxstacks.sh
 ./00-scripts/stacks_6_cstacks_rx.sh
 ./00-scripts/stacks_7_sstacks_rx.sh
@@ -197,40 +204,14 @@ updated in a long time. We believe they should not be used at the moment.</p>
 </pre></div>
 </div>
 <p>Visualize the distribution of log likelihoods in
-<tt class="docutils literal"><span class="pre">rxstacks_log_likelihoods.png</span></tt> and choose a cutoff to use in the next script
-(<tt class="docutils literal"><span class="pre">./00-scripts/stacks_5b_rxstacks.sh</span></tt>). Then launch:</p>
+<code class="docutils literal"><span class="pre">rxstacks_log_likelihoods.png</span></code> and choose a cutoff to use in the next script
+(<code class="docutils literal"><span class="pre">./00-scripts/stacks_5b_rxstacks.sh</span></code>). Then launch:</p>
 <div class="highlight-bash"><div class="highlight"><pre>./00-scripts/stacks_5b_rxstacks.sh
 ./00-scripts/stacks_6_cstacks_rx.sh
 ./00-scripts/stacks_7_sstacks_rx.sh
 ./00-scripts/stacks_8_populations_rx.sh
 </pre></div>
 </div>
-</div>
-<div class="section" id="what-to-do-in-case-of-power-outages">
-<h3>7.3.3. What to do in case of power outages?<a class="headerlink" href="#what-to-do-in-case-of-power-outages" title="Permalink to this headline">¶</a></h3>
-<p>If your analysis gets interrupted by a power outage or some similar cause, it
-is possible to restart some of the portions of STACKS where they were rather
-than at the beginning. The following scripts can be restarted:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">stacks_1a_ustacks.sh</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">stacks_2_cstacks.sh</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">stacks_3_sstacks.sh</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">stacks_5b_rxstacks.sh</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">stacks_4_populations.sh</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">stacks_6_cstacks_rx.sh</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">stacks_7_sstacks_rx.sh</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">stacks_8_populations_rx.sh</span></tt></li>
-</ul>
-<p>For <tt class="docutils literal"><span class="pre">stacks_1a_ustacks.sh</span></tt>, you will need to keep only the samples that need to
-be treated in <tt class="docutils literal"><span class="pre">04-all_samples</span></tt>. You can for example create a folder named
-<tt class="docutils literal"><span class="pre">treated</span></tt> in <tt class="docutils literal"><span class="pre">04-all_samples</span></tt> and move your treated samples there. You will
-also need to change the <tt class="docutils literal"><span class="pre">id</span></tt> variable in the script. For example, if you have
-already treated 40 samples, the <tt class="docutils literal"><span class="pre">id</span></tt> variable should be modified to 41.</p>
-<p>For <tt class="docutils literal"><span class="pre">stacks_2_cstacks.sh</span></tt> and <tt class="docutils literal"><span class="pre">stacks_6_cstacks_rx.sh</span></tt>, you will need to write
-the path to the partial catalog and assign it to the <tt class="docutils literal"><span class="pre">catalog</span></tt> variable in the
-script. You will also need to move the treated samples into another folder.</p>
-<p>For <tt class="docutils literal"><span class="pre">stacks_3_sstacks.sh</span></tt>, <tt class="docutils literal"><span class="pre">stacks_7_sstacks_rx.sh</span></tt> and <tt class="docutils literal"><span class="pre">stacks_5b_rxstacks.sh</span></tt>,
-you will need to move the treated samples into another folder.</p>
 </div>
 </div>
 </div>
@@ -241,7 +222,7 @@ you will need to move the treated samples into another folder.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="08-Step_8.html" class="btn btn-neutral float-right" title="8. Filtering the results"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="08-Step_8.html" class="btn btn-neutral float-right" title="8. Filtering the results">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="06-Step_6.html" class="btn btn-neutral" title="6. Align reads to a reference genome (optional)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -253,11 +234,12 @@ you will need to move the treated samples into another folder.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 14, 2015.
+      Last updated on Oct 26, 2015.
     </p>
   </div>
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
         </div>
       </div>

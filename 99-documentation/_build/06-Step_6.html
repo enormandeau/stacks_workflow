@@ -14,7 +14,7 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -25,6 +25,8 @@
   
   
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
   
 
   
@@ -44,9 +46,12 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+          <a href="index.html" class="fa fa-home"> Stacks workflow tutorial</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -56,8 +61,9 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01-stacks.html">1. Stacks workflow tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#about-stacks">1.1. About STACKS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-stacks.html#overview-of-the-steps">1.2. Overview of the steps</a></li>
@@ -74,13 +80,13 @@
 <li class="toctree-l1"><a class="reference internal" href="03-Step_3.html">3. Prepare your raw datafiles</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#downloading-your-data">3.1. Downloading your data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#copy-your-raw-files">3.2. Copy your raw files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <tt class="docutils literal"><span class="pre">lane_info.txt</span></tt> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#preparing-the-lane-info-txt-file">3.3. Preparing the <code class="docutils literal"><span class="pre">lane_info.txt</span></code> file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#removing-adapters">3.4. Removing adapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-Step_3.html#assess-sequence-quality-with-fastqc">3.5. Assess sequence quality with FastQC</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <tt class="docutils literal"><span class="pre">process_radtags</span></tt></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <tt class="docutils literal"><span class="pre">sample_information.csv</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Step_4.html">4. Extract individual data with <code class="docutils literal"><span class="pre">process_radtags</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#prepare-a-file-named-sample-information-csv">4.1. Prepare a file named <code class="docutils literal"><span class="pre">sample_information.csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#launch-process-radtags-with">4.2. Launch process_radtags with:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Step_4.html#testing-different-trim-lengths">4.3. Testing different trim lengths</a></li>
 </ul>
@@ -92,7 +98,7 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">6. Align reads to a reference genome (optional)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-bwa">6.1. Install bwa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-reference-genome-to-the-01-info-files">6.2. Download reference genome to the <code class="docutils literal"><span class="pre">01-info_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#index-the-reference-genome">6.3. Index the reference genome</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#align-samples">6.4. Align samples</a></li>
 </ul>
@@ -110,6 +116,7 @@
 </li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -140,20 +147,20 @@
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="align-reads-to-a-reference-genome-optional">
 <h1>6. Align reads to a reference genome (optional)<a class="headerlink" href="#align-reads-to-a-reference-genome-optional" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The documentation and scripts used with a reference genome have not been
-updated in a long time. We believe they should not be used at the moment.</p>
+updated in a long time and do not work. They should not be used at the moment.</p>
 </div>
 <div class="section" id="install-bwa">
 <h2>6.1. Install <a class="reference external" href="http://bio-bwa.sourceforge.net">bwa</a><a class="headerlink" href="#install-bwa" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="download-reference-genome-to-the-01-info-files">
-<h2>6.2. Download reference genome to the <tt class="docutils literal"><span class="pre">01-info_files</span></tt><a class="headerlink" href="#download-reference-genome-to-the-01-info-files" title="Permalink to this headline">¶</a></h2>
+<h2>6.2. Download reference genome to the <code class="docutils literal"><span class="pre">01-info_files</span></code><a class="headerlink" href="#download-reference-genome-to-the-01-info-files" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="index-the-reference-genome">
 <h2>6.3. Index the reference genome<a class="headerlink" href="#index-the-reference-genome" title="Permalink to this headline">¶</a></h2>
@@ -180,7 +187,7 @@ updated in a long time. We believe they should not be used at the moment.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="07-Step_7.html" class="btn btn-neutral float-right" title="7. STACKS pipeline"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="07-Step_7.html" class="btn btn-neutral float-right" title="7. STACKS pipeline">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="05-Step_5.html" class="btn btn-neutral" title="5. Rename samples"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -192,11 +199,12 @@ updated in a long time. We believe they should not be used at the moment.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 14, 2015.
+      Last updated on Oct 26, 2015.
     </p>
   </div>
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
 </footer>
         </div>
       </div>

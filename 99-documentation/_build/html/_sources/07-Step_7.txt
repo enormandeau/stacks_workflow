@@ -16,7 +16,7 @@ You will need to go through all the scripts named ``stacks_*`` in the
 
 .. warning::
 
- This step is crucial. Choosing appropriate parameters for your study is
+ This step is most important. Choosing appropriate parameters for your study is
  crucial in order to generate meaninful and optimal results. Read the STACKS
  documentation on their website to learn more about the different options.
 
@@ -45,6 +45,7 @@ Visualize the distribution of log likelihoods in
  ./00-scripts/stacks_7_sstacks_rx.sh
  ./00-scripts/stacks_8_populations_rx.sh
 
+<--
 With a reference genome
 -----------------------
 
@@ -72,4 +73,5 @@ Visualize the distribution of log likelihoods in
  ./00-scripts/stacks_6_cstacks_rx.sh
  ./00-scripts/stacks_7_sstacks_rx.sh
  ./00-scripts/stacks_8_populations_rx.sh
+-->
 

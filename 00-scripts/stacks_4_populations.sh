@@ -126,6 +126,5 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
     $bootstrap_fst $bootstrap_div $bootstrap_phist $bootstrap_reps \
     $bootstrap_wl $genomic $fasta $vcf $vcf_haplotypes $genepop $structure
     $phase $fastphase $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
-    $verbose $log_fst_comp 2>&1 |
-        tee 98-log_files/"$TIMESTAMP"_stacks_4_populations.log
+    $verbose $log_fst_comp 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_4_populations.log
 
