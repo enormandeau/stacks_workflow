@@ -6,7 +6,7 @@ for (i in nrow(data)) {
     d[i, i] = max(d)
 }
 
-png("missingness_17pops_no_empty.png", width=800, height=800)
+png("missingness_16pops_no_empty.png", width=800, height=800)
     heatmap(as.matrix(data), scale="none", margin=c(8,8))
 dev.off()
 
