@@ -98,26 +98,20 @@ if __name__ == '__main__':
     # Distance is the proportion of genotypes that differ
     print("Computing similarity and missingness...")
     similarity, missingness = compute_similarity(samples, genotypes)
-    print similarity.shape
-    print missingness.shape
-
-    ## Missing is the proportion of genotypes found in only one sample
-    #print("Computing missingness...")
-    #missingness = compute_missing(samples, genotypes)
 
     # Writing similarity matrix to file
-    #with open(output_similarity, "w") as outf:
-    #    outf.write("\t".join(["Sample"] + samples) + "\n")
-    #    for i in xrange(num_samples):
-    #        print "Sample:", i
-    #        #outf.write("\t".join([samples[i]] + [str(x) for x in similarity[i:]]) + "\n")
+    with open(output_similarity + ".csv", "w") as outf:
+        outf.write("\t".join(["Sample"] + samples) + "\n")
+        for i in xrange(num_samples):
+            data = [str(x) for x in similarity[i,]]
+            outf.write("\t".join([samples[i]] + data) + "\n")
 
     # Writing missingness matrix to file
-    #with open(output_missing, "w") as outf:
-    #    outf.write("\t".join(["Sample"] + samples) + "\n")
-    #    for i in xrange(num_samples):
-    #        print "Sample:", i
-    #        #outf.write("\t".join([samples[i]] + [str(x) for x in similarity[i:]]) + "\n")
+    with open(output_missing + ".csv", "w") as outf:
+        outf.write("\t".join(["Sample"] + samples) + "\n")
+        for i in xrange(num_samples):
+            data = [str(x) for x in missingness[i,]]
+            outf.write("\t".join([samples[i]] + data) + "\n")
 
     # Plotting
     # Similarity
