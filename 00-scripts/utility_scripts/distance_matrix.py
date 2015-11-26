@@ -13,6 +13,7 @@ print("Loading modules...")
 from collections import defaultdict
 from multiprocessing import Process, Value, Array
 import numpy as np
+import time
 import sys
 
 # Functions
@@ -61,14 +62,13 @@ def compute_similarity(samples, genotypes):
             p = Process(target=pair_similarity, args=(i, j, similarity, missingness, genotypes, num_samples))
             p.start()
 
+    # Wait for processes to finish
+    p.join()
+    time.sleep(2)
     similarity = np.reshape(similarity, [num_samples, num_samples])
+    time.sleep(2)
     missingness = np.reshape(missingness, [num_samples, num_samples])
     return [similarity, missingness]
-
-def compute_missing(samples, genotypes):
-    num_samples = len(samples)
-    missing = np.ones((num_samples, num_samples))
-    return missing
 
 # Main
 if __name__ == '__main__':
