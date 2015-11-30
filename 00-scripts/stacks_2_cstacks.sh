@@ -20,11 +20,15 @@ o="-o 05-stacks"    # o: output path to write results
 n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
 p="-p 16"           # p: enable parallel execution with num_threads threads
-#catalog="--catalog PATH"
-#k_len 31           # k_len: specify k-mer size for matching between catalog loci
-                    # (automatically calculated by default).
-#report_mmatches="--report_mmatches"    # --report_mmatches: report query loci
-                    #   that match more than one catalog locus
+
+#Catalog editing:
+#catalog="--catalog PATH"   # provide the path to an existing catalog. cstacks will add data to this existing catalog.
+
+#Advanced options:
+
+#k_len="--k_len 31"                      # specify k-mer size for matching between catalog loci (automatically calculated by default).
+#report_mmatches="--report_mmatches "    # report query loci that match more than one catalog locus
+
 
 # -=( DO NOT MODIFY THE FOLLWING OPTION! )=-
 # This will automatically create the list of filenames for cstacks
@@ -32,5 +36,5 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
 s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Run cstacks
-cstacks $b $s $o $g $m $n $p $catalog $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
+cstacks $b $s $o $g $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
 
