@@ -20,8 +20,6 @@ o="-o 05-stacks"    # o: output path to write results
 n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
 p="-p 16"           # p: enable parallel execution with num_threads threads
-#v="-v"             # print program version.
-#h="-h"             # display this help messsage.
 
 #Catalog editing:
 #catalog="--catalog PATH"   # provide the path to an existing catalog. cstacks will add data to this existing catalog.
@@ -38,5 +36,5 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
 s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Run cstacks
-cstacks $b $s $o $g $m $n $p $v $h $catalog $k_len $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
+cstacks $b $s $o $g $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
 
