@@ -2,10 +2,7 @@
 """Compute a pairwise similarity matrix among samples from a filtered VCF file
 
 Usage:
-    ./00-scripts/utility_scripts/similarity_matrix.py input_vcf output_similarity output_missing
-
-Will create an output matrix to use with the R script:
-    ./00-scripts/utility_scripts/plot_distance_matrix.R
+    ./00-scripts/utility_scripts/similarity_matrix.py input_vcf output_similarity output_distance output_missing
 """
 
 # Modules
@@ -75,7 +72,8 @@ if __name__ == '__main__':
     try:
         input_vcf = sys.argv[1]
         output_similarity = sys.argv[2]
-        output_missing = sys.argv[3]
+        output_distance = sys.argv[3]
+        output_missing = sys.argv[4]
     except:
         print __doc__
         sys.exit(1)
@@ -104,6 +102,13 @@ if __name__ == '__main__':
         outf.write("\t".join(["Sample"] + samples) + "\n")
         for i in xrange(num_samples):
             data = [str(x) for x in similarity[i,]]
+            outf.write("\t".join([samples[i]] + data) + "\n")
+
+    # Writing distance matrix to file
+    with open(output_distance + ".csv", "w") as outf:
+        outf.write("\t".join(["Sample"] + samples) + "\n")
+        for i in xrange(num_samples):
+            data = [str(1 - x) for x in similarity[i,]]
             outf.write("\t".join([samples[i]] + data) + "\n")
 
     # Writing missingness matrix to file
