@@ -2,7 +2,7 @@
 # Testing the full stacks_workflow pipeline
 # WARNING! Do not use this script to run your analyses!
 
-echo "Long test should take approximately 1 hour to run"
+echo "Long test should take approximately 10 hours to run on 16 CPUs"
 
 # Clean directories
 rm 01-info_files/barcodes.txt 2> /dev/null
@@ -60,23 +60,22 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
 
 ### Filtering should give approximately the following:
 
-# Treating: 05-stacks_rx/batch_1.vcf (2 populations)
-# ===================================================
-# 318 Genotypes removed  (min_allele_coverage) [2]
-# 19857 Genotypes removed  (min_depth) [7]
-# 27 Genotypes removed  (max_allelic_imbalance) [4.0]
-# 22850 Genotypes removed  (min_genotype_likelihood) [10.0]
-# 22 SNPs failed        (max_allele_coverage) [30]
-# 6562 SNPs failed        (min_presence) [70]
-# 5689 SNPs failed        (maf_global) [0.05]
-# 6141 SNPs failed        (maf_population) [0.1]
-# 757 SNPs failed        (heterozygosity) [0.5]
-# 1467 SNPs failed        (min_fis) [-0.3]
-# 822 SNPs failed        (max_fis) [0.1]
-# 28 SNPs failed        (max_snp_number) [6]
-# ---------------------------------------------------
-# 8734 SNPs (6343 loci) in input file
-# 8561 SNPs (98.0%) filtered out
-# 173 SNPs (133 loci) retained
-# ===================================================
-
+#Treating: 05-stacks_rx/batch_1.vcf (2 populations)
+#===================================================
+#1629 Genotypes removed  (min_allele_coverage) [2]
+#188529 Genotypes removed  (min_depth) [7]
+#44 Genotypes removed  (max_allelic_imbalance) [4.0]
+#73843 Genotypes removed  (min_genotype_likelihood) [10.0]
+#29 SNPs failed        (max_allele_coverage) [30]
+#21528 SNPs failed        (min_presence) [70]
+#15091 SNPs failed        (maf_global) [0.05]
+#14744 SNPs failed        (maf_population) [0.1]
+#2277 SNPs failed        (heterozygosity) [0.5]
+#2790 SNPs failed        (min_fis) [-0.3]
+#4098 SNPs failed        (max_fis) [0.1]
+#1256 SNPs failed        (max_snp_number) [6]
+#---------------------------------------------------
+#23072 SNPs (13287 loci) in input file
+#22952 SNPs (99.5%) filtered out
+#120 SNPs (89 loci) retained
+#===================================================
