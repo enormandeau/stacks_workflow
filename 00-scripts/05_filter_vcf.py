@@ -20,6 +20,7 @@ import os
 class Sample(object):
     """Genotype information of one sample
     """
+
     def __init__(self, info):
         self.info = info.split(":")
         self.genotype = self.info[0]
@@ -62,6 +63,7 @@ class SNP(object):
     def __init__(self, line):
         """Parse SNP information from one SNP line in the VCF file
         """
+        
         self.line = line.split("\t")
         self.chrom = self.line[0]
         self.pos = int(self.line[1])
@@ -95,6 +97,7 @@ class SNP(object):
 class Locus(object):
     """A locus is a list of SNP objects and methods to manipulate them
     """
+
     def __init__(self, snp_list):
         self.snps = snp_list
 
@@ -126,6 +129,7 @@ class Flags(object):
     def __init__(self):
         """Initialize flag values for new SNP flags
         """
+
         self.min_presence = True
         self.maf_global = True
         self.maf_population = True
@@ -137,6 +141,7 @@ class Flags(object):
     def pass_filters(self, add_count=False):
         """Return True if a SNP passes the filters, False otherwise
         """
+
         if add_count:
             Flags.total_snps_count += 1
 
@@ -157,48 +162,59 @@ class Flags(object):
         return passing
 
     @classmethod
-    def report_filters(cls, locus_counter, total_good_loci):
-        """Print report about the numbers of SNPs that didn't pass each of the
-        filters
+    def report_filters(cls, locus_counter, total_good_loci, report_file):
+        """Print report about the numbers of SNPs that didn't pass each of the filters
         """
-        print "==================================================="
-        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_allele_coverage_count),
-                "min_allele_coverage", args.min_allele_coverage)
-        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_depth_count),
-                "min_depth", args.min_depth)
-        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.max_allelic_imbalance_count),
-                "max_allelic_imbalance", args.max_allelic_imbalance)
-        print "  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_genotype_likelihood_count),
-                "min_genotype_likelihood", args.min_genotype_likelihood)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_allele_coverage_count),
-                "max_allele_coverage", args.max_allele_coverage)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_presence_count),
-                "min_presence", args.min_presence)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_maf_global_count),
-                "maf_global", args.maf_global)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_maf_population_count),
-                "maf_population", args.maf_population)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_heterozygosity_count),
-                "heterozygosity", args.max_hetero)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.min_fis_count),
-                "min_fis", args.min_fis)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_fis_count),
-                "max_fis", args.max_fis)
-        print "  {} SNPs failed        ({}) [{}]".format(pad(cls.max_snp_number_count),
-                "max_snp_number", args.max_snp_number)
-        print "---------------------------------------------------"
-        print "  {} SNPs ({} loci) in input file".format(pad(cls.total_snps_count), locus_counter)
+
+        report = []
+        report.append("===================================================")
+        report.append("  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_allele_coverage_count),
+                "min_allele_coverage", args.min_allele_coverage))
+        report.append("  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_depth_count),
+                "min_depth", args.min_depth))
+        report.append("  {} Genotypes removed  ({}) [{}]".format(pad(cls.max_allelic_imbalance_count),
+                "max_allelic_imbalance", args.max_allelic_imbalance))
+        report.append("  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_genotype_likelihood_count),
+                "min_genotype_likelihood", args.min_genotype_likelihood))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.max_allele_coverage_count),
+                "max_allele_coverage", args.max_allele_coverage))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_presence_count),
+                "min_presence", args.min_presence))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_maf_global_count),
+                "maf_global", args.maf_global))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_maf_population_count),
+                "maf_population", args.maf_population))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.max_heterozygosity_count),
+                "heterozygosity", args.max_hetero))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_fis_count),
+                "min_fis", args.min_fis))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.max_fis_count),
+                "max_fis", args.max_fis))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.max_snp_number_count),
+                "max_snp_number", args.max_snp_number))
+        report.append("---------------------------------------------------")
+        report.append("  {} SNPs ({} loci) in input file".format(pad(cls.total_snps_count), locus_counter))
+
         try:
-            print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count),
-                    str(round(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count), 1)))
+            report.append("  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count),
+                    str(round(100.0 * float(cls.total_filtered_count) / float(cls.total_snps_count), 1))))
         except:
-            print "  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), 100)
-        print "  {} SNPs ({} loci) retained".format(pad(cls.total_good_snps_count), total_good_loci)
-        print "==================================================="
+            report.append("  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), 100))
+
+        report.append("  {} SNPs retained".format(pad(cls.total_good_snps_count), total_good_loci))
+        report.append("===================================================")
+
+        report = "\n".join(report)
+        # Print report
+        print report
+
+        # Write report to file
+        report_file.write(report)
 
     def format_filters(self):
         """Format the flag information for printing in filter file
         """
+
         return "\t".join([
                           str(self.min_presence),
                           str(self.maf_global),
@@ -248,6 +264,7 @@ def locus_iterator(input_file):
     """Iterate over the loci, one at a time, and yield the next one as a list
     containing all the SNPs for that locus
     """
+
     with open(input_file) as in_f:
         snps = []
         first = True
@@ -269,12 +286,14 @@ def locus_iterator(input_file):
                         yield Locus(snps)
                     snps = [snp]
                     last_id = current_id
+
         yield Locus(snps)
 
 ## Writing output to files
 def write_filters(locus, handle):
     """Output filters to file
     """
+
     for snp in locus.snps:
         handle.write("\t".join([str(snp.pos), str(snp.locus_id),
                                 snp.flags.format_filters()]))
@@ -282,6 +301,7 @@ def write_filters(locus, handle):
 def write_locus(locus, handle):
     """Output good SNPs to file
     """
+
     for snp in locus.snps:
         if snp.flags.pass_filters(add_count=True):
             handle.write("\t".join(snp.line) + "\n")
@@ -289,6 +309,7 @@ def write_locus(locus, handle):
 def write_whitelist(locus, handle):
     """Output ID of loci with good SNPs
     """
+
     global total_good_loci
     passed = False
 
@@ -304,6 +325,7 @@ def write_whitelist(locus, handle):
 ## General purpose
 def median(lst):
     lst = sorted(lst)
+
     if len(lst) < 1:
             return None
     if len(lst) %2 == 1:
@@ -314,6 +336,7 @@ def median(lst):
 def pad(text, char=" ", min_length=6):
     """Pad text with char to min_length
     """
+
     # Will crash if not possible
     text = str(text)
     char = str(char)
@@ -329,6 +352,7 @@ def pad(text, char=" ", min_length=6):
 def test_min_allele_coverage(locus, pop_info, min_allele_coverage):
     """Test if each genotype is backed by enough reads
     """
+
     for snp in locus.snps:
         for sample in snp.samples:
             # calculate allele coverage for both alleles
@@ -337,6 +361,7 @@ def test_min_allele_coverage(locus, pop_info, min_allele_coverage):
                 if sample.alt < min_allele_coverage or sample.ref < min_allele_coverage:
                     sample.genotype = "./."
                     Flags.min_allele_coverage_count += 1
+
             elif sample.genotype in ["0/0", "1/1"]:
                 if sample.depth < min_allele_coverage:
                     sample.genotype = "./."
@@ -353,6 +378,7 @@ def test_min_depth(locus, pop_info, min_depth):
                 if sample.depth < min_depth:
                     sample.genotype = "./."
                     Flags.min_depth_count += 1
+
             elif sample.genotype in ["0/0", "1/1"]:
                 if sample.depth < min_depth:
                     sample.genotype = "./."
@@ -361,6 +387,7 @@ def test_min_depth(locus, pop_info, min_depth):
 def get_depth_data(graph_dict, locus, pop_info):
     """Get min, median and max depth by pop and globally
     """
+
     for snp in locus.snps:
         for pop in pop_info:
             # By pop
@@ -374,12 +401,14 @@ def get_depth_data(graph_dict, locus, pop_info):
             # Globally
             graph_dict["global"]["medDepth"][med] += 1
             graph_dict["global"]["maxDepth"][maximum] += 1
+
         break
 
 # Min genotype_likelihood
 def test_min_genotype_likelihood(locus, pop_info, min_genotype_likelihood):
     """Test if each genotype's genotype_likelihood is high enough
     """
+
     for snp in locus.snps:
         for sample in snp.samples:
             if sample.genotype != "./.":
@@ -391,6 +420,7 @@ def test_min_genotype_likelihood(locus, pop_info, min_genotype_likelihood):
 def get_genotype_likelihood_data(graph_dict, locus, pop_info):
     """Get genotype likelihood data by pop and globally
     """
+
     for snp in locus.snps:
         # By pop
         for pop in pop_info:
@@ -398,6 +428,7 @@ def get_genotype_likelihood_data(graph_dict, locus, pop_info):
             likelihood = [x.genotype_likelihood for x in samples
                              if x.genotype_likelihood != -9999 and x.genotype != "./."]
             likelihood = [round(x, 3) for x in likelihood]
+
             for i in likelihood:
                 graph_dict[pop]["genLikelihood"][i] += 1
                 graph_dict["global"]["genLikelihood"][i] += 1
@@ -406,6 +437,7 @@ def get_genotype_likelihood_data(graph_dict, locus, pop_info):
 def test_max_allelic_imbalance(locus, pop_info, max_allelic_imbalance):
     """Test if each heterozygote's genotype has a low enough allelic allelic_imbalance
     """
+
     for snp in locus.snps:
         for sample in snp.samples:
             if sample.genotype in ["0/1", "1/0"]:
@@ -416,6 +448,7 @@ def test_max_allelic_imbalance(locus, pop_info, max_allelic_imbalance):
 def get_allelic_imbalance_data(graph_dict, locus, pop_info):
     """Get allelic imbalance data by pop and globally
     """
+
     for snp in locus.snps:
         # By pop
         for pop in pop_info:
@@ -430,6 +463,7 @@ def get_allelic_imbalance_data(graph_dict, locus, pop_info):
 def test_min_presence(locus, pop_info, min_presence, joker, percent):
     """Test if enough populations have enough samples genotyped
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -466,6 +500,7 @@ def test_min_presence(locus, pop_info, min_presence, joker, percent):
 def get_presence_data(graph_dict, locus, pop_info):
     """Get presence data by pop and globally
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -480,6 +515,7 @@ def get_presence_data(graph_dict, locus, pop_info):
                 num_samples += 1
                 if sample.genotype != "./.":
                     passing += 1
+
             proportion_passing = round(float(passing) / num_samples, 4)
             graph_dict[pop]["presence"][proportion_passing] += 1
             graph_dict["global"]["presence"][proportion_passing] += 1
@@ -488,6 +524,7 @@ def get_presence_data(graph_dict, locus, pop_info):
 def test_maf_global(locus, maf_global):
     """Test if the global MAF value is sufficiently high
     """
+
     for snp in locus.snps:
         if snp.global_maf < maf_global:
             snp.flags.maf_global = False
@@ -496,6 +533,7 @@ def test_maf_global(locus, maf_global):
 def get_maf_global_data(graph_dict, locus, pop_info):
     """Get maf data globally
     """
+
     for snp in locus.snps:
         maf = round(snp.global_maf, 3)
         graph_dict["global"]["mafGlobal"][maf] += 1
@@ -504,6 +542,7 @@ def get_maf_global_data(graph_dict, locus, pop_info):
 def test_maf_population(locus, pop_info, maf_population):
     """Test if at least one population has a sufficiently high MAF value
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -538,6 +577,7 @@ def test_maf_population(locus, pop_info, maf_population):
 def get_maf_population_data(graph_dict, locus, pop_info):
     """Get maf data by pop
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -569,6 +609,7 @@ def test_heterozygosity(locus, pop_info, max_hetero, max_hetero_joker):
     """Test whether too many individuals are heterozygous in at least
     one (or move if the joker value is used) population.
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -602,6 +643,7 @@ def test_heterozygosity(locus, pop_info, max_hetero, max_hetero_joker):
 def get_heterozygosity_data(graph_dict, locus, pop_info):
     """Get heterozygosity data by pop and globally
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -631,6 +673,7 @@ def get_heterozygosity_data(graph_dict, locus, pop_info):
 def test_fis(locus, pop_info, min_fis, max_fis, fis_joker):
     """Test if each population passes minimum and maximum Fis filter
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -652,6 +695,7 @@ def test_fis(locus, pop_info, min_fis, max_fis, fis_joker):
                     num_samples += 1
                     if sample.genotype in ["0/1", "1/0"]:
                         num_hetero += 1
+
                     a1, a2 = sample.genotype.split("/")
                     allele_count[a1] += 1
                     allele_count[a2] += 1
@@ -667,6 +711,7 @@ def test_fis(locus, pop_info, min_fis, max_fis, fis_joker):
                     fis = (expected_hetero_freq - observed_hetero_freq) / expected_hetero_freq
                 except:
                     fis = 0.0
+
             else:
                 fis = 0.0
 
@@ -689,6 +734,7 @@ def test_fis(locus, pop_info, min_fis, max_fis, fis_joker):
 def get_fis_data(graph_dict, locus, pop_info):
     """Get heterozygosity data by pop and globally
     """
+
     for snp in locus.snps:
         # Get Sample objects for each populations for that SNP
         populations = {}
@@ -706,6 +752,7 @@ def get_fis_data(graph_dict, locus, pop_info):
                     num_samples += 1
                     if sample.genotype in ["0/1", "1/0"]:
                         num_hetero += 1
+
                     a1, a2 = sample.genotype.split("/")
                     allele_count[a1] += 1
                     allele_count[a2] += 1
@@ -731,6 +778,7 @@ def get_fis_data(graph_dict, locus, pop_info):
 def test_max_allele_coverage(locus, pop_info, max_allele_coverage):
     """Test if median coverage of SNP is above max_allele_coverage
     """
+
     for snp in locus.snps:
         coverages = []
         for sample in snp.samples:
@@ -746,6 +794,7 @@ def test_max_allele_coverage(locus, pop_info, max_allele_coverage):
 def test_max_snp_number(locus, pop_info, max_snp_number):
     """Test if there are too many SNPs at one locus
     """
+
     for snp in locus.snps:
         if len(locus.snps) > max_snp_number:
             snp.flags.max_snp_number = False
@@ -754,11 +803,13 @@ def test_max_snp_number(locus, pop_info, max_snp_number):
 def get_numSNP_data(graph_dict, locus, pop_info):
     """Get number of SNPs per locus data
     """
+
     graph_dict["global"]["numSNP"][len(locus.snps)] += 1
 
 def get_individual_coverage(locus, ind_info):
     """Count the number of missing data per indivual
     """
+
     for snp in locus.snps:
         ind_info["total"] += 1
 
@@ -842,6 +893,7 @@ if __name__ == '__main__':
     with open(args.input_file) as in_file:
         for line in in_file:
             l = line.strip()
+
             if l.startswith("##"):
                 header.append(line)
             elif l.startswith("#CHROM"):
@@ -965,6 +1017,8 @@ if __name__ == '__main__':
     out_file = open (args.output_file, "w")
     filters_file = open(args.output_file + "_filters.tsv", "w")
     whitelist_file = open(args.output_file + "_whitelist.txt", "w")
+    report_file = open(args.output_file + "_report.txt", "w")
+    report_file.write(" ".join(sys.argv) + "\n\n")
 
     # Writing header to filtered VCF file
     out_file.writelines(header)
@@ -1019,8 +1073,9 @@ if __name__ == '__main__':
         write_whitelist(locus, whitelist_file)
 
     # Print filtering report
-    Flags.report_filters(locus_counter, total_good_loci)
+    Flags.report_filters(locus_counter, total_good_loci, report_file)
 
     out_file.close()
     filters_file.close()
     whitelist_file.close()
+    report_file.close()
