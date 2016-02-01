@@ -10,8 +10,6 @@ LOG_FOLDER="98-log_files"
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
 # OPTIONS: Comment out options that you do not wish to use
-# rxstacks 1.20
-# rxstacks -b batch_id -P path [-o path] [-t threads] [-v] [-h]
 b="-b 1"              #  b: Batch ID to examine when exporting from the catalog.
 P="-P 05-stacks"      #  P: path to the Stacks output files.
 o="-o 05-stacks_rx"   #  o: output path to write results.
