@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N 5brxstacks
+#$ -N brxstacks
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 1

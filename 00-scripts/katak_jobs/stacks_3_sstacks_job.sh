@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N 3sstacks
+#$ -N sstacks
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 4

@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N 1ustacks
+#$ -N ustacks
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 8

@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N 2cstacks
+#$ -N cstacks
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 4
