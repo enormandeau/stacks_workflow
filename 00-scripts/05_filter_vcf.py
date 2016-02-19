@@ -102,7 +102,7 @@ class Locus(object):
         self.snps = snp_list
 
     def __repr__(self):
-        print "There are {} snps in this locus".format(len(self.snps))
+        return "There are {} snps in this locus".format(len(self.snps))
 
 class Flags(object):
     """Flags used for filtering each SNP
@@ -486,12 +486,14 @@ def test_min_presence(locus, pop_info, min_presence, joker, percent):
             needed_percent = float(min_presence) / 100.0 * float(num_samples)
 
             # Using percentage
-            if percent and (passing >= needed_percent):
-                pops_passing += 1
+            if percent:
+                if passing >= needed_percent:
+                    pops_passing += 1
 
             # Using number of individuals
-            elif passing >= needed_samples:
-                pops_passing += 1
+            else:
+                if passing >= needed_samples:
+                    pops_passing += 1
 
         if pops_passing < len(populations) - joker:
             snp.flags.min_presence = False
@@ -846,7 +848,7 @@ if __name__ == '__main__':
             help = "minimum genotype likelihood to keep a genotype (or modified to './.') (float, 0.0 or more, default -1000.0)")
     parser.add_argument("-I", "--max_allelic_imbalance", type=float, default=1000.0,
             help = "maximum coverage fold change among alleles in heterozygotes (or modified to './.') (float, 0.0 or more, default 1000.0)")
-    parser.add_argument("-C", "--max_allele_coverage", type=int, default=1000,
+    parser.add_argument("-C", "--max_allele_coverage", type=int, default=10000,
             help = "maximum median allele depth to keep a SNP (int, default: 10000)")
     parser.add_argument("-p", "--min_presence", type=int, default=0,
             help = "minimum number of individuals per population to keep locus (int, default: 0)")
@@ -877,7 +879,7 @@ if __name__ == '__main__':
     assert 0 <= args.min_allele_coverage <= 100, "min_allele_coverage must be an integer between 0 and 100"
     assert args.max_allelic_imbalance >= 0.0, "max_allelic_imbalance must be a floating point number equal to or greater than 0.0"
     assert args.max_allele_coverage >= 1, "max_allele_coverage must be an integer equal to or greater than 1"
-    assert 0 <= args.min_presence <= 100, "min_presence must be an integer between 0 and 100" 
+    assert 0 <= args.min_presence <= 100000, "min_presence must be an integer between 0 and 100" 
     assert args.min_presence_joker_populations >= 0, "min_presence_joker_populations must be an integer that is 0 or more"
     assert 0 <= args.max_hetero <= 1, "max_hetero must be a floating point number between 0 and 1"
     assert 0 <= args.maf_global <= 1.0, "maf_global must be a floating point number between 0 and 1.0"
