@@ -1,12 +1,13 @@
 #!/usr/bin/env python
-"""Convert batch_1.fa output of population for phylogenetics
+"""Extract wanted loci from batch_1.fa output of population
+and prepare for phylogenetics analyses
 
 - Join alleles using IUPAC degenerated nucleotides (R, Y, S, W...)
 - Eliminate loci with individuals that have more than 2 alleles?
 - Join all sequences to have only one long sequence per individual
 
 Usage:
-    ./00-scripts/utility_scripts/format_fasta_for_phylogeny.py input_fasta output_fasta
+    ./00-scripts/utility_scripts/format_fasta_for_phylogeny.py input_fasta wanted_loci output_fasta
 """
 
 # Modules
@@ -88,7 +89,7 @@ def write_output_fasta(output_fasta, seq_dict, sample_set):
     with open(output_fasta, "w") as outfile:
         for locus in seq_dict:
             allele_count = defaultdict(int)
-            for sample in sample_set:
+            for sample in sorted(sample_set):
                 try:
                     sample_sequences[sample].append(seq_dict[locus][sample])
                     seq = seq_dict[locus][sample]
@@ -113,7 +114,8 @@ def write_output_fasta(output_fasta, seq_dict, sample_set):
 # Parse user input
 try:
     input_fasta = sys.argv[1]
-    output_fasta = sys.argv[2]
+    wanted_loci = sys.argv[2]
+    output_fasta = sys.argv[3]
 except:
     print __doc__
     sys.exit(1)
@@ -122,16 +124,25 @@ except:
 seq_dict = dict()
 sequences = fasta_iterator(input_fasta)
 
+# Get wanted loci numbers
+wanted = set()
+with open(wanted_loci) as infile:
+    for line in infile:
+        wanted.add(int(line.strip()))
+
+# Get wanted sequences
 sample_set = set()
 for seq in sequences:
-    sample_set.add(seq.sample)
-    if seq.locus in seq_dict:
-        if seq.sample in seq_dict[seq.locus]:
-            seq_dict[seq.locus][seq.sample] = concensus(seq_dict[seq.locus][seq.sample], seq.sequence)
+    if seq.locus in wanted:
+        sample_set.add(seq.sample)
+        if seq.locus in seq_dict and seq.allele < 2:
+            if seq.sample in seq_dict[seq.locus]:
+                seq_dict[seq.locus][seq.sample] = concensus(seq_dict[seq.locus][seq.sample], seq.sequence)
+            else:
+                seq_dict[seq.locus][seq.sample] = seq.sequence
         else:
+            seq_dict[seq.locus] = dict()
             seq_dict[seq.locus][seq.sample] = seq.sequence
-    else:
-        seq_dict[seq.locus] = dict()
-        seq_dict[seq.locus][seq.sample] = seq.sequence
 
+# Write output
 write_output_fasta(output_fasta, seq_dict, sample_set)
