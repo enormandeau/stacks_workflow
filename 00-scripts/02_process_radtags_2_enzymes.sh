@@ -39,7 +39,7 @@ do
         -f 02-raw/trimmed/$f".fastq.gz" \
         -o 03-samples/$f \
         -b $INFO_FILES/barcodes.txt \
-        -c -q -r -t $TRIM_LENGTH \
+        -c -r -t $TRIM_LENGTH \
         --barcode_dist_1 2 \
         -E phred33 \
         --renz_1 $ENZYME1 \
