@@ -21,7 +21,7 @@ process_radtags \
     -f 02-raw/trimmed/$LANE".fastq.gz" \
     -o 03-samples/$LANE \
     -b $INFO_FILES/$TEMPBARCODES \
-    -c -q -r -t $TRIM_LENGTH \
+    -c -r -t $TRIM_LENGTH \
     --barcode_dist_1 2 \
     -E phred33 \
     --renz_1 $ENZYME1 \
