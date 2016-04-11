@@ -3,7 +3,7 @@
 #$ -M your.addresse@service.com
 #$ -m beas
 #$ -pe smp 1
-#$ -l h_vmem=24G
+#$ -l h_vmem=2G
 #$ -l h_rt=30:00:00
 #$ -cwd
 #$ -S /bin/bash
