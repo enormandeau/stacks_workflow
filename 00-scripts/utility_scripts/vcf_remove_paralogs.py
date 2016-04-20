@@ -2,16 +2,16 @@
 """Remove or clean loci with paralogs
 
 Usage:
-    ./vcf_remove_paralogs.py input_vcf haplotype_info threshold output_vcf
+    ./vcf_remove_paralogs.py input_vcf paralog_info threshold output_vcf
 
 Where:
     input_vcf is the VCF file to treat
-    haplotype_info contains information about paralogous loci (see format below)
+    paralog_info contains information about paralogous loci (see format below)
     threshold is the maximum number of individuals to keep the locus by removing
         only the bad genotypes. Above this threshold, the entire locus is removed
     output_vcf is the output VCF file
 
-Format of haplotype_info file:
+Format of paralog_info file:
     NOTE: Header lines MUST start with a '#' sign
 
 #LOCUS  POP_ID  INDIVIDUALS  HAPLOTYPES
@@ -38,17 +38,17 @@ import sys
 # Parsing user input
 try:
     input_vcf = sys.argv[1]
-    haplotype_info = sys.argv[2]
+    paralog_info = sys.argv[2]
     threshold = int(sys.argv[3])
     output_vcf = sys.argv[4]
 except:
     print __doc__
     sys.exit(1)
 
-# Parsing haplotype_info file
+# Parsing paralog_info file
 loci = defaultdict(set)
 
-with open(haplotype_info) as hapfile:
+with open(paralog_info) as hapfile:
     for line in hapfile:
         if not line.startswith("#"):
             locus, pop, sample, haplotype = line.strip().split("\t")
@@ -59,7 +59,7 @@ for i in loci.values():
     num_paralog_per_locus.append(len(i))
 
 paralog_frequency = sorted(Counter(num_paralog_per_locus).items())
-with open(input_vcf + ".paralog_frequency", "w") as freqfile:
+with open(paralog_info + ".paralog_frequency", "w") as freqfile:
     for i in paralog_frequency:
         freqfile.write(str(i[0]) + "\t" + str(i[1]) + "\n")
 
