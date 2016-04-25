@@ -11,16 +11,16 @@ cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
 # OPTIONS: Comment out options that you do not wish to use
 b="-b 1"            # b: Batch ID to examine when exporting from the catalog
-#c="-c"             # c: make automated corrections to the data.
+c="-c"             # c: make automated corrections to the data.
 P="-P 05-stacks"    # P: output path to write results
 t="-t F2"           # t: map type to write. 'CP', 'DH', 'F2', 'BC1' and 'GEN' are the currently supported map types
 o="-o joinmap"      # o: output file type to write, 'joinmap', 'onemap', 'rqtl', and 'genomic' are currently supported.
-m="-m 5"            # m: specify a minimum stack depth required before exporting a locus in a particular individual.
+#m="-m 5"            # m: specify a minimum stack depth required before exporting a locus in a particular individual.
 R="-r 2"            # r: minimum number of progeny required to print a marker.
-#s="file SQL"       # s: output a file to import results into an SQL database.
-#B="Blacklist"      # B: specify a file containing Blacklisted markers to be excluded from the export.
-#W="Whitelist"      # W: specify a file containign Whitelisted markers to include in the export.
-#e="renz"           # e: restriction enzyme, required if generating 'genomic' output
+#s="-s file SQL"       # s: output a file to import results into an SQL database.
+#B="-B Blacklist"      # B: specify a file containing Blacklisted markers to be excluded from the export.
+#W="-W Whitelist"      # W: specify a file containign Whitelisted markers to include in the export.
+#e="-e renz"           # e: restriction enzyme, required if generating 'genomic' output
 
 #filtering option
 log_likelihood="--lnl_lim -10"    #: filter loci with log likelihood values below this threshold.
