@@ -24,6 +24,11 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
 #Catalog editing:
 #catalog="--catalog PATH"   # provide the path to an existing catalog. cstacks will add data to this existing catalog.
 
+#Gapped assembly options:
+gap="--gapped"  #preform gapped alignments between stacks.
+maxgap="--max_gaps 2"	# number of gaps allowed between stacks before merging (default: 2). 
+minallen="--min_aln_len 0.80"	#minimum length of aligned sequence in a gapped alignment (default: 0.80).
+
 #Advanced options:
 
 #k_len="--k_len 31"                      # specify k-mer size for matching between catalog loci (automatically calculated by default).
@@ -36,5 +41,5 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
 s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Run cstacks
-cstacks $b $s $o $g $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
+cstacks $b $s $o $g $gap $maxgap $minallen $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
 
