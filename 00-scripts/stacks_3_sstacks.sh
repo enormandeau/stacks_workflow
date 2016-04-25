@@ -18,10 +18,14 @@ o="-o 05-stacks"           # o: output path to write results
                            #   identity
 #x="-x"                    # x: don't verify haplotype of matching locus
 
+
+#Gapped assembly options:
+gap=" --gapped" 	#preform gapped alignments between stacks.
+
 # Prepare list of samples to treat
 s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | grep -v catalog | \
     perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Launch sstacks on all samples
-sstacks $p $b $c $s $o $g $x $v $h 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_3_sstacks.log
+sstacks $p $b $c $s $o $gap $g $x $v $h 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_3_sstacks.log
 
