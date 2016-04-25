@@ -32,6 +32,11 @@ max_locus_stacks="--max_locus_stacks 2"
                     # alleles and loci (automatically calculated by default).
 model_type="--model_type bounded" #--model_type: either 'snp' (default), 'bounded', or 'fixed'
 
+#Gapped assembly options:
+gap="--gapped"  #preform gapped alignments between stacks.
+maxgap="--max_gaps 2"	# number of gaps allowed between stacks before merging (default: 2). 
+minallen="--min_aln_len 0.80"	#minimum length of aligned sequence in a gapped alignment (default: 0.80).
+
 #alpha="--alpha 0.05"
 bound_low="--bound_low 0"
 bound_high="--bound_high 1"
@@ -43,7 +48,7 @@ for file in 04-all_samples/*.fq.gz
 do
     echo -e "\n\n##### Treating individual $id: $file\n\n"
     ustacks $t $o $i $m $M $N $R $H $p $r $d $max_locus_stacks $k_len \
-        $model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
+        $gap $maxgap $minallen \
+	$model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
 done 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_1a_ustacks.log
-
