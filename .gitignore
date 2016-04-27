@@ -11,9 +11,11 @@
 *.fastq.gz*
 *.fq
 *.fq.gz
+*.infos
 *.jpg
 *.js
 *.log
+*.numseq
 *.odt
 *.pac
 *.pickle
