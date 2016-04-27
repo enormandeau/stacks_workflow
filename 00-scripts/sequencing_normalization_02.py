@@ -14,6 +14,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import math
 import sys
 import os
 
@@ -77,7 +78,7 @@ for chip in chips:
         row = well[0]
         column = int(well[1:])
         volume = float(data.loc[data["Well"] == well, "Volume"])
-        volume = "{0:.1f}".format(volume)
+        volume = "{0:.1f}".format(round(volume, 1))
         plate.loc[row, column] = volume
 
     print plate
