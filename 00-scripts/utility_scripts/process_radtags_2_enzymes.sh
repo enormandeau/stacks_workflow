@@ -22,6 +22,7 @@ process_radtags \
     -o 03-samples/$LANE \
     -b $INFO_FILES/$TEMPBARCODES \
     -c -r -t $TRIM_LENGTH \
+    -q -s 0 \
     --barcode_dist_1 2 \
     -E phred33 \
     --renz_1 $ENZYME1 \

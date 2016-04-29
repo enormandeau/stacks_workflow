@@ -40,6 +40,7 @@ do
         -o 03-samples/$f \
         -b $INFO_FILES/barcodes.txt \
         -c -r -t $TRIM_LENGTH \
+        -q -s 0 \
         --barcode_dist_1 2 \
         -E phred33 \
         --renz_1 $ENZYME1 \
