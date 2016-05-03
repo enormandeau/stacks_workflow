@@ -5,6 +5,7 @@
 rm -rf .git
 rm .gitignore
 rm -r 99-documentation
-rm -r 00-scripts/utility_scripts/deprecated
-rm -r 00-scripts/utility_scripts/test_stacks_workflow
-rm CHANGELOG.txt LICENSE MANUAL.html README.md TODO.md
+rm -r 00-scripts/deprecated
+rm -r 00-scripts/test_stacks_workflow
+rm CHANGELOG LICENSE MANUAL.html README.md TODO.md
+find . | grep \.gitignore | xargs rm
