@@ -94,6 +94,7 @@ for chip in chips:
 
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
     data.loc[data["Volume"] < 1, "Volume"] = 1.0
+    data.loc[(data["Missing"] == 0) & (data["NumReads"] < minimumReads), "Volume"] = 0.0
 
     # Create output csv file
     rows = list("ABCDEFGH")
@@ -105,6 +106,15 @@ for chip in chips:
     s = wb.get_sheet(0)
 
     # Print some useful informations (chip name, some stats...)
+    print chip
+    print "  {0:.2f} million usable reads produced".format(sum_reads / 1000000.)
+    print "  {0:.1f} million reads still needed to reach {1:.1f} million reads per sample".format(
+        float(data.shape[0]) * (float(targetNumReads) - sum_reads /
+            float(data.shape[0])) / 1000000.0,
+        targetNumReads / 1000000.0)
+    print "  {0:.2f} more chips needed".format(
+        (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads))
+
     setOutCell(s, 6, 0, chip)
     setOutCell(s, 2, 10, "{0:.2f} million usable reads produced".format(
         sum_reads / 1000000.))
@@ -126,6 +136,9 @@ for chip in chips:
         volume = float(data.loc[data["Well"] == well, "Volume"])
         volume = "{0:.1f}".format(round(volume, 1))
         plate.loc[row, column] = volume
+
+    # Output data array for debugging purposes
+    data.to_csv(os.path.join(folder, chip + "_data.csv"), sep="\t", index=False)
 
     # Fill Excel template
     nrow, ncol = plate.shape
