@@ -93,7 +93,7 @@ for chip in chips:
     data["Correction"] = data["Missing"].astype(float) / data["NumReads"]
 
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
-    data.loc[data["Volume"] < 1, "Volume"] = 1.0
+    data.loc[(data["Volume"] < 1) & (data["Missing"] > 0), "Volume"] = 1.0
     data.loc[(data["Missing"] == 0) & (data["NumReads"] < minimumReads), "Volume"] = 0.0
 
     # Create output csv file
