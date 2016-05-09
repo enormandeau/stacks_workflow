@@ -115,7 +115,7 @@ for chip in chips:
     print "  {0:.2f} more chips needed".format(
         (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads))
 
-    setOutCell(s, 6, 0, chip)
+    setOutCell(s, 6, 0, chip + "(" + totalVolume + "µl to resequence)")
     setOutCell(s, 2, 10, "{0:.2f} million usable reads produced".format(
         sum_reads / 1000000.))
     setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample".format(
