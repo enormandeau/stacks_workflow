@@ -92,6 +92,7 @@ lnl_lim="--lnl_lim -10"   # Filter loci with log likelihood values below this
                                        # in this whitelist.
 
 # file output options
+#orderedexport="--ordered_export"  #if data is reference aligned, exports will be ordered; only a single representative of each overlapping site
 #genomic="--genomic"               # Output each nucleotide position
                                    # (fixed or polymorphic) in all population
                                    # members to a file.
@@ -124,7 +125,7 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
     $r $p $m $f $min_maf $p_value_cutoff $lnl_lim $write_single_snp \
     $write_random_snp $fstats $k $window_size $bootstrap $bootstrap_pifis \
     $bootstrap_fst $bootstrap_div $bootstrap_phist $bootstrap_reps \
-    $bootstrap_wl $genomic $fasta $vcf $vcf_haplotypes $genepop $structure \
+    $bootstrap_wl $orderedexport $genomic $fasta $vcf $vcf_haplotypes $genepop $structure \
     $phase $fastphase $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
     $verbose $log_fst_comp 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_8_populations.log
 
