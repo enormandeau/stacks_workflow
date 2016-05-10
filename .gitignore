@@ -43,3 +43,5 @@
 lane_info.txt
 nohup.out
 population_map.txt
+PSTACKS*.sh
+GSNAP*.sh
