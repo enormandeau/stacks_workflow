@@ -94,6 +94,8 @@ for chip in chips:
 
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
     data.loc[(data["Volume"] < 1) & (data["Missing"] > 0), "Volume"] = 1.0
+    temp = (data["Missing"] == 0) & (data["NumReads"] < minimumReads)
+    num_low_samples = sum(temp.tolist())
     data.loc[(data["Missing"] == 0) & (data["NumReads"] < minimumReads), "Volume"] = 0.0
 
     # Create output csv file
@@ -107,21 +109,21 @@ for chip in chips:
 
     # Print some useful informations (chip name, some stats...)
     print chip
-    print "  {0:.2f} million usable reads produced".format(sum_reads / 1000000.)
-    print "  {0:.1f} million reads still needed to reach {1:.1f} million reads per sample".format(
+    print "  {0:.2f} million usable reads produced. {1} samples had too few reads.".format(sum_reads / 1000000., num_low_samples)
+    print "  {0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
         float(data.shape[0]) * (float(targetNumReads) - sum_reads /
             float(data.shape[0])) / 1000000.0,
         targetNumReads / 1000000.0)
-    print "  {0:.2f} more chips needed".format(
+    print "  {0:.2f} more chips needed.".format(
         (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads))
 
-    setOutCell(s, 6, 0, chip + "(" + str(totalVolume) + "ul to resequence)")
-    setOutCell(s, 2, 10, "{0:.2f} million usable reads produced".format(
-        sum_reads / 1000000.))
-    setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample".format(
+    setOutCell(s, 6, 0, chip + " (total: " + str(int(totalVolume)) + "ul)")
+    setOutCell(s, 2, 10, "{0:.2f} million usable reads produced. {1} samples had too few reads".format(
+        sum_reads / 1000000., num_low_samples))
+    setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
         float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0,
         targetNumReads / 1000000.0))
-    setOutCell(s, 2, 12, "{0:.2f} more chips needed".format(
+    setOutCell(s, 2, 12, "{0:.2f} more chips needed.".format(
         (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads)))
 
     # Create empty plate
