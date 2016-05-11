@@ -2,8 +2,8 @@
 
 # Global variables
 DATAFOLDER="04-all_samples"
-GENOMEFOLDER="07-genome"
-GENOME="sfon_genome_v1.0.fasta"
+GENOMEFOLDER="06-genome"
+GENOME="genome.fasta"
 
 # Index genome if not alread done
 # bwa index -p $GENOMEFOLDER/$GENOME $GENOMEFOLDER/$GENOME.fasta
