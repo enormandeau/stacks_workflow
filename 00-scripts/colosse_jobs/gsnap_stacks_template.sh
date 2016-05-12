@@ -4,7 +4,7 @@
 #PBS -o gsnap__LIST__.out
 #PBS -e gsnap__LIST__.err
 #PBS -l walltime=24:00:00
-#PBS -M your.email.address@here
+#PBS -M your.address@here
 #PBS -m bea
 #PBS -l nodes=1:ppn=8
 #PBS -r n
