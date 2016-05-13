@@ -1,26 +1,34 @@
 #!/bin/bash
 
-# Create list of samples
-ls 04-all_samples/*bam | split -l 30 - list
+# Global variables
+NUMSAMPLES=50
+TEMPLATE=./00-scripts/colosse_jobs/stacks_1b_pstacks_template_job.sh
 
-#give proper direction
-for i in $(pwd); do sed -i "s#__PWD__#$i#g" 00-scripts/colosse_jobs/stacks_1b_template_colosse.sh; done
+# Cleanup first
+rm temp.pstacks.list.* 2>/dev/null
+rm 00-scripts/colosse_jobs/PSTACKS_temp.pstacks.list.* 2>/dev/null
+
+# Create list of samples
+ls 04-all_samples/*bam | split -a 4 -d -l "$NUMSAMPLES" - temp.pstacks.list.
 
 #create list of jobs
-for base in $(ls list*); do toEval="cat 00-scripts/colosse_jobs/stacks_1b_template_colosse.sh | sed 's/__LIST__/$base/g'"; eval $toEval > 00-scripts/colosse_jobs/PSTACKS_$base.sh;done
-
-#give proper direction
-sed -i 's#__PWD__#/rap/ihv-653-ab/jeremy_leluyer/jeremy_leluyer/04-stacks_workflow_2016-04-14#g' 00-scripts/colosse_jobs/stacks_1b_template_colosse.sh
-
-#change SQL id
-sed -i 's/id=1/id=31/g' 00-scripts/colosse_jobs/PSTACKS_listab.sh
-sed -i 's/id=1/id=61/g' 00-scripts/colosse_jobs/PSTACKS_listac.sh
-sed -i 's/id=1/id=91/g' 00-scripts/colosse_jobs/PSTACKS_listad.sh
-sed -i 's/id=1/id=121/g' 00-scripts/colosse_jobs/PSTACKS_listae.sh
-sed -i 's/id=1/id=151/g' 00-scripts/colosse_jobs/PSTACKS_listaf.sh
-sed -i 's/id=1/id=181/g' 00-scripts/colosse_jobs/PSTACKS_listag.sh
+for file_list in $(ls temp.pstacks.list.*)
+do
+    JOB=00-scripts/colosse_jobs/PSTACKS_"$file_list".sh
+    toEval="cat "$TEMPLATE" | sed 's/__LIST__/"$file_list"/g'"
+    eval "$toEval" > "$JOB"
+    id=$(echo "$file_list" | cut -d "." -f 4)
+    echo "$file_list"
+    echo $id
+    starting=$(echo "1 + $id * $NUMSAMPLES" | bc)
+    echo $starting
+    sed -i "s/id=__ID__/id=$starting/" "$JOB"
+done
 
 exit
-#submit jobs
 
-for i in $(ls 00-scripts/colosse_jobs/PSTACKS*sh); do msub $i; done
+#submit jobs
+for i in $(ls 00-scripts/colosse_jobs/PSTACKS*sh)
+do
+    msub "$i"
+done

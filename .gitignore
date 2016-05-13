@@ -40,8 +40,9 @@
 98-log_files/*
 99-documentation/_build/_sources/*
 99-papers/*
+GSNAP*.sh
+PSTACKS*.sh
 lane_info.txt
+logfiles
 nohup.out
 population_map.txt
-PSTACKS*.sh
-GSNAP*.sh
