@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Global variables
-NUMSAMPLES=50
+NUMSAMPLES=4
 TEMPLATE=./00-scripts/colosse_jobs/stacks_1b_pstacks_template_job.sh
 
 # Cleanup first
@@ -18,10 +18,7 @@ do
     toEval="cat "$TEMPLATE" | sed 's/__LIST__/"$file_list"/g'"
     eval "$toEval" > "$JOB"
     id=$(echo "$file_list" | cut -d "." -f 4)
-    echo "$file_list"
-    echo $id
     starting=$(echo "1 + $id * $NUMSAMPLES" | bc)
-    echo $starting
     sed -i "s/id=__ID__/id=$starting/" "$JOB"
 done
 
