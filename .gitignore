@@ -46,3 +46,5 @@ lane_info.txt
 logfiles
 nohup.out
 population_map.txt
+temp.list.*
+gsnaptemp.list.*

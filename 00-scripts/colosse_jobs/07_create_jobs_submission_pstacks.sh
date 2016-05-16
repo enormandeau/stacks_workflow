@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Global variables
-NUMSAMPLES=12
+NUMSAMPLES=8
 TEMPLATE=./00-scripts/colosse_jobs/stacks_1b_pstacks_template_job.sh
 
 # Cleanup first

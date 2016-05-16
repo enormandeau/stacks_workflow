@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create list of samples
-ls 04-all_samples/*f*q.gz | split -l 12 - temp.list.
+ls 04-all_samples/*f*q.gz | split -l 8 - temp.list.
 
 #change drectory in gsnap template job
 i=$(pwd)
