@@ -3,9 +3,9 @@
 #PBS -N gsnap__LIST__
 #PBS -o gsnap__LIST__.out
 #PBS -e gsnap__LIST__.err
-#PBS -l walltime=24:00:00
-#PBS -M your.address@here
-####PBS -m bea
+#PBS -l walltime=20:00:00
+#PBS -M eric.normandeau@bio.ulaval.ca
+####PBS -m ea
 #PBS -l nodes=1:ppn=8
 #PBS -r n
 

@@ -3,7 +3,7 @@
 #PBS -N pstacks__LIST__
 #PBS -o log.pstacks__LIST__.out
 #PBS -e log.pstacks__LIST__.err
-#PBS -l walltime=6:00:00
+#PBS -l walltime=20:00:00
 #PBS -M your.address@here
 #PBS -m ea 
 #PBS -l nodes=1:ppn=8
