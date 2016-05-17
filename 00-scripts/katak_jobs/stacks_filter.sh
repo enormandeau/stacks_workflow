@@ -37,6 +37,6 @@ INPUT="-i filtered_no_paralog.vcf"
 OUTPUT="-o batch_1_filtered.vcf"
 
 ./00-scripts/05_filter_vcf.py -q $INPUT $OUTPUT \
- 		$MIN_PRES $MIN_ALLELE_COVERAGE $MIN_DEPTH $ALL_IMB $LOG_LIKELIHOOD \
+ 		$MIN_PRES $MIN_ALLELE_COVERAGE $ALL_IMB $MIN_DEPTH $ALL_IMB $LOG_LIKELIHOOD \
 		--use_percent $MAF_GLOBAL $MAF_POP $HET $JOKER_HET \
 		$FIS $MAX_FIS $JOKER_POP $MAX_NB_SNPS $JOKER_FIS 2>&1 | tee 98-log_files/"$TIMESTAMP"_filter.log 
