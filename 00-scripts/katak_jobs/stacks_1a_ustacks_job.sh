@@ -2,8 +2,8 @@
 #$ -N ustacks
 #$ -M your.addresse@service.com
 #$ -m beas
-#$ -pe smp 1
-#$ -l h_vmem=20G
+#$ -pe smp 4
+#$ -l h_vmem=40G
 #$ -l h_rt=40:00:00
 #$ -cwd
 #$ -S /bin/bash
