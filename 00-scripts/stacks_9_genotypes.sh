@@ -38,5 +38,5 @@ log_likelihood="--lnl_lim -10"    #: filter loci with log likelihood values belo
 genotypes $b $P $t $m $R $o \
     $B $W \
     $c $s $e \
-    $log_likelihood $min_hom $min_hetero $max_hetero $man_genotype 2>&1 | \
+    $log_likelihood $min_homo $min_hetero $max_hetero $man_genotype 2>&1 | \
     tee 98-log_files/"$TIMESTAMP"_stacks_9_genotypes.log
