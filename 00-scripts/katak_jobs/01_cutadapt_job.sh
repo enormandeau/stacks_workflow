@@ -1,12 +1,17 @@
 #!/bin/bash
-#$ -N cutadapt
-#$ -M your.addresse@service.com
-#$ -m beas
-#$ -pe smp 1
-#$ -l h_vmem=24G
-#$ -l h_rt=30:00:00
-#$ -cwd
-#$ -S /bin/bash
+
+#SBATCH -D ./ 
+#SBATCH --job-name="cutadapt"
+#SBATCH -o log-cutadapt.out
+#SBATCH -c 4
+#SBATCH -p ibismini
+#SBATCH -A ibismini
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=1-00:00
+#SBATCH --mem=50000
+
+cd $SLURM_SUBMIT_DIR
 
 #./00-scripts/00_prepare_lane_info.sh
 ./00-scripts/01_cutadapt.sh
