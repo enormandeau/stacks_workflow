@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH -D ./ 
-#SBATCH --job-name="stacks_rx"
+#SBATCH --job-name="cstacks_rx"
 #SBATCH -o log-cstacks_rx.out
 #SBATCH -c 1
 #SBATCH -p ibismini
