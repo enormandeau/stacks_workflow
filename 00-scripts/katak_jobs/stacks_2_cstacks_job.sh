@@ -1,13 +1,17 @@
 #!/bin/bash
-#$ -N cstacks
-#$ -M your.addresse@service.com
-#$ -m beas
-#$ -pe smp 4
-#$ -l h_vmem=100G
-#$ -l h_rt=100:00:00
-#$ -cwd
-#$ -S /bin/bash
 
+#SBATCH -D ./ 
+#SBATCH --job-name="cstacks"
+#SBATCH -o log-cstacks.out
+#SBATCH -c 1
+#SBATCH -p ibismini
+#SBATCH -A ibismini
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=1-00:00
+#SBATCH --mem=50000
+
+cd $SLURM_SUBMIT_DIR
 #./00-scripts/00_prepare_lane_info.sh
 #./00-scripts/01_cutadapt.sh
 #./00-scripts/02_process_radtags_2_enzymes.sh 80 pstI mspI
