@@ -1,12 +1,17 @@
 #!/bin/bash
-#$ -N extract
-#$ -M your.addresse@service.co
-#$ -m beas
-#$ -pe smp 1
-#$ -l h_vmem=40G
-#$ -l h_rt=30:00:00
-#$ -cwd
-#$ -S /bin/bash
+
+#SBATCH -D ./ 
+#SBATCH --job-name="extract"
+#SBATCH -o log-extract.out
+#SBATCH -c 1
+#SBATCH -p ibismini
+#SBATCH -A ibismini
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=1-00:00
+#SBATCH --mem=50000
+
+cd $SLURM_SUBMIT_DIR
 
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 SCRIPT=$0
