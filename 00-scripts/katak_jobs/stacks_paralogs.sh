@@ -1,12 +1,17 @@
 #!/bin/bash
-#$ -N filter_paralogs
-#$ -M your.addresse@service.com
-#$ -m beas
-#$ -pe smp 8
-#$ -l h_vmem=40G
-#$ -l h_rt=30:00:00
-#$ -cwd
-#$ -S /bin/bash
+
+#SBATCH -D ./ 
+#SBATCH --job-name="paralogs"
+#SBATCH -o log-paralogs.out
+#SBATCH -c 1
+#SBATCH -p ibismini
+#SBATCH -A ibismini
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=1-00:00
+#SBATCH --mem=50000
+
+cd $SLURM_SUBMIT_DIR
 
 
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
@@ -14,10 +19,6 @@ SCRIPT=$0
 NAME=$(basename $0)
 LOG_FOLDER="98-log_files"
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
-
-
-#move work dir
-cd $SGE_O_WORKDIR
 
 #global variables
 input_vcf="extracted_temp.vcf"
