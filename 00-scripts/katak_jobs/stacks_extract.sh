@@ -19,9 +19,6 @@ NAME=$(basename $0)
 LOG_FOLDER="98-log_files"
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
-#move work dir
-cd $SGE_O_WORKDIR
-
 #global variables
 OUTPUT="./05-stacks/filtered"
 
