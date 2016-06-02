@@ -1,18 +1,16 @@
 #!/bin/bash
 
-#SBATCH -D ./ 
-#SBATCH --job-name="paralogs"
-#SBATCH -o log-paralogs.out
+#SBATCH -J "paralogs"
+#SBATCH -o log_%j
 #SBATCH -c 1
 #SBATCH -p ibismini
-#SBATCH -A ibismini
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --mail-user="$YOUREMAILADDRESS"
 #SBATCH --time=1-00:00
 #SBATCH --mem=50000
 
+# Move to directory where job was submitted
 cd $SLURM_SUBMIT_DIR
-
 
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 SCRIPT=$0
@@ -26,4 +24,5 @@ paralog_info="blacklist.loci.paralogs.ind.filtered.txt"
 threshold=6
 output_vcf="filtered_no_paralog.vcf"
 
-./00-scripts/utility_scripts/vcf_remove_paralogs.py $input_vcf $paralog_info $threshold $output_vcf 2>&1 | tee 98-log_files/"$TIMESTAMP"_paralogs.log
+./00-scripts/utility_scripts/vcf_remove_paralogs.py $input_vcf $paralog_info \
+    $threshold $output_vcf 2>&1 | tee 98-log_files/"$TIMESTAMP"_paralogs.log
