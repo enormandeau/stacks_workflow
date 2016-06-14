@@ -20,7 +20,7 @@ o="-o 05-stacks"           # o: output path to write results
 
 
 #Gapped assembly options:
-gap=" --gapped" 	#preform gapped alignments between stacks.
+#gap=" --gapped" 	#preform gapped alignments between stacks.
 
 # Prepare list of samples to treat
 s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | grep -v catalog | \

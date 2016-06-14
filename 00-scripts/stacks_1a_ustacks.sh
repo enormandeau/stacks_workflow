@@ -33,9 +33,9 @@ max_locus_stacks="--max_locus_stacks 2"
 model_type="--model_type bounded" #--model_type: either 'snp' (default), 'bounded', or 'fixed'
 
 #Gapped assembly options:
-gap="--gapped"  #preform gapped alignments between stacks.
-maxgap="--max_gaps 2"	# number of gaps allowed between stacks before merging (default: 2). 
-minallen="--min_aln_len 0.80"	#minimum length of aligned sequence in a gapped alignment (default: 0.80).
+#gap="--gapped"  #preform gapped alignments between stacks.
+#maxgap="--max_gaps 2"	# number of gaps allowed between stacks before merging (default: 2). 
+#minallen="--min_aln_len 0.80"	#minimum length of aligned sequence in a gapped alignment (default: 0.80).
 
 #alpha="--alpha 0.05"
 bound_low="--bound_low 0"

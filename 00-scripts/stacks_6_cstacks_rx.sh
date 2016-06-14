@@ -27,9 +27,9 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
                     #   that match more than one catalog locus
 
 #Gapped assembly options:
-gap="--gapped"  #preform gapped alignments between stacks.
-maxgap="--max_gaps 2"	# number of gaps allowed between stacks before merging (default: 2). 
-minallen="--min_aln_len 0.80"	#minimum length of aligned sequence in a gapped alignment (default: 0.80).
+#gap="--gapped"  #preform gapped alignments between stacks.
+#maxgap="--max_gaps 2"	# number of gaps allowed between stacks before merging (default: 2). 
+#minallen="--min_aln_len 0.80"	#minimum length of aligned sequence in a gapped alignment (default: 0.80).
 
 #Advanced options:
 

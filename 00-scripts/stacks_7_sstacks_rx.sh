@@ -19,7 +19,7 @@ o="-o 05-stacks_rx"           # o: output path to write results
 #x="-x"                    # x: don't verify haplotype of matching locus
 
 #Gapped assembly options:
-gap=" --gapped" 	#preform gapped alignments between stacks.
+#gap=" --gapped" 	#preform gapped alignments between stacks.
 
 # Prepare list of samples to treat
 s="$(for file in $(ls -1 05-stacks_rx/*.tags.tsv.gz | grep -v catalog | \
