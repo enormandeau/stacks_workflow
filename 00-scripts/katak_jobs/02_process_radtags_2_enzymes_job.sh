@@ -1,11 +1,11 @@
 #!/bin/bash
-
 #SBATCH -J "proc_rad"
 #SBATCH -o log_%j
 #SBATCH -c 1
 #SBATCH -p ibismini
+#SBATCH -A ibismini
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user="$YOUREMAILADDRESS"
+#SBATCH --mail-user=your.email@service.com
 #SBATCH --time=1-00:00
 #SBATCH --mem=8000
 
