@@ -5,7 +5,7 @@
 #SBATCH -p ibismini
 #SBATCH -A ibismini
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=your.email@service.com
+#SBATCH --mail-user=YOUREMAIL
 #SBATCH --time=2-00:00
 #SBATCH --mem=40000
 
