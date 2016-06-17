@@ -5,5 +5,5 @@
 for script in 00-scripts/katak_jobs/*.sh
 do
     grep "your.email@service.com" "$script"
-    perl -sape 's/YOUREMAIL/$e/' -- -e="$YOUREMAIL" "$script"
+    perl -i -sape 's/YOUREMAIL/$e/' -- -e="$YOUREMAIL" "$script"
 done

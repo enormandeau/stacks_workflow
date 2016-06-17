@@ -12,8 +12,5 @@
 # Move to directory where job was submitted
 cd $SLURM_SUBMIT_DIR
 
-# Process radtags with one CPU
-./00-scripts/02_process_radtags_2_enzymes.sh 80 pstI mspI
-
-# Or use parallel version (adjust number of CPUs above)
-#./00-scripts/02_process_radtags_2_enzymes_parallel.sh 80 pstI mspI 4
+# Process radtags with one CPU or more (also change CPU number above)
+./00-scripts/02_process_radtags_2_enzymes_parallel.sh 80 pstI mspI 1
