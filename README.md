@@ -7,17 +7,15 @@ analyses
 stacks workflow is developped in [louis bernatchez'
 lab](http://www.bio.ulaval.ca/louisbernatchez/presentation.htm).
 
-**warning** 
+**Warning!**: this software is provided "as is", without warranty of any kind,
+express or implied, including but not limited to the warranties of
+merchantability, fitness for a particular purpose and noninfringement. In no
+event shall the authors or copyright holders be liable for any claim, damages
+or other liability, whether in an action of contract, tort or otherwise,
+arising from, out of or in connection with the software or the use or other
+dealings in the software.
 
-the software is provided "as is", without warranty of any kind, express or
-implied, including but not limited to the warranties of merchantability,
-fitness for a particular purpose and noninfringement. in no event shall the
-authors or copyright holders be liable for any claim, damages or other
-liability, whether in an action of contract, tort or otherwise, arising from,
-out of or in connection with the software or the use or other dealings in the
-software.
-
-## downloading
+## Downloading
 
 [click here to
 download](https://github.com/enormandeau/stacks_workflow/archive/master.zip)
@@ -28,31 +26,31 @@ repository with:
 git clone https://github.com/enormandeau/stacks_workflow
 ```
 
-## licence
+## Licence
 
-the stacks_workflow is licensed under the gpl3 license. see the licence file
+The stacks_workflow is licensed under the gpl3 license. See the licence file
 for more details.
 
-# stacks workflow tutorial
+# Stacks workflow tutorial
 
-the goal of this workflow is to simplify the use of the stacks pipeline and to
+The goal of this workflow is to simplify the use of the STACKS pipeline and to
 create a folder architecture and code structure to help people analysing gbs or
 rad data, especially those with limited unix/linux experience, to jump on the
 analysis wagon faster. 
 
-it was developed with the needs of our research group in mind as well as with
-an emphasis on non-model species studies. we make no claim about its usefulness
+It was developed with the needs of our research group in mind as well as with
+an emphasis on non-model species studies. We make no claim about its usefulness
 to other groups or in other contexts, but we still believe it may be of use to
 some.
 
-## about stacks
+## About STACKS
  
-the [stacks analysis pipeline](http://creskolab.uoregon.edu/stacks/) is used
+The [stacks analysis pipeline](http://creskolab.uoregon.edu/stacks/) is used
 for snp discovery in genotyping by sequencing (gbs) and restriction-site
 associated dna sequencing (rad) studies, with and without a reference genome.
 
-upon starting to use stacks, it is highly suggested to read the two official
-stacks papers:
+Upon starting to use STACKS, it is highly suggested to read the two official
+STACKS papers:
 
 [catchen, j. m., amores, a., hohenlohe, p. a., cresko, w. a., postlethwait, j.
 h., & de koning, d. j. (2011). stacks: building and genotyping loci de novo
@@ -64,35 +62,35 @@ doi:10.1534/g3.111.000240](http://www.g3journal.org/content/1/3/171.full)
 ecology, 22(11), 3124–3140.
 doi:10.1111/mec.12354](http://onlinelibrary.wiley.com/doi/10.1111/mec.12354/abstract)
 
-also very useful paper to read before attempting to run stacks:
+Also very useful paper to read before attempting to run stacks:
 
 [mastretta yanes a, arrigo n, alvarez n et al. (2014) rad sequencing,
 genotyping error estimation and de novo assembly optimization for population
 genetic inference. molecular ecology resources,
 n/a–n/a.](http://onlinelibrary.wiley.com/doi/10.1111/1755-0998.12291/abstract;jsessionid=a32722e1462a2a2714ee53a6fd4c7194.f04t04)
  
-## overview of the steps
+## Overview of the steps
 
-1. install stacks_workflow and stacks with its dependencies
-1. download your raw data files (illumina lanes or ion proton chips)
-1. clean the reads and assess their quality
-1. extract individual data with process_radtags
-1. rename the sample files
-1. align reads to a reference genome (optional)
-1. stacks pipeline
-1. filtering the results
-1. further analyses
+1. Install stacks_workflow and STACKS with its dependencies
+1. Download your raw data files (illumina lanes or ion proton chips)
+1. Clean the reads and assess their quality
+1. Extract individual data with process_radtags
+1. Rename the sample files
+1. Align reads to a reference genome (optional)
+1. Stacks pipeline
+1. Filtering the results
+1. Further analyses
 
-## where to find this manual
+## Where to find this manual
 
-to read a html version of this file, simply go to the github home page
+To read a html version of this file, simply go to the github home page
 for [stacks_workflow](https://github.com/enormandeau/stacks_workflow)
 
-## installing stacks_workflow
+## Installing stacks_workflow
 
-### download and install the most recent version of this workflow
+### Download and install the most recent version of this workflow
 
-#### from the terminal
+#### From the terminal
 
 ```bash
 cd ~/desktop
@@ -100,32 +98,25 @@ wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
 unzip master.zip
 ```
 
-#### using git
+#### Using git
 
-if `git` is installed on your computer, you can run the following command
+If `git` is installed on your computer, you can run the following command
 instead to get a complete `stacks_workflow` git repository.
 
 ```bash
 git clone https://github.com/enormandeau/stacks_workflow
 ```
 
-for the rest of the project, use the extracted or cloned folder as your working
-directory. **all the commands in this manual are launched from that
+For the rest of the project, use the extracted or cloned folder as your working
+directory. **All the commands in this manual are launched from that
 directory.**
 
-### set up for mac osx
+### Download and install [STACKS](http://creskolab.uoregon.edu/stacks/)
 
-if you have a macos computer, you can prepare your computer to run gbs
-analyses. thierry gosselin prepared a companion tutorial about gbs for cloud
-computing and you should read the section about [setting up your macos
-computer](http://gbs-cloud-tutorial.readthedocs.org/en/latest/03_computer_setup.html#mac-osx>)
+#### Installing google's sparsehash
 
-### download and install [stacks](http://creskolab.uoregon.edu/stacks/)
-
-#### installing google's sparsehash
-
-google sparsehash is a hash table implementation with a small memory footprint.
-stacks can (and should) be compiled using it. this will make stacks use much
+Google sparsehash is a hash table implementation with a small memory footprint.
+STACKS can (and should) be compiled using it. This will make STACKS use much
 less memory.
 
 ```bash
@@ -138,14 +129,14 @@ make  # add '-j n' to use n cpus during the compilation
 sudo make install
 ```
 
-#### Installing stacks
+#### Installing STACKS
 
 ```bash
 # Modify the version number as needed
-wget http://creskolab.uoregon.edu/stacks/source/stacks-1.29.tar.gz
+wget http://creskolab.uoregon.edu/stacks/source/stacks-1.40.tar.gz
 
-tar -xvf stacks-1.29.tar.gz
-cd stacks-1.29
+tar -xvf stacks-1.40.tar.gz
+cd stacks-1.40
 
 # Install the binaries in /usr/local/bin
 ./configure --enable-sparsehash
@@ -154,7 +145,7 @@ sudo make install
 
 # Remove the temporary install folders and archives
 cd ..
-sudo rm -R stacks-1.29 stacks-1.29.tar.gz sparsehash-2.0.2 sparsehash-2.0.2.tar.gz
+sudo rm -R stacks-1.40 stacks-1.40.tar.gz sparsehash-2.0.2 sparsehash-2.0.2.tar.gz
 ```
  
 #### Test the STACKS installation
