@@ -5,7 +5,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
@@ -29,7 +29,7 @@ M="-M 01-info_files/population_map.txt"  # Path to the population map, a
 #W="-W whitelist_file.txt"   # Specify a file containing Whitelisted markers
                              # to include in the export
 #e="-e ENZYME"   # Restriction enzyme, required if generating 'genomic' output
-t="-t 16"         # Number of threads to run in parallel sections of code
+t="-t 1"         # Number of threads to run in parallel sections of code
 #v="-v"          # Print program version.
 #h="-h"          # Display this help message.
 
@@ -43,7 +43,7 @@ t="-t 16"         # Number of threads to run in parallel sections of code
 # Data filtering
 r="-r 0.5"          # Minimum percentage of individuals in a population
                     # required to process a locus for that population
-p="-p 4"            # Minimum number of populations a locus must be present
+p="-p 1"            # Minimum number of populations a locus must be present
                     # in order to process a locus
 m="-m 4"            # Specify a minimum stack depth required for individuals
                     # at a locus
@@ -126,5 +126,5 @@ populations $b $P $M $r $m $g $V $B $W $s $e $t $v $h \
     $bootstrap_fst $bootstrap_div $bootstrap_phist $bootstrap_reps \
     $bootstrap_wl $genomic $fasta $vcf $vcf_haplotypes $genepop $structure \
     $phase $fastphase $beagle $beagle_phased $plink $phylip $phylip_var $hzar \
-    $verbose $log_fst_comp 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_4_populations.log
+    $verbose $log_fst_comp 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_4_populations.log
 

@@ -5,15 +5,15 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
 # OPTIONS: Comment out options that you do not wish to use
 b="-b 1"              #  b: Batch ID to examine when exporting from the catalog.
 P="-P 05-stacks"      #  P: path to the Stacks output files.
-o="-o 05-stacks_rx"   #  o: output path to write results.
-t="-t 16"              #  t: number of threads to run in parallel sections of code.
+o="-o 06-stacks_rx"   #  o: output path to write results.
+t="-t 1"              #  t: number of threads to run in parallel sections of code.
 #v="-v"               #  v: print program version.
 #h="-h"               #  h: display this help messsage.
 
@@ -47,10 +47,10 @@ t="-t 16"              #  t: number of threads to run in parallel sections of co
 rxstacks $b $P $o $t --lnl_dist --model_type bounded
 
 # Exploring the log likelihoods
-cat 05-stacks_rx/batch_1.rxstacks_lnls.tsv | \
+cat 06-stacks_rx/batch_1.rxstacks_lnls.tsv | \
     grep -v "^#" | \
     awk '{bucket=(int($2)); lnls[bucket] += 1} END { for (bucket in lnls) print bucket, "\t", lnls[bucket]}' | \
-    sort -n > 05-stacks_rx/rxstacks_log_likelihoods.tsv
+    sort -n > 06-stacks_rx/rxstacks_log_likelihoods.tsv
 
 # Create figure
 R -q -e 'source("./00-scripts/utility_scripts/plot_log_likelihoods.r")' 2>&1 > /dev/null

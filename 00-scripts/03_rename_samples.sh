@@ -5,7 +5,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
@@ -53,7 +53,7 @@ cat renaming_02.txt |
                     cat $SAMPLES_FOLDER/"$j" >> "$i"
                 done
         fi
-    done | tee 98-log_files/"$TIMESTAMP"_03_rename_samples_complex.log
+    done | tee 10-log_files/"$TIMESTAMP"_03_rename_samples_complex.log
 
 rm renaming_01.txt renaming_02.txt 2> /dev/null
 

@@ -15,7 +15,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT="$0"
 NAME="$(basename $0)"
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 # Move to job submission directory
@@ -48,4 +48,4 @@ do
     pstacks $t $o $i $m $p $max_locus_stacks $model_type $alpha $bound_low \
         $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
-done 2>&1 #| tee 98-log_files/"$TIMESTAMP"_stacks_1b_pstacks.log
+done 2>&1 #| tee 10-log_files/"$TIMESTAMP"_stacks_1b_pstacks.log

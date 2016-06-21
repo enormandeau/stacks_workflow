@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J "populations_rx"
+#SBATCH -J "rxpopulations"
 #SBATCH -o log_%j
 #SBATCH -c 1
 #SBATCH -p ibismini

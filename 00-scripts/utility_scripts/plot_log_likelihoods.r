@@ -1,5 +1,5 @@
 # Importing data
-data = data=read.table("05-stacks_rx/rxstacks_log_likelihoods.tsv")
+data = data=read.table("06-stacks_rx/rxstacks_log_likelihoods.tsv")
 
 # Creating figure
 png("rxstacks_log_likelihoods.png", width=800, height=600)

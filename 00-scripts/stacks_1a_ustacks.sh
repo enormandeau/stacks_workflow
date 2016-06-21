@@ -5,7 +5,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
@@ -22,7 +22,7 @@ N="-N 5"          # N: Maximum distance allowed to align secondary reads to
                   #   primary stacks (default: M + 2).
 #R="-R"           # R: retain unused reads.
 H="-H"            # H: disable calling haplotypes from secondary reads.
-p="-p 16"         # p: enable parallel execution with num_threads threads.
+p="-p 1"         # p: enable parallel execution with num_threads threads.
 r="-r"            # r: enable the Removal algorithm, to drop highly-repetitive
                   #   stacks (and nearby errors) from the algorithm.
 d="-d"            # d: enable the Deleveraging algorithm, used for resolving
@@ -51,4 +51,4 @@ do
         $gap $maxgap $minallen \
 	$model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
-done 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_1a_ustacks.log
+done 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_1a_ustacks.log

@@ -14,8 +14,8 @@ rm -r 02-raw/trimmed 2> /dev/null
 rm -r 03-samples/* 2> /dev/null
 rm -r 04-all_samples/* 2> /dev/null
 rm -r 05-stacks/* 2> /dev/null
-rm -r 05-stacks_rx/* 2> /dev/null
-rm -r 98-log_files/* 2> /dev/null
+rm -r 06-stacks_rx/* 2> /dev/null
+rm -r 10-log_files/* 2> /dev/null
 
 # Get raw data, adapters, and sample information
 cp -l ~/temp.backup/stacks_workflow_test_data/*_mini_*.fastq.gz 02-raw/data.fastq.gz
@@ -49,7 +49,7 @@ cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta
 
 # Filtering
 ./00-scripts/05_filter_vcf.py \
-    -i 05-stacks_rx/batch_1.vcf \
+    -i 06-stacks_rx/batch_1.vcf \
     -o filtered.vcf \
     -c 2 -m 7 -I 4 -l 10 -C 30 \
     -p 70 --use_percent \

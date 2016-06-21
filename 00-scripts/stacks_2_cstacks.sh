@@ -5,7 +5,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
@@ -19,7 +19,7 @@ o="-o 05-stacks"    # o: output path to write results
 #m="-m"             # m: include tags in catalog that match more than one entry
 n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
-p="-p 16"           # p: enable parallel execution with num_threads threads
+p="-p 1"           # p: enable parallel execution with num_threads threads
 
 #Catalog editing:
 #catalog="--catalog PATH"   # provide the path to an existing catalog. cstacks will add data to this existing catalog.
@@ -41,5 +41,5 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
 s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Run cstacks
-cstacks $b $s $o $g $gap $maxgap $minallen $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
+cstacks $b $s $o $g $gap $maxgap $minallen $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
 

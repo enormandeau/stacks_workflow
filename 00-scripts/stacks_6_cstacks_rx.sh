@@ -5,7 +5,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
@@ -13,13 +13,13 @@ cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 # Comment out options that you do not wish to use
 
 b="-b 1"            # b: MySQL ID of this batch
-o="-o 05-stacks_rx" # o: output path to write results
+o="-o 06-stacks_rx" # o: output path to write results
 #g="-g"             # g: base catalog matching on genomic location, not sequence
                     #   identity
 #m="-m"             # m: include tags in catalog that match more than one entry
 n="-n 1"            # n: number of mismatches allowed between sample tags when
                     #   generating the catalog (default 0)
-p="-p 16"           # p: enable parallel execution with num_threads threads
+p="-p 1"           # p: enable parallel execution with num_threads threads
 #catalog="--catalog PATH"
 #k_len 31           # k_len: specify k-mer size for matching between catalog loci
                     # (automatically calculated by default).
@@ -39,8 +39,8 @@ p="-p 16"           # p: enable parallel execution with num_threads threads
 # -=( DO NOT MODIFY THE FOLLWING OPTION! )=-
 # This will automatically create the list of filenames for cstacks
 # s: filename prefix from which to load loci into the catalog
-s="$(for file in $(ls -1 05-stacks_rx/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
+s="$(for file in $(ls -1 06-stacks_rx/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 
 # Run cstacks
-cstacks $b $s $o $g $gap $maxgap $minallen $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 98-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
+cstacks $b $s $o $g $gap $maxgap $minallen $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
 

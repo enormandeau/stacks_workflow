@@ -28,8 +28,8 @@ process_radtags \
     --renz_1 $ENZYME1 \
     --renz_2 $ENZYME2
 
-# Copy log files to ./98_log_files/
-cp 03-samples/$LANE/process_radtags.log 98-log_files/"$TIMESTAMP"_02_process_radtags_2_enzymes_"$LANE".log
+# Copy log files to ./10-log_files/
+cp 03-samples/$LANE/process_radtags.log 10-log_files/"$TIMESTAMP"_02_process_radtags_2_enzymes_"$LANE".log
 
 # Cleanup temp files
 rm $INFO_FILES/$TEMPBARCODES

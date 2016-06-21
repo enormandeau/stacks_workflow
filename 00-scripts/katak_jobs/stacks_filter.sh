@@ -15,7 +15,7 @@ cd $SLURM_SUBMIT_DIR
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
 #global variables
@@ -49,4 +49,4 @@ MAX_NB_SNPS="-s 10"		    # max number of snps by loci
     $MIN_ALLELE_COVERAGE $MIN_DEPTH $LOG_LIKELIHOOD $ALL_IMB \
     $MIN_PRES $USE_PERCENT $JOKER_POP $MAF_GLOBAL $MAF_POP \
     $HET $JOKER_HET $FIS $MAX_FIS $JOKER_FIS $MAX_NB_SNPS 2>&1 |
-    tee 98-log_files/"$TIMESTAMP"_filter.log
+    tee 10-log_files/"$TIMESTAMP"_filter.log

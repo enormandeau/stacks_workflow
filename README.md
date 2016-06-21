@@ -249,7 +249,7 @@ compatibility).
 
 ### Scan the cutadapt logs
 
-The cutadapt log files can be found in the `98-log_files` folder. Scan them
+The cutadapt log files can be found in the `10-log_files` folder. Scan them
 to confirm that cutadapt has done an appropriate job.
 
 There may be difference in adapters and filter parameters to use with data

@@ -6,7 +6,7 @@ NCPU=$4
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 INFO_FILES_FOLDER="01-info_files"
 SAMPLE_INFO="sample_information.csv"
 
@@ -29,7 +29,7 @@ ENZYME2=$3 # Name of the enzyme (run 'process_radtags' without options for list)
 # Write command to file
 echo -e "process_radtags command used:\n\n\
     $(echo process_radtags_2_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \
-> 98-log_files/process_radtags_2_enzymes_command.log
+> 10-log_files/process_radtags_2_enzymes_command.log
 
 # Extract reads
 cat $INFO_FILES/lane_info.txt |

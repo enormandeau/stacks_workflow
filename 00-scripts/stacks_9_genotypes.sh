@@ -5,7 +5,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 # Copy script as it was run
 SCRIPT=$0
 NAME=$(basename $0)
-LOG_FOLDER="98-log_files"
+LOG_FOLDER="10-log_files"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
@@ -39,4 +39,4 @@ genotypes $b $P $t $m $R $o \
     $B $W \
     $c $s $e \
     $log_likelihood $min_homo $min_hetero $max_hetero $man_genotype 2>&1 | \
-    tee 98-log_files/"$TIMESTAMP"_stacks_9_genotypes.log
+    tee 10-log_files/"$TIMESTAMP"_stacks_9_genotypes.log
