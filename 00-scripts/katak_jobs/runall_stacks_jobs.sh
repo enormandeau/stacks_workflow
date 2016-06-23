@@ -19,8 +19,6 @@ s2=$(sbatch "$DEPENDS"$s1 "$SCRIPTPATH"/stacks_2_cstacks_job.sh | awk '{print $4
 s3=$(sbatch "$DEPENDS"$s2 "$SCRIPTPATH"/stacks_3_sstacks_job.sh | awk '{print $4}')
 s4=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks_4_populations_job.sh | awk '{print $4}')
 
-exit # Stop here. Remove to continue.
-
 # STACKS second half (rxstacks)
 s5=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks_5b_rxstacks_job.sh | awk '{print $4}')
 s6=$(sbatch "$DEPENDS"$s5 "$SCRIPTPATH"/stacks_6_cstacks_rx_job.sh | awk '{print $4}')
