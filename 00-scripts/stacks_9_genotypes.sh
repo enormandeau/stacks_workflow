@@ -40,3 +40,4 @@ genotypes $b $P $t $m $R $o \
     $c $s $e \
     $log_likelihood $min_homo $min_hetero $max_hetero $man_genotype 2>&1 | \
     tee 10-log_files/"$TIMESTAMP"_stacks_9_genotypes.log
+
