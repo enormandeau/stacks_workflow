@@ -27,3 +27,4 @@ s="$(for file in $(ls -1 06-stacks_rx/*.tags.tsv.gz | grep -v catalog | \
 
 # Launch sstacks on all samples
 sstacks $p $b $c $gap $s $o $g $x $v $h 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_7_sstacks_rx.log
+

@@ -52,3 +52,4 @@ do
 	$model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
     id=$(echo $id + 1 | bc)
 done 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_1a_ustacks.log
+
