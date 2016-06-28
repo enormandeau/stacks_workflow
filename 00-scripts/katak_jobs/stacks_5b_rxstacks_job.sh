@@ -4,9 +4,9 @@
 #SBATCH -c 1
 #SBATCH -p ibismini
 #SBATCH -A ibismini
-#SBATCH --mail-type=ALL
+#SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=YOUREMAIL
-#SBATCH --time=1-00:00
+#SBATCH --time=4-00:00
 #SBATCH --mem=40000
 
 # Move to directory where job was submitted
