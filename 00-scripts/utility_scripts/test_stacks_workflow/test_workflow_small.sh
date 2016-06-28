@@ -8,7 +8,6 @@ echo "Small test should take approximately 45 minutes to run"
 rm 01-info_files/barcodes.txt 2> /dev/null
 rm 01-info_files/lane_info.txt 2> /dev/null
 rm 01-info_files/population_map.txt 2> /dev/null
-rm 01-info_files/adapters.fasta 2> /dev/null
 rm 02-raw/*.fastq.gz 2> /dev/null
 rm -r 02-raw/trimmed 2> /dev/null
 rm -r 03-samples/* 2> /dev/null
@@ -17,10 +16,9 @@ rm -r 05-stacks/* 2> /dev/null
 rm -r 06-stacks_rx/* 2> /dev/null
 rm -r 10-log_files/* 2> /dev/null
 
-# Get raw data, adapters, and sample information
+# Get raw data, and sample information
 cp -l ~/temp.backup/stacks_workflow_test_data/*_small_*.fastq.gz 02-raw/data.fastq.gz
 cp ~/temp.backup/stacks_workflow_test_data/sample_information.csv 01-info_files
-cp 01-info_files/example_adapters.fasta 01-info_files/adapters.fasta 
 
 # Preparatory scripts
 ./00-scripts/00_prepare_lane_info.sh
