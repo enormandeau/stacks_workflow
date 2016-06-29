@@ -4,7 +4,7 @@
 #SBATCH -c 1
 #SBATCH -p ibismini
 #SBATCH -A ibismini
-#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-type=FAIL
 #SBATCH --mail-user=YOUREMAIL
 #SBATCH --time=2-00:00
 #SBATCH --mem=50000
