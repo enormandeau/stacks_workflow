@@ -10,8 +10,9 @@ SCRIPTPATH="./00-scripts/katak_jobs"
 # Processing the reads and normalization
 p1=$(sbatch "$SCRIPTPATH"/01_cutadapt_job.sh                                | awk '{print $4}')
 p2=$(sbatch "$DEPENDS"$p1 "$SCRIPTPATH"/02_process_radtags_2_enzymes_job.sh | awk '{print $4}')
-p3=$(sbatch "$DEPENDS"$p2 ./00-scripts/sequencing_normalization_01.sh       | awk '{print $4}')
-p4=$(sbatch "$DEPENDS"$p3 ./00-scripts/sequencing_normalization_02.py       | awk '{print $4}')
+p3=$(sbatch "$DEPENDS"$p2 "$SCRIPTPATH"/03_rename_samples_job.sh            | awk '{print $4}')
+p4=$(sbatch "$DEPENDS"$p2 ./00-scripts/sequencing_normalization_01.sh       | awk '{print $4}')
+p5=$(sbatch "$DEPENDS"$p4 ./00-scripts/sequencing_normalization_02.py       | awk '{print $4}')
 
 # STACKS first half (before rxstacks)
 s1=$(sbatch "$DEPENDS"$p2 "$SCRIPTPATH"/stacks_1a_ustacks_job.sh            | awk '{print $4}')
