@@ -7,6 +7,9 @@ Usage:
 
 Where:
     targetNumReads = desired total number of sequenced reads [int]
+
+Example for EPIC4 project:
+    ./00-scripts/sequencing_normalization_02.py 5000000 10000 480
 """
 
 # Modules
