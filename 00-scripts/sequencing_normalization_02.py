@@ -87,19 +87,44 @@ for chip in chips:
     # Merge infos and number of reads into one dataframe
     data = pd.merge(info_df, numseq_df, on="Barcode")
 
+
+
+
+
+
     # Computations
     sum_reads = sum(data["NumReads"])
+
+    # calculate number of missing reads
     data["Missing"] = targetNumReads - data["NumReads"]
+
+    # if too many reads, set missing to 0
     data.loc[data["NumReads"] > targetNumReads, "Missing"] = 0
+
+    # if not enough reads, set missing to 0
     data.loc[data["NumReads"] < minimumReads, "Missing"] = 0
 
+    # correction ratio
     data["Correction"] = data["Missing"].astype(float) / data["NumReads"]
 
+    # add first volume
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
+
+    # if volume smaller than 1 and missing > 0, correct volume to 1
     data.loc[(data["Volume"] < 1) & (data["Missing"] > 0), "Volume"] = 1.0
+    data.loc[data["NumReads"] > targetNumReads, "Volume"] = -0.1
+
+    # calculate number of low samples
     temp = (data["Missing"] == 0) & (data["NumReads"] < minimumReads)
     num_low_samples = sum(temp.tolist())
+
+    # set volume to 0 if missing = 0 and numreads too low
     data.loc[(data["Missing"] == 0) & (data["NumReads"] < minimumReads), "Volume"] = 0.0
+
+
+
+
+
 
     # Create output csv file
     rows = list("ABCDEFGH")
