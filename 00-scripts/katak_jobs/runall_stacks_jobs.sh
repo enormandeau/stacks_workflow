@@ -15,7 +15,7 @@ p4=$(sbatch "$DEPENDS"$p2 ./00-scripts/sequencing_normalization_01.sh       | aw
 p5=$(sbatch "$DEPENDS"$p4 ./00-scripts/sequencing_normalization_02.py       | awk '{print $4}')
 
 # STACKS first half (before rxstacks)
-s1=$(sbatch "$DEPENDS"$p2 "$SCRIPTPATH"/stacks_1a_ustacks_job.sh            | awk '{print $4}')
+s1=$(sbatch "$DEPENDS"$p3 "$SCRIPTPATH"/stacks_1a_ustacks_job.sh            | awk '{print $4}')
 s2=$(sbatch "$DEPENDS"$s1 "$SCRIPTPATH"/stacks_2_cstacks_job.sh             | awk '{print $4}')
 s3=$(sbatch "$DEPENDS"$s2 "$SCRIPTPATH"/stacks_3_sstacks_job.sh             | awk '{print $4}')
 s4=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks_4_populations_job.sh         | awk '{print $4}')
