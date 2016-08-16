@@ -3,6 +3,11 @@
 # WARNING! All scripts must be edited prior to submitting and not changed until run!
 # HINT: Give meaningful job names in submission scripts to distinguish them
 
+echo "WARNING! Make sure you have created the 01-info_files/population_map.txt with:"
+echo "    ./00-scripts/04_prepare_population_map.sh"
+echo
+
+
 # Global variables
 DEPENDS="--dependency=afterok:"
 SCRIPTPATH="./00-scripts/katak_jobs"
