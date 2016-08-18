@@ -3,14 +3,14 @@
 # WARNING! All scripts must be edited prior to submitting and not changed until run!
 # HINT: Give meaningful job names in submission scripts to distinguish them
 
-echo "WARNING! Make sure you have created the 01-info_files/population_map.txt with:"
-echo "    ./00-scripts/04_prepare_population_map.sh"
-echo
-
-
 # Global variables
 DEPENDS="--dependency=afterok:"
 SCRIPTPATH="./00-scripts/katak_jobs"
+
+# Warning to have a population map file ready before running this script
+echo "WARNING! Make sure you have created the 01-info_files/population_map.txt with:"
+echo "    ./00-scripts/04_prepare_population_map.sh"
+echo
 
 # Processing the reads and normalization
 p1=$(sbatch "$SCRIPTPATH"/01_cutadapt_job.sh                                | awk '{print $4}')
@@ -30,3 +30,6 @@ s5=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks_5b_rxstacks_job.sh           | aw
 s6=$(sbatch "$DEPENDS"$s5 "$SCRIPTPATH"/stacks_6_cstacks_rx_job.sh          | awk '{print $4}')
 s7=$(sbatch "$DEPENDS"$s6 "$SCRIPTPATH"/stacks_7_sstacks_rx_job.sh          | awk '{print $4}')
 s8=$(sbatch "$DEPENDS"$s7 "$SCRIPTPATH"/stacks_8_populations_rx_job.sh      | awk '{print $4}')
+
+# Confirm job sumbissions
+echo "All jobs submitted"
