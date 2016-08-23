@@ -46,9 +46,19 @@ def compute_similarity(samples, genotypes):
 
         pos = i * num_samples + j
         rev_pos = j * num_samples + i
-        similarity[pos] = float(dist) / float(dist_count)
+
+        if dist_count:
+            similarity[pos] = float(dist) / float(dist_count)
+        else:
+            similarity[pos] = 0.0
+
         similarity[rev_pos] = similarity[pos]
-        missingness[pos] = float(missing) / float(missing_count)
+
+        if missing_count:
+            missingness[pos] = float(missing) / float(missing_count)
+        else:
+            missingness[pop] = 0.0
+
         missingness[rev_pos] = missingness[pos]
 
     for i in xrange(num_samples):
