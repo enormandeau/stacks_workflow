@@ -4,7 +4,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # Copy script as it was run
 SCRIPT=$0
-NAME="00-scripts/ustacks_iteration.sh"
+NAME="ustacks_iteration.sh"
 LOG_FOLDER="10-log_files"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Global variables
-id=$1
+id=$[ $1 - 1 ]
 files=(04-all_samples/*.fq.gz)
 file=${files[$id]}
 
