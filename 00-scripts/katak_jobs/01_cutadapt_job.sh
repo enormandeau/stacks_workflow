@@ -2,8 +2,8 @@
 #SBATCH -J "cutadapt"
 #SBATCH -o log_%j
 #SBATCH -c 1
-#SBATCH -p ibismini
-#SBATCH -A ibismini
+#SBATCH -p ibismax
+#SBATCH -A ibismax
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=YOUREMAIL
 #SBATCH --time=1-00:00
