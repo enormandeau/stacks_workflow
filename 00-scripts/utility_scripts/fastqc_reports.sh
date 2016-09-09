@@ -9,7 +9,7 @@ OUTPUTFOLDER="90-fastqc_$DESCRIPTION"
 if ! [[ -d "$INPUTFOLDER" ]]
 then
     echo "Usage:"
-    echo "    ./00-scripts/utility_scripts/fastqc_quality.sh INPUTFOLDER"
+    echo "    ./00-scripts/utility_scripts/fastqc_reports.sh INPUTFOLDER"
     exit 1
 fi
 
