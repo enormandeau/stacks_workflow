@@ -75,7 +75,12 @@ class SNP(object):
         self.info = self.line[7]
         self.number_samples, self.global_maf = self.info.split(";")
         self.number_samples = int(self.number_samples.split("=")[1])
-        self.global_maf = float(self.global_maf.split("=")[1].split(",")[1])
+
+        try:    # Version 1.41-
+            self.global_maf = float(self.global_maf.split("=")[1].split(",")[1])
+        except: # Version 1.42+
+            self.global_maf = float(self.global_maf.split("=")[1])
+
         self.format = self.line[8]
         self.samples = [Sample(x) for x in self.line[9:]]
         self.flags = Flags()
