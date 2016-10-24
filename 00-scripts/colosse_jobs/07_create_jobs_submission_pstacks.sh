@@ -22,8 +22,6 @@ do
     sed -i "s/id=__ID__/id=$starting/" "$JOB"
 done
 
-exit
-
 #submit jobs
 for i in $(ls 00-scripts/colosse_jobs/PSTACKS*sh)
 do

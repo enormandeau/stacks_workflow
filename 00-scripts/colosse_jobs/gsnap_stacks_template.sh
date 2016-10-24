@@ -27,20 +27,19 @@ module load mugqic/samtools/1.2
 DATAFOLDER="04-all_samples"
 GENOMEFOLDER="/rap/ihv-653-ab/00_ressources/01_genomes/Omykiss/"
 GENOME="gmap_omykiss"
-PWD="__PWD__"
 
 for file in $(cat $list)
 do
     # Align reads
     echo "Aligning $file"
-    gsnap --gunzip -t 8 -A sam -m 1 -i 2 --min-coverage=0.90 \
+    gsnap --gunzip -t 8 -A sam -m 5 -i 2 --min-coverage=0.90 \
         --dir="$GENOMEFOLDER" -d "$GENOME" \
         -o "${file%.fq.gz}".sam \
         "$file"
 
     # Create bam file
     echo "Creating bam for $file"
-    samtools view -Sb -q 1 -F 4 -F 1797 \
+    samtools view -Sb -q 1 -F 4 -F 256 \
         "${file%.fq.gz}".sam > "${file%.fq.gz}".bam
 
     # Clean up
