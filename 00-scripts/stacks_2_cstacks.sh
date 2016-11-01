@@ -40,6 +40,7 @@ p="-p 1"           # p: enable parallel execution with num_threads threads
 # s: filename prefix from which to load loci into the catalog
 s="$(for file in $(ls -1 06-stacks_rx/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 #s="$(for file in $(cat wanted_samples_for_catalog.txt); do echo -s '05-stacks/'$file; done)"
+# wanted_samples_for_catalog.txt contains one pop_id per line
 
 # Run cstacks
 cstacks $b $s $o $g $gap $maxgap $minallen $m $n $p $catalog $k_len $report_mmatches 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_2_cstacks.log
