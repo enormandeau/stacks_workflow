@@ -38,7 +38,7 @@ p="-p 1"           # p: enable parallel execution with num_threads threads
 # -=( DO NOT MODIFY THE FOLLWING OPTION! )=-
 # This will automatically create the list of filenames for cstacks
 # s: filename prefix from which to load loci into the catalog
-s="$(for file in $(ls -1 06-stacks_rx/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
+s="$(for file in $(ls -1 05-stacks/*.tags.tsv.gz | perl -pe 's/\.tags\.tsv\.gz//'); do echo -s $file; done)"
 #s="$(for file in $(cat wanted_samples_for_catalog.txt); do echo -s '05-stacks/'$file; done)"
 # wanted_samples_for_catalog.txt contains one pop_id per line
 
