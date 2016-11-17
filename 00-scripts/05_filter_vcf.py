@@ -67,7 +67,7 @@ class SNP(object):
         self.line = line.split("\t")
         self.chrom = self.line[0]
         self.pos = int(self.line[1])
-        self.locus_id = self.line[2]
+        self.locus_id = self.line[2].split("_")[0]
         self.ref = self.line[3]
         self.alt = self.line[4]
         self.qual = self.line[5]
