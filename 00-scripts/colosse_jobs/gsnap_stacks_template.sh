@@ -34,6 +34,7 @@ do
     echo "Aligning $file"
     gsnap --gunzip -t 8 -A sam -m 5 -i 2 --min-coverage=0.90 \
         --dir="$GENOMEFOLDER" -d "$GENOME" \
+        --read-group-id="${file%.fq.gz}" \
         -o "${file%.fq.gz}".sam \
         "$file"
 
