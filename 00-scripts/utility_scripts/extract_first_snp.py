@@ -31,6 +31,9 @@ if __name__ == '__main__':
             outfile.write(line)
         else:
             snp_id = line.strip().split()[2]
+            if "_" in snp_id:
+                snp_id = snp_id.split("_")[0]
+
             if snp_id not in extracted_snps:
                 outfile.write(line)
                 extracted_snps.add(snp_id)
