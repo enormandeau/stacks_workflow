@@ -52,6 +52,10 @@ with open(paralog_info) as hapfile:
     for line in hapfile:
         if not line.startswith("#"):
             locus, pop, sample, haplotype = line.strip().split("\t")
+            
+            if "_" in locus:
+                locus = locus.split("_")[0]
+
             loci[locus].add(sample)
             
 num_paralog_per_locus = []
