@@ -1,39 +1,97 @@
-#Lane	Barcode	Population	Sample	PopulationID
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	ACAA	Pop01	1	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	ACCTA	Pop01	2	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	AGTGG	Pop01	3	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	ATCGT	Pop01	4	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	CCACA	Pop01	5	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	CTGT	Pop01	6	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	CTTCC	Pop01	7	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	GCGAT	Pop01	8	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	GCGG	Pop01	9	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	GCTCT	Pop01	10	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	GCTT	Pop01	11	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	GTCA	Pop01	12	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	TAAT	Pop01	13	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	TAGGA	Pop01	14	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	TCAT	Pop01	15	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	TCGGA	Pop01	16	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	TGCG	Pop01	17	1
-HI.0821.001.P25_P26_P29_P30_R1.fastq.gz	TTCAG	Pop01	18	1
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	ACAA	Pop02	19	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	ACCTA	Pop02	20	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	AGTGG	Pop02	21	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	ATCGT	Pop02	22	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	CCACA	Pop02	23	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	CTGT	Pop02	24	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	CTTCC	Pop02	25	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	GCGAT	Pop02	26	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	GCGG	Pop02	27	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	GCTCT	Pop02	28	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	GCTT	Pop02	29	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	GTCA	Pop02	30	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	TAAT	Pop02	31	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	TAGGA	Pop02	32	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	TCAT	Pop02	33	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	TCGGA	Pop02	34	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	TGCG	Pop02	35	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	TTCAG	Pop02	36	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	GTTGA	Pop02	37	2
-HI.0699.002.P17_P18_P19_P20_R1.fastq.gz	TGAAG	Pop02	38	2
+#Lane	Barcode	Population	Sample	PopulationID	PlatePosition		
+gado_orni_p01_c01.fq.gz	CTAAGGTAACGAT	LED	2	1	A01		Notes
+gado_orni_p01_c01.fq.gz	TAAGGAGAACGAT	LEM	1	2	B01		DO NOT modify the column titles in the header line
+gado_orni_p01_c01.fq.gz	AAGAGGATTCGAT	COU	1	3	C01		DO NOT modify the order of the first six columns
+gado_orni_p01_c01.fq.gz	TACCAAGATCGAT	GEL	1	4	D01		DO NOT modify the plate position format (A01, not A1)
+gado_orni_p01_c01.fq.gz	CAGAAGGAACGAT	ARB	1	5	E01		"DO NOT use underscores ""_"" in Population, Sample or PopulationID columns"
+gado_orni_p01_c01.fq.gz	CTGCAAGTTCGAT	CHA	1	6	F01		The PopulationID column can contain text (eg: the same as the Population column)
+gado_orni_p01_c01.fq.gz	TTCGTGATTCGAT	JON	1	7	G01		
+gado_orni_p01_c01.fq.gz	TTCCGATAACGAT	GRI	1	8	H01		
+gado_orni_p01_c01.fq.gz	TGAGCGGAACGAT	DET	1	9	A02		
+gado_orni_p01_c01.fq.gz	CTGACCGAACGAT	ABE	1	10	B02		
+gado_orni_p01_c01.fq.gz	TCCTCGAATCGAT	AMA	1	11	C02		
+gado_orni_p01_c01.fq.gz	TAGGTGGTTCGAT	MET	1	12	D02		
+gado_orni_p01_c01.fq.gz	TCTAACGGACGAT	DAP	1	13	E02		
+gado_orni_p01_c01.fq.gz	TTGGAGTGTCGAT	CAR	1	14	F02		
+gado_orni_p01_c01.fq.gz	TCTAGAGGTCGAT	LED	7	1	G02		
+gado_orni_p01_c01.fq.gz	TCTGGATGACGAT	LEM	6	2	H02		
+gado_orni_p01_c01.fq.gz	TCTATTCGTCGAT	COU	6	3	A03		
+gado_orni_p01_c01.fq.gz	AGGCAATTGCGAT	GEL	6	4	B03		
+gado_orni_p01_c01.fq.gz	TTAGTCGGACGAT	ARB	6	5	C03		
+gado_orni_p01_c01.fq.gz	CAGATCCATCGAT	CHA	6	6	D03		
+gado_orni_p01_c01.fq.gz	TCGCAATTACGAT	JON	6	7	E03		
+gado_orni_p01_c01.fq.gz	TTCGAGACGCGAT	GRI	6	8	F03		
+gado_orni_p01_c01.fq.gz	TGCCACGAACGAT	DET	6	9	G03		
+gado_orni_p01_c01.fq.gz	AACCTCATTCGAT	ABE	6	10	H03		
+gado_orni_p01_c01.fq.gz	CCTGAGATACGAT	AMA	6	11	A04		
+gado_orni_p01_c01.fq.gz	TTACAACCTCGAT	MET	6	12	B04		
+gado_orni_p01_c01.fq.gz	AACCATCCGCGAT	DAP	6	13	C04		
+gado_orni_p01_c01.fq.gz	TCGACCACTCGAT	CAR	7	14	D04		
+gado_orni_p01_c01.fq.gz	CGAGGTTATCGAT	DUH	1	15	E04		
+gado_orni_p01_c01.fq.gz	TCCAAGCTGCGAT	LED	12	1	F04		
+gado_orni_p01_c01.fq.gz	TCTTACACACGAT	LEM	11	2	G04		
+gado_orni_p01_c01.fq.gz	TTCTCATTGAACGAT	COU	11	3	H04		
+gado_orni_p01_c01.fq.gz	TCGCATCGTTCGAT	GEL	11	4	A05		
+gado_orni_p01_c01.fq.gz	TAAGCCATTGTCGAT	ARB	11	5	B05		
+gado_orni_p01_c01.fq.gz	AAGGAATCGTCGAT	CHA	11	6	C05		
+gado_orni_p01_c01.fq.gz	CTTGAGAATGTCGAT	JON	11	7	D05		
+gado_orni_p01_c01.fq.gz	TGGAGGACGGACGAT	GRI	11	8	E05		
+gado_orni_p01_c01.fq.gz	TAACAATCGGCGAT	DET	11	9	F05		
+gado_orni_p01_c01.fq.gz	CTGACATAATCGAT	ABE	11	10	G05		
+gado_orni_p01_c01.fq.gz	TTCCACTTCGCGAT	AMA	11	11	H05		
+gado_orni_p01_c01.fq.gz	AGCACGAATCGAT	MET	11	12	A06		
+gado_orni_p01_c01.fq.gz	CTTGACACCGCGAT	DAP	11	13	B06		
+gado_orni_p01_c01.fq.gz	TTGGAGGCCAGCGAT	CAR	12	14	C06		
+gado_orni_p01_c01.fq.gz	TGGAGCTTCCTCGAT	DUH	6	15	D06		
+gado_orni_p01_c01.fq.gz	TCAGTCCGAACGAT	LED	17	1	E06		
+gado_orni_p01_c01.fq.gz	TAAGGCAACCACGAT	LEM	16	2	F06		
+gado_orni_p01_c01.fq.gz	TTCTAAGAGACGAT	COU	16	3	G06		
+gado_orni_p01_c01.fq.gz	TCCTAACATAACGAT	GEL	17	4	H06		
+gado_orni_p01_c01.fq.gz	CGGACAATGGCGAT	ARB	16	5	A07		
+gado_orni_p01_c01.fq.gz	TTGAGCCTATTCGAT	CHA	16	6	B07		
+gado_orni_p01_c01.fq.gz	CCGCATGGAACGAT	JON	17	7	C07		
+gado_orni_p01_c01.fq.gz	CTGGCAATCCTCGAT	GRI	16	8	D07		
+gado_orni_p01_c01.fq.gz	TCCACCTCCTCGAT	DET	16	9	E07		
+gado_orni_p01_c01.fq.gz	CAGCATTAATTCGAT	ABE	16	10	F07		
+gado_orni_p01_c01.fq.gz	TCTGGCAACGGCGAT	AMA	16	11	G07		
+gado_orni_p01_c01.fq.gz	TCCTAGAACACGAT	MET	16	12	H07		
+gado_orni_p01_c01.fq.gz	TCCTTGATGTTCGAT	DAP	16	13	A08		
+gado_orni_p01_c01.fq.gz	TCTAGCTCTTCGAT	CAR	21	14	B08		
+gado_orni_p01_c01.fq.gz	TCACTCGGATCGAT	DUH	11	15	C08		
+gado_orni_p01_c01.fq.gz	TTCCTGCTTCACGAT	LED	23	1	D08		
+gado_orni_p01_c01.fq.gz	CCTTAGAGTTCGAT	LEM	21	2	E08		
+gado_orni_p01_c01.fq.gz	CTGAGTTCCGACGAT	COU	21	3	F08		
+gado_orni_p01_c01.fq.gz	TCCTGGCACATCGAT	GEL	22	4	G08		
+gado_orni_p01_c01.fq.gz	CCGCAATCATCGAT	ARB	21	5	H08		
+gado_orni_p01_c01.fq.gz	TTCCTACCAGTCGAT	CHA	26	6	A09		
+gado_orni_p01_c01.fq.gz	TCAAGAAGTTCGAT	GRI	21	8	B09		
+gado_orni_p01_c01.fq.gz	TTCAATTGGCGAT	DET	21	9	C09		
+gado_orni_p01_c01.fq.gz	CCTACTGGTCGAT	ABE	21	10	D09		
+gado_orni_p01_c01.fq.gz	TGAGGCTCCGACGAT	MET	21	12	E09		
+gado_orni_p01_c01.fq.gz	CGAAGGCCACACGAT	DAP	21	13	F09		
+gado_orni_p01_c01.fq.gz	TCTGCCTGTCGAT	CAR	26	14	G09		
+gado_orni_p01_c01.fq.gz	CGATCGGTTCGAT	DUH	16	15	H09		
+gado_orni_p01_c01.fq.gz	TCAGGAATACGAT	LED	27	1	A10		
+gado_orni_p01_c01.fq.gz	CGGAAGAACCTCGAT	LEM	25	2	B10		
+gado_orni_p01_c01.fq.gz	CGAAGCGATTCGAT	COU	25	3	C10		
+gado_orni_p01_c01.fq.gz	CAGCCAATTCTCGAT	GEL	26	4	D10		
+gado_orni_p01_c01.fq.gz	CCTGGTTGTCGAT	ARB	25	5	E10		
+gado_orni_p01_c01.fq.gz	TCGAAGGCAGGCGAT	JON	24	7	F10		
+gado_orni_p01_c01.fq.gz	CCTGCCATTCGCGAT	GRI	25	8	G10		
+gado_orni_p01_c01.fq.gz	TTGGCATCTCGAT	AMA	23	11	H10		
+gado_orni_p01_c01.fq.gz	CTAGGACATTCGAT	MET	25	12	A11		
+gado_orni_p01_c01.fq.gz	CTTCCATAACGAT	DAP	25	13	B11		
+gado_orni_p01_c01.fq.gz	CCAGCCTCAACGAT	DUH	20	15	C11		
+gado_orni_p01_c01.fq.gz	CTTGGTTATTCGAT	LEM	29	2	D11		
+gado_orni_p01_c01.fq.gz	TTGGCTGGACGAT	GEL	30	4	E11		
+gado_orni_p01_c01.fq.gz	CCGAACACTTCGAT	JON	28	7	F11		
+gado_orni_p01_c01.fq.gz	TCCTGAATCTCGAT	AMA	28	11	G11		
+gado_orni_p01_c01.fq.gz	CTAACCACGGCGAT	MET	30	12	H11		
+gado_orni_p01_c01.fq.gz	CGGAAGGATGCGAT	CAR	25	14	A12		
+gado_orni_p01_c01.fq.gz	CTAGGAACCGCGAT	DAP	20	13	B12		
+gado_orni_p01_c01.fq.gz	CTTGTCCAATCGAT	ARB	20	5	C12		
+gado_orni_p01_c01.fq.gz	TCCGACAAGCGAT	CHA	25	6	D12		
+gado_orni_p01_c01.fq.gz	CGGACAGATCGAT	JON	21	7	E12		
+gado_orni_p01_c01.fq.gz	TTAAGCGGTCGAT	GRI	20	8	F12		
+gado_orni_p01_c01.fq.gz	TTCGCAATGAACGAT	DET	20	9	G12		
+gado_orni_p01_c01.fq.gz	TTCCGCACGGCGAT	ABE	20	10	H12		
