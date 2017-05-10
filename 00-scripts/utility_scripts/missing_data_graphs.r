@@ -20,6 +20,11 @@ png(graph_name, width=1000, height=500)
             col="lightgrey",
             outcol="transparent")
 
+    # Add dotted lines at every 5%
+    for (i in seq(0, 1, 0.05)) {
+        abline(h=i, lty=2, col="lightgrey")
+    }
+
     # Add all data points
     points(as.numeric(data$Population),
            data$ProportionMissing,
@@ -28,4 +33,3 @@ png(graph_name, width=1000, height=500)
            cex=1.5)
 
 dev.off()
-
