@@ -6,6 +6,7 @@ Usage:
 """
 
 # Modules
+from collections import defaultdict
 import sys
 
 # Parse user input
@@ -33,6 +34,8 @@ with open(filtered_vcf) as infile:
                 wanted_loci.add(locus)
 
 # Treat input haplotypes
+distribution_tri_allelic = defaultdict(int)
+
 with open(output_haplotypes, "w") as outfile:
     with open(input_haplotypes) as infile:
         for line in infile:
@@ -51,6 +54,9 @@ with open(output_haplotypes, "w") as outfile:
                     continue
 
                 haplotypes = l[2:]
+                num_missing = len([x for x in haplotypes if x == "-"])
+                num_tri_allelic = len([x for x in haplotypes if x.count("/") > 1])
+                distribution_tri_allelic[num_tri_allelic] += 1
                 multi_haplotypes = [x for x in haplotypes if x.count("/") > 1]
 
                 # If too many, go to next
@@ -63,8 +69,16 @@ with open(output_haplotypes, "w") as outfile:
                         if haplotypes[i].count("/") > 1:
                             haplotypes[i] = "-"
 
-                    num_missing = len([x for x in haplotypes if x == "-"])
                     prop_missing = float(num_missing) / len(haplotypes)
                     prop_with_data = 1 - prop_missing
                     if prop_with_data >= min_proportion:
                         outfile.write("\t".join(infos + haplotypes) + "\n")
+# Report distribution of tri-allelic samples
+print("Distribution of tri-allelic samples")
+print("---")
+print("NumTri\tFrequency")
+for n in sorted(distribution_tri_allelic):
+    print str(n) + "\t" + str(distribution_tri_allelic[n])
+print("---")
+print("Note to future self:")
+print("  Add R script to produce figure if needed")
