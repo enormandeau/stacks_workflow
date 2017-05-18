@@ -70,7 +70,7 @@ folder="03-samples"
 chips = [x.replace(".infos", "") for x in os.listdir(folder) if x.endswith(".infos")]
 
 # Iterate over the chips
-for chip in chips:
+for chip in sorted(chips):
 
     # File names
     info_file = os.path.join(folder, chip + ".infos")
