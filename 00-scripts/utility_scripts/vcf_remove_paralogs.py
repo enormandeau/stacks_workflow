@@ -84,6 +84,9 @@ for line in vcffile:
     else:
         l = line.strip().split()
         locus = l[2]
+                    
+        if "_" in locus:
+            locus = locus.split("_")[0]
 
         # Locus contains paralogs
         if locus in loci:

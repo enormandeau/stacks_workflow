@@ -127,11 +127,11 @@ for chip in sorted(chips):
 
 
     # Create output csv file
-    rows = list("ABCDEFGH")
-    columns = range(1, 13)
+    rows = list("ABCDEFGHIJKLMNOP")
+    columns = range(1, 25)
 
     # Open Excel template, get link to first sheet and print name of chip
-    rb = open_workbook("01-info_files/normalization_template.xls", formatting_info=True)
+    rb = open_workbook("01-info_files/normalization_template_384.xls", formatting_info=True)
     wb = copy(rb)
     s = wb.get_sheet(0)
 
@@ -146,16 +146,16 @@ for chip in sorted(chips):
         (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads))
 
     setOutCell(s, 6, 0, chip + " (total: " + str(int(totalVolume)) + "ul)")
-    setOutCell(s, 2, 10, "{0:.2f} million usable reads produced. {1} samples had too few reads".format(
+    setOutCell(s, 2, 18, "{0:.2f} million usable reads produced. {1} samples had too few reads".format(
         sum_reads / 1000000., num_low_samples))
-    setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
+    setOutCell(s, 2, 19, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
         float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0,
         targetNumReads / 1000000.0))
-    setOutCell(s, 2, 12, "{0:.2f} more chips needed.".format(
+    setOutCell(s, 2, 20, "{0:.2f} more chips needed.".format(
         (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads)))
 
     # Create empty plate
-    plate = pd.DataFrame(np.zeros([8, 12]))
+    plate = pd.DataFrame(np.zeros([16, 24]))
     plate.columns = columns
     plate.index = rows
 
