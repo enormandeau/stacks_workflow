@@ -54,5 +54,5 @@ bound_high="--bound_high 1" #upper bound for epsilon, the error rate,
 #verbose="--verbose"  #extended logging, including coordinates of all changed 
                      #nucleotides (forces single-threaded execution).
 
-rxstacks $b $P $o $t $v $h $lnl_filter $lnl_lim $lnl_dist $conf_filter $conf_lim $prune_haplo $max_haplo_cnt $model_type $alpha $bound_low $bound_high $verbose | tee 10-log_files/"$TIMESTAMP"_stacks_5b_rxstacks.log
+rxstacks $b $P $o $t $v $h $lnl_filter $lnl_lim $lnl_dist $conf_filter $conf_lim $prune_haplo $max_haplo_cnt $model_type $alpha $bound_low $bound_high $verbose 2>&1 | tee 10-log_files/"$TIMESTAMP"_stacks_5b_rxstacks.log
 
