@@ -42,6 +42,7 @@ bound_high="--bound_high 1"
 
 # Run ustacks
 echo -e "\n\n##### Treating individual $id: $file\n\n"
+sample_id=$[ $id + 1 ]
 ustacks $t $o $i $m $M $N $R $H $p $r $d $max_locus_stacks $k_len \
     $gap $maxgap $minallen \
-    $model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $id
+    $model_type $alpha $bound_low $bound_high $bc_err_freq -f $file -i $sample_id
