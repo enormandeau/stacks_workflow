@@ -7,7 +7,7 @@
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=YOUREMAIL
 #SBATCH --time=8-00:00
-#SBATCH --mem=30G
+#SBATCH --mem=5G
 
 # Move to directory where job was submitted
 cd $SLURM_SUBMIT_DIR
