@@ -44,9 +44,8 @@ class Sample(object):
         except:
             self.allelic_imbalance = 0.0
 
-        self.genotype_likelihood = self.info[3].split(",")[1]
-
         try:
+            self.genotype_likelihood = self.info[3].split(",")[1]
             self.genotype_likelihood = float(self.genotype_likelihood)
         except:
             self.genotype_likelihood = 0.0
@@ -73,7 +72,8 @@ class SNP(object):
         self.qual = self.line[5]
         self.filter = self.line[6]
         self.info = self.line[7]
-        self.number_samples, self.global_maf = self.info.split(";")
+        self.number_samples = self.info.split(";")[0]
+        self.global_maf = self.info.split(";")[1]
         self.number_samples = int(self.number_samples.split("=")[1])
 
         try:    # Version 1.41-
