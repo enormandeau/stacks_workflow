@@ -418,8 +418,8 @@ own values carefully.
 
 ```bash
 ./00-scripts/05_filter_vcf.py \  
-   -i 05-stacks/batch_1.sumstats.tsv \  
-   -o filtered.tsv \  
+   -i 05-stacks/batch_1.vcf \  
+   -o filtered.vcf \  
    -c 1 -m 7 -l 10 -I 8 -p 70 --use_percent \
    -a 0.01 -A 0.05 -H 0.5 -f -0.3 -F 0.3 -s 10
 ```
