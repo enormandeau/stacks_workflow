@@ -9,7 +9,11 @@ with the -g option and the output_folder is the desired output folder
 """
 
 # Modules
-import Image
+try:
+    from PIL import Image
+except:
+    import Image
+
 import sys
 import os
 
