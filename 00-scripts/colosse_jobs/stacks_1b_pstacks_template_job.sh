@@ -5,7 +5,7 @@
 #PBS -e log.pstacks__LIST__.err
 #PBS -l walltime=20:00:00
 #PBS -M your.address@here
-#PBS -m ea 
+###PBS -m ea 
 #PBS -l nodes=1:ppn=8
 #PBS -r n
 
