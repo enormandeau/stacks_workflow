@@ -17,7 +17,7 @@ cd $PBS_O_WORKDIR
 
 # Load gmap module
 module load apps/gmap/2015-12-31.v9
-module load compilers/gcc/4.8  apps/mugqic_pipeline/2.1.1
+module load compilers/gcc/4.8.5  apps/mugqic_pipeline/2.1.1
 module load mugqic/samtools/1.2
 
 #prepare the genome if not already done
