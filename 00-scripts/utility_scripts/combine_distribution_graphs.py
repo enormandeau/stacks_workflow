@@ -21,11 +21,14 @@ import os
 def combine_images(image_1, image_2, image_out, xdim=800, ydim=800):
     """Combine two images vertically
     """
-    i1 = Image.open(image_1)
-    i1_width, i1_height = i1.size
+    try:
+        i1 = Image.open(image_1)
+        i1_width, i1_height = i1.size
 
-    i2 = Image.open(image_2)
-    i2_width, i2_height = i2.size
+        i2 = Image.open(image_2)
+        i2_width, i2_height = i2.size
+    except:
+        return None
 
     new_image = Image.new("RGB",
             (max([i1_width, i2_width]), i1_height + i2_height))
