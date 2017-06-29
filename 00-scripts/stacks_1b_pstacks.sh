@@ -18,7 +18,7 @@ o="-o 05-stacks"      # o: output path to write results.
                       #   sample
 m="-m 1"              # m: minimum depth of coverage to report a stack
                       #   (default 1)
-p="-p 1"              # p: enable parallel execution with num_threads threads
+p="-p 10"              # p: enable parallel execution with num_threads threads
 model_type="--model_type snp"
 alpha="--alpha 0.05"
 #bound_low="--bound_low 0"
