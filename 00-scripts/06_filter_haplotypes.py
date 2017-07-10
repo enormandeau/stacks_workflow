@@ -50,7 +50,7 @@ with open(output_haplotypes, "w") as outfile:
                 infos = l[:2]
                 locus = infos[0]
                 
-                if locus not in wanted_loci:
+                if locus not in wanted_loci and "consensus" not in line:
                     continue
 
                 haplotypes = l[2:]
