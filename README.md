@@ -1,7 +1,6 @@
 # Stacks Workflow
 
-An integrated workflow around the [STACKS software
-pipeline](http://creskolab.uoregon.edu/stacks/)
+RADseq workflow using [STACKS](http://creskolab.uoregon.edu/stacks/)
 
 Developed by [Eric Normandeau](https://github.com/enormandeau) in
 [Louis Bernatchez](http://www.bio.ulaval.ca/louisbernatchez/presentation.htm)'s
