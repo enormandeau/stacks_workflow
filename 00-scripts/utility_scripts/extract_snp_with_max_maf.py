@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-"""Keep only the first SNP per locus in vcf file
+"""Keep only SNP per locus, the one with the max maf, in vcf file
 
 Usage:
-    ./extract_first_snp.py input_vcf output_vcf
+    ./extract_snp_with_max_maf.py input_vcf output_vcf
 """
 
 # Modules
