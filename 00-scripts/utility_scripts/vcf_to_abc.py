@@ -26,7 +26,7 @@ class Sample(object):
         self.info = info.split(":")
         self.genotype = self.info[0]
         try:
-            self.depth = int(self.info[1])
+            self.depth = int(self.info[1].split(",")[0])
         except:
             self.genotype = "./."
             self.depth = "0"
@@ -129,7 +129,11 @@ def locus_iterator(input_file):
 
         for line in in_f:
             if line.startswith("#"):
-                pass
+                continue
+
+            elif "\t\t" in line:
+                continue
+
             elif line.strip():
                 snp = SNP(line.strip())
                 current_id = snp.locus_id
@@ -157,14 +161,22 @@ if __name__ == '__main__':
 
     parser.add_argument("-q", "--quiet", action="store_true",
             help = "do not print progress messages")
+
     parser.add_argument("-i", "--input_file", type=str, required=True,
             help = "input VCF file")
+
     parser.add_argument("-p", "--pops", type=str, required=True,
             help = "ID of populations, separated by a comma")
+
     parser.add_argument("-l", "--locus_length", type=int, default=80,
             help = "length of loci in VCF file (int, default: 80)")
+
     parser.add_argument("-n", "--effective_size", type=int, default=10000,
             help = "population effective size (int, default: 10000)")
+
+    parser.add_argument("-M", "--min_pop_size", type=int, default=4,
+            help = "minimum number of samples in each population (int, default: 4)")
+
     parser.add_argument("-m", "--mutation_rate", type=float, default=10e-8,
             help = "mutation rate (int, default: 10e-8)")
 
@@ -233,7 +245,7 @@ if __name__ == '__main__':
                 a = alleles[int(allele)]
                 haplotypes.append(a)
 
-        if len(set(haplotypes)) > 1 and min(num_samples_per_pop) >= 10:
+        if len(set(haplotypes)) > 1 and min(num_samples_per_pop) >= args.min_pop_size:
             num_sample_per_snp.append(num_samples_per_pop)
             kept_loci.add(snp.locus_id)
 
