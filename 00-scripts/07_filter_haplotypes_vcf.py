@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Use a filtered vcf to filter an haplotypes.tsv file
 
 Usage:
