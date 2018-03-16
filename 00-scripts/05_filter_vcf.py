@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Filtering VCF files output by STACKS
 
 WARNING! will not work properly with STACKS versions older to v1.30 since the
