@@ -54,10 +54,39 @@ with open(output_haplotypes, "w") as outfile:
                     continue
 
                 haplotypes = l[2:]
+
                 num_missing = len([x for x in haplotypes if x == "-"])
                 num_tri_allelic = len([x for x in haplotypes if x.count("/") > 1])
                 distribution_tri_allelic[num_tri_allelic] += 1
                 multi_haplotypes = [x for x in haplotypes if x.count("/") > 1]
+
+                # Correct haplotypes containing Ns
+                if "N" in "".join(haplotypes):
+                    bad_haplotypes = [x for x in haplotypes if "N" in x]
+                    bad_positions = set()
+                    for bad in bad_haplotypes:
+                        for b in bad.split("/"):
+                            for i in range(len(b)):
+                                if b[i] == "N":
+                                    bad_positions.add(i)
+
+                    bad_positions = sorted(list(bad_positions), reverse=True)
+
+                    corrected_haplotypes = []
+                    for h in haplotypes:
+
+                        corrected_alleles = []
+                        for allele in h.split("/"):
+                            if allele == "-":
+                                corrected_alleles.append(allele)
+                                continue
+
+                            for p in bad_positions:
+                                allele = allele[:p] + allele[p+1:]
+
+                            corrected_alleles.append(allele)
+
+                        corrected_haplotypes.append("/".join(corrected_alleles))
 
                 # If too many, go to next
                 if len(multi_haplotypes) > max_multi_haplotypes:
