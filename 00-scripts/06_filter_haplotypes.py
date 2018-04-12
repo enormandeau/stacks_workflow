@@ -88,7 +88,7 @@ with open(output_haplotypes, "w") as outfile:
 
                         corrected_haplotypes.append("/".join(corrected_alleles))
 
-                haplotypes = corrected_haplotypes
+                    haplotypes = corrected_haplotypes
 
                 # If too many, go to next
                 if len(multi_haplotypes) > max_multi_haplotypes:
