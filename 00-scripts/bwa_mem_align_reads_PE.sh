@@ -2,7 +2,7 @@
 
 # Global variables
 GENOMEFOLDER="08-genome"
-GENOME="kelpfly_genome_AA_pacbio_100kb_plus.fasta"
+GENOME="inversion_contig.fasta"
 DATAFOLDER="04-all_samples"
 NCPU=$1
 
@@ -26,15 +26,11 @@ do
 
     name=$(basename $file)
     name2=$(basename $file2)
-    ID="@RG\tID:ind\tSM:ind\tPL:IonProton"
+    ID="@RG\tID:ind\tSM:ind\tPL:Illumina"
 
     # Align reads 1 step
-    bwa mem -t "$NCPU" -k 19 -c 500 -O 0,0 -E 2,2 -T 0 \
-        -R $ID \
-        $GENOMEFOLDER/$GENOME $DATAFOLDER/"$name" $DATAFOLDER/"$name2" 2> /dev/null |
-        samtools view -Sb -q 20 \
-            -f 83 -f 163 -f 99 -f 147 \
-        - > $DATAFOLDER/"${name%.fq.gz}".bam
+    bwa mem -t "$NCPU" -R "$ID" $GENOMEFOLDER/$GENOME $DATAFOLDER/"$name" $DATAFOLDER/"$name2" 2> /dev/null | samtools view -Sb -q 10 - > $DATAFOLDER/"${name%.fq.gz}".bam
+        #samtools view -Sb -q 20 -f 83 -f 163 -f 99 -f 147 - > $DATAFOLDER/"${name%.fq.gz}".bam
 
     # Sort and index
     samtools sort $DATAFOLDER/"${name%.fq.gz}".bam > $DATAFOLDER/"${name%.fq.gz}".sorted.bam
