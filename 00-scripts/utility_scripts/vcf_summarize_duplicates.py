@@ -82,6 +82,7 @@ with open(input_vcf) as infile:
                 geno1, cov1, allele_cov1 = data[column1].split(":")
                 geno1 = geno_dictionary[geno1]
                 a1_cov1, a2_cov1 = allele_cov1.split(",")
+                print(geno1, cov1, allele_cov1, a1_cov1, a2_cov1)
 
                 geno2, cov2, allele_cov2 = data[column2].split(":")
                 geno2 = geno_dictionary[geno2]
@@ -127,7 +128,7 @@ with open(input_vcf) as infile:
                 # Report all infos
                 report = "\t".join([contig, contig_pos, locus_id, snp_pos,
                         allele1, allele2, number_samples, allele_freq,
-                        sample1, str(geno1), cov1, a1_cov1, a2_cov2,
+                        sample1, str(geno1), cov1, a1_cov1, a2_cov1,
                         sample2, str(geno2), cov2, a1_cov2, a2_cov2]) + "\n"
 
                 outfile.write(report)
