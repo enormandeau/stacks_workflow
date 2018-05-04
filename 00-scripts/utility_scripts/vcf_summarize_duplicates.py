@@ -81,12 +81,11 @@ with open(input_vcf) as infile:
 
                 geno1, cov1, allele_cov1 = data[column1].split(":")
                 geno1 = geno_dictionary[geno1]
-                a1_cov1, a2_cov1 = allele_cov1.split(",")
-                print(geno1, cov1, allele_cov1, a1_cov1, a2_cov1)
+                cov1_a1, cov1_a2 = allele_cov1.split(",")
 
                 geno2, cov2, allele_cov2 = data[column2].split(":")
                 geno2 = geno_dictionary[geno2]
-                a1_cov2, a2_cov2 = allele_cov2.split(",")
+                cov2_a1, cov2_a2 = allele_cov2.split(",")
 
                 min_cov = min([cov1, cov2])
 
@@ -128,18 +127,10 @@ with open(input_vcf) as infile:
                 # Report all infos
                 report = "\t".join([contig, contig_pos, locus_id, snp_pos,
                         allele1, allele2, number_samples, allele_freq,
-                        sample1, str(geno1), cov1, a1_cov1, a2_cov1,
-                        sample2, str(geno2), cov2, a1_cov2, a2_cov2]) + "\n"
+                        sample1, str(geno1), cov1, cov1_a1, cov1_a2,
+                        sample2, str(geno2), cov2, cov2_a1, cov2_a2]) + "\n"
 
                 outfile.write(report)
-
-for sample in pairs:
-    for case in duplicate_cases:
-
-        print(sample, case, duplicates_dict[sample][case])
-
-    print("--")
-
 
 for sample in pairs:
     for case in duplicate_cases:
@@ -148,6 +139,3 @@ for sample in pairs:
             print(sample, case, duplicates_per_coverage_dict[sample][cov][case])
 
     print("--")
-
-
-
