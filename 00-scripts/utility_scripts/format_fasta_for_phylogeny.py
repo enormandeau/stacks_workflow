@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Extract wanted loci from batch_1.fa output of population
 and prepare for phylogenetics analyses
 
