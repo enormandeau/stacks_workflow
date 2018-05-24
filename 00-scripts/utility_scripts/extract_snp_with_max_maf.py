@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Keep only SNP per locus, the one with the max maf, in vcf file
 
 Usage:
