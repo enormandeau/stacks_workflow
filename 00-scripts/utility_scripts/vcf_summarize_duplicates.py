@@ -69,9 +69,9 @@ with open(input_vcf) as infile:
             infos = line.strip().split("\t")[:8]
             contig, contig_pos, locus_id, allele1, allele2, _, _, num_and_maf = infos
             snp_pos = locus_id.split("_")[1]
-            temp = num_and_maf.split(";")
-            number_samples = temp[0]
-            allele_freq = temp[1]
+            num_and_maf = num_and_maf.split(";")
+            number_samples = num_and_maf[0]
+            allele_freq = num_and_maf[1]
             number_samples = number_samples.split("=")[1]
             allele_freq = allele_freq.split("=")[1]
 
@@ -81,11 +81,17 @@ with open(input_vcf) as infile:
             for stub in pairs:
                 sample1, column1, sample2, column2 = pairs[stub]
 
-                geno1, cov1, allele_cov1 = data[column1].split(":")
+                data_column1 = data[column1].split(":")
+                geno1 = data_column1[0]
+                cov1 = data_column1[1]
+                allele_cov1 = data_column1[2]
                 geno1 = geno_dictionary[geno1]
                 cov1_a1, cov1_a2 = allele_cov1.split(",")
 
-                geno2, cov2, allele_cov2 = data[column2].split(":")
+                data_column2 = data[column2].split(":")
+                geno2 = data_column2[0]
+                cov2 = data_column2[1]
+                allele_cov1 = data_column1[2]
                 geno2 = geno_dictionary[geno2]
                 cov2_a1, cov2_a2 = allele_cov2.split(",")
 
