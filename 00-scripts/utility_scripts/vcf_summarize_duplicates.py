@@ -69,7 +69,9 @@ with open(input_vcf) as infile:
             infos = line.strip().split("\t")[:8]
             contig, contig_pos, locus_id, allele1, allele2, _, _, num_and_maf = infos
             snp_pos = locus_id.split("_")[1]
-            number_samples, allele_freq, _ = num_and_maf.split(";")
+            temp = num_and_maf.split(";")
+            number_samples = temp[0]
+            allele_freq = temp[1]
             number_samples = number_samples.split("=")[1]
             allele_freq = allele_freq.split("=")[1]
 
