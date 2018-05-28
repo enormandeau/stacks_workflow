@@ -91,7 +91,7 @@ with open(input_vcf) as infile:
                 data_column2 = data[column2].split(":")
                 geno2 = data_column2[0]
                 cov2 = data_column2[1]
-                allele_cov1 = data_column1[2]
+                allele_cov2 = data_column2[2]
                 geno2 = geno_dictionary[geno2]
                 cov2_a1, cov2_a2 = allele_cov2.split(",")
 
