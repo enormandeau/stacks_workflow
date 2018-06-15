@@ -77,7 +77,7 @@ for chip in sorted(chips):
     numseq_file = os.path.join(folder, chip + ".numseq")
 
     # Load data into pandas data frame
-    info_df = pd.read_csv(info_file, sep="\t", header=None)
+    info_df = pd.read_csv(info_file, sep="\t", header=None, usecols=range(6))
     info_df = info_df.ix[:,0:5]
     info_df.columns = ["Chip", "Barcode", "Population", "Individual", "PopID", "Well"]
 
