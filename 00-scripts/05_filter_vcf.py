@@ -207,7 +207,7 @@ class Flags(object):
             report.append("  {} SNPs ({}%) filtered out".format(pad(cls.total_filtered_count), 100))
 
         report.append("  {} SNPs retained".format(pad(cls.total_good_snps_count), total_good_loci))
-        report.append("===================================================")
+        report.append("===================================================\n")
 
         report = "\n".join(report)
         # Print report
