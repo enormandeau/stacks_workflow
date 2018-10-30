@@ -2,8 +2,7 @@
 #SBATCH -J "sstacks"
 #SBATCH -o log_%j
 #SBATCH -c 1
-#SBATCH -p ibismax
-#SBATCH -A ibismax
+#SBATCH -p medium
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=YOUREMAIL
 #SBATCH --time=6-00:00

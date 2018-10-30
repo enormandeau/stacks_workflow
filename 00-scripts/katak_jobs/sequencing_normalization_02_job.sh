@@ -2,8 +2,7 @@
 #SBATCH -J "norm2"
 #SBATCH -o log_%j
 #SBATCH -c 1
-#SBATCH -p ibismax
-#SBATCH -A ibismax
+#SBATCH -p small
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=YOUREMAIL
 #SBATCH --time=0-01:00
