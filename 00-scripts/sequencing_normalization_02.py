@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Calculate new volumes needed to normalize the sequencing depth per sample
 and then create a DNA plate template with these volumes for a new library.
 
