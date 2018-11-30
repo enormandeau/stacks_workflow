@@ -14,9 +14,9 @@ o="-o 05-stacks"  # o: output path to write results.
 #i="-i 1"         # i: SQL ID to insert into the output to identify this sample
 m="-m 4"          # m: Minimum depth of coverage required to create a stack
                   #   (default 3).
-M="-M 5"          # M: Maximum distance (in nucleotides) allowed between stacks
+M="-M 3"          # M: Maximum distance (in nucleotides) allowed between stacks
                   #   (default 2).
-N="-N 7"          # N: Maximum distance allowed to align secondary reads to
+N="-N 5"          # N: Maximum distance allowed to align secondary reads to
                   #   primary stacks (default: M + 2).
 #R="-R"           # R: retain unused reads.
 H="-H"            # H: disable calling haplotypes from secondary reads.

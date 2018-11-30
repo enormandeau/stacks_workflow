@@ -47,6 +47,6 @@ do
 
 
     # Copy log files to ./10-log_files/
-    cp 03-samples/$f/process_radtags.log 10-log_files/"$TIMESTAMP"_02_process_radtags_"$f".log
+    cp 03-samples/$f/process_radtags.trimmed.log 10-log_files/"$TIMESTAMP"_02_process_radtags_"$f".log
 done
 
