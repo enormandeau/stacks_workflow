@@ -5,8 +5,10 @@
 #SBATCH -p medium
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=YOUREMAIL
-#SBATCH --time=8-00:00
+#SBATCH --time=7-00:00
 #SBATCH --mem=8G
+
+module load stacks/1.48
 
 # Move to directory where job was submitted
 cd $SLURM_SUBMIT_DIR

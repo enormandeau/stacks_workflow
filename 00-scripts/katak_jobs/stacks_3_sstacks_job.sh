@@ -8,6 +8,8 @@
 #SBATCH --time=6-00:00
 #SBATCH --mem=20G
 
+module load stacks/1.48
+
 # Move to directory where job was submitted
 cd $SLURM_SUBMIT_DIR
 
