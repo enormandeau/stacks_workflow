@@ -2,7 +2,14 @@
 """Use a filtered vcf to filter an haplotypes.tsv file
 
 Usage:
-    ./00-scripts/06_filter_haplotypes.py filtered_vcf input_haplotypes max_multi_haplotypes min_proportion output_haplotypes
+    <program> filtered_stacks_vcf input_haplotypes max_multi_haplotypes min_proportion output_haplotypes
+
+Where:
+    filtered_stacks_vcf: STACKS VCF filtered with 05_filter_vcf.py
+    input_haplotypes: STACKS batch_1.haplotypes.tsv
+    max_multi_haplotypes: Maximum number of samples with 3+ haplotypes
+    min_proportion: Minimum proportion of samples with data (1 - prop_missing)
+    output_haplotypes: output haplotype.tsv file
 """
 
 # Modules
@@ -11,7 +18,7 @@ import sys
 
 # Parse user input
 try:
-    filtered_vcf = sys.argv[1]
+    filtered_stacks_vcf = sys.argv[1]
     input_haplotypes = sys.argv[2]
     max_multi_haplotypes = int(sys.argv[3])
     min_proportion = float(sys.argv[4])
@@ -22,7 +29,7 @@ except:
 
 # Read filtered VCF to collect wanted loci IDs
 wanted_loci = set()
-with open(filtered_vcf) as infile:
+with open(filtered_stacks_vcf) as infile:
     for line in infile:
         if line.startswith("#"):
             continue

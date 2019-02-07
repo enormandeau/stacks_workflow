@@ -1,8 +1,15 @@
 #!/usr/bin/env python2
-"""Use a filtered vcf to filter an haplotypes.tsv file
+"""Use a filtered vcf to filter an haplotypes.vcf file
 
 Usage:
-    ./00-scripts/06_filter_haplotypes.py filtered_vcf input_haplotypes max_multi_haplotypes min_proportion output_haplotypes
+    <program> filtered_stacks_vcf input_haplotypes max_multi_haplotypes min_proportion output_haplotypes
+
+Where:
+    filtered_stacks_vcf: STACKS VCF filtered with 05_filter_vcf.py
+    input_haplotypes: STACKS batch_1.haplotypes.vcf
+    max_multi_haplotypes: Maximum number of samples with 3+ haplotypes
+    min_proportion: Minimum proportion of samples with data (1 - prop_missing)
+    output_haplotypes: output haplotype.vcf file
 """
 
 # Modules
