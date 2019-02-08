@@ -67,6 +67,10 @@ with open(output_haplotypes, "w") as outfile:
                 distribution_tri_allelic[num_tri_allelic] += 1
                 multi_haplotypes = [x for x in haplotypes if x.count("/") > 1]
 
+                # If too many, go to next
+                if len(multi_haplotypes) > max_multi_haplotypes:
+                    continue
+
                 # Correct haplotypes containing Ns
                 if "N" in "".join(haplotypes):
                     bad_haplotypes = [x for x in haplotypes if "N" in x]
@@ -96,10 +100,6 @@ with open(output_haplotypes, "w") as outfile:
                         corrected_haplotypes.append("/".join(corrected_alleles))
 
                     haplotypes = corrected_haplotypes
-
-                # If too many, go to next
-                if len(multi_haplotypes) > max_multi_haplotypes:
-                    continue
 
                 # Else, correct the genotypes to null ("-")
                 else:
