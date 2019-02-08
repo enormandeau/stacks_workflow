@@ -61,4 +61,4 @@ with open(output_haplotypes, "w") as outfile:
                     continue
 
                 else:
-                    outfile.write(line)
+                    outfile.write(line.replace("\t\t", "\t./.:0\t").replace("\t\t", "\t./.:0\t"))
