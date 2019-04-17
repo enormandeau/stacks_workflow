@@ -16,9 +16,9 @@ list=__LIST__
 cd $PBS_O_WORKDIR
 
 # Load gmap module
-module load compilers/gcc/4.8.5  apps/mugqic_pipeline/2.1.1
-module load mugqic/samtools/1.2
-module load mugqic/bwa/0.7.12
+source /clumeq/bin/enable_cc_cvmfs
+module load samtools/1.5
+module load bwa/0.7.15
 
 # Global variables
 DATAFOLDER="04-all_samples"
