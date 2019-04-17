@@ -15,8 +15,8 @@ fi
 # Index genome if not alread done
 # bwa index -p $GENOMEFOLDER/$GENOME $GENOMEFOLDER/$GENOME.fasta
 
-module load bwa
-module load samtools
+module load samtools/1.8
+module load bwa/0.7.17
 
 for file in $(ls -1 $DATAFOLDER/*_R1_*.fastq.gz)
 do
