@@ -17,11 +17,16 @@ except:
     print(__doc__)
     sys.exit(1)
 
+# Functions
+def duplicated_likelihood(avg_ratio, total_coverage_heterozygotes, med_coverage_heterozygotes, fis):
+    return -1
+
 # Read VCF and compute allelic imbalance for each SNP
 with open(input_vcf) as infile:
+    with open(output_file, "w") as outfile:
 
-        loci = []
-        previous_locus = None
+        # Write header
+        outfile.write("Scaffold\tPosition\tID\tMedRatio\tAvgRatio\tMedCovHet\tTotCovHet\tMedCovHom\tNumHet\tPropHomFreq\tPropHet\tPropHomRare\tNumRare\tFis\n")
 
         # Iterate over loci and SNPs
         for line in infile:
@@ -33,6 +38,7 @@ with open(input_vcf) as infile:
             # Get locus information
             scaffold, position, locus_id = l[:3]
             locus = locus_id.split("_")[0]
+            num_samples = len([x for x in l[9:] if x.split(":")[0] != "./."])
 
             # Get only coverage data per sample for heterozygote samples
             data_homozygotes_freq = [(int(i[0]), int(i[1])) for i in [x.split(":")[2].split(",")
@@ -47,40 +53,68 @@ with open(input_vcf) as infile:
                     for x in l[9:] if x.split(":")[0] in ["1/1"]]
                     ]
 
-            if len(data_heterozygotes) < 2:
-                continue
-
             # allele ratio of snp
             allele_ratios = [x[1] / sum(x) for x in data_heterozygotes]
-            med_ratio = statistics.median(allele_ratios)
+            try:
+                med_ratio = statistics.median(allele_ratios)
+                avg_ratio = statistics.mean(allele_ratios)
+            except:
+                continue
+                med_ratio = -1.0
+                avg_ratio = -1.0
 
             # median and stdev coverage
             coverages_heterozygotes = [sum(x) for x in data_heterozygotes]
-            med_coverage_heterozygotes = statistics.median(coverages_heterozygotes)
-            std_coverage_heterozygotes = statistics.stdev(coverages_heterozygotes)
+            total_coverage_heterozygotes = sum(coverages_heterozygotes)
+            try:
+                med_coverage_heterozygotes = statistics.median(coverages_heterozygotes)
+            except:
+                med_coverage_heterozygotes = 0.0
 
             coverages_homozygotes = [sum(x) for x in data_homozygotes_freq + data_homozygotes_rare]
-            med_coverage_homozygotes = statistics.median(coverages_homozygotes)
-            std_coverage_homozygotes = statistics.stdev(coverages_homozygotes)
+            coverages_homozygotes_rares = [sum(x) for x in data_homozygotes_rare]
 
-            # Skip high coverage SNPs
-            coverages_total = coverages_heterozygotes + coverages_homozygotes
-            med_coverage_total = statistics.median(coverages_total)
+            try:
+                med_coverage_homozygotes = statistics.median(coverages_homozygotes)
+            except:
+                med_coverage_homozygotes = 0.0
 
-            if med_coverage_total > 80:
-                continue
+            ## Skip high coverage SNPs
+            #coverages_total = coverages_heterozygotes + coverages_homozygotes
+            #med_coverage_total = statistics.median(coverages_total)
+
+            #if med_coverage_total > 80:
+            #    continue
 
             # proportion heterozygotes (only these with a genotype)
-            prop_heterozygotes = len(coverages_heterozygotes) / (
-                    len(coverages_heterozygotes) + len(coverages_homozygotes))
+            num_heterozygotes = len(coverages_heterozygotes)
+            num_rare = len(coverages_homozygotes_rares) + len(coverages_heterozygotes)
 
-            # proportion homozygotes for the frequent allele
-            prop_homozygotes_freq = len(data_homozygotes_freq) / (
-                    len(data_homozygotes_freq) + len(data_homozygotes_rare) + len(data_heterozygotes))
+            # Remove SNPs with less than 2 samples with rare allele
+            #if num_rare < 2:
+            #    continue
 
-            # proportion homozygotes for the rare allele
-            prop_homozygotes_rare = len(data_homozygotes_rare) / (
-                    len(data_homozygotes_freq) + len(data_homozygotes_rare) + len(data_heterozygotes))
+            prop_heterozygotes = len(coverages_heterozygotes) / num_samples
+
+            # proportion homozygotes for the frequent and rare allele
+            prop_homozygotes_freq = len(data_homozygotes_freq) / num_samples
+            prop_homozygotes_rare = len(data_homozygotes_rare) / num_samples
+
+            # Compute Fis
+            Hobs = prop_heterozygotes
+            p = prop_homozygotes_freq + prop_heterozygotes / 2
+            q = prop_homozygotes_rare + prop_heterozygotes / 2
+            Hexp = 2 * p * q
+
+            fis = 1 - Hobs / Hexp
+
+            # Compute likelihood of being a single / duplicated SNP
+            likelihood = duplicated_likelihood(
+                    avg_ratio,
+                    total_coverage_heterozygotes,
+                    med_coverage_heterozygotes,
+                    fis
+                    )
 
             # Get all infos
             snp_info = [
@@ -88,35 +122,17 @@ with open(input_vcf) as infile:
                     position,
                     locus_id,
                     med_ratio,
+                    avg_ratio,
                     med_coverage_heterozygotes,
-                    std_coverage_heterozygotes,
+                    total_coverage_heterozygotes,
                     med_coverage_homozygotes,
-                    std_coverage_homozygotes,
-                    prop_heterozygotes,
+                    num_heterozygotes,
                     prop_homozygotes_freq,
-                    prop_homozygotes_rare
+                    prop_heterozygotes,
+                    prop_homozygotes_rare,
+                    num_rare,
+                    fis
                     ]
 
-            if locus != previous_locus:
-                loci.append([])
-
-            loci[-1].append(snp_info)
-            previous_locus = locus
-
-with open(output_file, "w") as outfile:
-
-    # Write header
-    outfile.write("#Scaffold\tPosition\tID\tMedRatio\tMedCovHet\tStdCovHet\tMedCovHom\tStdCovHom\tPropHet\tPropHomFreq\tPropHomRare\tNumSnpsLocus\tMedLocusRatioLocus\tMedLocusCovLocus\n")
-
-    for locus in sorted(loci):
-        num_snps = len(locus)
-
-        med_allele_ratio = statistics.median([x[3] for x in locus])
-
-        med_allele_cov = statistics.median([x[4] for x in locus])
-
-        for snp in locus:
-            snp += [num_snps, med_allele_ratio, med_allele_cov]
-
-            info = [str(x) for x in snp]
+            info = [str(x) for x in snp_info]
             outfile.write("\t".join(info) + "\n")
