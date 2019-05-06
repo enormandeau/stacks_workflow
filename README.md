@@ -40,7 +40,7 @@ usefulness to other groups or in other contexts, but we still believe it may be
 of use to some.
 
 ## About STACKS
- 
+
 The [stacks analysis pipeline](http://creskolab.uoregon.edu/stacks/) is used
 for snp discovery in genotyping by sequencing (gbs) and restriction-site
 associated dna sequencing (rad) studies, with and without a reference genome.
@@ -64,7 +64,7 @@ Also very useful paper to read before attempting to run stacks:
 genotyping error estimation and de novo assembly optimization for population
 genetic inference. molecular ecology resources,
 n/a–n/a.](http://onlinelibrary.wiley.com/doi/10.1111/1755-0998.12291/abstract;jsessionid=a32722e1462a2a2714ee53a6fd4c7194.f04t04)
- 
+
 ## Overview of the steps
 
 1. Install stacks_workflow and STACKS with its dependencies
@@ -79,7 +79,7 @@ n/a–n/a.](http://onlinelibrary.wiley.com/doi/10.1111/1755-0998.12291/abstract;
 
 ## Where to find this manual
 
-To read a html version of this file, go to the 
+To read a html version of this file, go to the
 [stacks_workflow project page](https://github.com/enormandeau/stacks_workflow)
 on GitHub.
 
@@ -128,7 +128,7 @@ sudo make install
 cd ..
 sudo rm -R stacks-1.XX stacks-1.XX.tar.gz
 ```
- 
+
 #### Test the STACKS installation
 
 ```bash
@@ -179,7 +179,7 @@ You're on your own ;)
 
 ## Prepare your raw datafiles
 
-### Downloading your data 
+### Downloading your data
 
 Download your raw Illumina or Ion Proton data files from your sequencing
 service provider.
@@ -227,26 +227,26 @@ produced by Illumina and Ion Proton sequencers.
 ### Prepare a file named `sample_information.csv`
 
 Use the same format found in the `example_sample_information.csv` file in
-the `01-info_files` folder. 
+the `01-info_files` folder.
 
 Save this file in the `01-info_files` folder and name it exactly
 `sample_information.csv`.
 
 The `sample_information.csv` file will be used to extract the samples and
-rename the extracted sample files automatically. 
+rename the extracted sample files automatically.
 
 The first column **MUST** contain the **EXACT** name of the data file for the
-lane of each sample. 
+lane of each sample.
 
 **Notes:**
 
 - The **columns are separated by tabulations** (even if the extension is .csv)
-- The second column contains the barcode sequence of each sample. 
-- The third column contains the population name of each sample. 
+- The second column contains the barcode sequence of each sample.
+- The third column contains the population name of each sample.
 - The fourth column contains the name of the sample (do not include the
-population name or abbreviation in the sample name). 
+population name or abbreviation in the sample name).
 - Neither the population name nor the sample name should contain underscores `_`
-- The fifth column contains a number identifying the populations. 
+- The fifth column contains a number identifying the populations.
 
 Columns three and four are treated as text, so they can contain either text or
 numbers. Other columns can be present after the fifth one and will be ignored.
@@ -264,10 +264,10 @@ populations.
 ./00-scripts/02_process_radtags.sh <trimLength> <enzyme>
 ```
 
-Where:  
+Where:
 
  - **trimLength** = length to trim all the sequences. This should be the length
-   of the Illumina reads minus the length of the longest tag or MID.  
+   of the Illumina reads minus the length of the longest tag or MID.
  - **enzyme** = name of enzyme (run `process_radtags`, without options, for a
    list of the supported enzymes)
 
@@ -277,10 +277,10 @@ Where:
 ./00-scripts/02_process_radtags_2_enzymes.sh <trimLength> <enzyme1> <enzyme2>
 ```
 
-Where:  
+Where:
 
  - **trimLength** = length to trim all the sequences. This should be the length
-   of the Illumina reads minus the length of the longest tag or MID.  
+   of the Illumina reads minus the length of the longest tag or MID.
  - **enzyme1** = name of the first enzyme (run `process_radtags`, without
    options, for a list of the supported enzymes)
  - **enzyme2** = name of the second enzyme (run `process_radtags`, without
@@ -416,12 +416,54 @@ These parameter values are only for demonstration purpose. Choose your
 own values carefully.
 
 ```bash
-./00-scripts/05_filter_vcf.py \  
-   -i 05-stacks/batch_1.vcf \  
-   -o filtered.vcf \  
+./00-scripts/05_filter_vcf.py \
+   -i 05-stacks/batch_1.vcf \
+   -o filtered.vcf \
    -c 1 -m 7 -l 10 -I 8 -p 70 --use_percent \
    -a 0.01 -A 0.05 -H 0.5 -f -0.3 -F 0.3 -s 10
 ```
+
+## More on filering results
+
+Overview of what to filter for after STACKS
+
+- Filter a minimum
+```
+./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -o filtered_m4_p70 -q
+```
+
+- Create graphs
+```
+./00-scripts/05_filter_vcf -i filtered_m4_p70 -o graphs_filtered_m4_p70 -g -q
+```
+
+- Identify samples with too much missin data from figure and remove their files from `05-stacks`
+- Re-run `populations`
+
+- Copy `05-stacks/batch_1.vcf`
+- Group samples into fewer groups (`POP1_sample` -> `Group1_POP1-sample`)
+- Filter a minimum
+```
+./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -o filtered_bad_samples_removed_m4_p70 -q
+```
+
+- Run `vcftools --relatedness` and remove potential errors
+
+### TODO
+- Explore locus duplication
+
+- Filter based on:
+  - MinCov (per sample)
+  - MaxCov (per sample)
+  - MSC (minimum number of samples with rare allele)
+
+- Identify singleton and duplicated loci with
+  - MaxMedCov
+  - MedRatio
+  - Het
+  - Fis
+  - Fis + MedRatio
+  - Simulations
 
 ## Conclusion
 
