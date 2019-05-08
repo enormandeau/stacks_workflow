@@ -437,7 +437,7 @@ Overview of what to filter for after STACKS
 ./00-scripts/05_filter_vcf -i filtered_m4_p70 -o graphs_filtered_m4_p70 -g -q
 ```
 
-- Identify samples with too much missin data from figure and remove their files from `05-stacks`
+- Identify samples with too much missing data from figure and remove their files from `05-stacks`
 - Re-run `populations`
 
 - Copy `05-stacks/batch_1.vcf`
@@ -449,15 +449,17 @@ Overview of what to filter for after STACKS
 
 - Run `vcftools --relatedness` and remove potential errors
 
+- Re-run `population`
+
 ### TODO
 - Explore locus duplication
 
 - Filter based on:
   - MinCov (per sample)
-  - MaxCov (per sample)
+  - Proportion of missing by population
   - MSC (minimum number of samples with rare allele)
 
-- Identify singleton and duplicated loci with
+- Identify singletons and duplicated loci with
   - MaxMedCov
   - MedRatio
   - Het
