@@ -451,23 +451,30 @@ Overview of what to filter for after STACKS
 
 - Re-run `population`
 
-### TODO
 - Explore locus duplication
+```
+./00-scripts/08_explore_overmerged_loci_01.py
+./00-scripts/09_explore_overmerged_loci_02.R
+```
 
-- Filter based on:
+- Use results to filter with `05_filter_vcf.py`:
   - MinCov (per sample)
   - Proportion of missing by population
-  - MSC (minimum number of samples with rare allele)
+  - **TODO** MSC (minimum number of samples with rare allele)
 
 - Identify singletons and duplicated loci with
-  - MaxMedCov
-  - MedRatio
-  - Het
-  - Fis
-  - Fis + MedRatio
-  - Simulations
+  - MaxMedCov (loci with high numbers of copies)
+  - Het (above ~0.8 = duplicated loci fixed at different alleles)
+  - Het (above ~0.55 and below ~0.8 = duplicated variable loci)
+  - Fis (below ~0.1 or even closer to zero = duplicated loci)
+  - Fis + MedRatio (Fis + MedRatio / 4 < ~0.05 =duplicated loci)
+  - Other options (**TODO**)?
+  - Simulations (**TODO** maybe)
 
 ## Conclusion
+
+You should now have a very clean SNP dataset for your project. Analyze singletons
+and duplicated loci separately.
 
 ### Running into problems
 
