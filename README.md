@@ -471,6 +471,8 @@ Overview of what to filter for after STACKS
   - Other options (**TODO**)?
   - Simulations (**TODO** maybe)
 
+- Remove all loci with one or more suspected duplicated SNP
+
 ## Conclusion
 
 You should now have a very clean SNP dataset for your project. Analyze singletons
