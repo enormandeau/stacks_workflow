@@ -3,8 +3,13 @@
 # Cleanup
 rm(list=ls())
 
+# Parse user input
+args = commandArgs(trailingOnly=TRUE)
+input_file = args[1]
+output_image_file = paste0(input_file, ".png")
+
 # Load data
-data = read.table("filtered_m4_p70.overmerged.infos", header=T, stringsAsFactors=F)
+data = read.table(input_file, header=T, stringsAsFactors=F)
 
 # Subset columns
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom")]
@@ -40,6 +45,6 @@ d$Color[d$Fis + d$PropHet / 4 > 0.4] = purple
 d$Color[d$MedCovHom <= 10] = blue # | d$MedCovHet <= 9] = blue
 
 # Plot
-png("duplicated_loci.png", width=1200, height=950)
+png(output_image_file, width=1200, height=950)
     plot(d[,1:4], pch=16, cex=1, col=d$Color)
 dev.off()
