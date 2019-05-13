@@ -24,13 +24,25 @@ purple = "#DD00AA44"
 
 # Duplicated loci
 d$Color = black
+
+## Allele ratios are too far from 0.5
 d$Color[d$MedRatio < 0.3] = yellow
 d$Color[d$MedRatio > 0.7] = yellow
+
+# Fine tune negative Fis using MedRatio and PropHomRare info
 d$Color[d$Fis + d$MedRatio / 3 - d$PropHomRare / 4 < 0.1] = orange
+
+# Fis is too negative
 d$Color[d$Fis < -0.1] = red
-d$Color[d$PropHet > 0.9] = blue
+
+# Diverged duplicated loci with all samples heterozygous
+d$Color[d$PropHet > 0.8] = blue
+
+# Very high Fis means low coverage and confidence on genotypes
 d$Color[d$Fis + d$PropHet / 4 > 0.7] = purple
-d$Color[d$MedCovHom > 45 | d$MedCovHet > 45] = green
+
+# Loci with high coverage
+d$Color[d$MedCovHom > 40 | d$MedCovHet > 40] = green
 
 # Extract bad loci infos
 bad_snps = d$Color != black
@@ -42,7 +54,7 @@ bad_loci = unique(gsub("_.*", "", data$ID[bad_snps]))
 cat(paste0("Found ", length(bad_loci), " duplicated loci out of ", length(all_loci), "\n"))
 
 # Low cov (for exploration only, not removed)
-d$Color[d$MedCovHom <= 8] = blue # | d$MedCovHet <= 9] = blue
+d$Color[d$MedCovHom <= 8] = blue
 
 # Plot
 png(output_image_file, width=1200, height=950)
