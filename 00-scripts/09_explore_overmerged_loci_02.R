@@ -26,9 +26,9 @@ purple = "#DD00AA44"
 d$Color = black
 d$Color[d$MedRatio < 0.3] = yellow
 d$Color[d$MedRatio > 0.7] = yellow
-d$Color[d$Fis + d$MedRatio / 3 - d$PropHomRare / 4 < 0.13] = orange
-d$Color[d$Fis < -0.05] = red
-d$Color[d$PropHet > 0.88] = blue
+d$Color[d$Fis + d$MedRatio / 3 - d$PropHomRare / 4 < 0.1] = orange
+d$Color[d$Fis < -0.1] = red
+d$Color[d$PropHet > 0.9] = blue
 d$Color[d$Fis + d$PropHet / 4 > 0.7] = purple
 d$Color[d$MedCovHom > 45 | d$MedCovHet > 45] = green
 
