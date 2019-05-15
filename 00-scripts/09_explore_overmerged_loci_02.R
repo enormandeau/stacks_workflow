@@ -1,45 +1,34 @@
 #!/usr/bin/env Rscript
-
-# Cleanup
-rm(list=ls())
-
 # Parse user input
+rm(list=ls())
 args = commandArgs(trailingOnly=TRUE)
 input_file = args[1]
-output_image_file = paste0(input_file, ".png")
+output_file = paste0(input_file, ".categoried")
+output_image_file_1 = paste0(input_file, "_1.png")
+output_image_file_2 = paste0(input_file, "_2.png")
 
 # Load data
 data = read.table(input_file, header=T, stringsAsFactors=F)
-
-# Subset columns
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom")]
 
-black =  "#00000011"
-red =    "#FF000022"
-orange = "#FFCC0044"
-yellow = "#DDDD0066"
-green =  "#00AA0044"
-blue =   "#0000FF22"
-purple = "#DD00AA44"
+black = "#00000011"
+red = "#FF000022"
+green = "#00AA0044"
+blue = "#0000FF22"
+purple = "#DD00AA22"
 
-# Duplicated loci
+# All loci marked singleton before filters
 d$Color = black
 
-## Allele ratios are too far from 0.5
-d$Color[d$MedRatio < 0.3] = yellow
-d$Color[d$MedRatio > 0.7] = yellow
-
-# Fine tune negative Fis using MedRatio and PropHomRare info
-d$Color[d$Fis + d$MedRatio / 3 - d$PropHomRare / 4 < 0.1] = orange
-
-# Fis is too negative
+# Fis is too negative = singleton
 d$Color[d$Fis < -0.1] = red
+d$Color[d$Fis + d$MedRatio / 3 < 0.10] = red
 
-# Diverged duplicated loci with all samples heterozygous
-d$Color[d$PropHet > 0.8] = blue
+# Very low Fis = diverged
+d$Color[d$Fis < -0.6] = blue
 
-# Very high Fis means low coverage and confidence on genotypes
-d$Color[d$Fis + d$PropHet / 4 > 0.7] = purple
+# Very high Fis = low coverage and low confidence
+d$Color[d$Fis - d$PropHet / 4 > 0.5] = purple
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 40 | d$MedCovHet > 40] = green
@@ -49,14 +38,29 @@ bad_snps = d$Color != black
 all_loci = unique(gsub("_.*", "", data$ID))
 bad_loci = unique(gsub("_.*", "", data$ID[bad_snps]))
 
-# TODO extract scaffold + position
+# Categorize SNPs to filter loci with next script
+data$Category = "singleton"
+data$Category[d$Color == red] = "duplicated"
+data$Category[d$Color == blue] = "diverged"
+data$Category[d$Color == green] = "highcov"
+data$Category[d$Color == purple] = "lowconfidence"
 
-cat(paste0("Found ", length(bad_loci), " duplicated loci out of ", length(all_loci), "\n"))
+write.table(data[,c("Scaffold", "Position", "ID", "Category")],
+            output_file, sep="\t", quote=F, row.names=F)
 
-# Low cov (for exploration only, not removed)
-d$Color[d$MedCovHom <= 8] = blue
+# Report number of duplicated loci
+cat(paste0("\nLoci: ", length(bad_loci), " / ", length(all_loci), " duplicated, diverged...\n"))
 
-# Plot
-png(output_image_file, width=1200, height=950)
+# Report number of SNPs per category
+report = table(data$Category)
+cat("SNPs")
+print(report)
+
+# Plots
+png(output_image_file_1, width=1200, height=950)
     plot(d[,1:4], pch=16, cex=1, col=d$Color)
-dev.off()
+invisible(dev.off())
+
+png(output_image_file_2, width=1200, height=950)
+    plot(d$PropHet, d$MedRatio, pch=19, cex=1.5, col=d$Color)
+invisible(dev.off())
