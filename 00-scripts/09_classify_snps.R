@@ -31,7 +31,7 @@ d$Color[d$Fis + d$MedRatio / 3 < 0.11] = duplicated
 d$Color[d$Fis < -0.6] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.49] = lowconf
+d$Color[d$Fis > 0.6] = lowconf
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 40 | d$MedCovHet > 40] = highcov
