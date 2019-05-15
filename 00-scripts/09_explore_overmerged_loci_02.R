@@ -25,7 +25,7 @@ d$Color[d$MedRatio > 0.60 & d$PropHomRare > 0.00] = lowconfidence
 
 # Fis is too negative = duplicated
 d$Color[d$Fis < -0.1] = duplicated
-d$Color[d$Fis + d$MedRatio / 3 < 0.10] = duplicated
+d$Color[d$Fis + d$MedRatio / 3 < 0.11] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.6] = diverged
