@@ -12,16 +12,16 @@ d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom
 singleton =     "#00000011" # black
 duplicated =    "#FF000022" # red
 diverged =      "#0000FF22" # blue
-lowconfidence = "#DD00AA22" # purple
+lowconf =       "#DD00AA22" # purple
 highcov =       "#00AA0022" # green
-#orange =          "#FFAA0022" # orange
+mas =           "#FFAA0022" # orange
 
 # All loci marked singleton before filters
 d$Color = singleton
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.40 & d$PropHomRare > 0.00] = lowconfidence
-d$Color[d$MedRatio > 0.60 & d$PropHomRare > 0.00] = lowconfidence
+d$Color[d$MedRatio < 0.40 & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio > 0.60 & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
 d$Color[d$Fis < -0.1] = duplicated
@@ -31,13 +31,13 @@ d$Color[d$Fis + d$MedRatio / 3 < 0.11] = duplicated
 d$Color[d$Fis < -0.6] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.49] = lowconfidence
+d$Color[d$Fis > 0.49] = lowconf
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 40 | d$MedCovHet > 40] = highcov
 
 # Too few samples with rare allele
-d$Color[data$NumHet + data$NumRare <= 2] = lowconfidence
+d$Color[data$NumHet + data$NumRare <= 2] = mas
 
 # Extract bad loci infos
 bad_snps = d$Color != singleton
@@ -47,16 +47,13 @@ bad_loci = unique(gsub("_.*", "", data$ID[bad_snps]))
 # Categorize SNPs to filter loci with next script
 data$Category = "singleton"
 data$Category[d$Color == duplicated] = "duplicated"
-#data$Category[d$Color == orange] = "lowconfidence"
+data$Category[d$Color == mas] = "mas"
 data$Category[d$Color == diverged] = "diverged"
-data$Category[d$Color == lowconfidence] = "lowconfidence"
+data$Category[d$Color == lowconf] = "lowconf"
 data$Category[d$Color == highcov] = "highcov"
 
 write.table(data[,c("Scaffold", "Position", "ID", "Category")],
             output_file, sep="\t", quote=F, row.names=F)
-
-# Report number of duplicated loci
-cat(paste0("\nLoci: ", length(bad_loci), " / ", length(all_loci), " duplicated, diverged...\n"))
 
 # Report number of SNPs per category
 report = table(data$Category)

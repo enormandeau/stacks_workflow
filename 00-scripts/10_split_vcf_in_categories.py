@@ -35,16 +35,11 @@ with open(input_categories) as infile:
         snps[(scaffold, position, snp)] = category
         loci[locus].append(category)
 
-cases = [", ".join(list(set(x))) for x in loci.values() if len(x) > 1]
-c = Counter(cases)
-for k, v in c.items():
-    print(f"{k}: {v}")
-
 # Open output file handles
 output_vcfs = dict()
 
-for cat in categories:
-    output_vcfs[cat] = open(input_vcf.replace(".vcf", "") + "." + cat + ".vcf", "w")
+for category in categories:
+    output_vcfs[category] = open(input_vcf.replace(".vcf", "") + "." + category + ".vcf", "w")
 
 # Read and split VCF
 with open(input_vcf) as infile:
