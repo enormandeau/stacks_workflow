@@ -411,23 +411,9 @@ For the long documentation, use the -h option.
 ./00-scripts/05_filter_vcf.py -h
 ```
 
-The following example shows how to use the script with some of the options.
-These parameter values are only for demonstration purpose. Choose your
-own values carefully.
+### Overview of what to filter for after STACKS
 
-```bash
-./00-scripts/05_filter_vcf.py \
-   -i 05-stacks/batch_1.vcf \
-   -o filtered.vcf \
-   -c 1 -m 7 -l 10 -I 8 -p 70 --use_percent \
-   -a 0.01 -A 0.05 -H 0.5 -f -0.3 -F 0.3 -s 10
-```
-
-## More on filering results
-
-Overview of what to filter for after STACKS
-
-- Filter a minimum
+- Filter a minimum:
 ```
 ./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -o filtered_m4_p70 -q
 ```
@@ -451,32 +437,26 @@ Overview of what to filter for after STACKS
 
 - Re-run `population`
 
-- Explore locus duplication
+- Explore SNP duplication
 ```
-./00-scripts/08_explore_overmerged_loci_01.py
-./00-scripts/09_explore_overmerged_loci_02.R
+./00-scripts/08_extract_snp_duplication_info.py
+./00-scripts/09_classify_snps.R
+./00-scripts/10_split_vcf_in_categories.py
 ```
 
-- Use results to filter with `05_filter_vcf.py`:
-  - MinCov (per sample)
-  - Proportion of missing by population
-  - **TODO** MSC (minimum number of samples with rare allele)
-
-- Identify singletons and duplicated loci with
-  - MaxMedCov (loci with high numbers of copies)
-  - Het (above ~0.8 = duplicated loci fixed at different alleles)
-  - Het (above ~0.55 and below ~0.8 = duplicated variable loci)
-  - Fis (below ~0.1 or even closer to zero = duplicated loci)
-  - Fis + MedRatio (Fis + MedRatio / 4 < ~0.05 =duplicated loci)
-  - Other options (**TODO**)?
-  - Simulations (**TODO** maybe)
-
-- Remove all loci with one or more suspected duplicated SNP
+- The following criteria are used in `09_classify_snps.R`
+  - Low Confidence: Extreme allele ratios (< 0.4 and > 0.6) with least one rare homozygote
+  - Duplicated: Fis < -0.1
+  - Duplicated: Fis + MedRatio / 3 < 0.11
+  - Diverged: Fis < -0.6
+  - Low Confidence: Fis > 0.49
+  - High Coverage: MedCovHom > 40 or MedCovHet > 40
+  - Minor Allele Sample: NumRare <= 2
 
 ## Conclusion
 
-You should now have a very clean SNP dataset for your project. Analyze singletons
-and duplicated loci separately.
+You should now have a very clean SNP dataset for your project. Analyze singletons,
+duplicated, diverged, and high coverage SNPs separately.
 
 ### Running into problems
 
