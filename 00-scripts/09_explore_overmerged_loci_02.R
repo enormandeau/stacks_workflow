@@ -11,39 +11,39 @@ output_image_file_2 = paste0(input_file, "_2.png")
 data = read.table(input_file, header=T, stringsAsFactors=F)
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom")]
 
-black = "#00000011"
-red = "#FF000022"
-green = "#00AA0044"
-blue = "#0000FF22"
-purple = "#DD00AA22"
+singleton =     "#00000011" # black
+duplicated =    "#FF000022" # red
+diverged =      "#0000FF22" # blue
+lowconfidence = "#DD00AA22" # purple
+highcov =       "#00AA0044" # green
 
 # All loci marked singleton before filters
-d$Color = black
+d$Color = singleton
 
-# Fis is too negative = singleton
-d$Color[d$Fis < -0.1] = red
-d$Color[d$Fis + d$MedRatio / 3 < 0.10] = red
+# Fis is too negative = duplicated
+d$Color[d$Fis < -0.1] = duplicated
+d$Color[d$Fis + d$MedRatio / 3 < 0.10] = duplicated
 
 # Very low Fis = diverged
-d$Color[d$Fis < -0.6] = blue
+d$Color[d$Fis < -0.6] = diverged
 
 # Very high Fis = low coverage and low confidence
-d$Color[d$Fis - d$PropHet / 4 > 0.5] = purple
+d$Color[d$Fis - d$PropHet / 4 > 0.6] = lowconfidence
 
 # Loci with high coverage
-d$Color[d$MedCovHom > 40 | d$MedCovHet > 40] = green
+d$Color[d$MedCovHom > 45 | d$MedCovHet > 45] = highcov
 
 # Extract bad loci infos
-bad_snps = d$Color != black
+bad_snps = d$Color != singleton
 all_loci = unique(gsub("_.*", "", data$ID))
 bad_loci = unique(gsub("_.*", "", data$ID[bad_snps]))
 
 # Categorize SNPs to filter loci with next script
 data$Category = "singleton"
-data$Category[d$Color == red] = "duplicated"
-data$Category[d$Color == blue] = "diverged"
-data$Category[d$Color == green] = "highcov"
-data$Category[d$Color == purple] = "lowconfidence"
+data$Category[d$Color == duplicated] = "duplicated"
+data$Category[d$Color == diverged] = "diverged"
+data$Category[d$Color == lowconfidence] = "lowconfidence"
+data$Category[d$Color == highcov] = "highcov"
 
 write.table(data[,c("Scaffold", "Position", "ID", "Category")],
             output_file, sep="\t", quote=F, row.names=F)

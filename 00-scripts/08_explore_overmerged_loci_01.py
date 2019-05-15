@@ -59,9 +59,8 @@ with open(input_vcf) as infile:
                 med_ratio = statistics.median(allele_ratios)
                 avg_ratio = statistics.mean(allele_ratios)
             except:
-                continue
-                med_ratio = -1.0
-                avg_ratio = -1.0
+                med_ratio = 0.0
+                avg_ratio = 0.0
 
             # median and stdev coverage
             coverages_heterozygotes = [sum(x) for x in data_heterozygotes]
@@ -83,16 +82,9 @@ with open(input_vcf) as infile:
             #coverages_total = coverages_heterozygotes + coverages_homozygotes
             #med_coverage_total = statistics.median(coverages_total)
 
-            #if med_coverage_total > 80:
-            #    continue
-
             # proportion heterozygotes (only these with a genotype)
             num_heterozygotes = len(coverages_heterozygotes)
             num_rare = len(coverages_homozygotes_rares) + len(coverages_heterozygotes)
-
-            # Remove SNPs with less than 2 samples with rare allele
-            #if num_rare < 2:
-            #    continue
 
             prop_heterozygotes = len(coverages_heterozygotes) / num_samples
 
