@@ -453,6 +453,8 @@ For the long documentation, use the -h option.
   - High Coverage: MedCovHom > 40 or MedCovHet > 40
   - Minor Allele Sample: NumRare <= 2
 
+### TODO Keep only non-corraleted SNPs within loci
+
 ## Conclusion
 
 You should now have a very clean SNP dataset for your project. Analyze singletons,
