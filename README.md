@@ -430,7 +430,7 @@ For the long documentation, use the -h option.
 - Group samples into fewer groups (`POP1_sample` -> `Group1_POP1-sample`)
 - Filter a minimum
 ```
-./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -o filtered_bad_samples_removed_m4_p70 -q
+./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -M 2 -o filtered_bad_samples_removed_m4_p70_M2 -q
 ```
 
 - Run `vcftools --relatedness` and remove potential errors
