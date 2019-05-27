@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 """Filtering VCF files output by STACKS
 
 WARNING! will not work properly with STACKS versions older to v1.30 since the
@@ -121,6 +121,7 @@ class Flags(object):
     min_presence_count = 0
     min_maf_global_count = 0
     min_maf_population_count = 0
+    min_mas_count = 0
     max_heterozygosity_count = 0
     min_fis_count = 0
     max_fis_count = 0
@@ -138,6 +139,7 @@ class Flags(object):
         self.min_presence = True
         self.maf_global = True
         self.maf_population = True
+        self.mas = True
         self.heterozygosity = True
         self.min_fis = True
         self.max_fis = True
@@ -153,6 +155,7 @@ class Flags(object):
         passing = (
                    self.min_presence and
                    (self.maf_global or self.maf_population) and
+                   self.mas and
                    self.heterozygosity and
                    self.min_fis and
                    self.max_fis and
@@ -189,6 +192,8 @@ class Flags(object):
                 "maf_global", args.maf_global))
         report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_maf_population_count),
                 "maf_population", args.maf_population))
+        report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_mas_count),
+                "mas", args.mas))
         report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.max_heterozygosity_count),
                 "heterozygosity", args.max_hetero))
         report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_fis_count),
@@ -211,7 +216,7 @@ class Flags(object):
 
         report = "\n".join(report)
         # Print report
-        print report
+        print(report)
 
         # Write report to file
         report_file.write(report)
@@ -224,6 +229,7 @@ class Flags(object):
                           str(self.min_presence),
                           str(self.maf_global),
                           str(self.maf_population),
+                          str(self.mas),
                           str(self.heterozygosity),
                           str(self.min_fis),
                           str(self.max_fis),
@@ -254,7 +260,7 @@ def get_population_info(line):
 
     l = [x.split("_")[0] for x in line.split("\t")[9:]]
     unique_pops = sorted(list(set(l)))
-    print "(" + str(len(unique_pops)) + " populations)"
+    print("(" + str(len(unique_pops)) + " populations)")
     pop_dict = {}
 
     for p in unique_pops:
@@ -334,9 +340,9 @@ def median(lst):
     if len(lst) < 1:
             return None
     if len(lst) %2 == 1:
-            return lst[((len(lst)+1)/2)-1]
+            return lst[int((len(lst)+1)/2)-1]
     else:
-            return float(sum(lst[(len(lst)/2)-1:(len(lst)/2)+1]))/2.0
+            return float(sum(lst[int(len(lst)/2)-1:int(len(lst)/2)+1]))/2.0
 
 def pad(text, char=" ", min_length=6):
     """Pad text with char to min_length
@@ -544,6 +550,18 @@ def get_maf_global_data(graph_dict, locus, pop_info):
     for snp in locus.snps:
         maf = round(snp.global_maf, 3)
         graph_dict["global"]["mafGlobal"][maf] += 1
+
+# Mas (minor allele samples)
+def test_mas(locus, mas):
+    """Test if the global MAF value is sufficiently high
+    """
+
+    for snp in locus.snps:
+        num_samples_with_minor_allele = len([s for s in snp.samples if "1" in s.genotype])
+
+        if num_samples_with_minor_allele < mas:
+            snp.flags.mas = False
+            Flags.min_mas_count += 1
 
 # Maf population
 def test_maf_population(locus, pop_info, maf_population):
@@ -865,6 +883,8 @@ if __name__ == '__main__':
             help = "minimum minor allele frequency that must be respected in all populations to retain locus (float, 0 to 1, default: 0)")
     parser.add_argument("-A", "--maf_population", type=float, default=0.0,
             help = "minimum minor allele frequency that must be found in at least one population to retain locus (float, 0 to 1, default: 0)")
+    parser.add_argument("-S", "--mas", type=int, default=2,
+            help = "minimum number of samples with rare allele to retain snp (int, 1 or more, default: 0)")
     parser.add_argument("-H", "--max_hetero", type=float, default=1.0,
             help = "maximum proportion of heterozygous individuals (float, 0 to 1, default: 1)")
     parser.add_argument("-y", "--max_hetero_joker", type=int, default=0,
@@ -888,6 +908,7 @@ if __name__ == '__main__':
     assert args.min_presence_joker_populations >= 0, "min_presence_joker_populations must be an integer that is 0 or more"
     assert 0 <= args.max_hetero <= 1, "max_hetero must be a floating point number between 0 and 1"
     assert 0 <= args.maf_global <= 1.0, "maf_global must be a floating point number between 0 and 1.0"
+    assert 1 <= args.mas, "mas must be an integer of 1 or more"
     assert 0 <= args.maf_population <= 1.0, "maf_population must be a floating point number between 0 and 1.0"
     assert -1 <= args.min_fis <= 1, "min_fis must be a floating point number between -1 and 1"
     assert -1 <= args.max_fis <= 1, "max_fis must be a floating point number between -1 and 1"
@@ -896,7 +917,7 @@ if __name__ == '__main__':
 
     # Get header from VCF and population information
     header = []
-    print "Treating: " + args.input_file, 
+    print("Treating: " + args.input_file, end="")
     with open(args.input_file) as in_file:
         for line in in_file:
             l = line.strip()
@@ -913,7 +934,7 @@ if __name__ == '__main__':
 
     # Producing graphs
     if args.graphs:
-        print "Collecting data to produce distribution graphs"
+        print("Collecting data to produce distribution graphs")
 
         # Initializing dictionary
         graph_dict = {}
@@ -948,7 +969,7 @@ if __name__ == '__main__':
             # Reporting progress
             if not args.quiet:
                 if locus_counter % report_every == 0:
-                    print "    Treating locus number: " + str(locus_counter)
+                    print("    Treating locus number: " + str(locus_counter))
 
             # Getting graph data
             get_depth_data(graph_dict, locus, pop_info)
@@ -1057,7 +1078,7 @@ if __name__ == '__main__':
         # Reporting progress
         if not args.quiet:
             if locus_counter % report_every == 0:
-                print "  Treating locus number: " + str(locus_counter)
+                print("  Treating locus number: " + str(locus_counter))
 
         # Run filters
         # The filter functions automatically update SNP flags
@@ -1070,6 +1091,7 @@ if __name__ == '__main__':
                           args.min_presence_joker_populations, args.use_percent)
         test_maf_global(locus, args.maf_global)
         test_maf_population(locus, pop_info, args.maf_population)
+        test_mas(locus, args.mas)
         test_heterozygosity(locus, pop_info, args.max_hetero, args.max_hetero_joker)
         test_fis(locus, pop_info, args.min_fis, args.max_fis, args.fis_joker)
         test_max_snp_number(locus, pop_info, args.max_snp_number)
