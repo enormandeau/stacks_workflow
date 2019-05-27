@@ -17,7 +17,7 @@ if __name__ == '__main__':
         input_vcf = sys.argv[1]
         output_vcf = sys.argv[2]
     except:
-        print __doc__
+        print(__doc__)
         sys.exit(1)
 
     # Open file handles
