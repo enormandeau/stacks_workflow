@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-"""Keep only SNP per locus, the one with the max maf, in vcf file
+"""Keep only the SNP with the highest maf in each locus in a STACKS 1.x vcf file
 
 Usage:
     ./extract_snp_with_max_maf.py input_vcf output_vcf
@@ -8,8 +8,6 @@ Usage:
 # Modules
 import sys
 
-# Functions
-
 # Main
 if __name__ == '__main__':
     # Parse user input
@@ -17,7 +15,7 @@ if __name__ == '__main__':
         input_vcf = sys.argv[1]
         output_vcf = sys.argv[2]
     except:
-        print __doc__
+        print(__doc__)
         sys.exit(1)
 
     # Open file handles
