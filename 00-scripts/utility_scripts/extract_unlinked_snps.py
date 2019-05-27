@@ -1,0 +1,163 @@
+#!/usr/bin/env python3
+"""Keep only one SNP per linked group within a locus.
+
+If there are multiple SNPs in a linked group, the one on the left is kept.
+
+Usage:
+    <program> input_vcf diff_threshold output_vcf
+
+Where:
+    input_vcf: name of a VCF from STACKS 1.4x (not vcftools...)
+
+    diff_threshold: minimum difference between 0.0 and 1.0 to keep a second
+    SNP. A good value is anywhere between 0.2 and 0.5. A value of 0.2 is
+    permissive and will keep a few false positives, ie: SNPs with low MAFs that
+    have exactly the same information but where some one or a few samples were
+    mis-genotyped. A value of 0.5 will get you 99.9% of what that is different
+    without false positives. Values above 0.5 will lose you true positives.
+
+    output_vcf: name of the output filtered VCF
+"""
+
+# Modules
+import sys
+
+# Functions
+def write_snp_line(l, outfile):
+    outfile.write("\t".join(l) + "\n")
+
+def encode_genotype(g):
+    """Change genotypes into 0, 1, and 2 from 0/0, 0/1 or 1/0, and 1/1
+    """
+    code = {
+            "./.": -99,
+            "0/0": 0,
+            "0/1": 1,
+            "1/0": 1,
+            "1/1": 2
+            }
+
+    return code[g]
+
+def invert_genotypes(s):
+    return [-1 * (g - 2) if g != -99 else g for g in s]
+    
+def diff_pair(s1, s2):
+    """Compute difference [0.0 - 1.0] of genotypes for two SNPs
+
+    Use only samples without missin data at both SNPs and where at least one of
+    the two genotypes contains the rare variant.
+    """
+
+    genotypes = [[], []]
+
+    for i in range(len(s1)):
+        g1 = s1[i]
+        g2 = s2[i]
+
+        # Find differences between two original SNPs
+        if (g1 != 0 or g2 != 0) and not (g1 == -99 or g2 == -99):
+            genotypes[0].append(g1)
+            genotypes[1].append(g2)
+
+    differences = 0
+
+    for i in range(len(genotypes[0])):
+        if genotypes[0][i] != genotypes[1][i]:
+            differences += 1
+
+    return (differences / len(genotypes[0]))
+
+def difference(s1, s2):
+    """Return minimum expected difference
+    """
+
+    s1 = [encode_genotype(x.split(":")[0]) for x in s1[9:]]
+    s2 = [encode_genotype(x.split(":")[0]) for x in s2[9:]]
+    s2inversed = invert_genotypes(s2)
+
+    differences = [
+            diff_pair(s1, s2),
+            diff_pair(s1, s2inversed)
+            ]
+
+    return min(differences)
+
+def keep_all_different(snps, diff_threshold, outfile):
+    """Keep only SNPs with different information)
+
+    - always keep first SNP (write to file directly)
+    - go through all remaining and remove unwanted
+    - While 2+ SNPs remaining, repeat
+    """
+
+    # If zero SNP, do nothing (for recursion)
+    if len(snps) == 0:
+        pass
+
+    # Write lone SNPs without further work
+    elif len(snps) == 1:
+        write_snp_line(snps[0], outfile)
+
+    # If 2+ SNPs, write first, prune others, and recurse on remaining
+    else:
+        first_snp = snps[0]
+        write_snp_line(first_snp, outfile)
+        other_snps = snps[1:]
+
+        different_snps = [snp for snp in other_snps if difference(first_snp, snp) > diff_threshold]
+
+        keep_all_different(different_snps, diff_threshold, outfile)
+
+# Main
+if __name__ == '__main__':
+    # Parse user input
+    try:
+        input_vcf = sys.argv[1]
+        diff_threshold = float(sys.argv[2])
+        output_vcf = sys.argv[3]
+    except:
+        print(__doc__)
+        sys.exit(1)
+
+    # Open file handles
+    infile = open(input_vcf)
+    outfile = open(output_vcf, "w")
+
+    # Iterate through SNPs
+    snps = []
+
+    for line in infile:
+
+        # Write header to output file
+        if line.startswith("#"):
+            outfile.write(line)
+            continue
+
+        # Parse SNP data
+        l = line.strip().split()
+        locus = l[2].split("_")[0]
+
+        # First SNP of VCF
+        if snps == []:
+            snps.append(l)
+            previous_locus = locus
+
+        # SNP in same locus, add to list
+        elif locus == previous_locus:
+            snps.append(l)
+
+        else:
+            # Treat locus
+            keep_all_different(snps, diff_threshold, outfile)
+
+            # Re-initialize snps and previous_locus
+            snps = [l]
+            previous_locus = locus
+
+    ## Treat last locus
+    keep_all_different(snps, diff_threshold, outfile)
+
+    # Close file handles
+    infile.close()
+    outfile.close()
