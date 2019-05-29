@@ -366,52 +366,56 @@ moment.
 
 ## Filtering the results
 
-- Filter STACKS VCF a minimum using `./00-scripts/05_filter_vcf.py`
+1. Filter STACKS VCF a minimum and create graphs:
 ```
 ./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
-```
-
-- Create graphs
-```
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-- Identify samples with too much missing data from figure and `missing_data.txt`
-- Run `vcftools --relatedness` and identify potential errors / problems
-- Remove the files from these samples from `05-stacks` or `06-stacks_rx` (put them in a subfolder)
-- Re-run `population`
+2. Identify bad samples
+  - Identify samples with too much missing data from figure and `missing_data.txt`
+  - Run `vcftools --relatedness` and identify potential errors / problems
+  - Remove the files from these samples from `05-stacks` or `06-stacks_rx` (put them in a subfolder)
+  - Re-run `population`
 
-- If many small populations, group samples into fewer groups to avoid strict and stochastic filtering
-  - Copy `05-stacks/batch_1.vcf` (or `06-stacks_rx/batch_1.vcf`)
-  - Modify names of samples (`POP1_sample` -> `Group1_POP1-sample`)
-- Filter a minimum
+3. If needed, make bigger groups of samples
+  - If many small populations, group samples into fewer groups to avoid strict and stochastic filtering
+    - Copy `05-stacks/batch_1.vcf` (or `06-stacks_rx/batch_1.vcf`)
+    - Modify names of samples (`POP1_sample` -> `Group1_POP1-sample`)
+
+4. Filter new VCF
 ```
 ./00-scripts/05_filter_vcf -i batch_1_grouped.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_bad_samples_removed_m4_p70_S2
 ```
 
-- Explore SNP duplication
+5. Explore SNP duplication using the following scripts
 ```
 ./00-scripts/08_extract_snp_duplication_info.py
 ./00-scripts/09_classify_snps.R
 ./00-scripts/10_split_vcf_in_categories.py
 ```
 
-- The following criteria are used in `09_classify_snps.R`
-  - Low Confidence: Extreme allele ratios (< 0.4 and > 0.6) with least one rare homozygote
-  - Duplicated: Fis < -0.1
-  - Duplicated: Fis + MedRatio / 3 < 0.11
-  - Diverged: Fis < -0.6
-  - Low Confidence: Fis > 0.49
-  - High Coverage: MedCovHom > 40 or MedCovHet > 40
-  - Minor Allele Sample: NumRare <= 2
+  - The following criteria are used by in `09_classify_snps.R`. Modify these for your data.
+    - Low Confidence: Extreme allele ratios (< 0.4 and > 0.6) with least one rare homozygote
+    - Duplicated: Fis < -0.1
+    - Duplicated: Fis + MedRatio / 3 < 0.11
+    - Diverged: Fis < -0.6
+    - Low Confidence: Fis > 0.49
+    - High Coverage: MedCovHom > 40 or MedCovHet > 40
+    - Minor Allele Sample: NumRare <= 2
 
-- Using the singleton SNPs, keep only unlinked SNPs using `00-scripts/utility_scripts/extract_unlinked_snps.py`
+6. Keep all unlinked SNPs
+  - Using the singleton SNPs, keep only unlinked SNPs using
+```
+00-scripts/utility_scripts/extract_unlinked_snps.py
+```
 
+7. Onwards!
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
 
-- Run population genomics analyses
-- Publish a paper!
+  - Run population genomics analyses
+  - Publish a paper!
 
 ### Running into problems
 
