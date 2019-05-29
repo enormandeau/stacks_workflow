@@ -301,7 +301,7 @@ bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
 mv genome.* 01-info_files
 ```
 
-###Align samples
+### Align samples
 
 ```bash
 ./00-scripts/bwa_mem_align_reads.sh
