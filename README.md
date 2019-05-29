@@ -411,6 +411,7 @@ moment.
 ```
 
 7. Onwards!
+
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
 
