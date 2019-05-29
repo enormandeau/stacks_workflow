@@ -420,9 +420,6 @@ duplicated, diverged, and high coverage SNPs separately.
 
 ### Running into problems
 
-1. Consider joining the [Stacks Google
+1. Consider joining the [STACKS Google
    group](https://groups.google.com/forum/#!forum/stacks-users)
 1. [Biostar](https://www.biostars.org) is a useful bioinformatics forum.
-1. [SEQanswers](http://seqanswers.com) is another useful forum for all things
-   related to Next Generation Sequencing.
-1. Of course, you can always ask [Google](https://www.google.com) for help.
