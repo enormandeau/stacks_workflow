@@ -397,45 +397,28 @@ moment.
 
 ## Filtering the results
 
-`Stacks_workflow` includes a script to filter the VCF file output by STACKS.
-To print the short documentation of the filtering script, launch the script
-without options.
-
-```bash
-./00-scripts/05_filter_vcf.py
+- Filter STACKS VCF a minimum using `./00-scripts/05_filter_vcf.py`
 ```
-
-For the long documentation, use the -h option.
-
-```bash
-./00-scripts/05_filter_vcf.py -h
-```
-
-### Overview of what to filter for after STACKS
-
-- Filter a minimum:
-```
-./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -o filtered_m4_p70 -q
+./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
 ```
 
 - Create graphs
 ```
-./00-scripts/05_filter_vcf -i filtered_m4_p70 -o graphs_filtered_m4_p70 -g -q
+./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-- Identify samples with too much missing data from figure and remove their files from `05-stacks`
-- Re-run `populations`
+- Identify samples with too much missing data from figure and `missing_data.txt`
+- Run `vcftools --relatedness` and identify potential errors / problems
+- Remove the files from these samples from `05-stacks` or `06-stacks_rx` (put them in a subfolder)
+- Re-run `population`
 
-- Copy `05-stacks/batch_1.vcf`
-- Group samples into fewer groups (`POP1_sample` -> `Group1_POP1-sample`)
+- If many small populations, group samples into fewer groups to avoid strict and stochastic filtering
+  - Copy `05-stacks/batch_1.vcf` (or `06-stacks_rx/batch_1.vcf`)
+  - Modify names of samples (`POP1_sample` -> `Group1_POP1-sample`)
 - Filter a minimum
 ```
-./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -M 2 -o filtered_bad_samples_removed_m4_p70_M2 -q
+./00-scripts/05_filter_vcf -i batch_1_grouped.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_bad_samples_removed_m4_p70_S2
 ```
-
-- Run `vcftools --relatedness` and remove potential errors
-
-- Re-run `population`
 
 - Explore SNP duplication
 ```
@@ -453,14 +436,13 @@ For the long documentation, use the -h option.
   - High Coverage: MedCovHom > 40 or MedCovHet > 40
   - Minor Allele Sample: NumRare <= 2
 
-- Keep only unlinked SNPs using `00-scripts/utility_scripts/extract_unlinked_snps.py`
-
-### TODO Keep only non-corraleted SNPs within loci
-
-## Conclusion
+- Using the singleton SNPs, keep only unlinked SNPs using `00-scripts/utility_scripts/extract_unlinked_snps.py`
 
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
+
+- Run population genomics analyses
+- Publish a paper!
 
 ### Running into problems
 
