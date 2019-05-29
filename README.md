@@ -453,6 +453,8 @@ For the long documentation, use the -h option.
   - High Coverage: MedCovHom > 40 or MedCovHet > 40
   - Minor Allele Sample: NumRare <= 2
 
+- Keep only unlinked SNPs using `00-scripts/utility_scripts/extract_unlinked_snps.py`
+
 ### TODO Keep only non-corraleted SNPs within loci
 
 ## Conclusion
