@@ -14,6 +14,8 @@ or other liability, whether in an action of contract, tort or otherwise,
 arising from, out of or in connection with the software or the use or other
 dealings in the software.
 
+**NOTE**: Working on providing STACKS2 support (2019-05-29)
+
 ## Downloading
 
 [click here to
@@ -34,36 +36,18 @@ for more details.
 
 The goal of this workflow is to simplify the use of the STACKS pipeline and to
 create a folder architecture and code structure to help people analysing RADseq
-data. It was developed with the needs of our research group in mind as well as
-with an emphasis on non-model species studies. We make no claim about its
-usefulness to other groups or in other contexts, but we still believe it may be
-of use to some.
+data in a reproductible manner. It was developed with the needs of our research
+group in mind. We make no claim about its usefulness to other groups or in other
+contexts, but we still believe it may be of use to some.
 
 ## About STACKS
 
 The [stacks analysis pipeline](http://creskolab.uoregon.edu/stacks/) is used
-for snp discovery in genotyping by sequencing (gbs) and restriction-site
-associated dna sequencing (rad) studies, with and without a reference genome.
+for restriction-site associated DNA sequencing (RADseq) studies, with and
+without a reference genome.
 
-Before starting to use STACKS, it is highly suggested to read the two official
-STACKS papers:
-
-[catchen, j. m., amores, a., hohenlohe, p. a., cresko, w. a., postlethwait, j.
-h., & de koning, d. j. (2011). stacks: building and genotyping loci de novo
-from short-read sequences. g3, 1(3), 171–182.
-doi:10.1534/g3.111.000240](http://www.g3journal.org/content/1/3/171.full)
-
-[catchen, j. m., hohenlohe, p. a., bassham, s., amores, a., & cresko, w. a.
-(2013). stacks: an analysis tool set for population genomics. molecular
-ecology, 22(11), 3124–3140.
-doi:10.1111/mec.12354](http://onlinelibrary.wiley.com/doi/10.1111/mec.12354/abstract)
-
-Also very useful paper to read before attempting to run stacks:
-
-[mastretta yanes a, arrigo n, alvarez n et al. (2014) rad sequencing,
-genotyping error estimation and de novo assembly optimization for population
-genetic inference. molecular ecology resources,
-n/a–n/a.](http://onlinelibrary.wiley.com/doi/10.1111/1755-0998.12291/abstract;jsessionid=a32722e1462a2a2714ee53a6fd4c7194.f04t04)
+Before starting to use STACKS, you should read the official STACKS papers
+found at the bottom of the official STACKS page (see just above).
 
 ## Overview of the steps
 
@@ -75,17 +59,20 @@ n/a–n/a.](http://onlinelibrary.wiley.com/doi/10.1111/1755-0998.12291/abstract;
 1. Align reads to a reference genome (optional)
 1. Stacks pipeline
 1. Filtering the results
-1. Further analyses
 
 ## Where to find this manual
 
-To read a html version of this file, go to the
+To read a html version of this file online, go to the
 [stacks_workflow project page](https://github.com/enormandeau/stacks_workflow)
 on GitHub.
 
 ## Installing stacks_workflow
 
 ### Download and install the most recent version of this workflow
+
+It is recommended to do this **for each new project**, as opposed to re-using
+the same directory for multiple projects and naming the outputs differently.
+This is **central to `stack_workflow`'s phylosophy** of reproducibility.
 
 #### From the terminal
 
@@ -105,38 +92,20 @@ git clone https://github.com/enormandeau/stacks_workflow
 ```
 
 For the rest of the project, use the extracted or cloned folder as your working
-directory. **All the commands in this manual are launched from that
-directory.**
+directory. **All the commands in this manual are launched from that directory.**
 
 ### Download and install [STACKS](http://creskolab.uoregon.edu/stacks/)
 
-#### Installing STACKS
-
-```bash
-# Modify the version number as needed
-wget http://creskolab.uoregon.edu/stacks/source/stacks-1.XX.tar.gz
-
-tar -xvf stacks-1.XX.tar.gz
-cd stacks-1.XX
-
-# Install the binaries in /usr/local/bin
-./configure
-make  # Add '-j n' to use n CPUs during the compilation
-sudo make install
-
-# Remove the temporary install folders and archives
-cd ..
-sudo rm -R stacks-1.XX stacks-1.XX.tar.gz
-```
-
-#### Test the STACKS installation
+Follow the instructions on the website.
 
 ```bash
 cstacks
+which cstacks
 ```
 
-This will output the help of the cstacks program. You will also be able to
-confirm the version number of your STACKS installation.
+This will output the help of the cstacks program and where it is located
+on your computer. You will also be able to confirm the version number of
+your STACKS installation.
 
 #### Installing Cutadapt
 
@@ -172,10 +141,6 @@ chmod 755 fastqc
 # Run FastQC
 ./fastqc
 ```
-
-##### Installing on MacOS
-
-You're on your own ;)
 
 ## Prepare your raw datafiles
 
@@ -247,10 +212,11 @@ lane of each sample.
 population name or abbreviation in the sample name).
 - Neither the population name nor the sample name should contain underscores `_`
 - The fifth column contains a number identifying the populations.
+- The sixth column contains the plate well identifier.
 
 Columns three and four are treated as text, so they can contain either text or
 numbers. Other columns can be present after the fifth one and will be ignored.
-However, it is crucial that the five first columns respect the format in the
+However, it is crucial that the six first columns respect the format in the
 example file exactly. Be especially careful not to include errors in this file,
 for example mixing lower and capital letters in population or sample names
 (e.g.: Pop01 and pop01), since these will be treated as two different
@@ -290,12 +256,12 @@ Where:
 
 If you are using Ion Proton data, the effect of the trimLength parameter used
 above on the number of usable SNPs you recover at the end may not be trivial.
-As a rule of thumb, a trim length of 80bp should produce good results. We
+As a rule of thumb, a trimmed length of 80bp should produce good results. We
 suggest you run tests with a smaller group of samples to determine what length
 to trim to. For highly variant species, short loci will be more likely to
 contain SNPs and long loci to contain more than one SNP, which is not always
 informative. Thus, trimming to shorter lengths may be more interesting for
-highly variant species.
+highly variant species or when coverage is limiting.
 
 ### Rename samples
 
@@ -305,7 +271,7 @@ We provide a scripts to rename the extracted samples and move them into the
 `04-all_samples` folder. The script behaves differently for samples that are
 present only once in the `01-info_files/sample_information.csv` and for those
 that are present more than once. If a sample is present only once, a link is
-created, thus using no additional disk space. If it is present more than once,
+created, using no additional disk space. If it is present more than once,
 all the copies are concatenated into one file, doubling the amount of disk
 space taken by this sample (all the individual files PLUS the combined one).
 
@@ -318,7 +284,9 @@ space taken by this sample (all the individual files PLUS the combined one).
 If after splitting your samples you notice that some of have too few reads, you
 can remove these from the `04-all_samples` folder. The threshold for the
 minimum number of reads will depend on your project, including on the number of
-expected cut sites generated by your library preparation protocol.
+expected cut sites generated by your library preparation protocol. Keep samples
+with low coverages if you are not sure at this point what threshold to use. We
+will filter the output later for this and will then have better informations.
 
 #### Align reads to a reference genome (optional)
 
@@ -336,7 +304,7 @@ mv genome.* 01-info_files
 ###Align samples
 
 ```bash
-./00-scripts/bwa_commands.sh
+./00-scripts/bwa_mem_align_reads.sh
 ```
 
 ## STACKS pipeline
@@ -349,10 +317,11 @@ mv genome.* 01-info_files
 
 ## Edit script parameters
 
-You will need to go through all the scripts named `stacks_*` in the `00-scripts
-folder` and edit the options to suite your needs.
+You will need to go through the scripts named `stacks_*` in the `00-scripts
+folder` and edit the options to suite your needs. Depending on your project
+(eg: *de novo* vs reference), you will not use all the scripts.
 
-**Warning!** This step is most important. Choosing appropriate parameters for
+**Warning!** This step is very important. Choosing appropriate parameters for
 your study is crucial in order to generate meaninful and optimal results. Read
 the STACKS documentation on their website to learn more about the different
 options.
