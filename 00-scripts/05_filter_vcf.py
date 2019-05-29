@@ -938,7 +938,7 @@ if __name__ == '__main__':
 
         # Initializing dictionary
         graph_dict = {}
-        for pop in pop_info.keys() + ["global"]:
+        for pop in list(pop_info.keys()) + ["global"]:
             graph_dict[pop] = {}
             graph_dict[pop]["medDepth"] = defaultdict(int)
             graph_dict[pop]["maxDepth"] = defaultdict(int)
