@@ -64,4 +64,5 @@ log_*
 logfiles
 nohup.out
 population_map.txt
+sample_files*
 temp.list.*
