@@ -351,11 +351,6 @@ Visualize the distribution of log likelihoods in
 
 ### With a reference genome
 
-**Warning!** The documentation and scripts used with a reference genome have
-not been updated in a long time. We believe they should not be used at the
-moment.
-
-
 ```bash
 ./00-scripts/bwa_mem_align_reads.sh
 ./00-scripts/stacks_1a_pstacks.sh
@@ -366,22 +361,33 @@ moment.
 
 ## Filtering the results
 
-1. Filter STACKS VCF a minimum and create graphs:
+1. Filter STACKS or STACKS2 VCF a minimum and create graphs:
 ```
-./00-scripts/05_filter_vcf -i 05-stacks/batch_1.fcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
+# Filtering
+./00-scripts/05_filter_vcf -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
+
+# Graphs
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
+**Note:** The `-S` option filters on the **MAS**, whichi is akin to the MAF and MAC.
+It keeps only SNPs where the rare allele has been found in *at least* a certain
+number of samples. For example: `-S 2` means that at least two samples have the
+rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
+often boosted by genotyping errors where one heterozygote sample is genotyped as
+a rare-allele homozygote.
+
 2. Identify bad samples
-  - Identify samples with too much missing data from figure and `missing_data.txt`
+  - Identify samples with too much missing data from `missing_data.png` and `missing_data.txt`
   - Run `vcftools --relatedness` and identify potential errors / problems
   - Remove the files from these samples from `05-stacks` or `06-stacks_rx` (put them in a subfolder)
   - Re-run `population`
 
 3. If needed, make bigger groups of samples
-  - If many small populations, group samples into fewer groups to avoid strict and stochastic filtering
+  - If your dataset contains many small populations, regroup samples into fewer and bigger
+    groups to avoid strict and overly stochastic filtering
     - Copy `05-stacks/batch_1.vcf` (or `06-stacks_rx/batch_1.vcf`)
-    - Modify names of samples (`POP1_sample` -> `Group1_POP1-sample`)
+    - Modify names of samples (`POP1_sample` -> `Group1_POP1-sample`, note that the underscore `_` becomes a dash `-`
 
 4. Filter new VCF
 ```
@@ -395,14 +401,14 @@ moment.
 ./00-scripts/10_split_vcf_in_categories.py
 ```
 
-  - The following criteria are used by in `09_classify_snps.R`. Modify these for your data.
+  - The following criteria are used by in `09_classify_snps.R`. Modify these in the script to fit your data.
     - Low Confidence: Extreme allele ratios (< 0.4 and > 0.6) with least one rare homozygote
     - Duplicated: Fis < -0.1
     - Duplicated: Fis + MedRatio / 3 < 0.11
     - Diverged: Fis < -0.6
-    - Low Confidence: Fis > 0.49
+    - Low Confidence: Fis > 0.6
     - High Coverage: MedCovHom > 40 or MedCovHet > 40
-    - Minor Allele Sample: NumRare <= 2
+    - Minor Allele Sample (MAS): NumRare <= 2
 
 6. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
