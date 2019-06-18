@@ -20,8 +20,8 @@ mas =           "#FFAA0022" # orange
 d$Color = singleton
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.40 & d$PropHomRare > 0.00] = lowconf
-d$Color[d$MedRatio > 0.60 & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio < 0.35] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio > 0.65] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
 d$Color[d$Fis < -0.1] = duplicated
