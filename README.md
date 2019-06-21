@@ -438,6 +438,8 @@ duplicated, diverged, and high coverage SNPs separately.
   - Impute within each differentiable group
   - Assign genotypes randomly using observed genotype frequencies
 
+- Build a standardized paragraphs and table to report SNP generation and filtration parameters and remaining SNPs for each step.
+
 ### Running into problems
 
 1. Consider joining the [STACKS Google
