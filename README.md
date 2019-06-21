@@ -430,6 +430,14 @@ duplicated, diverged, and high coverage SNPs separately.
   - Run population genomics analyses
   - Publish a paper!
 
+8. TODO
+
+- Look for patterns of missing data caused by the sequencing (PCAs, heatmaps?)
+- Missing data imputation
+  - Look for structure
+  - Impute within each differentiable group
+  - Assign genotypes randomly using observed genotype frequencies
+
 ### Running into problems
 
 1. Consider joining the [STACKS Google
