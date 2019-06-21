@@ -24,8 +24,20 @@ class Sample(object):
     def __init__(self, info):
         self.info = info.split(":")
         self.genotype = self.info[0]
-        self.depth = int(self.info[1])
-        self.ref, self.alt = self.info[2].split(",")
+
+        if self.genotype == "./.":
+            self.depth = 0
+            self.ref = 0
+            self.alt = 0
+
+        else:
+            self.depth = int(self.info[1])
+
+            if self.info[2] == ".":
+                self.ref = self.depth
+                self.alt = 0
+            else:
+                self.ref, self.alt = self.info[2].split(",")
 
         try:
             self.ref = int(self.ref)
@@ -44,29 +56,35 @@ class Sample(object):
         except:
             self.allelic_imbalance = 0.0
 
-        try:
-            self.genotype_likelihood = self.info[3].split(",")[1]
-            self.genotype_likelihood = float(self.genotype_likelihood)
-        except:
-            self.genotype_likelihood = 0.0
+        # STACKS 2
+        if len(self.info) == 5:
+            self.genotype_likelihood = ":".join(self.info[3:5])
+
+        # STACKS 1
+        else:
+            try:
+                self.genotype_likelihood = self.info[3].split(",")[1]
+                self.genotype_likelihood = float(self.genotype_likelihood)
+            except:
+                self.genotype_likelihood = 0.0
 
     def __repr__(self):
-        return "\t".join([self.genotype,
+        return ":".join([self.genotype,
             str(self.depth),
-            str(self.ref),
-            str(self.alt),
-            str(self.genotype_likelihood),
-            str(self.allelic_imbalance)])
+            str(self.ref) + "," + str(self.alt),
+            str(self.genotype_likelihood)]
+            )
+
 
 class SNP(object):
-    def __init__(self, line):
+    def __init__(self, line, locus_separator):
         """Parse SNP information from one SNP line in the VCF file
         """
         
         self.line = line.split("\t")
         self.chrom = self.line[0]
         self.pos = int(self.line[1])
-        self.locus_id = self.line[2].split("_")[0]
+        self.locus_id = self.line[2].split(locus_separator)[0]
         self.ref = self.line[3]
         self.alt = self.line[4]
         self.qual = self.line[5]
@@ -126,7 +144,6 @@ class Flags(object):
     min_fis_count = 0
     max_fis_count = 0
     max_allelic_imbalance_count = 0
-    min_genotype_likelihood_count = 0
     max_snp_number_count = 0
     total_snps_count = 0
     total_good_snps_count = 0
@@ -182,8 +199,6 @@ class Flags(object):
                 "min_depth", args.min_depth))
         report.append("  {} Genotypes removed  ({}) [{}]".format(pad(cls.max_allelic_imbalance_count),
                 "max_allelic_imbalance", args.max_allelic_imbalance))
-        report.append("  {} Genotypes removed  ({}) [{}]".format(pad(cls.min_genotype_likelihood_count),
-                "min_genotype_likelihood", args.min_genotype_likelihood))
         report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.max_allele_coverage_count),
                 "max_allele_coverage", args.max_allele_coverage))
         report.append("  {} SNPs failed        ({}) [{}]".format(pad(cls.min_presence_count),
@@ -260,7 +275,7 @@ def get_population_info(line):
 
     l = [x.split("_")[0] for x in line.split("\t")[9:]]
     unique_pops = sorted(list(set(l)))
-    print("(" + str(len(unique_pops)) + " populations)")
+    print("  " + str(len(unique_pops)) + " populations")
     pop_dict = {}
 
     for p in unique_pops:
@@ -271,7 +286,7 @@ def get_population_info(line):
 
     return pop_dict
 
-def locus_iterator(input_file):
+def locus_iterator(input_file, locus_separator):
     """Iterate over the loci, one at a time, and yield the next one as a list
     containing all the SNPs for that locus
     """
@@ -285,7 +300,7 @@ def locus_iterator(input_file):
             if line.startswith("#"):
                 pass
             else:
-                snp = SNP(line.strip())
+                snp = SNP(line.strip(), locus_separator)
                 current_id = snp.locus_id
 
                 if current_id == last_id:
@@ -315,7 +330,7 @@ def write_locus(locus, handle):
 
     for snp in locus.snps:
         if snp.flags.pass_filters(add_count=True):
-            handle.write("\t".join(snp.line) + "\n")
+            handle.write(str(snp) + "\n")
 
 def write_whitelist(locus, handle):
     """Output ID of loci with good SNPs
@@ -414,35 +429,6 @@ def get_depth_data(graph_dict, locus, pop_info):
             graph_dict["global"]["maxDepth"][maximum] += 1
 
         break
-
-# Min genotype_likelihood
-def test_min_genotype_likelihood(locus, pop_info, min_genotype_likelihood):
-    """Test if each genotype's genotype_likelihood is high enough
-    """
-
-    for snp in locus.snps:
-        for sample in snp.samples:
-            if sample.genotype != "./.":
-                if sample.genotype_likelihood < min_genotype_likelihood:
-                    sample.genotype = "./."
-                    sample.genotype_likelihood = -9999
-                    Flags.min_genotype_likelihood_count += 1
-
-def get_genotype_likelihood_data(graph_dict, locus, pop_info):
-    """Get genotype likelihood data by pop and globally
-    """
-
-    for snp in locus.snps:
-        # By pop
-        for pop in pop_info:
-            samples = [snp.samples[i] for i in pop_info[pop]]
-            likelihood = [x.genotype_likelihood for x in samples
-                             if x.genotype_likelihood != -9999 and x.genotype != "./."]
-            likelihood = [round(x, 3) for x in likelihood]
-
-            for i in likelihood:
-                graph_dict[pop]["genLikelihood"][i] += 1
-                graph_dict["global"]["genLikelihood"][i] += 1
 
 # Max allelic_imbalance
 def test_max_allelic_imbalance(locus, pop_info, max_allelic_imbalance):
@@ -867,8 +853,6 @@ if __name__ == '__main__':
             help = "minimum allele coverage (rare allele for heterozygotes, global coverage for homozygotes) to keep a genotype (or modified to './.') (int, default: 0)")
     parser.add_argument("-m", "--min_depth", type=int, default=0,
             help = "minimum depth (global depth by adding coverage of both alleles) to keep a genotype (or modified to './.') (int, default: 0)")
-    parser.add_argument("-l", "--min_genotype_likelihood", type=float, default=-1000.0,
-            help = "minimum genotype likelihood to keep a genotype (or modified to './.') (float, 0.0 or more, default -1000.0)")
     parser.add_argument("-I", "--max_allelic_imbalance", type=float, default=1000.0,
             help = "maximum coverage fold change among alleles in heterozygotes (or modified to './.') (float, 0.0 or more, default 1000.0)")
     parser.add_argument("-C", "--max_allele_coverage", type=int, default=10000,
@@ -917,13 +901,33 @@ if __name__ == '__main__':
 
     # Get header from VCF and population information
     header = []
-    print("Treating: " + args.input_file, end="")
+    print("Treating: " + args.input_file)
+
     with open(args.input_file) as in_file:
         for line in in_file:
             l = line.strip()
 
             if l.startswith("##"):
                 header.append(line)
+
+                # Get STACKS version
+                if l.startswith("##source="):
+                    stacks_version = l.split('"')[1].split(" ")[1]
+
+                    if "v1" in stacks_version:
+                        print(f"  STACKS version: {stacks_version}")
+                        locus_separator = "_"
+                        stacks_version = 1
+
+                    elif "v2" in stacks_version:
+                        print(f"  STACKS version: {stacks_version}")
+                        locus_separator = ":"
+                        stacks_version = 2
+
+                    else:
+                        print("Error: STACKS version not recognized")
+                        sys.exit(1)
+
             elif l.startswith("#CHROM"):
                 header.append(line)
                 pop_info = get_population_info(l)
@@ -958,7 +962,7 @@ if __name__ == '__main__':
         #max_loci = 100
 
         # Iterate over the loci and filter the snps
-        for locus in locus_iterator(args.input_file):
+        for locus in locus_iterator(args.input_file, locus_separator):
 
             # For debugging purposes
             if locus_counter >= max_loci:
@@ -974,7 +978,6 @@ if __name__ == '__main__':
             # Getting graph data
             get_depth_data(graph_dict, locus, pop_info)
             get_allelic_imbalance_data(graph_dict, locus, pop_info)
-            get_genotype_likelihood_data(graph_dict, locus, pop_info)
             get_presence_data(graph_dict, locus, pop_info)
             get_maf_population_data(graph_dict, locus, pop_info)
             get_maf_global_data(graph_dict, locus, pop_info)
@@ -1067,7 +1070,7 @@ if __name__ == '__main__':
     total_good_loci = 0
 
     # Iterate over the loci and filter the SNPs
-    for locus in locus_iterator(args.input_file):
+    for locus in locus_iterator(args.input_file, locus_separator):
 
         # For debugging purposes
         if locus_counter >= max_loci:
@@ -1085,7 +1088,6 @@ if __name__ == '__main__':
         test_min_allele_coverage(locus, pop_info, args.min_allele_coverage)
         test_min_depth(locus, pop_info, args.min_depth)
         test_max_allelic_imbalance(locus, pop_info, args.max_allelic_imbalance)
-        test_min_genotype_likelihood(locus, pop_info, args.min_genotype_likelihood)
         test_max_allele_coverage(locus, pop_info, args.max_allele_coverage)
         test_min_presence(locus, pop_info, args.min_presence,
                           args.min_presence_joker_populations, args.use_percent)
