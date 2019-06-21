@@ -432,6 +432,7 @@ duplicated, diverged, and high coverage SNPs separately.
 
 8. TODO
 
+- Plot average heterozygozity per sample to remove strange samples
 - Look for patterns of missing data caused by the sequencing (PCAs, heatmaps?)
 - Missing data imputation
   - Look for structure
