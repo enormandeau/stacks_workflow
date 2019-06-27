@@ -376,7 +376,7 @@ Visualize the distribution of log likelihoods in
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-**Note:** The `-S` option filters on the **MAS**, whichi is akin to the MAF and MAC.
+**Note:** The `-S` option filters on the **MAS**, which is akin to the MAF and MAC.
 It keeps only SNPs where the rare allele has been found in *at least* a certain
 number of samples. For example: `-S 2` means that at least two samples have the
 rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
