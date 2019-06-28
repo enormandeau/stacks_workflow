@@ -22,6 +22,7 @@ class Sample(object):
     """
 
     def __init__(self, info):
+        self.info_full = info
         self.info = info.split(":")
         self.genotype = self.info[0]
 
@@ -69,11 +70,12 @@ class Sample(object):
                 self.genotype_likelihood = 0.0
 
     def __repr__(self):
-        return ":".join([self.genotype,
-            str(self.depth),
-            str(self.ref) + "," + str(self.alt),
-            str(self.genotype_likelihood)]
-            )
+        return self.info_full
+        #return ":".join([self.genotype,
+        #    str(self.depth),
+        #    str(self.ref) + "," + str(self.alt),
+        #    str(self.genotype_likelihood)]
+        #    )
 
 
 class SNP(object):
@@ -84,7 +86,8 @@ class SNP(object):
         self.line = line.split("\t")
         self.chrom = self.line[0]
         self.pos = int(self.line[1])
-        self.locus_id = self.line[2].split(locus_separator)[0]
+        self.locus_full = self.line[2]
+        self.locus_id = self.locus_full.split(locus_separator)[0]
         self.ref = self.line[3]
         self.alt = self.line[4]
         self.qual = self.line[5]
@@ -107,7 +110,7 @@ class SNP(object):
         return "\t".join([
                           self.chrom,
                           str(self.pos),
-                          str(self.locus_id),
+                          self.locus_full,
                           self.ref,
                           self.alt,
                           self.qual,
@@ -902,6 +905,7 @@ if __name__ == '__main__':
     # Get header from VCF and population information
     header = []
     print("Treating: " + args.input_file)
+    stacks_version = None
 
     with open(args.input_file) as in_file:
         for line in in_file:
@@ -924,11 +928,12 @@ if __name__ == '__main__':
                         locus_separator = ":"
                         stacks_version = 2
 
-                    else:
-                        print("Error: STACKS version not recognized")
-                        sys.exit(1)
-
             elif l.startswith("#CHROM"):
+
+                if not stacks_version:
+                    print("Error: STACKS version not recognized")
+                    sys.exit(1)
+
                 header.append(line)
                 pop_info = get_population_info(l)
                 assert len(pop_info) > 0, "Input file does not contain a header"
