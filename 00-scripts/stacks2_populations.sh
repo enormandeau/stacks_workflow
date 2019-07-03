@@ -22,6 +22,7 @@ cp $INFO_FILES_FOLDER/$POP_MAP $LOG_FOLDER/"$TIMESTAMP"_"$POP_MAP"
 
 populations -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/"$POP_MAP" \
     -t "$NUM_CPU" -p 2 -r 0.6 \
+    --renz pstI --merge-sites \
     --ordered-export --fasta-loci --vcf
 
 # TODO test with locus merging
