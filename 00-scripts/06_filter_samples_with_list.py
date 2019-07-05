@@ -7,7 +7,7 @@ Usage:
 Where:
     input_vcf is the name of the VCF file to filter
     filtering_type is either "wanted" or "unwanted"
-    info_file contains wanted or blacklisted sample names
+    info_file contains wanted or unwanted sample names
     output_vcf is the name of the filtered VCF
 
 Warning:
@@ -31,7 +31,7 @@ if not filtering_type in ["wanted", "unwanted"]:
     print("ERROR: filtering_type must be 'wanted' or 'unwanted'")
     sys.exit(2)
 
-# Get wanted or blacklisted samples
+# Get wanted or unwanted samples
 listed_samples = set([x.strip() for x in open(info_file).readlines()])
 
 # Filter
