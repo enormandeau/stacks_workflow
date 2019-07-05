@@ -9,7 +9,7 @@ SAMPLE_FOLDER="04-all_samples"
 STACKS_FOLDER="05-stacks"
 LOG_FOLDER="10-log_files"
 INFO_FILES_FOLDER="01-info_files"
-POP_MAP="population_map_test_gstacks.txt"
+POP_MAP="population_map.txt"
 
 # Populations does not seem to use more than 1 CPU most of the time
 NUM_CPU="1"
