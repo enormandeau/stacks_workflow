@@ -447,6 +447,7 @@ duplicated, diverged, and high coverage SNPs separately.
 
 8. TODO
 
+- Add v2.4 tag once full analysis is tested with STACKS2
 - Make a faster filter script (remove un nessecary filters, bypass unspecified filters?)
 - Plot average heterozygozity per sample to remove strange samples
 - Look for patterns of missing data caused by the sequencing (PCAs, heatmaps?)
