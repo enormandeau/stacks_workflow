@@ -37,6 +37,7 @@ temp.list.*
 *.fasta
 *.fq
 *.fq.gz
+*.ids
 *.infos
 *.jpg
 *.js
