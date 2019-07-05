@@ -447,8 +447,7 @@ duplicated, diverged, and high coverage SNPs separately.
 
 8. TODO
 
-- Filter VCF on SNPs w/ whitelist or blacklist
-- Filter VCF on samples w/ whitelist or blacklist
+- Filter VCF on SNPs w/ wanted or unwanted list
 - Plot average heterozygozity per sample to remove strange samples
 - Look for patterns of missing data caused by the sequencing (PCAs, heatmaps?)
 - Missing data imputation
