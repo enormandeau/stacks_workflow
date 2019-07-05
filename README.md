@@ -332,7 +332,7 @@ your study is crucial in order to generate meaninful and optimal results. Read
 the STACKS documentation on their website to learn more about the different
 options.
 
-## Run the STACKS programs
+## Run the STACKS1 programs
 
 ### Without a reference genome
 
@@ -365,12 +365,27 @@ Visualize the distribution of log likelihoods in
 ./00-scripts/stacks_4_populations.sh
 ```
 
+## Run the STACKS2 programs
+
+### Without a reference genome
+
+**NOTE**: Not yet implemented
+
+### With a reference genome
+
+```bash
+./00-scripts/stacks2_gstacks_reference.sh
+./00-scripts/stacks2_populations.sh
+```
 ## Filtering the results
 
 1. Filter STACKS or STACKS2 VCF minimally and create graphs:
 ```
-# Filtering
+# Filtering (STACKS1)
 ./00-scripts/05_filter_vcf -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
+
+# Filtering (STACKS2)
+./00-scripts/05_filter_vcf -i 05-stacks/populations.snps.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
 
 # Graphs
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
