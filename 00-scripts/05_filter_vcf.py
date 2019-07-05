@@ -801,7 +801,7 @@ def test_max_allele_coverage(locus, pop_info, max_allele_coverage):
             if sample.genotype != "./.":
                 coverages.append(sample.depth)
 
-        if median(coverages) >= max_allele_coverage:
+        if not coverages or median(coverages) >= max_allele_coverage:
             Flags.max_allele_coverage_count += 1
 
 # Max number of SNPs
