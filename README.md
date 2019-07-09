@@ -400,7 +400,7 @@ Visualize the distribution of log likelihoods in
 #     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
 #     output_vcf: is the name of the filtered VCF
 
-./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 0.3 2 filtered_m4_p70_S2
+./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 2 filtered_m4_p70_S2
 
 # Filtering (STACKS2)
 # Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
