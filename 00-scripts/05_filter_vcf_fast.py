@@ -2,13 +2,13 @@
 """Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
 
 Usage:
-    <program> input_vcf min_cov percent_genotypes min_mas output_vcf
+    <program> input_vcf min_cov percent_genotypes max_pop_fail min_mas output_vcf
 
 Where:
     input_vcf: is the name of the VCF file to filter
     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
-    percent_genotypes: minimum percent of genotype data per population
-        (must be good for ALL populations) <float> eg: 50, 70, 80, 100
+    percent_genotypes: minimum percent of genotype data per population <float> eg: 50, 70, 80, 100
+    max_pop_fail: maximum number of populations that can fail percent_genotypes <int> eg: 1, 2, 3
     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
     output_vcf: is the name of the filtered VCF
 
@@ -59,8 +59,9 @@ try:
     input_vcf = sys.argv[1]
     min_cov = int(sys.argv[2])
     percent_genotypes = float(sys.argv[3])
-    min_mas = int(sys.argv[4])
-    output_vcf = sys.argv[5]
+    max_pop_fail = int(sys.argv[4])
+    min_mas = int(sys.argv[5])
+    output_vcf = sys.argv[6]
 
 except:
     print(__doc__)
@@ -89,16 +90,14 @@ with open(input_vcf) as infile:
             # Correct genotypes with coverage below min_cov
             genotypes = [correct_genotype(x, min_cov) for x in genotypes]
 
-            # Create corrected line
-            line = "\t".join(infos + genotypes) + "\n"
-
             # Remove SNPs with MAS below threshold
             mas = len([1 for x in genotypes if x.split(":")[0] in ["0/1", "1/0", "1/1"]])
 
             if mas < min_mas:
                 continue
 
-            # Remove SNPs with too much missing data in at least one population
+            # Remove SNPs with too much missing data in too many populations
+            pops_failed = 0
             max_missing_failed = False
 
             for pop in pop_info:
@@ -109,8 +108,14 @@ with open(input_vcf) as infile:
                 prop_missing = num_missing / num_samples
 
                 if prop_missing > 1 - (percent_genotypes / 100):
-                    max_missing_failed = True
-                    break
+                    pops_failed += 1
+
+                    if pops_failed > max_pop_fail:
+                        max_missing_failed = True
+                        break
 
             if not max_missing_failed:
+
+                # Create corrected line
+                line = "\t".join(infos + genotypes) + "\n"
                 outfile.write(line)
