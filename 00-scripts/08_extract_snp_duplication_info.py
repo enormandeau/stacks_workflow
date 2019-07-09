@@ -42,15 +42,15 @@ with open(input_vcf) as infile:
 
             # Get only coverage data per sample for heterozygote samples
             data_homozygotes_freq = [(int(i[0]), int(i[1])) for i in [x.split(":")[2].split(",")
-                    for x in l[9:] if x.split(":")[0] in ["0/0"]]
+                for x in l[9:] if x.split(":")[0] == "0/0" and "," in x.split(":")[2]]
                     ]
 
             data_heterozygotes = [(int(i[0]), int(i[1])) for i in [x.split(":")[2].split(",")
-                    for x in l[9:] if x.split(":")[0] in ["0/1", "1/0"]]
+                    for x in l[9:] if x.split(":")[0] in ["0/1", "1/0"] and "," in x.split(":")[2]]
                     ]
 
             data_homozygotes_rare = [(int(i[0]), int(i[1])) for i in [x.split(":")[2].split(",")
-                    for x in l[9:] if x.split(":")[0] in ["1/1"]]
+                    for x in l[9:] if x.split(":")[0] == "1/1" and "," in x.split(":")[2]]
                     ]
 
             # allele ratio of snp
