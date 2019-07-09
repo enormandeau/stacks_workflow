@@ -428,7 +428,6 @@ rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
 often boosted by genotyping errors where one heterozygote sample is genotyped as
 a rare-allele homozygote.
 
-
 ### Slow filter
 
 - More parameters but not needed with new filtering procedure
