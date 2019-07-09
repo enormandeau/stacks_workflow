@@ -34,7 +34,7 @@ for more details.
 
 # Stacks workflow tutorial
 
-The goal of this workflow is to simplify the use of the STACKS pipeline and 
+The goal of this workflow is to simplify the use of the STACKS pipeline and
 make the analyses more reproductible.
 
 It was developed with the needs of our research group in mind. We make no claim
@@ -379,6 +379,62 @@ Visualize the distribution of log likelihoods in
 ```
 ## Filtering the results
 
+### Fast filter
+
+- Less parameters
+- Faster (5-10X depending on dataset)
+- Recommended overall analyses and much better for big datasets
+
+1. Filter STACKS or STACKS2 VCF minimally and create graphs:
+```
+#  (STACKS1)
+# Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
+#
+# Usage:
+#     <program> input_vcf min_cov max_missing min_mas output_vcf
+#
+# Where:
+#     input_vcf: is the name of the VCF file to filter
+#     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
+#     max_missing: maximum proportion of missing data (applies to ALL populations) <float> eg: 0.0 to 0.5
+#     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
+#     output_vcf: is the name of the filtered VCF
+
+./00-scripts/05_filter_vcf_fast.py -i 05-stacks/batch_1.vcf 4 0.3 2 filtered_m4_p70_S2
+
+# Filtering (STACKS2)
+# Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
+#
+# Usage:
+#     <program> input_vcf min_cov max_missing min_mas output_vcf
+#
+# Where:
+#     input_vcf: is the name of the VCF file to filter
+#     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
+#     max_missing: maximum proportion of missing data (applies to ALL populations) <float> eg: 0.0 to 0.5
+#     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
+#     output_vcf: is the name of the filtered VCF
+
+./00-scripts/05_filter_vcf_fast.py -i 05-stacks/populations.snps.vcf 4 70 2 filtered_m4_p70_S2
+
+# Graphs
+./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
+```
+
+**Note:** The `-S` option filters on the **MAS**, which is akin to the MAF and MAC.
+It keeps only SNPs where the rare allele has been found in *at least* a certain
+number of samples. For example: `-S 2` means that at least two samples have the
+rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
+often boosted by genotyping errors where one heterozygote sample is genotyped as
+a rare-allele homozygote.
+
+
+### Slow filter
+
+- More parameters but not needed with new filtering procedure
+- Slower (5-10X depending on dataset)
+- Keeping for backward compatibility
+
 1. Filter STACKS or STACKS2 VCF minimally and create graphs:
 ```
 # Filtering (STACKS1)
@@ -401,18 +457,18 @@ a rare-allele homozygote.
 2. Identify bad samples
   - Identify samples with too much missing data from `missing_data.png` and `missing_data.txt`
   - Run `vcftools --relatedness` and identify potential errors / problems
-  - Remove the files from these samples from `05-stacks` or `06-stacks_rx` (put them in a subfolder)
-  - Re-run `population`
+  - Create file with wanted or unwanted samples (one sample name per line)
+  - Filter populations VCF with `06_filter_samples_with_list.py`
 
 3. If needed, make bigger groups of samples
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
-    - Copy `05-stacks/batch_1.vcf` (or `06-stacks_rx/batch_1.vcf`)
+    - Copy `05-stacks/batch_1.vcf` (or `05-stacks/populations.snps.vcf`, or `06-stacks_rx/batch_1.vcf`)
     - Modify names of samples (`POP1_sample` -> `Group1_POP1-sample`, note that the underscore `_` becomes a dash `-`
 
 4. Filter new VCF
 ```
-./00-scripts/05_filter_vcf -i batch_1_grouped.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_bad_samples_removed_m4_p70_S2
+./00-scripts/05_filter_fast_vcf batch_1_grouped.vcf 4 70 2 filtered_bad_samples_removed_m4_p70_S2
 ```
 
 5. Explore SNP duplication using the following scripts
@@ -447,8 +503,8 @@ duplicated, diverged, and high coverage SNPs separately.
 
 8. TODO
 
+- Make filtering scripts 05 to 07 read and write .gz files
 - Add v2.4 tag once full analysis is tested with STACKS2
-- Make a faster filter script (remove un nessecary filters, bypass unspecified filters?)
 - Plot average heterozygozity per sample to remove strange samples
 - Look for patterns of missing data caused by the sequencing (PCAs, heatmaps?)
 - Missing data imputation
