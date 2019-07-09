@@ -390,13 +390,13 @@ Visualize the distribution of log likelihoods in
 # Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
 #
 # Usage:
-#     <program> input_vcf min_cov percent_genotypes min_mas output_vcf
+#     <program> input_vcf min_cov percent_genotypes max_pop_fail min_mas output_vcf
 #
 # Where:
 #     input_vcf: is the name of the VCF file to filter
 #     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
-#     percent_genotypes: minimum percent of genotype data per population
-#         (must be good for ALL populations) <float> eg: 50, 70, 80, 100
+#     percent_genotypes: minimum percent of genotype data per population <float> eg: 50, 70, 80, 100
+#     max_pop_fail: maximum number of populations that can fail percent_genotypes <int> eg: 1, 2, 3
 #     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
 #     output_vcf: is the name of the filtered VCF
 #
