@@ -2,12 +2,13 @@
 """Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
 
 Usage:
-    <program> input_vcf min_cov max_missing min_mas output_vcf
+    <program> input_vcf min_cov percent_genotypes min_mas output_vcf
 
 Where:
     input_vcf: is the name of the VCF file to filter
     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
-    max_missing: maximum proportion of missing data (applies to ALL populations) <float> eg: 0.5 to 1.0
+    percent_genotypes: minimum percent of genotype data per population
+        (must be good for ALL populations) <float> eg: 50, 70, 80, 100
     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
     output_vcf: is the name of the filtered VCF
 
@@ -57,7 +58,7 @@ def correct_genotype(genotype_info, min_cov):
 try:
     input_vcf = sys.argv[1]
     min_cov = int(sys.argv[2])
-    max_missing = float(sys.argv[3])
+    percent_genotypes = float(sys.argv[3])
     min_mas = int(sys.argv[4])
     output_vcf = sys.argv[5]
 
@@ -107,7 +108,7 @@ with open(input_vcf) as infile:
                 num_missing = len([1 for x in samples if x.split(":")[0] == "./."])
                 prop_missing = num_missing / num_samples
 
-                if prop_missing > max_missing:
+                if prop_missing > 1 - (percent_genotypes / 100):
                     max_missing_failed = True
                     break
 
