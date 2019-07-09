@@ -387,43 +387,35 @@ Visualize the distribution of log likelihoods in
 
 1. Filter STACKS or STACKS2 VCF minimally and create graphs:
 ```
-#  (STACKS1)
 # Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
 #
 # Usage:
-#     <program> input_vcf min_cov max_missing min_mas output_vcf
+#     <program> input_vcf min_cov percent_genotypes min_mas output_vcf
 #
 # Where:
 #     input_vcf: is the name of the VCF file to filter
 #     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
-#     max_missing: maximum proportion of missing data (applies to ALL populations) <float> eg: 0.0 to 0.5
+#     percent_genotypes: minimum percent of genotype data per population
+#         (must be good for ALL populations) <float> eg: 50, 70, 80, 100
 #     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
 #     output_vcf: is the name of the filtered VCF
+#
+# WARNING:
+#     The filtering is done purely on a SNP basis. Loci are not taken into account.
 
+# Filtering (STACKS1)
 ./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 2 filtered_m4_p70_S2
 
 # Filtering (STACKS2)
-# Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
-#
-# Usage:
-#     <program> input_vcf min_cov max_missing min_mas output_vcf
-#
-# Where:
-#     input_vcf: is the name of the VCF file to filter
-#     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
-#     max_missing: maximum proportion of missing data (applies to ALL populations) <float> eg: 0.0 to 0.5
-#     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
-#     output_vcf: is the name of the filtered VCF
-
 ./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 2 filtered_m4_p70_S2
 
 # Graphs
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-**Note:** The `-S` option filters on the **MAS**, which is akin to the MAF and MAC.
+**Note:** The last option filters on the **MAS**, which is akin to the MAF and MAC.
 It keeps only SNPs where the rare allele has been found in *at least* a certain
-number of samples. For example: `-S 2` means that at least two samples have the
+number of samples. For example: `2` means that at least two samples have the
 rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
 often boosted by genotyping errors where one heterozygote sample is genotyped as
 a rare-allele homozygote.
