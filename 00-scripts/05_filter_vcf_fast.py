@@ -67,6 +67,13 @@ except:
     print(__doc__)
     sys.exit(1)
 
+# Validate parameter values
+assert min_cov >= 0, "min_cov needs to be zero or a positive integer"
+assert percent_genotypes >= 0 and percent_genotypes <= 100.0, "percent_genotypes needs to be a number between zero and 100"
+assert max_pop_fail >= 1, "max_pop_fail needs to be a non-null positive integer"
+assert min_mas >= 1, "min_mas needs to be a non-null positive integer"
+
+# Loop over VCF
 with open(input_vcf) as infile:
     with open(output_vcf, "w") as outfile:
         for line in infile:
