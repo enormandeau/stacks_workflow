@@ -498,7 +498,7 @@ duplicated, diverged, and high coverage SNPs separately.
 
 8. TODO
 
-- Make filtering scripts 05 to 07 read and write .gz files
+- Make filtering scripts 05 to 10 read and write .gz files
 - Add v2.4 tag once full analysis is tested with STACKS2
 - Have trimming / alignment scripts with defaults suitable for Illumina / Ion Proton
 - Plot average heterozygozity per sample to remove strange samples
