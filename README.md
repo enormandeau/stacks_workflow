@@ -14,7 +14,16 @@ or other liability, whether in an action of contract, tort or otherwise,
 arising from, out of or in connection with the software or the use or other
 dealings in the software.
 
+stack_workflow was developed with the needs of our research group in mind. We
+make no claim about its usefulness to other groups or in other contexts, but we
+know it has been and continues to be useful to other groups.
+
 **NOTE**: Works with STACKS2 when using a reference genome (2019-06-17)
+
+## Licence
+
+stacks_workflow is licensed under the gpl3 license. See the LICENCE file
+provided with stacks_workflow for more details.
 
 ## Downloading
 
@@ -27,20 +36,6 @@ repository with:
 git clone https://github.com/enormandeau/stacks_workflow
 ```
 
-## Licence
-
-The stacks_workflow is licensed under the gpl3 license. See the licence file
-for more details.
-
-# Stacks workflow tutorial
-
-The goal of this workflow is to simplify the use of the STACKS pipeline and
-make the analyses more reproductible.
-
-It was developed with the needs of our research group in mind. We make no claim
-about its usefulness to other groups or in other contexts, but we know it has
-been and continues to be useful to other groups.
-
 ## About STACKS
 
 The [stacks analysis pipeline](http://creskolab.uoregon.edu/stacks/) is used
@@ -50,9 +45,15 @@ without a reference genome.
 Before starting to use STACKS, you should read the official STACKS papers
 found at the bottom of the official STACKS page (see link above).
 
+# Stacks workflow tutorial
+
+The goal of this workflow is to simplify the use of the STACKS pipeline and
+make the analyses more reproductible. Special care is taken to have a
+standardized SNP filtering procedure to produce quality SNPs at the end.
+
 ## Overview of the steps
 
-1. Install stacks_workflow and STACKS with its dependencies
+1. Install stacks_workflow and STACKS (or STACKS2 if you have a reference genome) with its dependencies
 1. Download your raw data files (illumina lanes or ion proton chips)
 1. Clean the reads and assess their quality
 1. Extract individual data with process_radtags
@@ -71,9 +72,10 @@ on GitHub.
 
 ### Download and install the most recent version of this workflow
 
-It is recommended to do this **for each new project**, as opposed to re-using
-the same directory for multiple projects and naming the outputs differently.
-This is **central to `stack_workflow`'s phylosophy** of reproducibility.
+It is recommended to download the most recent version of stacks_workflow **for
+each new project**, as opposed to re-using the same directory for multiple
+projects and naming the outputs differently.  This is **central to
+`stack_workflow`'s phylosophy** of reproducibility.
 
 **One stacks_workflow folder should contain only one analysis**
 
@@ -106,18 +108,18 @@ directory. **All the commands in this manual are launched from that directory.**
 Follow the instructions on the website to install and test the installation with:
 
 ```bash
-cstacks
-which cstacks
+populations
+which populations
 ```
 
-This will output the help of the cstacks program and where it is located
+This will output the help of the populations program and where it is located
 on your computer. You will also be able to confirm the version number of
 your STACKS installation.
 
 #### Installing Cutadapt
 
-There are different ways you can install Cutadapt. If you have `pip` (a
-Python package installer) installed, you can use the following command:
+There are different ways you can install Cutadapt. If you have `pip` (a Python
+package manager) installed, you can use the following command:
 
 ```bash
 sudo pip install --user --upgrade cutadapt
@@ -125,29 +127,6 @@ sudo pip install --user --upgrade cutadapt
 
 Otherwise, [visit their website to download it and install
 it](https://pypi.python.org/pypi/cutadapt/)
-
-#### Installing FastQC
-
-We use FastQC to assess read quality before and after filtering with Cutadapt.
-To install FastQC, visit [this
-page](http://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc)
-and download the version that works with your system (Linux or MacOS). Then
-launch these commands:
-
-##### Installing on Linux
-
-```bash
-# Installing
-unzip fastqc_v0.11.3_source.zip
-cd FastQC
-chmod 755 fastqc
-
-# Look at the options
-./fastqc --help
-
-# Run FastQC
-./fastqc
-```
 
 ## Prepare your raw datafiles
 
@@ -258,16 +237,32 @@ Where:
  - **enzyme2** = name of the second enzyme (run `process_radtags`, without
    options, for a list of the supported enzymes)
 
+#### Two restriction enzymes in parallel over multiple CPUs
+
+```bash
+./00-scripts/02_process_radtags_2_enzymes_parallel.sh <trimLength> <enzyme1> <enzyme2> <numCPUs>
+```
+
+Where:
+
+ - **trimLength** = length to trim all the sequences. This should be the length
+   of the Illumina reads minus the length of the longest tag or MID.
+ - **enzyme1** = name of the first enzyme (run `process_radtags`, without
+   options, for a list of the supported enzymes)
+ - **enzyme2** = name of the second enzyme (run `process_radtags`, without
+   options, for a list of the supported enzymes)
+ - **numCPUs** = number of CPUs to use
+
 #### Testing different trim lengths
 
 If you are using Ion Proton data, the effect of the trimLength parameter used
 above on the number of usable SNPs you recover at the end may not be trivial.
 As a rule of thumb, a trimmed length of 80bp should produce good results. We
 suggest you run tests with a smaller group of samples to determine what length
-to trim to. For highly species with hith genetic variability, short loci will be more likely to
-contain SNPs and long loci to contain more than one SNP, which is not always
-informative. Thus, trimming to shorter lengths may be more interesting for
-highly variant species or when coverage is limiting.
+to trim to. For highly species with hith genetic variability, short loci will
+be more likely to contain SNPs and long loci to contain more than one SNP,
+which is not always informative. Thus, trimming to shorter lengths may be more
+interesting for highly variant species or when coverage is limiting.
 
 ### Rename samples
 
@@ -296,18 +291,25 @@ will filter the VCF for this later and will then have better information.
 
 #### Align reads to a reference genome (optional)
 
-#### Install `bwa <http://bio-bwa.sourceforge.net>`_
+#### Install `bwa <http://bio-bwa.sourceforge.net>`
 
-#### Download reference genome to the `01-info_files`
+#### Download reference genome to the `08-genome`
 
 #### Index the reference genome
 
 ```bash
-bwa index -p genome -a bwtsw ./01-info_files/<genome reference>
-mv genome.* 01-info_files
+bwa index -p 08-genome/genome ./08-genome/<genome reference>
 ```
 
 ### Align samples
+
+Different bwa alignment scripts are available in 00-scripts:
+
+```bash
+00-scripts/bwa_mem_align_reads.sh
+00-scripts/bwa_mem_align_reads_by_n_samples.sh
+00-scripts/bwa_mem_align_reads_PE.sh
+```
 
 ```bash
 ./00-scripts/bwa_mem_align_reads.sh
@@ -380,6 +382,8 @@ Visualize the distribution of log likelihoods in
 ## Filtering the results
 
 ### Fast filter
+
+This new filter script (2019-07-08) is recommended over the old one.
 
 - Less parameters
 - Faster (5-10X depending on dataset)
@@ -496,6 +500,7 @@ duplicated, diverged, and high coverage SNPs separately.
 
 - Make filtering scripts 05 to 07 read and write .gz files
 - Add v2.4 tag once full analysis is tested with STACKS2
+- Have trimming / alignment scripts with defaults suitable for Illumina / Ion Proton
 - Plot average heterozygozity per sample to remove strange samples
 - Look for patterns of missing data caused by the sequencing (PCAs, heatmaps?)
 - Missing data imputation
