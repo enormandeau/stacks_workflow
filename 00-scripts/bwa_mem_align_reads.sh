@@ -18,7 +18,7 @@ module load bwa
 module load samtools
 
 # Index genome if not alread done
-# bwa index -p "$GENOMEFOLDER"/"$GENOME" "$GENOMEFOLDER"/"$GENOME".fasta
+# bwa index -p "$GENOMEFOLDER"/"${GENOME%.fasta}" "$GENOMEFOLDER"/"$GENOME"
 
 for file in $(ls -1 "$DATAFOLDER"/*.fq.gz)
 do
