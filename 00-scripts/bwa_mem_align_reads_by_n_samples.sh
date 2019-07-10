@@ -1,4 +1,9 @@
 #!/bin/bash
+
+## With GNU Parallel
+# ls -1 samples_split/* | parallel -k -j 10 srun -c 4 --mem 20G -p large --time 21-00:00 -J bwaMem -o 10-log_files/bwaMEMsplit_%j.log ./00-scripts/bwa_mem_align_reads_by_n_samples.sh 4 {} \; sleep 0.1 &
+
+## srun
 # srun -c 4 --mem 20G -p large --time 21-00:00 -J bwaMem -o 10-log_files/bwaMEMsplit_%j.log ./00-scripts/bwa_mem_align_reads_by_n_samples.sh 4 <SAMPLE_FILE>
 
 # First split sample list to align into different files with:
