@@ -45,7 +45,7 @@ listed_samples = set([x.strip() for x in open(info_file).readlines()])
 
 # Filter
 with myopen(input_vcf) as infile:
-    with myopen(output_vcf, "w") as outfile:
+    with myopen(output_vcf, "wt") as outfile:
         for line in infile:
             l = line.strip().split("\t")
 

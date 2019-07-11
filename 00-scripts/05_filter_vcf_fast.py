@@ -83,7 +83,7 @@ assert min_mas >= 1, "min_mas needs to be a non-null positive integer"
 
 # Loop over VCF
 with myopen(input_vcf) as infile:
-    with myopen(output_vcf, "w") as outfile:
+    with myopen(output_vcf, "wt") as outfile:
         for line in infile:
             l = line.strip().split("\t")
 

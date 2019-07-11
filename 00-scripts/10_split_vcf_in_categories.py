@@ -49,7 +49,7 @@ with open(input_categories) as infile:
 output_vcfs = dict()
 
 for category in categories:
-    output_vcfs[category] = open(input_vcf.replace(".vcf", "") + "." + category + ".vcf", "w")
+    output_vcfs[category] = open(input_vcf.replace(".vcf", "") + "." + category + ".vcf", "wt")
 
 # Read and split VCF
 with myopen(input_vcf) as infile:
