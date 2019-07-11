@@ -10,6 +10,7 @@
 08-genome/*
 09-population_vcfs/*
 10-log_files/*
+11-finding_samples_to_remove/*
 99-project_info/*
 GSNAP*.sh
 PSTACKS*.sh
