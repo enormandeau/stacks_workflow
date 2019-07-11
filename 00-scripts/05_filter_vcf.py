@@ -6,7 +6,8 @@ minor allele counts in the VCF file created by STACKS were not reported
 properly at that time.
 """
 
-# Import
+# Modules
+import gzip
 from collections import defaultdict
 import subprocess
 import argparse
@@ -255,6 +256,13 @@ class Flags(object):
                          ]) + "\n"
 
 # Functions
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
+
 def get_individual_info(line):
     """Return dictionary of positions in the lines of the VCF file and their
     corresponding samples ([population, sample]).
@@ -294,7 +302,7 @@ def locus_iterator(input_file, locus_separator):
     containing all the SNPs for that locus
     """
 
-    with open(input_file) as in_f:
+    with myopen(input_file) as in_f:
         snps = []
         first = True
         last_id = -99
@@ -847,9 +855,9 @@ if __name__ == '__main__':
     parser.add_argument("-q", "--quiet", action="store_true",
             help = "do not print progress messages")
     parser.add_argument("-i", "--input_file", type=str, required=True,
-            help = "input VCF file")
+            help = "input VCF file (can be compressed with gzip, ending in .gz)")
     parser.add_argument("-o", "--output_file", type=str, required=True,
-            help = "output VCF file or name of directory if you use -g option")
+            help = "output VCF file (can be compressed with gzip, ending in .gz) or name of directory if you use -g option")
     parser.add_argument("-g", "--graphs", action="store_true",
             help = "produce parameter distribution graphs instead of filtering")
     parser.add_argument("-c", "--min_allele_coverage", type=int, default=0,
@@ -907,7 +915,7 @@ if __name__ == '__main__':
     print("Treating: " + args.input_file)
     stacks_version = None
 
-    with open(args.input_file) as in_file:
+    with myopen(args.input_file) as in_file:
         for line in in_file:
             l = line.strip()
 

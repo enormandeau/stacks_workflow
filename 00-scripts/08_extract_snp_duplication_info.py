@@ -3,10 +3,12 @@
 
 Usage:
     <program> input_vcf output_file
+    Input and output VCFs can be compressed with gzip, ending in .gz
 """
 
 # Modules
 import statistics
+import gzip
 import sys
 
 # Parse user input
@@ -18,12 +20,19 @@ except:
     sys.exit(1)
 
 # Functions
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
+
 def duplicated_likelihood(avg_ratio, total_coverage_heterozygotes, med_coverage_heterozygotes, fis):
     return -1
 
 # Read VCF and compute allelic imbalance for each SNP
-with open(input_vcf) as infile:
-    with open(output_file, "w") as outfile:
+with myopen(input_vcf) as infile:
+    with myopen(output_file, "w") as outfile:
 
         # Write header
         outfile.write("Scaffold\tPosition\tID\tMedRatio\tAvgRatio\tMedCovHet\tTotCovHet\tMedCovHom\tNumHet\tPropHomFreq\tPropHet\tPropHomRare\tNumRare\tFis\n")

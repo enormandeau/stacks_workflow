@@ -3,12 +3,22 @@
 
 Usage:
     <program> input_vcf input_categories
+    Input and output VCFs can be compressed with gzip, ending in .gz
 """
 
 # Modules
 from collections import defaultdict
 from collections import Counter
+import gzip
 import sys
+
+# Functions
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
 
 # Parse user input
 try:
@@ -42,7 +52,7 @@ for category in categories:
     output_vcfs[category] = open(input_vcf.replace(".vcf", "") + "." + category + ".vcf", "w")
 
 # Read and split VCF
-with open(input_vcf) as infile:
+with myopen(input_vcf) as infile:
     for line in infile:
         if line.startswith("#"):
             for output in output_vcfs:

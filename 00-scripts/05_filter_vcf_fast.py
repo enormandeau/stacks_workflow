@@ -5,21 +5,29 @@ Usage:
     <program> input_vcf min_cov percent_genotypes max_pop_fail min_mas output_vcf
 
 Where:
-    input_vcf: is the name of the VCF file to filter
+    input_vcf: is the name of the VCF file to filter (can be compressed with gzip, ending in .gz)
     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
     percent_genotypes: minimum percent of genotype data per population <float> eg: 50, 70, 80, 100
     max_pop_fail: maximum number of populations that can fail percent_genotypes <int> eg: 1, 2, 3
     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
-    output_vcf: is the name of the filtered VCF
+    output_vcf: is the name of the filtered VCF (can be compressed with gzip, ending in .gz)
 
 WARNING:
     The filtering is done purely on a SNP basis. Loci are not taken into account.
 """
 
-# Import
+# Modules
+import gzip
 import sys
 
 # Functions
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
+
 def get_population_info(line):
     """Return dictionary of population names with a list of their sample
     positions in the lines of the VCF file.
@@ -74,8 +82,8 @@ assert max_pop_fail >= 1, "max_pop_fail needs to be a non-null positive integer"
 assert min_mas >= 1, "min_mas needs to be a non-null positive integer"
 
 # Loop over VCF
-with open(input_vcf) as infile:
-    with open(output_vcf, "w") as outfile:
+with myopen(input_vcf) as infile:
+    with myopen(output_vcf, "w") as outfile:
         for line in infile:
             l = line.strip().split("\t")
 
