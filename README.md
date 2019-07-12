@@ -381,6 +381,12 @@ Visualize the distribution of log likelihoods in
 ```
 ## Filtering the results
 
+NOTE: All the filtering scripts that take a VCF for input or output can read
+and write compressed VCF files. The files must be compressed with gzip and end
+with the `.gz` extension. This is how the Python scripts recognize them. As a
+result, it is recommended to compress your original VCF files from populations
+with gzip as well as any further steps in order to save disk space.
+
 ### Fast filter
 
 This new filter script (2019-07-08) is recommended over the old one.
@@ -390,6 +396,7 @@ This new filter script (2019-07-08) is recommended over the old one.
 - Recommended overall analyses and much better for big datasets
 
 1. Filter STACKS or STACKS2 VCF minimally and create graphs:
+
 ```
 # Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
 #
@@ -408,10 +415,10 @@ This new filter script (2019-07-08) is recommended over the old one.
 #     The filtering is done purely on a SNP basis. Loci are not taken into account.
 
 # Filtering (STACKS1)
-./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 2 filtered_m4_p70_S2
+./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 0 2 filtered_m4_p70_S2
 
 # Filtering (STACKS2)
-./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 2 filtered_m4_p70_S2
+./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 0 2 filtered_m4_p70_S2
 
 # Graphs
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
@@ -430,7 +437,8 @@ a rare-allele homozygote.
 - Slower (5-10X depending on dataset)
 - Keeping for backward compatibility
 
-1. Filter STACKS or STACKS2 VCF minimally and create graphs:
+2. Filter STACKS or STACKS2 VCF minimally and create graphs:
+
 ```
 # Filtering (STACKS1)
 ./00-scripts/05_filter_vcf -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
@@ -449,24 +457,24 @@ rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
 often boosted by genotyping errors where one heterozygote sample is genotyped as
 a rare-allele homozygote.
 
-2. Identify bad samples
+3. Identify bad samples
   - Identify samples with too much missing data from `missing_data.png` and `missing_data.txt`
   - Run `vcftools --relatedness` and identify potential errors / problems
   - Create file with wanted or unwanted samples (one sample name per line)
-  - Filter populations VCF with `06_filter_samples_with_list.py`
+  - Filter original populations VCF with `06_filter_samples_with_list.py`
 
-3. If needed, make bigger groups of samples
+4. If needed, make bigger groups of samples
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
     - Copy `05-stacks/batch_1.vcf` (or `05-stacks/populations.snps.vcf`, or `06-stacks_rx/batch_1.vcf`)
-    - Modify names of samples (`POP1_sample` -> `Group1_POP1-sample`, note that the underscore `_` becomes a dash `-`
+    - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
 
-4. Filter new VCF
+5. Filter new VCF
 ```
-./00-scripts/05_filter_fast_vcf batch_1_grouped.vcf 4 70 2 filtered_bad_samples_removed_m4_p70_S2
+./00-scripts/05_filter_fast_vcf batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
-5. Explore SNP duplication using the following scripts
+6. Explore SNP duplication using the following scripts
 ```
 ./00-scripts/08_extract_snp_duplication_info.py
 ./00-scripts/09_classify_snps.R
@@ -482,13 +490,13 @@ a rare-allele homozygote.
     - High Coverage: MedCovHom > 40 or MedCovHet > 40
     - Minor Allele Sample (MAS): NumRare <= 2
 
-6. Keep all unlinked SNPs
+7. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
 ```
 00-scripts/utility_scripts/extract_unlinked_snps.py
 ```
 
-7. Onwards!
+8. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
@@ -496,9 +504,8 @@ duplicated, diverged, and high coverage SNPs separately.
   - Run population genomics analyses
   - Publish a paper!
 
-8. TODO
+## TODO
 
-- Make filtering scripts 05 to 10 read and write .gz files
 - Add v2.4 tag once full analysis is tested with STACKS2
 - Have trimming / alignment scripts with defaults suitable for Illumina / Ion Proton
 - Plot average heterozygozity per sample to remove strange samples
