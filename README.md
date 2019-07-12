@@ -459,22 +459,24 @@ a rare-allele homozygote.
 
 3. Identify bad samples
   - Identify samples with too much missing data from `missing_data.png` and `missing_data.txt`
-  - Run `vcftools --relatedness` and identify potential errors / problems
   - Create file with wanted or unwanted samples (one sample name per line)
   - Filter original populations VCF with `06_filter_samples_with_list.py`
 
-4. If needed, make bigger groups of samples
+4. - Run `vcftools --relatedness` and identify potential errors / problems
+  - Filter original populations VCF with `06_filter_samples_with_list.py`
+
+5. If needed, make bigger groups of samples
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
     - Copy `05-stacks/batch_1.vcf` (or `05-stacks/populations.snps.vcf`, or `06-stacks_rx/batch_1.vcf`)
     - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
 
-5. Filter new VCF
+6. Filter new VCF
 ```
 ./00-scripts/05_filter_fast_vcf batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
-6. Explore SNP duplication using the following scripts
+7. Explore SNP duplication using the following scripts
 ```
 ./00-scripts/08_extract_snp_duplication_info.py
 ./00-scripts/09_classify_snps.R
@@ -490,13 +492,13 @@ a rare-allele homozygote.
     - High Coverage: MedCovHom > 40 or MedCovHet > 40
     - Minor Allele Sample (MAS): NumRare <= 2
 
-7. Keep all unlinked SNPs
+8. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
 ```
 00-scripts/utility_scripts/extract_unlinked_snps.py
 ```
 
-8. Onwards!
+9. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
