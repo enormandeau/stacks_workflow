@@ -493,7 +493,7 @@ a rare-allele homozygote.
 7. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
 ```
-00-scripts/utility_scripts/extract_unlinked_snps.py
+00-scripts/11_extract_unlinked_snps.py
 ```
 
 8. Onwards!

@@ -20,9 +20,17 @@ Where:
 """
 
 # Modules
+import gzip
 import sys
 
 # Functions
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
+
 def write_snp_line(l, outfile):
     outfile.write("\t".join(l) + "\n")
 
@@ -121,8 +129,8 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # Open file handles
-    infile = open(input_vcf)
-    outfile = open(output_vcf, "w")
+    infile = myopen(input_vcf)
+    outfile = myopen(output_vcf, "wt")
 
     # Iterate through SNPs
     snps = []
