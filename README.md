@@ -459,11 +459,14 @@ a rare-allele homozygote.
 
 3. Identify bad samples
   - Identify samples with too much missing data from `missing_data.png` and `missing_data.txt`
-  - Create file with wanted or unwanted samples (one sample name per line)
+  - Create file with unwanted samples (one sample name per line)
   - Filter original populations VCF with `06_filter_samples_with_list.py`
 
 4. - Run `vcftools --relatedness` and identify potential errors / problems
-  - Filter original populations VCF with `06_filter_samples_with_list.py`
+  - Plot relatedness graph to choose threshold with `00-scripts/11_plot_relatedness_graphs.R`
+  - Create list of unwanted samples using the .csv output and a chosen
+    threshold (one sample name per line)
+  - Filter precedent VCF with `06_filter_samples_with_list.py`
 
 5. If needed, make bigger groups of samples
   - If your dataset contains many small populations, regroup samples into fewer and bigger
@@ -473,6 +476,7 @@ a rare-allele homozygote.
 
 6. Filter new VCF
 ```
+# Launch script without options to see parameters
 ./00-scripts/05_filter_fast_vcf batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
