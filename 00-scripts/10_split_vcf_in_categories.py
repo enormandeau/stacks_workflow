@@ -49,7 +49,12 @@ with open(input_categories) as infile:
 output_vcfs = dict()
 
 for category in categories:
-    output_vcfs[category] = open(input_vcf.replace(".vcf", "") + "." + category + ".vcf", "wt")
+    if input_vcf.endswith(".gz"):
+        compression = ".gz"
+    else:
+        compression = ""
+
+    output_vcfs[category] = myopen(input_vcf.replace(".vcf", "").replace(".gz", "") + "." + category + ".vcf" + compression, "wt")
 
 # Read and split VCF
 with myopen(input_vcf) as infile:
