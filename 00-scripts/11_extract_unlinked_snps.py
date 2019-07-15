@@ -137,14 +137,29 @@ if __name__ == '__main__':
 
     for line in infile:
 
+        # Get STACKS version
+        if line.startswith("##source="):
+            stacks_version = line.split('"')[1].split(" ")[1]
+
+            if "v1" in stacks_version:
+                print(f"  STACKS version: {stacks_version}")
+                locus_separator = "_"
+                stacks_version = 1
+
+            elif "v2" in stacks_version:
+                print(f"  STACKS version: {stacks_version}")
+                locus_separator = ":"
+                stacks_version = 2
+
         # Write header to output file
         if line.startswith("#"):
+
             outfile.write(line)
             continue
 
         # Parse SNP data
         l = line.strip().split()
-        locus = l[2].split("_")[0]
+        locus = l[2].split(locus_separator)[0]
 
         # First SNP of VCF
         if snps == []:
