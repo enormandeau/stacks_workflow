@@ -50,7 +50,8 @@ do
         - > "$DATAFOLDER"/"${name%.fq.gz}".bam
 
     # Samtools sort
-    samtools sort --threads "$NCPU" -o "$DATAFOLDER"/"$name".sorted.bam "$DATAFOLDER"/"${name%.fq.gz}".bam
+    samtools sort --threads "$NCPU" -o "$DATAFOLDER"/"${name%.fq.gz}".sorted.bam \
+        "$DATAFOLDER"/"${name%.fq.gz}".bam
 
     # Cleanup
     rm "$DATAFOLDER"/"${name%.fq.gz}".bam
