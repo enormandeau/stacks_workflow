@@ -53,6 +53,8 @@ do
     samtools sort --threads "$NCPU" -o "$DATAFOLDER"/"${name%.fq.gz}".sorted.bam \
         "$DATAFOLDER"/"${name%.fq.gz}".bam
 
+    samtools index "$DATAFOLDER"/"${name%.fq.gz}".sorted.bam
+
     # Cleanup
     rm "$DATAFOLDER"/"${name%.fq.gz}".bam
 done

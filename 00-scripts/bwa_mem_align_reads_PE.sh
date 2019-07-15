@@ -33,6 +33,8 @@ do
         #samtools view -Sb -q 20 -f 83 -f 163 -f 99 -f 147 - > "$DATAFOLDER"/"${name%.fq.gz}".bam
 
     # Sort and index
-    samtools sort "$DATAFOLDER"/"${name%.fq.gz}".bam > "$DATAFOLDER"/"${name%.fq.gz}".sorted.bam
+    samtools sort --threads "$NCPU" -o "$DATAFOLDER"/"${name%.fq.gz}".sorted.bam \
+        "$DATAFOLDER"/"${name%.fq.gz}".bam
+
     samtools index "$DATAFOLDER"/"${name%.fq.gz}".sorted.bam
 done
