@@ -105,7 +105,7 @@ directory. **All the commands in this manual are launched from that directory.**
 
 `stacks_workflow` works with STACKS2 when using a reference genome (2019-06-17)
 
-Follow the instructions on the website to install and test the installation with:
+Follow the instructions on the website to install and test the installation with
 
 ```bash
 populations
@@ -119,7 +119,7 @@ your STACKS installation.
 #### Installing Cutadapt
 
 There are different ways you can install Cutadapt. If you have `pip` (a Python
-package manager) installed, you can use the following command:
+package manager) installed, you can use the following command
 
 ```bash
 sudo pip install --user --upgrade cutadapt
@@ -146,7 +146,7 @@ work.
 ### Preparing the `lane_info.txt` file
 
 This file will contain the names of the raw data files and is used by
-stacks_workflow later. From the stacks_workflow folder, run:
+stacks_workflow later. From the stacks_workflow folder, run
 
 ```bash
 ./00-scripts/00_prepare_lane_info.sh
@@ -155,7 +155,7 @@ stacks_workflow later. From the stacks_workflow folder, run:
 ### Running Cutadapt
 
 We trim our data using Cutadapt **in single-end mode** with the following
-command:
+command
 
 ```bash
 ./00-scripts/01_cutadapt.sh numCPUs
@@ -188,7 +188,7 @@ rename the extracted sample files automatically.
 The first column **MUST** contain the **EXACT** name of the data file for the
 lane of each sample.
 
-**Notes:**
+**Notes**:
 
 - The **columns are separated by tabulations** (even if the extension is .csv)
 - The second column contains the barcode sequence of each sample.
@@ -207,7 +207,7 @@ for example by mixing lower and capital letters in population or sample names
 (e.g.: Pop01 and pop01), since these will be treated as two different
 populations.
 
-### Launch process_radtags with:
+### Launch process_radtags
 
 #### One restriction enzyme
 
@@ -348,7 +348,7 @@ options.
 
 Visualize the distribution of log likelihoods in
 `rxstacks_log_likelihoods.png` and choose a cutoff to use in the next script
-(`./00-scripts/stacks_5b_rxstacks.sh`). Then launch:
+(`./00-scripts/stacks_5b_rxstacks.sh`). Then launch
 
 ```bash
 ./00-scripts/stacks_5b_rxstacks.sh
@@ -381,11 +381,13 @@ Visualize the distribution of log likelihoods in
 ```
 ## Filtering the results
 
-NOTE: All the filtering scripts that take a VCF for input or output can read
+**NOTE**: All the filtering scripts that take a VCF for input or output can read
 and write compressed VCF files. The files must be compressed with gzip and end
 with the `.gz` extension. This is how the Python scripts recognize them. As a
 result, it is recommended to compress your original VCF files from populations
 with gzip as well as any further steps in order to save disk space.
+
+1. Filter STACKS or STACKS2 VCF minimally and create graphs
 
 ### Fast filter
 
@@ -394,8 +396,6 @@ This new filter script (2019-07-08) is recommended over the old one.
 - Less parameters
 - Faster (5-10X depending on dataset)
 - Recommended overall analyses and much better for big datasets
-
-1. Filter STACKS or STACKS2 VCF minimally and create graphs:
 
 ```
 # Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
@@ -424,7 +424,7 @@ This new filter script (2019-07-08) is recommended over the old one.
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-**Note:** The last option filters on the **MAS**, which is akin to the MAF and MAC.
+**Note**: The last option filters on the **MAS**, which is akin to the MAF and MAC.
 It keeps only SNPs where the rare allele has been found in *at least* a certain
 number of samples. For example: `2` means that at least two samples have the
 rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
@@ -437,8 +437,6 @@ a rare-allele homozygote.
 - Slower (5-10X depending on dataset)
 - Keeping for backward compatibility
 
-2. Filter STACKS or STACKS2 VCF minimally and create graphs:
-
 ```
 # Filtering (STACKS1)
 ./00-scripts/05_filter_vcf -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
@@ -450,37 +448,36 @@ a rare-allele homozygote.
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-**Note:** The `-S` option filters on the **MAS**, which is akin to the MAF and MAC.
+**Note**: The `-S` option filters on the **MAS**, which is akin to the MAF and MAC.
 It keeps only SNPs where the rare allele has been found in *at least* a certain
 number of samples. For example: `-S 2` means that at least two samples have the
 rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
 often boosted by genotyping errors where one heterozygote sample is genotyped as
 a rare-allele homozygote.
 
-3. Identify bad samples
-  - Identify samples with too much missing data from `missing_data.png` and `missing_data.txt`
+2. Identify bad samples with too much missing data
+  - Use data from `missing_data.png` and `missing_data.txt`
   - Create file with unwanted samples (one sample name per line)
   - Filter original populations VCF with `06_filter_samples_with_list.py`
 
-4. - Run `vcftools --relatedness` and identify potential errors / problems
+3. - Run `vcftools --relatedness` and identify potential errors / problems
   - Plot relatedness graph to choose threshold with `00-scripts/11_plot_relatedness_graphs.R`
-  - Create list of unwanted samples using the .csv output and a chosen
-    threshold (one sample name per line)
+  - Create list of unwanted samples using the .csv output and a chosen threshold (one sample name per line)
   - Filter precedent VCF with `06_filter_samples_with_list.py`
 
-5. If needed, make bigger groups of samples
+4. If needed, make bigger groups of samples
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
     - Copy `05-stacks/batch_1.vcf` (or `05-stacks/populations.snps.vcf`, or `06-stacks_rx/batch_1.vcf`)
     - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
 
-6. Filter new VCF
+5. Filter new VCF
 ```
 # Launch script without options to see parameters
 ./00-scripts/05_filter_fast_vcf batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
-7. Explore SNP duplication using the following scripts
+6. Explore SNP duplication using the following scripts
 ```
 ./00-scripts/08_extract_snp_duplication_info.py
 ./00-scripts/09_classify_snps.R
@@ -496,13 +493,13 @@ a rare-allele homozygote.
     - High Coverage: MedCovHom > 40 or MedCovHet > 40
     - Minor Allele Sample (MAS): NumRare <= 2
 
-8. Keep all unlinked SNPs
+7. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
 ```
 00-scripts/11_extract_unlinked_snps.py
 ```
 
-9. Onwards!
+8. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
