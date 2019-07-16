@@ -303,16 +303,16 @@ bwa index -p 08-genome/genome ./08-genome/<genome reference>
 
 ### Align samples
 
-Different bwa alignment scripts are available in 00-scripts:
+Different bwa alignment scripts are available in 00-scripts.
+
+**NOTE**: The two scripts for single-end reads (ie: not the one with `PE` in
+its name) have options that are specific for IonProton data. To align Illumina
+data, remove the `-O 0,0` and `-E 2,2` options.
 
 ```bash
 00-scripts/bwa_mem_align_reads.sh
 00-scripts/bwa_mem_align_reads_by_n_samples.sh
 00-scripts/bwa_mem_align_reads_PE.sh
-```
-
-```bash
-./00-scripts/bwa_mem_align_reads.sh
 ```
 
 ## STACKS pipeline
@@ -366,6 +366,9 @@ Visualize the distribution of log likelihoods in
 ./00-scripts/stacks_3_sstacks.sh
 ./00-scripts/stacks_4_populations.sh
 ```
+
+**NOTE**: To align Illumina data, remove the `-O 0,0` and `-E 2,2` options from
+the bwa script.
 
 ## Run the STACKS2 programs
 
@@ -509,10 +512,13 @@ duplicated, diverged, and high coverage SNPs separately.
 
 ## TODO
 
-- Add v2.4 tag once full analysis is tested with STACKS2
-- Have trimming / alignment scripts with defaults suitable for Illumina / Ion Proton
-- Plot average heterozygozity per sample to remove strange samples
-- Look for patterns of missing data caused by the sequencing (PCAs, heatmaps?)
+- Plot average heterozygozity per sample to remove samples with much lower heterozygozity
+  - Use `vcftools --het --vcf <INPUT_VCF>` (use `--gzvcf` for comressed VCF files)
+
+- Look for shared patterns of missing data caused by the sequencing
+  - plink --vcf yourVCF.vcf --cluster missing --out outputName --mds-plot 4 --allow-extra-chr
+  - Create figure using strata file to color samples
+
 - Missing data imputation
   - Look for structure
   - Impute within each differentiable group
