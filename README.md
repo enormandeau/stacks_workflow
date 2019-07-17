@@ -32,7 +32,7 @@ download](https://github.com/enormandeau/stacks_workflow/archive/master.zip)
 the current version of the stacks workflow. alternatively, you can clone this
 repository with:
 
-```
+```bash
 git clone https://github.com/enormandeau/stacks_workflow
 ```
 
@@ -394,13 +394,16 @@ with gzip as well as any further steps in order to save disk space.
 
 ### Fast filter
 
-This new filter script (2019-07-08) is recommended over the old one.
+This new filter script (2019-07-08) is recommended over the older, slower one.
 
 - Less parameters
 - Faster (5-10X depending on dataset)
-- Recommended overall analyses and much better for big datasets
+- Uses only needed parameters
+- Recommended for all analyses and much faster for big datasets
 
-```
+Here is the help from this script:
+
+```bash
 # Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
 #
 # Usage:
@@ -427,20 +430,20 @@ This new filter script (2019-07-08) is recommended over the old one.
 ./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-**Note**: The last option filters on the **MAS**, which is akin to the MAF and MAC.
-It keeps only SNPs where the rare allele has been found in *at least* a certain
-number of samples. For example: `2` means that at least two samples have the
-rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
-often boosted by genotyping errors where one heterozygote sample is genotyped as
-a rare-allele homozygote.
+**Note**: The last option filters on the **MAS**, which is akin to the MAF and
+MAC. It keeps only SNPs where the rare allele has been found in *at least* a
+certain number of samples. For example: `2` means that at least two samples
+have the rare alleles. For RADseq data, the MAS is better than the MAF and MAC,
+which are boosted by genotyping errors where one heterozygote sample is
+genotyped as a rare-allele homozygote.
 
 ### Slow filter
 
-- More parameters but not needed with new filtering procedure
+- More parameters but they are not needed with this new filtering procedure
 - Slower (5-10X depending on dataset)
-- Keeping for backward compatibility
+- Keeping only for backward compatibility
 
-```
+```bash
 # Filtering (STACKS1)
 ./00-scripts/05_filter_vcf -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
 
@@ -458,33 +461,54 @@ rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
 often boosted by genotyping errors where one heterozygote sample is genotyped as
 a rare-allele homozygote.
 
-2. Identify bad samples with too much missing data
-  - Use data from `missing_data.png` and `missing_data.txt`
-  - Create file with unwanted samples (one sample name per line)
-  - Filter original populations VCF with `06_filter_samples_with_list.py`
+2. Identify bad samples in lightly filtered VCF
 
-3. - Run `vcftools --relatedness` and identify potential errors / problems
-  - Plot relatedness graph to choose threshold with `00-scripts/11_plot_relatedness_graphs.R`
-  - Create list of unwanted samples using the .csv output and a chosen threshold (one sample name per line)
-  - Filter precedent VCF with `06_filter_samples_with_list.py`
+a. Too much missing data
+
+  - Use data from `missing_data.png` and `missing_data.txt` from the graph step just above
+  - Decide on a threshold and create a file with unwanted samples (one sample name per line)
+
+b. Relatedness
+
+  - Run `vcftools --relatedness --vcf <INPUT_VCF>` and identify potential errors / problems
+  - Plot relatedness graph with `00-scripts/11_plot_relatedness_graphs.R`
+  - Decide on a threshold and create a file with unwanted samples (one sample name per line)
+
+c. Heterozygozity
+
+  - Use `vcftools --het --vcf <INPUT_VCF>` (use `--gzvcf` for comressed VCF files)
+  - Plot average heterozygozity per sample
+  - Decide on a threshold and create a file with unwanted samples (one sample name per line)
+
+d. Remove bad samples
+
+  - Create list of all unwanted samples from subsections a, b, and c (one sample name per line)
+  - Filter original populations VCF with `06_filter_samples_with_list.py`
+  - This will create an unfiltered VCF where the bad samples are removed
 
 4. If needed, make bigger groups of samples
+# TODO Permit the use of a population map with fast filter script to avoid this
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
-    - Copy `05-stacks/batch_1.vcf` (or `05-stacks/populations.snps.vcf`, or `06-stacks_rx/batch_1.vcf`)
-    - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
+  - STACKS1: Make a copy of `05-stacks/batch_1.vcf` or `06-stacks_rx/batch_1.vcf`
+  - STACKS1: Make a copy of `05-stacks/populations.snps.vcf`
+  - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
 
 5. Filter new VCF
-```
-# Launch script without options to see parameters
-./00-scripts/05_filter_fast_vcf batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
+
+**NOTE**: You can launch the `05_filter_vcf_fast.py` without options to see documentation.
+
+```bash
+./00-scripts/05_filter_vcf_fast.py batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
 6. Explore SNP duplication using the following scripts
-```
+
+```bash
 ./00-scripts/08_extract_snp_duplication_info.py
 ./00-scripts/09_classify_snps.R
 ./00-scripts/10_split_vcf_in_categories.py
+
 ```
 
   - The following criteria are used by in `09_classify_snps.R`. Modify these in the script to fit your data.
@@ -498,7 +522,8 @@ a rare-allele homozygote.
 
 7. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
-```
+
+```bash
 00-scripts/11_extract_unlinked_snps.py
 ```
 
@@ -512,11 +537,8 @@ duplicated, diverged, and high coverage SNPs separately.
 
 ## TODO
 
-- Plot average heterozygozity per sample to remove samples with much lower heterozygozity
-  - Use `vcftools --het --vcf <INPUT_VCF>` (use `--gzvcf` for comressed VCF files)
-
 - Look for shared patterns of missing data caused by the sequencing
-  - plink --vcf yourVCF.vcf --cluster missing --out outputName --mds-plot 4 --allow-extra-chr
+  - `plink --vcf <INPUT_VCF> --cluster missing --out <OUTPUT_VCF> --mds-plot 4 --allow-extra-chr`
   - Create figure using strata file to color samples
 
 - Missing data imputation
