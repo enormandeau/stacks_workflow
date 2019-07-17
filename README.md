@@ -390,9 +390,9 @@ with the `.gz` extension. This is how the Python scripts recognize them. As a
 result, it is recommended to compress your original VCF files from populations
 with gzip as well as any further steps in order to save disk space.
 
-1. Filter STACKS or STACKS2 VCF minimally and create graphs
+### 1. Filter STACKS or STACKS2 VCF minimally and create graphs
 
-### Fast filter
+#### Fast filter
 
 This new filter script (2019-07-08) is recommended over the older, slower one.
 
@@ -437,7 +437,7 @@ have the rare alleles. For RADseq data, the MAS is better than the MAF and MAC,
 which are boosted by genotyping errors where one heterozygote sample is
 genotyped as a rare-allele homozygote.
 
-### Slow filter
+#### Slow filter
 
 - More parameters but they are not needed with this new filtering procedure
 - Slower (5-10X depending on dataset)
@@ -461,40 +461,40 @@ rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
 often boosted by genotyping errors where one heterozygote sample is genotyped as
 a rare-allele homozygote.
 
-2. Identify bad samples in lightly filtered VCF
+### 2. Identify bad samples in lightly filtered VCF
 
-  2.1. Too much missing data
+#### 2.1. Too much missing data
 
   - Use data from `missing_data.png` and `missing_data.txt` from the graph step just above
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
-  2.2. Relatedness
+#### 2.2. Relatedness
 
   - Run `vcftools --relatedness --vcf <INPUT_VCF>` and identify potential errors / problems
   - Plot relatedness graph with `00-scripts/11_plot_relatedness_graphs.R`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
-  2.3. Heterozygozity
+#### 2.3. Heterozygozity
 
   - Use `vcftools --het --vcf <INPUT_VCF>` (use `--gzvcf` for comressed VCF files)
   - Plot average heterozygozity per sample
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
-  2.4. Remove bad samples
+#### 2.4. Remove bad samples
 
   - Create list of all unwanted samples from subsections 2.1, 2.2, and 2.3 (one sample name per line)
   - Filter original populations VCF with `06_filter_samples_with_list.py`
   - This will create an unfiltered VCF where the bad samples are removed
 
-3. If needed, make bigger groups of samples
-### TODO Permit the use of a population map with fast filter script to avoid this
+### 3. If needed, make bigger groups of samples
+#### TODO Permit the use of a population map with fast filter script to avoid this
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
   - STACKS1: Make a copy of `05-stacks/batch_1.vcf` or `06-stacks_rx/batch_1.vcf`
   - STACKS1: Make a copy of `05-stacks/populations.snps.vcf`
   - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
 
-4. Filter new VCF
+### 4. Filter new VCF
 
 **NOTE**: You can launch the `05_filter_vcf_fast.py` without options to see documentation.
 
@@ -502,7 +502,7 @@ a rare-allele homozygote.
 ./00-scripts/05_filter_vcf_fast.py batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
-5. Explore SNP duplication using the following scripts
+### 5. Explore SNP duplication using the following scripts
 
 ```bash
 ./00-scripts/08_extract_snp_duplication_info.py
@@ -520,14 +520,14 @@ a rare-allele homozygote.
     - High Coverage: MedCovHom > 40 or MedCovHet > 40
     - Minor Allele Sample (MAS): NumRare <= 2
 
-6. Keep all unlinked SNPs
+### 6. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
 
 ```bash
 00-scripts/11_extract_unlinked_snps.py
 ```
 
-7. Onwards!
+### 7. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
