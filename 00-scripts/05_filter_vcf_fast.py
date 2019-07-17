@@ -108,7 +108,12 @@ with myopen(input_vcf) as infile:
             # Remove SNPs with MAS below threshold
             mas = len([1 for x in genotypes if x.split(":")[0] in ["0/1", "1/0", "1/1"]])
 
-            if mas < min_mas:
+            # The second part of the test (after the or) is to take into
+            # account that we may be filtering a VCF that is a subset of a
+            # larger VCF file where a SNP could be 100% homozygote for the rare
+            # allele in the samples we kept, even if its MAF was globally less
+            # than 0.5 in the original VCF.
+            if mas < min_mas or mas > len(genotypes) - min_mas + 1:
                 continue
 
             # Remove SNPs with too much missing data in too many populations
