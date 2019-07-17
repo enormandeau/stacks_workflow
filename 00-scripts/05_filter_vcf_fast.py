@@ -113,7 +113,9 @@ with myopen(input_vcf) as infile:
             # larger VCF file where a SNP could be 100% homozygote for the rare
             # allele in the samples we kept, even if its MAF was globally less
             # than 0.5 in the original VCF.
-            if mas < min_mas or mas > len(genotypes) - min_mas + 1:
+            non_null_genotypes = [x for x in genotypes if not x.split(":")[0] in ["./.", "."]]
+
+            if mas < min_mas or mas > len(non_null_genotypes) - min_mas + 1:
                 continue
 
             # Remove SNPs with too much missing data in too many populations
