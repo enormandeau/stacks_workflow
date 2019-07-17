@@ -24,17 +24,22 @@ d$Color[d$MedRatio < 0.35] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.65] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.2] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.30] = duplicated
+d$Color[d$Fis < -0.4] = duplicated
+d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
+d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
+d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
 
 # Very low Fis = diverged
-d$Color[d$Fis < -0.6] = diverged
+d$Color[d$Fis < -0.8] = diverged
+d$Color[d$Fis + d$MedRatio * 2 < -0.00] = diverged
+d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
+d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
 d$Color[d$Fis > 0.6] = lowconf
 
 # Loci with high coverage
-d$Color[d$MedCovHom > 80 | d$MedCovHet > 80] = highcov
+d$Color[d$MedCovHom > 60 | d$MedCovHet > 60] = highcov
 
 # Too few samples with rare allele
 d$Color[data$NumHet + data$NumRare < 5] = mas
