@@ -467,22 +467,34 @@ a rare-allele homozygote.
 
   - Use data from `missing_data.png` and `missing_data.txt` from the graph step just above
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
+  - Remove samples from original populations VCF with `06_filter_samples_with_list.py`
+  - Filter original populations VCF again with `05_filter_vcf_fast.py`
 
 #### 2.2. Relatedness
 
-  - Run `vcftools --relatedness --vcf <INPUT_VCF>` and identify potential errors / problems
-  - Plot relatedness graph with `00-scripts/11_plot_relatedness_graphs.R`
+  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out bad_samples_ID` and identify potential errors / problems on filtered VCF from 2.1
+  - Plot relatedness graph with `00-scripts/00-scripts/utility_scripts/plot_relatedness_graphs.R`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
-#### 2.3. Heterozygozity
+#### 2.3. Heterozygosity
 
-  - Use `vcftools --het --vcf <INPUT_VCF>` (use `--gzvcf` for comressed VCF files)
-  - Plot average heterozygozity per sample
+  - Use `vcftools --het --vcf <INPUT_VCF> --out bad_samples_ID` (use `--gzvcf` for comressed VCF files)
+  - Format data with
+
+```bash
+awk '{print $5,$1,$1}' bad_samples_ID.het | cut -d "_" -f 1,2 > bad_samples_ID.het.data
+```
+  - Plot average heterozygosity per sample with `00-scripts/utility_scripts/plot_heterozygosity.R`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
+  - Extract samples below that threshold with
+
+```bash
+awk '$1 < -0.4 {print $2}' bad_samples_ID.het.data > bad_samples_ID.het.ids
+```
 
 #### 2.4. Remove bad samples
 
-  - Create list of all unwanted samples from subsections 2.1, 2.2, and 2.3 (one sample name per line)
+  - Create list of all unwanted samples from subsections  2.2, and 2.3 (one sample name per line)
   - Filter original populations VCF with `06_filter_samples_with_list.py`
   - This will create an unfiltered VCF where the bad samples are removed
 
