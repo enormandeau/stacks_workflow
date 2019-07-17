@@ -463,24 +463,24 @@ a rare-allele homozygote.
 
 2. Identify bad samples in lightly filtered VCF
 
-2.1. Too much missing data
+  2.1. Too much missing data
 
   - Use data from `missing_data.png` and `missing_data.txt` from the graph step just above
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
-2.2. Relatedness
+  2.2. Relatedness
 
   - Run `vcftools --relatedness --vcf <INPUT_VCF>` and identify potential errors / problems
   - Plot relatedness graph with `00-scripts/11_plot_relatedness_graphs.R`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
-2.3. Heterozygozity
+  2.3. Heterozygozity
 
   - Use `vcftools --het --vcf <INPUT_VCF>` (use `--gzvcf` for comressed VCF files)
   - Plot average heterozygozity per sample
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
-2.4. Remove bad samples
+  2.4. Remove bad samples
 
   - Create list of all unwanted samples from subsections 2.1, 2.2, and 2.3 (one sample name per line)
   - Filter original populations VCF with `06_filter_samples_with_list.py`
