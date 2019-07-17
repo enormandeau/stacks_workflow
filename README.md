@@ -486,7 +486,7 @@ a rare-allele homozygote.
   - Filter original populations VCF with `06_filter_samples_with_list.py`
   - This will create an unfiltered VCF where the bad samples are removed
 
-4. If needed, make bigger groups of samples
+3. If needed, make bigger groups of samples
 ### TODO Permit the use of a population map with fast filter script to avoid this
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
@@ -494,7 +494,7 @@ a rare-allele homozygote.
   - STACKS1: Make a copy of `05-stacks/populations.snps.vcf`
   - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
 
-5. Filter new VCF
+4. Filter new VCF
 
 **NOTE**: You can launch the `05_filter_vcf_fast.py` without options to see documentation.
 
@@ -502,7 +502,7 @@ a rare-allele homozygote.
 ./00-scripts/05_filter_vcf_fast.py batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
-6. Explore SNP duplication using the following scripts
+5. Explore SNP duplication using the following scripts
 
 ```bash
 ./00-scripts/08_extract_snp_duplication_info.py
@@ -520,14 +520,14 @@ a rare-allele homozygote.
     - High Coverage: MedCovHom > 40 or MedCovHet > 40
     - Minor Allele Sample (MAS): NumRare <= 2
 
-7. Keep all unlinked SNPs
+6. Keep all unlinked SNPs
   - Using the singleton SNPs, keep only unlinked SNPs using
 
 ```bash
 00-scripts/11_extract_unlinked_snps.py
 ```
 
-8. Onwards!
+7. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze singletons,
 duplicated, diverged, and high coverage SNPs separately.
