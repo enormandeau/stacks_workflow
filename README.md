@@ -487,7 +487,7 @@ d. Remove bad samples
   - This will create an unfiltered VCF where the bad samples are removed
 
 4. If needed, make bigger groups of samples
-# TODO Permit the use of a population map with fast filter script to avoid this
+### TODO Permit the use of a population map with fast filter script to avoid this
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
   - STACKS1: Make a copy of `05-stacks/batch_1.vcf` or `06-stacks_rx/batch_1.vcf`
