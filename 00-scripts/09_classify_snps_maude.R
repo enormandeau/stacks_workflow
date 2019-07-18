@@ -20,23 +20,30 @@ mas =           "#FFAA0022" # orange
 d$Color = singleton
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.35] = lowconf # & d$PropHomRare > 0.00] = lowconf
-d$Color[d$MedRatio > 0.65] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio < 0.30] = lowconf
+d$Color[d$MedRatio > 0.70] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.4] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
-d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
-d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
+## Under 0.5
+d$Color[d$Fis < -0.45] = duplicated
+d$Color[d$Fis + d$MedRatio < 0.025] = duplicated
+d$Color[d$Fis + d$MedRatio * 3 < 0.75] = duplicated
+d$Color[d$MedRatio < 0.35] = duplicated
+
+## Above 0.5
+d$Color[d$Fis - d$MedRatio < -0.97] = duplicated
+d$Color[d$Fis - d$MedRatio * 3 < -2.25] = duplicated
+d$Color[d$MedRatio > 0.65] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.8] = diverged
 d$Color[d$Fis + d$MedRatio * 2 < -0.00] = diverged
 d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
 d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
+d$Color[d$MedRatio < 0.22] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.6] = lowconf
+d$Color[d$Fis > 0.6 & d$PropHomRare < 0.2] = lowconf
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 60 | d$MedCovHet > 60] = highcov
