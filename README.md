@@ -482,7 +482,7 @@ a rare-allele homozygote.
 #### 2.3. Heterozygosity
 
   - Use `vcftools --het --vcf <INPUT_VCF> --out bad_samples_ID` (use `--gzvcf` for comressed VCF files)
-  - Plot heterozygosity graph with `./00-scripts/utility_scripts/plot_heterozygosity.R`
+  - Plot heterozygosity graph (see steps below)
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
   - Format data with:
 
