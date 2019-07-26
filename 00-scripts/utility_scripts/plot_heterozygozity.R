@@ -4,7 +4,6 @@
 rm(list=ls())
 args = commandArgs(trailingOnly=TRUE)
 input_file = args[1]
-threshold = as.numeric(args[2])
 output_figure = paste0(input_file, ".graph.png")
 
 # Load data
