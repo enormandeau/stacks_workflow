@@ -25,18 +25,18 @@ png(output_figure, width=600, height=900)
     hist(same[,3],
          main="Samples against themselves",
          col="grey",
-         breaks=seq(-10, 10, by=0.05),
+         breaks=seq(-100, 100, by=0.05),
          xlim=c(-1, 2))
 
     hist(diff[,3],
          main="Samples among themselves",
          col="grey",
-         breaks=seq(-10, 10, by=0.05),
+         breaks=seq(-100, 100, by=0.05),
          xlim=c(-1, 2))
 
     hist(outliers[,3],
          main="Outlier samples",
          col="grey",
-         breaks=seq(-10, 10, by=0.05),
+         breaks=seq(-100, 100, by=0.05),
          xlim=c(-1, 2))
 dev.off()
