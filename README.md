@@ -105,7 +105,7 @@ directory. **All the commands in this manual are launched from that directory.**
 
 `stacks_workflow` works with STACKS2 when using a reference genome (2019-06-17)
 
-Follow the instructions on the website to install and test the installation with
+Follow the instructions on the website to install and test the installation with:
 
 ```bash
 populations
@@ -119,7 +119,7 @@ your STACKS installation.
 #### Installing Cutadapt
 
 There are different ways you can install Cutadapt. If you have `pip` (a Python
-package manager) installed, you can use the following command
+package manager) installed, you can use the following command:
 
 ```bash
 sudo pip install --user --upgrade cutadapt
@@ -146,7 +146,7 @@ work.
 ### Preparing the `lane_info.txt` file
 
 This file will contain the names of the raw data files and is used by
-stacks_workflow later. From the stacks_workflow folder, run
+stacks_workflow later. From the stacks_workflow folder, run:
 
 ```bash
 ./00-scripts/00_prepare_lane_info.sh
@@ -155,7 +155,7 @@ stacks_workflow later. From the stacks_workflow folder, run
 ### Running Cutadapt
 
 We trim our data using Cutadapt **in single-end mode** with the following
-command
+command:
 
 ```bash
 ./00-scripts/01_cutadapt.sh numCPUs
@@ -348,7 +348,7 @@ options.
 
 Visualize the distribution of log likelihoods in
 `rxstacks_log_likelihoods.png` and choose a cutoff to use in the next script
-(`./00-scripts/stacks_5b_rxstacks.sh`). Then launch
+(`./00-scripts/stacks_5b_rxstacks.sh`). Then launch:
 
 ```bash
 ./00-scripts/stacks_5b_rxstacks.sh
@@ -467,26 +467,31 @@ a rare-allele homozygote.
 
   - Use data from `missing_data.png` and `missing_data.txt` from the graph step just above
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
-  - Remove samples from original populations VCF with `06_filter_samples_with_list.py`
+  - Remove these bad samples from original populations VCF with `06_filter_samples_with_list.py`
+    **BEFORE** you proceed to the next steps. Samples with a lot of missing data will create
+    strange relatedness patterns.
   - Filter original populations VCF again with `05_filter_vcf_fast.py`
 
 #### 2.2. Relatedness
 
-  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out bad_samples_ID` and identify potential errors / problems on filtered VCF from 2.1
+  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out bad_samples_ID` on filtered VCF from 2.1
+    to identify samples with potential errors / problems
   - Plot relatedness graph with `./00-scripts/utility_scripts/plot_relatedness_graphs.R`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
 #### 2.3. Heterozygosity
 
   - Use `vcftools --het --vcf <INPUT_VCF> --out bad_samples_ID` (use `--gzvcf` for comressed VCF files)
-  - Format data with
+  - Plot heterozygosity graph with `./00-scripts/utility_scripts/plot_heterozygosity.R`
+  - Decide on a threshold and create a file with unwanted samples (one sample name per line)
+  - Format data with:
 
 ```bash
 awk '{print $5,$1,$1}' bad_samples_ID.het | cut -d "_" -f 1,2 > bad_samples_ID.het.data
 ```
   - Plot average heterozygosity per sample with `./00-scripts/utility_scripts/plot_heterozygosity.R`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
-  - Extract samples below that threshold with
+  - Extract samples below that threshold with:
 
 ```bash
 awk '$1 < -0.4 {print $2}' bad_samples_ID.het.data > bad_samples_ID.het.ids
@@ -533,7 +538,7 @@ awk '$1 < -0.4 {print $2}' bad_samples_ID.het.data > bad_samples_ID.het.ids
     - Minor Allele Sample (MAS): NumRare <= 2
 
 ### 6. Keep all unlinked SNPs
-  - Using the singleton SNPs, keep only unlinked SNPs using
+  - Using the singleton SNPs, keep only unlinked SNPs using:
 
 ```bash
 00-scripts/11_extract_unlinked_snps.py
