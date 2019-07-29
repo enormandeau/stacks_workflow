@@ -57,6 +57,7 @@
 99-project_info/*
 GSNAP*.sh
 PSTACKS*.sh
+bad_samples*
 batch_1.*
 filtered_*
 gsnaptemp.list.*
