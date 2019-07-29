@@ -14,5 +14,4 @@ POP_MAP="population_map.txt"
 # Number of CPUs
 NUM_CPU="4"
 
-sstacks --gapped -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/population_map.txt \
-    -p 4 -o "$STACKS_FOLDER"
+tsv2bam -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/population_map.txt -t 4
