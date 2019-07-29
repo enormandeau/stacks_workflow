@@ -19,6 +19,7 @@ make no claim about its usefulness to other groups or in other contexts, but we
 know it has been and continues to be useful to other groups.
 
 **NOTE**: Works with STACKS2 when using a reference genome (2019-06-17)
+**NOTE**: Implementing STACKS2 *without* a reference genome (2019-07-29)
 
 ## Licence
 
@@ -103,7 +104,8 @@ directory. **All the commands in this manual are launched from that directory.**
 
 ### Download and install [STACKS](http://creskolab.uoregon.edu/stacks/)
 
-`stacks_workflow` works with STACKS2 when using a reference genome (2019-06-17)
+**NOTE**: `stacks_workflow` works with STACKS2 when using a reference genome (2019-06-17)
+**NOTE**: Implementing STACKS2 *without* a reference genome (2019-07-29)
 
 Follow the instructions on the website to install and test the installation with:
 
@@ -374,7 +376,7 @@ the bwa script.
 
 ### Without a reference genome
 
-**NOTE**: Not yet implemented
+**NOTE**: Implementing STACKS2 *without* a reference genome (2019-07-29)
 
 ### With a reference genome
 
