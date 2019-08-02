@@ -586,19 +586,19 @@ Here is a summary of informations that should in the Methods section of your pap
   - bwa <version> (eg: 0.7.17-r1188)
   - samtools <version> (eg: 1.8)
 
-- STACKS1 pipeline (Reference genome)
+- **STACKS1 pipeline (Reference genome)**
   - pstacks (params: -m 1)
   - cstacks (params: -n 1, -g)
   - sstacks (params: -g)
   - populations (params: )
 
-- STACKS2 pipeline (Reference genome)
+- **STACKS2 pipeline (Reference genome)**
   - gstacks (params: --max-clipped 0.1)
   - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
 
 ### Denovo
 
-- STACKS1 pipeline (Denovo)
+- **STACKS1 pipeline (Denovo)**
   - ustacks (params: -m 4, -M 3, -N 5)
   - cstacks (params: -n 1)
   - sstacks (params: na)
@@ -608,7 +608,7 @@ Here is a summary of informations that should in the Methods section of your pap
   - sstacks (params: na)
   - populations (params: -f p_value, --p_value_cutoff 0.1, -a 0.0, --lnl_lim -10, --vcf, --vcf_haplotypes)
 
-- STACKS2 pipeline (Denovo)
+- **STACKS2 pipeline (Denovo)**
   - ustacks (params: -m 4, -M 3, -N 5)
   - cstacks (params: -n 3)
   - sstacks (params: na)
