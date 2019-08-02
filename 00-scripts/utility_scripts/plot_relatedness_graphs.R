@@ -25,7 +25,7 @@ png(output_figure, width=600, height=900)
     hist(same[,3],
          main="Samples against themselves",
          col="grey",
-         breaks=seq(-1000, 1000, by=0.02),
+         breaks=seq(-1000, 1000, by=0.05),
          xlim=c(-1, 2))
 
     hist(diff[,3],
