@@ -568,51 +568,53 @@ duplicated, diverged, and high coverage SNPs separately.
   - Run population genomics analyses
   - Publish a paper!
 
-## What to write in the Methods section of your paper
+## For the Methods section of your paper
 
-Here is a summary of things to write in the Methods section of your paper:
+Here is a summary of informations that should in the Methods section of your paper.
 
 ### Sample preparation
 
-- Data prepared and SNPs VCF generated using [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.4)
-- Analyses done with STACKS <version> (eg: 1.48 or 2.4)
+- Data prepared, SNPs VCF generated and filtered using:
+  - [STACKS](http://catchenlab.life.illinois.edu/stacks/) <version> (eg: 1.48 or 2.4)
+  - [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.4)
 - Raw data cleaned with Cutadapt <version> (eg: 2.1)
-- Samples extracted with `process_radtags`(part of STACKS)
+- Samples extracted with `process_radtags` (part of STACKS)
 
-### With a reference genome
+### Reference genome
 
-- Cleaned and demultiplexed reads aligned to genome with bwa <version> (eg: 0.7.17-r1188)
-  and samtools <version> (eg: 1.8)
+- Cleaned and demultiplexed reads aligned to genome with:
+  - bwa <version> (eg: 0.7.17-r1188)
+  - samtools <version> (eg: 1.8)
 
-- STACKS1 pipeline
-  - pstacks (params: )
-  - cstacks (params: )
-  - sstacks (params: )
+- STACKS1 pipeline (Reference genome)
+  - pstacks (params: -m 1)
+  - cstacks (params: -n 1, -g)
+  - sstacks (params: -g)
   - populations (params: )
 
-- STACKS2 pipeline
-  - gstacks (params: )
-  - populations (params: )
+- STACKS2 pipeline (Reference genome)
+  - gstacks (params: --max-clipped 0.1)
+  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
 
-### Withoug a reference genome (denovo)
+### Denovo
 
-- STACKS1 pipeline
-  - ustacks (params: )
-  - cstacks (params: )
-  - sstacks (params: )
+- STACKS1 pipeline (Denovo)
+  - ustacks (params: -m 4, -M 3, -N 5)
+  - cstacks (params: -n 1)
+  - sstacks (params: na)
   - populations (params: )
-  - rxstacks (params: )
-  - cstacks (params: )
-  - sstacks (params: )
-  - populations (params: )
+  - rxstacks (params: --lnl_filter, --lnl_lim -10, --conf_filter, --conf_lim 0.75, --prune_haplo --model_type bounded, --bound_low 0, --bound_high 1)
+  - cstacks (params: -n 1)
+  - sstacks (params: na)
+  - populations (params: -f p_value, --p_value_cutoff 0.1, -a 0.0, --lnl_lim -10, --vcf, --vcf_haplotypes)
 
-- STACKS2 pipeline
-  - ustacks (params: )
-  - cstacks (params: )
-  - sstacks (params: )
-  - tsv2bam (params: )
-  - gstacks (params: )
-  - populations (params: )
+- STACKS2 pipeline (Denovo)
+  - ustacks (params: -m 4, -M 3, -N 5)
+  - cstacks (params: -n 3)
+  - sstacks (params: na)
+  - tsv2bam (params: na)
+  - gstacks (params: --max-clipped 0.1)
+  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
 
 ### Filtering
 
@@ -621,8 +623,8 @@ Here is a summary of things to write in the Methods section of your paper:
 - Decide missing data threshold and remove these samples with `06_filter_samples_with_list.py`
 - Look for sample relatedness and heterozygosity problems in new VCF with vcftools
 - Remove them with `06_filter_samples_with_list.py`
-- If needed, regroups
-- Filter this VCF with `05_filter_vcf_fast.py` (params: 4 60 0 3)
+- If needed, regroup populations into larger groups to prevent spurious filtering
+- Filter this new VCF with `05_filter_vcf_fast.py` (params: 4 60 0 3)
 - Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
   - `./00-scripts/08_extract_snp_duplication_info.py`
   - `./00-scripts/09_classify_snps.R`
