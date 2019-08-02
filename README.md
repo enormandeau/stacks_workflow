@@ -376,12 +376,26 @@ the bwa script.
 
 ### Without a reference genome
 
-**NOTE**: Implementing STACKS2 *without* a reference genome (2019-07-29)
+  - ustacks (params: )
+  - cstacks (params: )
+  - sstacks (params: )
+  - tsv2bam (params: )
+  - gstacks (params: )
+  - populations (params: )
+
+```bash
+./00-scripts/stacks2_ustacks.sh
+./00-scripts/stacks2_cstacks.sh
+./00-scripts/stacks2_sstacks.sh
+./00-scripts/stacks2_tsv2bam.sh
+./00-scripts/stacks2_gstacks.sh
+./00-scripts/stacks2_populations.sh
+```
 
 ### With a reference genome
 
 ```bash
-./00-scripts/stacks2_gstacks_reference.sh
+./00-scripts/stacks2_gstacks.sh
 ./00-scripts/stacks2_populations.sh
 ```
 ## Filtering the results
@@ -554,6 +568,67 @@ duplicated, diverged, and high coverage SNPs separately.
   - Run population genomics analyses
   - Publish a paper!
 
+## What to write in the Methods section of your paper
+
+Here is a summary of things to write in the Methods section of your paper:
+
+### Sample preparation
+
+- Data prepared and SNPs VCF generated using [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.4)
+- Analyses done with STACKS <version> (eg: 1.48 or 2.4)
+- Raw data cleaned with Cutadapt <version> (eg: 2.1)
+- Samples extracted with `process_radtags`(part of STACKS)
+
+### With a reference genome
+
+- Cleaned and demultiplexed reads aligned to genome with bwa <version> (eg: 0.7.17-r1188)
+  and samtools <version> (eg: 1.8)
+
+- STACKS1 pipeline
+  - pstacks (params: )
+  - cstacks (params: )
+  - sstacks (params: )
+  - populations (params: )
+
+- STACKS2 pipeline
+  - gstacks (params: )
+  - populations (params: )
+
+### Withoug a reference genome (denovo)
+
+- STACKS1 pipeline
+  - ustacks (params: )
+  - cstacks (params: )
+  - sstacks (params: )
+  - populations (params: )
+  - rxstacks (params: )
+  - cstacks (params: )
+  - sstacks (params: )
+  - populations (params: )
+
+- STACKS2 pipeline
+  - ustacks (params: )
+  - cstacks (params: )
+  - sstacks (params: )
+  - tsv2bam (params: )
+  - gstacks (params: )
+  - populations (params: )
+
+### Filtering
+
+- STACKS VCF filtered a first time with `05_filter_vcf_fast.py` (params: 4 60 2 3)
+- Create graphs to find samples with high missing data `05_filter_vcf.py` (params: -g)
+- Decide missing data threshold and remove these samples with `06_filter_samples_with_list.py`
+- Look for sample relatedness and heterozygosity problems in new VCF with vcftools
+- Remove them with `06_filter_samples_with_list.py`
+- If needed, regroups
+- Filter this VCF with `05_filter_vcf_fast.py` (params: 4 60 0 3)
+- Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
+  - `./00-scripts/08_extract_snp_duplication_info.py`
+  - `./00-scripts/09_classify_snps.R`
+  - `./00-scripts/10_split_vcf_in_categories.py`
+- Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
+
 ## TODO
 
 - Look for shared patterns of missing data caused by the sequencing
@@ -564,8 +639,6 @@ duplicated, diverged, and high coverage SNPs separately.
   - Look for structure
   - Impute within each differentiable group
   - Assign genotypes randomly using observed genotype frequencies
-
-- Build a standardized paragraph and table to report SNP generation and filtration parameters and remaining SNPs for each step.
 
 ### Running into problems
 
