@@ -476,9 +476,9 @@ a rare-allele homozygote.
 
 #### 2.2. Relatedness
 
-  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out bad_samples` on filtered VCF from 2.1
+  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out bad_samples` (use `--gzvcf` for comressed VCF files)
     to identify samples with potential errors / problems
-  - Plot relatedness graph with `./00-scripts/utility_scripts/plot_relatedness_graphs.R bad_samples.relatedness 0.5`
+  - Plot graph with `./00-scripts/utility_scripts/plot_relatedness_graphs.R bad_samples.relatedness 0.5`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
 #### 2.3. Heterozygosity
@@ -491,7 +491,7 @@ a rare-allele homozygote.
 ```bash
 awk '{print $5,$1,$1}' bad_samples.het | cut -d "_" -f 1,2 > bad_samples.het.data
 ```
-  - Plot average heterozygosity per sample with `./00-scripts/utility_scripts/plot_heterozygozity.R bad_samples.het.data`
+  - Plot graph with `./00-scripts/utility_scripts/plot_heterozygozity.R bad_samples.het.data`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
   - Extract samples below that threshold with:
 
