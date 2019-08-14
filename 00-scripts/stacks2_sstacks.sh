@@ -12,6 +12,6 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Number of CPUs
-NUM_CPU="4"
+NUM_CPU="16"
 
-sstacks -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/population_map.txt -p 4
+sstacks -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/population_map.txt -p 16

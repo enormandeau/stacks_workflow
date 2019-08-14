@@ -31,6 +31,8 @@
 *.tsv.gz
 *.ttf
 *.vcf
+*.xls
+*.xlsx
 */population_map*
 */sample_information*
 *BWA_temp*
