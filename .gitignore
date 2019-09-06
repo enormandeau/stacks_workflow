@@ -33,6 +33,7 @@
 *.vcf
 *.xls
 *.xlsx
+*.zip
 */population_map*
 */sample_information*
 *BWA_temp*
