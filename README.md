@@ -443,7 +443,7 @@ Here is the help from this script:
 ./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 0 2 filtered_m4_p70_S2
 
 # Graphs
-./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
+./00-scripts/05_filter_vcf.py -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
 **Note**: The last option filters on the **MAS**, which is akin to the MAF and
@@ -461,13 +461,13 @@ genotyped as a rare-allele homozygote.
 
 ```bash
 # Filtering (STACKS1)
-./00-scripts/05_filter_vcf -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
+./00-scripts/05_filter_vcf.py -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
 
 # Filtering (STACKS2)
-./00-scripts/05_filter_vcf -i 05-stacks/populations.snps.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
+./00-scripts/05_filter_vcf.py -i 05-stacks/populations.snps.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
 
 # Graphs
-./00-scripts/05_filter_vcf -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
+./00-scripts/05_filter_vcf.py -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
 **Note**: The `-S` option filters on the **MAS**, which is akin to the MAF and MAC.
@@ -632,6 +632,8 @@ Here is a summary of informations that should in the Methods section of your pap
 - Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
 
 ## TODO
+
+- Keep only unlinked SNPs using scaffolds and max_dist instead of only within loci
 
 - Look for shared patterns of missing data caused by the sequencing
   - `plink --vcf <INPUT_VCF> --cluster missing --out <OUTPUT_VCF> --mds-plot 4 --allow-extra-chr`

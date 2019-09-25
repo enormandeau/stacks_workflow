@@ -17,5 +17,5 @@ boxplot(data[,1] ~ data[,3],
         outcol="black",
         main="Boxplot of heterozygosity per samples regrouped by populations",
         xlab="Population",
-        ylab="Heterozygosity from vcftools")
+        ylab="Fis (higher values mean lower heterozygosity)")
 dev.off()
