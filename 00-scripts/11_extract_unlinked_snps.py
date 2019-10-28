@@ -89,6 +89,7 @@ def difference(s1, s2):
             diff_pair(s1, s2inversed)
             ]
 
+    print(min(differences))
     return min(differences)
 
 def keep_all_different(snps, diff_threshold, outfile):
@@ -142,12 +143,10 @@ if __name__ == '__main__':
             stacks_version = line.split('"')[1].split(" ")[1]
 
             if "v1" in stacks_version:
-                print(f"  STACKS version: {stacks_version}")
                 locus_separator = "_"
                 stacks_version = 1
 
             elif "v2" in stacks_version:
-                print(f"  STACKS version: {stacks_version}")
                 locus_separator = ":"
                 stacks_version = 2
 
