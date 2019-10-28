@@ -282,6 +282,17 @@ space taken by this sample (all the individual files PLUS the combined one).
 ./00-scripts/03_rename_samples.sh
 ```
 
+#### Assessing the quality of your reads
+
+After this step, you will want to run FastQC on the read sequences found in
+`04-all_samples`. A nice way of visualizing them is to use `multiqc` to create
+a unique report for all the reads. Pay special attention to the duplication
+level. You probably want to have high duplication in the 10-50X range, but if a
+high proportion of your data is in the 100X+ range, then maybe your library
+suffers from lower complexity than is ideal. This is up to you to judge given
+what you know of your species (genome), enzyme(s) used, and sequencing
+coverage.
+
 #### Deleting samples with too few reads
 
 If after splitting your samples you notice that some have too few reads, you
