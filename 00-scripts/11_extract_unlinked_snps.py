@@ -89,7 +89,6 @@ def difference(s1, s2):
             diff_pair(s1, s2inversed)
             ]
 
-    print(min(differences))
     return min(differences)
 
 def keep_all_different(snps, diff_threshold, outfile):
