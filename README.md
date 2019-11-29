@@ -565,7 +565,24 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
     - Minor Allele Sample (MAS): NumRare <= 2
 
 ### 6. Keep all unlinked SNPs
-  - Using the singleton SNPs, keep only unlinked SNPs using:
+
+It is often thought that SNPs appearing within the same STACKS locus are 100% linked because
+they are really close. However, this is often not the case. Frequently, you will find SNPs
+that are not linked within the same locus. In order to filter and keep as much genetic information
+as possible, while avoiding close by SNPs with high Linkage Disequilibrium, you can keep all the
+SNPs that we refer to as unlinked in all the loci.
+
+The procedure is as follows:
+  - Keep the first SNP remove all the others are linked (specifics below)
+  - If you have SNPs remaining, repeat
+
+Two SNPs are linked when sample genotypes are highly correlated for these two SNPs. Since RADseq
+data has 1) missing data and 2) mostly SNPs with low MAF values, we need to be careful when
+comparing sample genotypes between two SNPs. As a result, when comparing two SNPs, we only use
+samples that have no missing data in both SNPs and who possess the rare allele in at least one
+of the SNPs.
+
+Using the singleton SNPs, keep only unlinked SNPs using:
 
 ```bash
 00-scripts/11_extract_unlinked_snps.py
