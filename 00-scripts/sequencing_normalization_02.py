@@ -108,7 +108,7 @@ for chip in sorted(chips):
     data["Correction"] = data["Missing"].astype(float) / data["NumReads"]
 
     # add first volume
-    data["Volume"] = data["Correction"] / sum(np.nan_to_num(data["Correction"])) * totalVolume
+    data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
 
     # if volume smaller than 1 and missing > 0, correct volume to 1
     data.loc[(data["Volume"] < 0.5) & (data["Missing"] > 0), "Volume"] = 0.5
