@@ -84,12 +84,9 @@ def difference(s1, s2):
     s2 = [encode_genotype(x.split(":")[0]) for x in s2[9:]]
     s2inversed = invert_genotypes(s2)
 
-    differences = [
-            diff_pair(s1, s2),
-            diff_pair(s1, s2inversed)
-            ]
-
-    return min(differences)
+    minimum = min(diff_pair(s1, s2), diff_pair(s1, s2inversed))
+    print(minimum, flush=True)
+    return minimum
 
 def keep_all_different(snps, diff_threshold, outfile):
     """Keep only SNPs with different information)
@@ -137,23 +134,29 @@ if __name__ == '__main__':
 
     for line in infile:
 
-        # Get STACKS version
-        if line.startswith("##source="):
-            stacks_version = line.split('"')[1].split(" ")[1]
-
-            if "v1" in stacks_version:
-                print(f"  STACKS version: {stacks_version}")
-                locus_separator = "_"
-                stacks_version = 1
-
-            elif "v2" in stacks_version:
-                print(f"  STACKS version: {stacks_version}")
-                locus_separator = ":"
-                stacks_version = 2
-
-        # Write header to output file
+        # Treat header lines
         if line.startswith("#"):
 
+            # Get STACKS version
+            if line.startswith("##source="):
+                stacks_version = line.split('"')[1].split(" ")[1]
+
+                if "v1" in stacks_version:
+                    print(f"# STACKS version: {stacks_version}")
+                    locus_separator = "_"
+                    stacks_version = 1
+
+                elif "v2" in stacks_version:
+                    print(f"# STACKS version: {stacks_version}")
+                    locus_separator = ":"
+                    stacks_version = 2
+
+            elif line.startswith("#CHROM"):
+                samples = line.strip().split("\t")
+                populations = set([x.split("_")[0] for x in samples])
+                print(f"# VCF contains {len(samples)} samples in {len(populations)} populations")
+
+            # Write header to output file
             outfile.write(line)
             continue
 
