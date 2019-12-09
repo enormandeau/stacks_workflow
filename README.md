@@ -282,6 +282,17 @@ space taken by this sample (all the individual files PLUS the combined one).
 ./00-scripts/03_rename_samples.sh
 ```
 
+#### Assessing the quality of your reads
+
+After this step, you will want to run FastQC on the read sequences found in
+`04-all_samples`. A nice way of visualizing them is to use `multiqc` to create
+a unique report for all the reads. Pay special attention to the duplication
+level. You probably want to have high duplication in the 10-50X range, but if a
+high proportion of your data is in the 100X+ range, then maybe your library
+suffers from lower complexity than is ideal. This is up to you to judge given
+what you know of your species (genome), enzyme(s) used, and sequencing
+coverage.
+
 #### Deleting samples with too few reads
 
 If after splitting your samples you notice that some have too few reads, you
@@ -554,7 +565,24 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
     - Minor Allele Sample (MAS): NumRare <= 2
 
 ### 6. Keep all unlinked SNPs
-  - Using the singleton SNPs, keep only unlinked SNPs using:
+
+It is often thought that SNPs appearing within the same STACKS locus are 100% linked because
+they are really close. However, this is often not the case. Frequently, you will find SNPs
+that are not linked within the same locus. In order to filter and keep as much genetic information
+as possible, while avoiding close by SNPs with high Linkage Disequilibrium, you can keep all the
+SNPs that we refer to as unlinked in all the loci.
+
+The procedure is as follows:
+  - Keep the first SNP remove all the others are linked (specifics below)
+  - If you have SNPs remaining, repeat
+
+Two SNPs are linked when sample genotypes are highly correlated for these two SNPs. Since RADseq
+data has 1) missing data and 2) mostly SNPs with low MAF values, we need to be careful when
+comparing sample genotypes between two SNPs. As a result, when comparing two SNPs, we only use
+samples that have no missing data in both SNPs and who possess the rare allele in at least one
+of the SNPs.
+
+Using the singleton SNPs, keep only unlinked SNPs using:
 
 ```bash
 00-scripts/11_extract_unlinked_snps.py

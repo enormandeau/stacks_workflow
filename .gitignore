@@ -30,7 +30,7 @@
 *.tsv
 *.tsv.gz
 *.ttf
-*.vcf
+*.vcf.gz
 *.xls
 *.xlsx
 *.zip

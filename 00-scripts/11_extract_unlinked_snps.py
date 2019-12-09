@@ -74,7 +74,21 @@ def diff_pair(s1, s2):
         if genotypes[0][i] != genotypes[1][i]:
             differences += 1
 
-    return (differences / len(genotypes[0]))
+    try:
+        return (differences / len(genotypes[0]))
+    except:
+        # Special cases "LOW-MAF-AND-MISSING-DATA"
+        #
+        # either:
+        # 1. One SNP has an MAF of 0.0
+        # 2. Both SNPs have a low MAF and all the samples in the SNP without the
+        #    rare allele have missing data
+        #
+        # In both cases, return 0.0 to keep only the first SNP
+
+        print("Found special case LOW-MAF-AND-MISSING-DATA")
+        print(genotypes)
+        return 0.0
 
 def difference(s1, s2):
     """Return minimum expected difference
@@ -141,6 +155,7 @@ if __name__ == '__main__':
             if line.startswith("##source="):
                 stacks_version = line.split('"')[1].split(" ")[1]
 
+<<<<<<< HEAD
                 if "v1" in stacks_version:
                     print(f"# STACKS version: {stacks_version}")
                     locus_separator = "_"
@@ -150,6 +165,15 @@ if __name__ == '__main__':
                     print(f"# STACKS version: {stacks_version}")
                     locus_separator = ":"
                     stacks_version = 2
+=======
+            if "v1" in stacks_version:
+                locus_separator = "_"
+                stacks_version = 1
+
+            elif "v2" in stacks_version:
+                locus_separator = ":"
+                stacks_version = 2
+>>>>>>> a512e5373c7c615089d392ad7b12f62b21ee4d92
 
             elif line.startswith("#CHROM"):
                 samples = line.strip().split("\t")
