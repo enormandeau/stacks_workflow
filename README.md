@@ -661,8 +661,6 @@ Here is a summary of informations that should in the Methods section of your pap
 
 ## TODO
 
-- Keep only unlinked SNPs using scaffolds and max_dist instead of only within loci
-
 - Look for shared patterns of missing data caused by the sequencing
   - `plink --vcf <INPUT_VCF> --cluster missing --out <OUTPUT_VCF> --mds-plot 4 --allow-extra-chr`
   - Create figure using strata file to color samples
