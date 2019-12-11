@@ -155,7 +155,6 @@ if __name__ == '__main__':
             if line.startswith("##source="):
                 stacks_version = line.split('"')[1].split(" ")[1]
 
-<<<<<<< HEAD
                 if "v1" in stacks_version:
                     print(f"# STACKS version: {stacks_version}")
                     locus_separator = "_"
@@ -165,15 +164,6 @@ if __name__ == '__main__':
                     print(f"# STACKS version: {stacks_version}")
                     locus_separator = ":"
                     stacks_version = 2
-=======
-            if "v1" in stacks_version:
-                locus_separator = "_"
-                stacks_version = 1
-
-            elif "v2" in stacks_version:
-                locus_separator = ":"
-                stacks_version = 2
->>>>>>> a512e5373c7c615089d392ad7b12f62b21ee4d92
 
             elif line.startswith("#CHROM"):
                 samples = line.strip().split("\t")
