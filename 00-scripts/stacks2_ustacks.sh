@@ -13,7 +13,7 @@ POP_MAP="population_map.txt"
 
 # Number of CPUs
 # TODO use gnu parallel
-NUM_CPU="16"
+NUM_CPU="32"
 
 #id=1
 #ls -1 "$SAMPLE_FOLDER"/*.gz |

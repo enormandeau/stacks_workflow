@@ -12,6 +12,6 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Number of CPUs
-NUM_CPU="12"
+NUM_CPU="16"
 
-tsv2bam -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/population_map.txt -t 12
+tsv2bam -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/population_map.txt -t "$NUM_CPU"

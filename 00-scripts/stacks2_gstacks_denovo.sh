@@ -12,7 +12,7 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Number of CPUs
-NUM_CPU="1"
+NUM_CPU="12"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 cp $INFO_FILES_FOLDER/$POP_MAP $LOG_FOLDER/"$TIMESTAMP"_"$POP_MAP"
