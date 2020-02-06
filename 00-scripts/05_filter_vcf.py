@@ -89,6 +89,10 @@ class SNP(object):
         self.pos = int(self.line[1])
         self.locus_full = self.line[2]
         self.locus_id = self.locus_full.split(locus_separator)[0]
+
+        if self.locus_id == ".":
+            self.locus_id = self.line[0]
+
         self.ref = self.line[3]
         self.alt = self.line[4]
         self.qual = self.line[5]
