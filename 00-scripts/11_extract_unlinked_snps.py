@@ -177,6 +177,8 @@ if __name__ == '__main__':
         # Parse SNP data
         l = line.strip().split()
         locus = l[2].split(locus_separator)[0]
+        if locus == ".":
+            locus = l[0]
 
         # First SNP of VCF
         if snps == []:
