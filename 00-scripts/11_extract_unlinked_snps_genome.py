@@ -102,7 +102,6 @@ def difference(s1, s2):
     s2inversed = invert_genotypes(s2)
 
     minimum = min(diff_pair(s1, s2), diff_pair(s1, s2inversed))
-    print(minimum, flush=True)
     return minimum
 
 def distance(snp1, snp2):
