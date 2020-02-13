@@ -70,5 +70,8 @@ logfiles
 nohup.out
 population_map.txt
 sample_files*
+samples.het
+samples.relatedness
+samples.relatedness.outliers.csv
 samples_split/*
 temp.list.*
