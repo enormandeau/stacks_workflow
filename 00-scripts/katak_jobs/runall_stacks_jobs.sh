@@ -20,16 +20,16 @@ p4=$(sbatch "$DEPENDS"$p2 "$SCRIPTPATH"/sequencing_normalization_01_job.sh  | aw
 p5=$(sbatch "$DEPENDS"$p4 "$SCRIPTPATH"/sequencing_normalization_02_job.sh  | awk '{print $4}')
 
 # STACKS first half (before rxstacks)
-s1=$(sbatch "$DEPENDS"$p3 "$SCRIPTPATH"/stacks_1a_ustacks_job.sh            | awk '{print $4}')
-s2=$(sbatch "$DEPENDS"$s1 "$SCRIPTPATH"/stacks_2_cstacks_job.sh             | awk '{print $4}')
-s3=$(sbatch "$DEPENDS"$s2 "$SCRIPTPATH"/stacks_3_sstacks_job.sh             | awk '{print $4}')
-s4=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks_4_populations_job.sh         | awk '{print $4}')
+s1=$(sbatch "$DEPENDS"$p3 "$SCRIPTPATH"/stacks1_1a_ustacks_job.sh            | awk '{print $4}')
+s2=$(sbatch "$DEPENDS"$s1 "$SCRIPTPATH"/stacks1_2_cstacks_job.sh             | awk '{print $4}')
+s3=$(sbatch "$DEPENDS"$s2 "$SCRIPTPATH"/stacks1_3_sstacks_job.sh             | awk '{print $4}')
+s4=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks1_4_populations_job.sh         | awk '{print $4}')
 
 # STACKS second half (rxstacks)
-s5=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks_5b_rxstacks_job.sh           | awk '{print $4}')
-s6=$(sbatch "$DEPENDS"$s5 "$SCRIPTPATH"/stacks_6_cstacks_rx_job.sh          | awk '{print $4}')
-s7=$(sbatch "$DEPENDS"$s6 "$SCRIPTPATH"/stacks_7_sstacks_rx_job.sh          | awk '{print $4}')
-s8=$(sbatch "$DEPENDS"$s7 "$SCRIPTPATH"/stacks_8_populations_rx_job.sh      | awk '{print $4}')
+s5=$(sbatch "$DEPENDS"$s3 "$SCRIPTPATH"/stacks1_5b_rxstacks_job.sh           | awk '{print $4}')
+s6=$(sbatch "$DEPENDS"$s5 "$SCRIPTPATH"/stacks1_6_cstacks_rx_job.sh          | awk '{print $4}')
+s7=$(sbatch "$DEPENDS"$s6 "$SCRIPTPATH"/stacks1_7_sstacks_rx_job.sh          | awk '{print $4}')
+s8=$(sbatch "$DEPENDS"$s7 "$SCRIPTPATH"/stacks1_8_populations_rx_job.sh      | awk '{print $4}')
 
 # Confirm job sumbissions
 echo "All jobs submitted"

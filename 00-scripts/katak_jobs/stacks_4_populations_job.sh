@@ -14,4 +14,4 @@ module load stacks/1.48
 cd $SLURM_SUBMIT_DIR
 
 # Create population ouputs (vcf...)
-./00-scripts/stacks_4_populations.sh
+./00-scripts/stacks1_4_populations.sh

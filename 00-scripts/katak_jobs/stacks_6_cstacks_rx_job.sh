@@ -12,4 +12,4 @@
 cd $SLURM_SUBMIT_DIR
 
 # Create stacks catalog
-./00-scripts/stacks_6_cstacks_rx.sh
+./00-scripts/stacks1_6_cstacks_rx.sh

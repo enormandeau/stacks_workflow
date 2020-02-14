@@ -14,4 +14,4 @@ module load stacks/1.48
 cd $SLURM_SUBMIT_DIR
 
 # Create stacks catalog
-./00-scripts/stacks_2_cstacks.sh
+./00-scripts/stacks1_2_cstacks.sh

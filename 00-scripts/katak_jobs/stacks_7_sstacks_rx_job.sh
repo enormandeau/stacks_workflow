@@ -12,4 +12,4 @@
 cd $SLURM_SUBMIT_DIR
 
 # Assign genotypes to individuals for loci in catalog
-./00-scripts/stacks_7_sstacks_rx.sh
+./00-scripts/stacks1_7_sstacks_rx.sh

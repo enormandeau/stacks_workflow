@@ -14,4 +14,4 @@ module load stacks/1.48
 cd $SLURM_SUBMIT_DIR
 
 # Find stacks for each sample
-./00-scripts/stacks_1a_ustacks_parallel.sh
+./00-scripts/stacks1_1a_ustacks_parallel.sh

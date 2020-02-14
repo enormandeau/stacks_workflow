@@ -14,4 +14,4 @@ module load stacks/1.48
 cd $SLURM_SUBMIT_DIR
 
 # Assign genotypes to individuals for loci in catalog
-./00-scripts/stacks_3_sstacks.sh
+./00-scripts/stacks1_3_sstacks.sh

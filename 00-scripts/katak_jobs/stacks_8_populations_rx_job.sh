@@ -12,4 +12,4 @@
 cd $SLURM_SUBMIT_DIR
 
 # Create population ouputs (vcf...)
-./00-scripts/stacks_8_populations_rx.sh
+./00-scripts/stacks1_8_populations_rx.sh

@@ -12,4 +12,4 @@
 cd $SLURM_SUBMIT_DIR
 
 # Error correction
-./00-scripts/stacks_5b_rxstacks.sh
+./00-scripts/stacks1_5b_rxstacks.sh

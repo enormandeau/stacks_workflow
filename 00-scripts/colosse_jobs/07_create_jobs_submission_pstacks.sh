@@ -2,7 +2,7 @@
 
 # Global variables
 NUMSAMPLES=8
-TEMPLATE=./00-scripts/colosse_jobs/stacks_1b_pstacks_template_job.sh
+TEMPLATE=./00-scripts/colosse_jobs/stacks1_1b_pstacks_template_job.sh
 
 # Cleanup first
 rm temp.pstacks.list.* 2>/dev/null
