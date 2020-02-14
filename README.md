@@ -338,9 +338,9 @@ data, remove the `-O 0,0` and `-E 2,2` options.
 
 ## Edit script parameters
 
-You will need to go through the scripts named `stacks_*` in the `00-scripts
-folder` and edit the options to suit your needs. Depending on your project
-(eg: *de novo* vs reference), you will not use all the scripts.
+You will need to go through the scripts named `stacks1_*` or `stacks2_*` in the
+`00-scripts folder` and edit the options to suit your needs. Depending on your
+project (eg: *de novo* vs reference), you will not use all the scripts.
 
 **Warning!** This step is very important. Choosing appropriate parameters for
 your study is crucial in order to generate meaningful and optimal results. Read
@@ -352,32 +352,32 @@ options.
 ### Without a reference genome
 
 ```bash
-./00-scripts/stacks_1a_ustacks.sh
-./00-scripts/stacks_2_cstacks.sh
-./00-scripts/stacks_3_sstacks.sh
-./00-scripts/stacks_4_populations.sh
-./00-scripts/stacks_5a_rxstacks_likelihoods.sh
+./00-scripts/stacks1_1a_ustacks.sh
+./00-scripts/stacks1_2_cstacks.sh
+./00-scripts/stacks1_3_sstacks.sh
+./00-scripts/stacks1_4_populations.sh
+./00-scripts/stacks1_5a_rxstacks_likelihoods.sh
 ```
 
 Visualize the distribution of log likelihoods in
 `rxstacks_log_likelihoods.png` and choose a cutoff to use in the next script
-(`./00-scripts/stacks_5b_rxstacks.sh`). Then launch:
+(`./00-scripts/stacks1_5b_rxstacks.sh`). Then launch:
 
 ```bash
-./00-scripts/stacks_5b_rxstacks.sh
-./00-scripts/stacks_6_cstacks_rx.sh
-./00-scripts/stacks_7_sstacks_rx.sh
-./00-scripts/stacks_8_populations_rx.sh
+./00-scripts/stacks1_5b_rxstacks.sh
+./00-scripts/stacks1_6_cstacks_rx.sh
+./00-scripts/stacks1_7_sstacks_rx.sh
+./00-scripts/stacks1_8_populations_rx.sh
 ```
 
 ### With a reference genome
 
 ```bash
 ./00-scripts/bwa_mem_align_reads.sh
-./00-scripts/stacks_1a_pstacks.sh
-./00-scripts/stacks_2_cstacks.sh
-./00-scripts/stacks_3_sstacks.sh
-./00-scripts/stacks_4_populations.sh
+./00-scripts/stacks1_1a_pstacks.sh
+./00-scripts/stacks1_2_cstacks.sh
+./00-scripts/stacks1_3_sstacks.sh
+./00-scripts/stacks1_4_populations.sh
 ```
 
 **NOTE**: To align Illumina data, remove the `-O 0,0` and `-E 2,2` options from
