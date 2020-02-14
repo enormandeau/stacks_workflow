@@ -76,3 +76,4 @@ samples.relatedness
 samples.relatedness.outliers.csv
 samples_split/*
 temp.list.*
+vcf_impute/*
