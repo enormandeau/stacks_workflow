@@ -1,4 +1,4 @@
-# Stacks Workflow
+# STACKS Workflow
 
 RADseq workflow using [STACKS](http://creskolab.uoregon.edu/stacks/)
 
@@ -15,27 +15,13 @@ arising from, out of or in connection with the software or the use or other
 dealings in the software.
 
 stack_workflow was developed with the needs of our research group in mind. We
-make no claim about its usefulness to other groups or in other contexts, but we
-know it has been and continues to be useful to other groups.
-
-**NOTE**: Works with STACKS2 when using a reference genome (2019-06-17)
-**NOTE**: Implementing STACKS2 *without* a reference genome (2019-07-29)
+make no claim about its usefulness to other groups or in other contexts, but it
+has been and continues to be useful to other groups.
 
 ## Licence
 
 stacks_workflow is licensed under the gpl3 license. See the LICENCE file
 provided with stacks_workflow for more details.
-
-## Downloading
-
-[click here to
-download](https://github.com/enormandeau/stacks_workflow/archive/master.zip)
-the current version of the stacks workflow. alternatively, you can clone this
-repository with:
-
-```bash
-git clone https://github.com/enormandeau/stacks_workflow
-```
 
 ## About STACKS
 
@@ -46,28 +32,23 @@ without a reference genome.
 Before starting to use STACKS, you should read the official STACKS papers
 found at the bottom of the official STACKS page (see link above).
 
-# Stacks workflow tutorial
+# STACKS workflow tutorial
 
 The goal of this workflow is to simplify the use of the STACKS pipeline and
-make the analyses more reproducible. Special care is taken to have a
-standardized SNP filtering procedure to produce quality SNPs at the end.
+make the analyses more reproducible. One of the major contributions is the
+standardized SNP filtering procedure used to produce quality SNPs.
 
 ## Overview of the steps
 
-1. Install stacks_workflow and STACKS (or STACKS2 if you have a reference genome) with its dependencies
+1. Install stacks_workflow and STACKS 1 or 2 with its dependencies
 1. Download your raw data files (illumina lanes or ion proton chips)
 1. Clean the reads and assess their quality
 1. Extract individual data with process_radtags
 1. Rename the sample files
 1. Align reads to a reference genome (optional)
-1. Stacks pipeline
-1. Filtering the results
-
-## Where to find this manual
-
-To read an HTML version of this file online, go to the
-[stacks_workflow project page](https://github.com/enormandeau/stacks_workflow)
-on GitHub.
+1. Use the STACKS pipeline
+1. Filter the results
+1. Impute missing data if needed
 
 ## Installing stacks_workflow
 
@@ -75,52 +56,46 @@ on GitHub.
 
 It is recommended to download the most recent version of stacks_workflow **for
 each new project**, as opposed to re-using the same directory for multiple
-projects and naming the outputs differently.  This is **central to
+projects and naming the outputs differently. This is **central to
 `stack_workflow`'s philosophy** of reproducibility.
 
 **One stacks_workflow folder should contain only one analysis**
 
 Deviate from this at your own risk ;)
 
-#### From the terminal
+[click here to
+download](https://github.com/enormandeau/stacks_workflow/archive/master.zip)
 
-```bash
-cd ~/desktop
-wget https://github.com/enormandeau/stacks_workflow/archive/master.zip
-unzip master.zip
-```
-
-#### Using git
+#### Download using git
 
 If `git` is installed on your computer, you can run the following command
-instead to get a complete `stacks_workflow` git repository.
+instead to get a complete stacks_workflow git repository.
 
 ```bash
 git clone https://github.com/enormandeau/stacks_workflow
 ```
 
-For the rest of the project, use the extracted or cloned folder as your working
-directory. **All the commands in this manual are launched from that directory.**
+For the rest of the project, use the extracted stacks_workflow archive or
+cloned folder as your working directory. It may be a good idea to rename it by
+adding information about your project, the analysis date...
+
+**All the commands in this manual are launched from that directory.**
 
 ### Download and install [STACKS](http://creskolab.uoregon.edu/stacks/)
 
-**NOTE**: `stacks_workflow` works with STACKS2 when using a reference genome (2019-06-17)
-**NOTE**: Implementing STACKS2 *without* a reference genome (2019-07-29)
-
-Follow the instructions on the website to install and test the installation with:
+Follow the instructions on the STACKS website to install and test the installation with:
 
 ```bash
-populations
+populations --version
 which populations
 ```
 
-This will output the help of the populations program and where it is located
-on your computer. You will also be able to confirm the version number of
-your STACKS installation.
+This will output the version of the populations program and where it is located
+on your computer.
 
 ### Dependencies
 
-- STACKS (latest 1.x or 2.x is recommended)
+- STACKS (latest 1.x or 2.x version is recommended)
 - Linux or MacOS
 - gnu parallel
 - cutadapt
@@ -133,7 +108,6 @@ your STACKS installation.
   - xlutil (optional, inter-chip normalization)
 - admixture (missing data imputation)
 - plink (missing data imputation)
-
 
 #### Installing Cutadapt
 
@@ -185,8 +159,8 @@ not put a number, the script will use only one CPU.
 
 ### Scan the cutadapt logs
 
-The cutadapt log files can be found in the `10-log_files` folder. Scan them
-to confirm that cutadapt has done an appropriate job.
+The cutadapt log files can be found in the `10-log_files` folder. Scan them or
+look at the file sizes to confirm that cutadapt has done an appropriate job.
 
 There may be differences in adapters and filter parameters to use with data
 produced by Illumina and Ion Proton sequencers.
@@ -213,18 +187,19 @@ lane of each sample.
 - The second column contains the barcode sequence of each sample.
 - The third column contains the population name of each sample.
 - The fourth column contains the name of the sample (do not include the
-population name or abbreviation in the sample name).
+  population name or abbreviation in the sample name).
 - Neither the population name nor the sample name should contain underscores `_`
-- The fifth column contains a number identifying the populations.
+- The fifth column contains a number or string identifying the populations. you
+  can use the same as in the the the third column.
 - The sixth column contains the plate well identifier.
 
-Columns three and four are treated as text, so they can contain either text or
-numbers. Other columns can be present after the fifth one and will be ignored.
-However, it is crucial that the six first columns respect the format in the
-example file exactly. Be especially careful not to include errors in this file,
-for example by mixing lower and capital letters in population or sample names
-(e.g.: Pop01 and pop01), since these will be treated as two different
-populations.
+Columns three, four, and five are treated as text, so they can contain either
+text or numbers. Other columns can be present after the fifth one and will be
+ignored.  However, it is crucial that the six first columns respect the format
+in the example file exactly. Be especially careful not to include errors in
+this file, for example by mixing lower and capital letters in population or
+sample names (e.g.: Pop01 and pop01), since these will be treated as two
+different populations.
 
 ### Launch process_radtags
 
@@ -276,12 +251,13 @@ Where:
 
 If you are using Ion Proton data, the effect of the trimLength parameter used
 above on the number of usable SNPs you recover at the end may not be trivial.
-As a rule of thumb, a trimmed length of 80bp should produce good results. We
-suggest you run tests with a smaller group of samples to determine what length
-to trim to. For highly species with high genetic variability, short loci will
-be more likely to contain SNPs and long loci to contain more than one SNP,
-which is not always informative. Thus, trimming to shorter lengths may be more
-interesting for highly variant species or when coverage is limiting.
+As a rule of thumb, a trimmed length of 80bp should produce good results in
+most projects. We suggest you run tests with a smaller group of samples to
+determine what length to trim to. For highly species with high genetic
+variability, short loci will be more likely to contain SNPs and long loci to
+contain more than one SNP, which is not always informative. Thus, trimming to
+shorter lengths may be more interesting for highly variant species or when
+coverage is limiting.
 
 ### Rename samples
 
@@ -314,18 +290,19 @@ coverage.
 
 If after splitting your samples you notice that some have too few reads, you
 can remove these from the `04-all_samples` folder. The threshold for the
-minimum number of reads will depend on your project, including on the number of
-expected cut sites generated by your library preparation protocol. Keep samples
-with low coverages if you are not sure what threshold to use at this point. We
-will filter the VCF for this later and will then have better information.
+minimum number of reads will depend on your project, including the number of
+expected cut sites generated by your library preparation protocol and the
+number of reads per sample. Keep samples with low coverages if you are not sure
+what threshold to use at this point. We will filter the VCF for this later and
+will then have better information then.
 
 #### Align reads to a reference genome (optional)
 
-#### Install `bwa <http://bio-bwa.sourceforge.net>`
+##### Install `bwa <http://bio-bwa.sourceforge.net>`
 
-#### Download reference genome to the `08-genome`
+##### Download reference genome to the `08-genome`
 
-#### Index the reference genome
+##### Index the reference genome
 
 ```bash
 bwa index -p 08-genome/genome ./08-genome/<genome reference>
@@ -335,7 +312,7 @@ bwa index -p 08-genome/genome ./08-genome/<genome reference>
 
 Different bwa alignment scripts are available in 00-scripts.
 
-**NOTE**: The two scripts for single-end reads (ie: not the one with `PE` in
+**IMPORTANT NOTE**: The two scripts for single-end reads (ie: not the one with `PE` in
 its name) have options that are specific for IonProton data. To align Illumina
 data, remove the `-O 0,0` and `-E 2,2` options.
 
@@ -438,7 +415,10 @@ with gzip as well as any further steps in order to save disk space.
 
 #### Fast filter
 
-This new filter script (2019-07-08) is recommended over the older, slower one.
+This new filter script (2019-07-08) is recommended instead of the older, slower
+one.
+
+Reasons to use the faster filter script:
 
 - Less parameters
 - Faster (5-10X depending on dataset)
@@ -465,10 +445,10 @@ Here is the help from this script:
 #     The filtering is done purely on a SNP basis. Loci are not taken into account.
 
 # Filtering (STACKS1)
-./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 0 2 filtered_m4_p70_S2
+./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 0 2 filtered_m4_p70_S2.vcf
 
 # Filtering (STACKS2)
-./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 0 2 filtered_m4_p70_S2
+./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 0 2 filtered_m4_p70_S2.vcf
 
 # Graphs
 ./00-scripts/05_filter_vcf.py -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
@@ -478,14 +458,16 @@ Here is the help from this script:
 MAC. It keeps only SNPs where the rare allele has been found in *at least* a
 certain number of samples. For example: `2` means that at least two samples
 have the rare alleles. For RADseq data, the MAS is better than the MAF and MAC,
-which are boosted by genotyping errors where one heterozygote sample is
-genotyped as a rare-allele homozygote.
+which are artificially boosted by genotyping errors, where one heterozygote
+sample is genotyped as a rare-allele homozygote. Given the nature of RADseq,
+these errors are quite frequent.
 
 #### Slow filter
 
-- More parameters but they are not needed with this new filtering procedure
+- More parameters but they are not needed with this new filtering procedure.
+  They are a relic of an "early era" in the exploration of quality filtering.
 - Slower (5-10X depending on dataset)
-- Keeping only for backward compatibility
+- Keeping only for backward compatibility and to generate graphs
 
 ```bash
 # Filtering (STACKS1)
@@ -498,12 +480,13 @@ genotyped as a rare-allele homozygote.
 ./00-scripts/05_filter_vcf.py -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
 ```
 
-**Note**: The `-S` option filters on the **MAS**, which is akin to the MAF and MAC.
-It keeps only SNPs where the rare allele has been found in *at least* a certain
-number of samples. For example: `-S 2` means that at least two samples have the
-rare alleles. For Radseq data, the MAS is better than the MAF and MAC, which are
-often boosted by genotyping errors where one heterozygote sample is genotyped as
-a rare-allele homozygote.
+**Note**: The last option filters on the **MAS**, which is akin to the MAF and
+MAC. It keeps only SNPs where the rare allele has been found in *at least* a
+certain number of samples. For example: `2` means that at least two samples
+have the rare alleles. For RADseq data, the MAS is better than the MAF and MAC,
+which are artificially boosted by genotyping errors, where one heterozygote
+sample is genotyped as a rare-allele homozygote. Given the nature of RADseq,
+these errors are quite frequent.
 
 ### 2. Identify bad samples in lightly filtered VCF
 
@@ -605,78 +588,7 @@ Using the singleton SNPs, keep only unlinked SNPs using:
 00-scripts/11_extract_unlinked_snps.py
 ```
 
-### 7. Onwards!
-
-You should now have a very clean SNP dataset for your project. Analyze singletons,
-duplicated, diverged, and high coverage SNPs separately.
-
-  - Run population genomics analyses
-  - Publish a paper!
-
-## For the Methods section of your paper
-
-Here is a summary of informations that should in the Methods section of your paper.
-
-### Sample preparation
-
-- Data prepared, SNPs VCF generated and filtered using:
-  - [STACKS](http://catchenlab.life.illinois.edu/stacks/) <version> (eg: 1.48 or 2.4)
-  - [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.4)
-- Raw data cleaned with Cutadapt <version> (eg: 2.1)
-- Samples extracted with `process_radtags` (part of STACKS)
-
-### Reference genome
-
-- Cleaned and demultiplexed reads aligned to genome with:
-  - bwa <version> (eg: 0.7.17-r1188)
-  - samtools <version> (eg: 1.8)
-
-- **STACKS1 pipeline (Reference genome)**
-  - pstacks (params: -m 1)
-  - cstacks (params: -n 1, -g)
-  - sstacks (params: -g)
-  - populations (params: )
-
-- **STACKS2 pipeline (Reference genome)**
-  - gstacks (params: --max-clipped 0.1)
-  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
-
-### Denovo
-
-- **STACKS1 pipeline (Denovo)**
-  - ustacks (params: -m 4, -M 3, -N 5)
-  - cstacks (params: -n 1)
-  - sstacks (params: na)
-  - populations (params: )
-  - rxstacks (params: --lnl_filter, --lnl_lim -10, --conf_filter, --conf_lim 0.75, --prune_haplo --model_type bounded, --bound_low 0, --bound_high 1)
-  - cstacks (params: -n 1)
-  - sstacks (params: na)
-  - populations (params: -f p_value, --p_value_cutoff 0.1, -a 0.0, --lnl_lim -10, --vcf, --vcf_haplotypes)
-
-- **STACKS2 pipeline (Denovo)**
-  - ustacks (params: -m 4, -M 3, -N 5)
-  - cstacks (params: -n 3)
-  - sstacks (params: na)
-  - tsv2bam (params: na)
-  - gstacks (params: --max-clipped 0.1)
-  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
-
-### Filtering
-
-- STACKS VCF filtered a first time with `05_filter_vcf_fast.py` (params: 4 60 2 3)
-- Create graphs to find samples with high missing data `05_filter_vcf.py` (params: -g)
-- Decide missing data threshold and remove these samples with `06_filter_samples_with_list.py`
-- Look for sample relatedness and heterozygosity problems in new VCF with vcftools
-- Remove them with `06_filter_samples_with_list.py`
-- If needed, regroup populations into larger groups to prevent spurious filtering
-- Filter this new VCF with `05_filter_vcf_fast.py` (params: 4 60 0 3)
-- Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
-  - `./00-scripts/08_extract_snp_duplication_info.py`
-  - `./00-scripts/09_classify_snps.R`
-  - `./00-scripts/10_split_vcf_in_categories.py`
-- Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
-
-### Missing data imputation
+### 7. Missing data imputation
 
 Impute missing data in a VCF using Admixture ancestry relationships
 
@@ -765,12 +677,78 @@ awk '{gsub(/^[A-Z]*_/,""); print}' 02_vcf/input.vcf |
 ```bash
 ./01_scripts/05_impute_missing.sh input_vcf input_admixture output_vcf
 ```
-## TODO
+### 8. Onwards!
 
-- Revise README
-  - Simplify
-    - Remove installation sections for different software (cutadapt...)
-  - Test code
+You should now have a very clean SNP dataset for your project. Analyze singletons,
+duplicated, diverged, and high coverage SNPs separately.
+
+  - Run population genomics analyses
+  - Publish a paper!
+
+## For the Methods section of your paper
+
+Here is a summary of informations that should in the Methods section of your paper.
+
+### Sample preparation
+
+- Data prepared, SNPs VCF generated and filtered using:
+  - [STACKS](http://catchenlab.life.illinois.edu/stacks/) <version> (eg: 1.48 or 2.5)
+  - [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.5)
+- Raw data cleaned with Cutadapt <version> (eg: 2.1)
+- Samples extracted with `process_radtags` (part of STACKS)
+
+### Reference genome
+
+- Cleaned and demultiplexed reads aligned to genome with:
+  - bwa <version> (eg: 0.7.17-r1188)
+  - samtools <version> (eg: 1.8)
+
+- **STACKS1 pipeline (Reference genome)**
+  - pstacks (params: -m 1)
+  - cstacks (params: -n 1, -g)
+  - sstacks (params: -g)
+  - populations (params: )
+
+- **STACKS2 pipeline (Reference genome)**
+  - gstacks (params: --max-clipped 0.1)
+  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
+
+### Denovo
+
+- **STACKS1 pipeline (Denovo)**
+  - ustacks (params: -m 4, -M 3, -N 5)
+  - cstacks (params: -n 1)
+  - sstacks (params: na)
+  - populations (params: )
+  - rxstacks (params: --lnl_filter, --lnl_lim -10, --conf_filter, --conf_lim 0.75, --prune_haplo --model_type bounded, --bound_low 0, --bound_high 1)
+  - cstacks (params: -n 1)
+  - sstacks (params: na)
+  - populations (params: -f p_value, --p_value_cutoff 0.1, -a 0.0, --lnl_lim -10, --vcf, --vcf_haplotypes)
+
+- **STACKS2 pipeline (Denovo)**
+  - ustacks (params: -m 4, -M 3, -N 5)
+  - cstacks (params: -n 3)
+  - sstacks (params: na)
+  - tsv2bam (params: na)
+  - gstacks (params: --max-clipped 0.1)
+  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
+
+### Filtering
+
+- STACKS VCF filtered a first time with `05_filter_vcf_fast.py` (params: 4 60 2 3)
+- Create graphs to find samples with high missing data `05_filter_vcf.py` (params: -g)
+- Decide missing data threshold and remove these samples with `06_filter_samples_with_list.py`
+- Look for sample relatedness and heterozygosity problems in new VCF with vcftools
+- Remove them with `06_filter_samples_with_list.py`
+- If needed, regroup populations into larger groups to prevent spurious filtering
+- Filter this new VCF with `05_filter_vcf_fast.py` (params: 4 60 0 3)
+- Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
+  - `./00-scripts/08_extract_snp_duplication_info.py`
+  - `./00-scripts/09_classify_snps.R`
+  - `./00-scripts/10_split_vcf_in_categories.py`
+- Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
+
+## TODO
 
 - Look for shared patterns of missing data caused by the sequencing
   - `plink --vcf <INPUT_VCF> --cluster missing --out <OUTPUT_VCF> --mds-plot 4 --allow-extra-chr`
