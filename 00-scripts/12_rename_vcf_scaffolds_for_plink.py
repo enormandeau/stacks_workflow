@@ -26,7 +26,7 @@ except:
 
 # Read VCF and modify scaffold names
 seen_scaffold = set()
-scaffold_number = 0
+scaffold_number = 1000
 with myopen(input_vcf) as infile:
     with myopen(output_vcf, "wt") as outfile:
 
