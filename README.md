@@ -615,7 +615,7 @@ of software will not accept missing data.
   of related samples. You can use the relatedness part of the filtration steps
   listed above to check that.
 - **Moderate**: Identity by missing data, where patterns of similarity among
-  sampels is the result of non-random missing data within groups of samples, is
+  samples is the result of non-random missing data within groups of samples, is
   problematic for admixture. You need to assert that this pattern is not present
   in your dataset (using plink) or remove the loci succeptible to this from
   your VCF before using vcf_impute. See TODO section at the end of this document
@@ -624,52 +624,50 @@ of software will not accept missing data.
   genetic gratient or a pattern of isolation by distance. Using a k-nearest
   neighbors approach may be better in this case.
 - **IMPORTANT**: Large genomic features, like big inversions, can create
-  false groups in admixture but that group structure would only apply to
+  strong groupings in admixture but that group structure would only apply to
   small parts of the genome, or even none for complex cases. Here again, using
   a k-nearest approach may be better.
 
 #### Advantages of the ancestry-based missing data imputation
 
-- Major: Avoid using overfitted models using information about other loci to impute
-  genotypes in the current locus.
+- Major: Avoid using overfitted models that depend on information from other
+  loci to impute genotypes in the current locus. It is our belief that, in most
+  RADseq studies, apparent correlation among loci exists because of random
+  rather than biological reasons. For that reason, using information from loci
+  that seem correlated are not a good choice to infer missing genotypes. This
+  is because the genotypes at these other pseudo-correlated loci have a low
+  probability to be informative for the imputation of the missing genotype.
+  It is already proposed to explore this idea using real and simulated datasets
+  in order to confirm this belief.
 
 #### Running the imputation
 
 1. Format contig/scaffold names
 
-In order to use admixture, contig/scaffold names must be integers. Here is some
-example code to help you rename them in your VCF file.
+In order to use admixture, contig/scaffold names (refered to as chromosomes in
+admixture) must be integers.
 
 ```bash
-# Replace a portion of text in the contig/scaffold name
-# Note that in the second awk command, there are two tabulations, one after the
-# `\.1` and one between the double quotes `"	"`. You can type tabulations in
-# the terminal by pressing `Ctrl-V TAB`.
-
-awk '{gsub(/^[A-Z]*_/,""); print}' 02_vcf/input.vcf |
-    awk '{gsub(/\.1	/, "	"); print}' > 02_vcf/input_renamed.vcf
+./00-scripts/12_rename_vcf_scaffolds_for_plink.py input.vcf input_renamed.vcf
 ```
 
-2. Use plink to create bed
+2. Use plink to create bed file
 
 ```bash
-#plink --vcf input_renamed.vcf --make-bed --out input_renamed --allow-extra-chr
-./01_scripts/01_create_bedfile.sh
+plink --vcf input_renamed.vcf --make-bed --out input_renamed --allow-extra-chr
 ```
 
 3. Use admixture and find good K value
 
 ```bash
 # Run admixture
-#seq 10 | parallel admixture input_renamed.bed {} -j4 --cv -C 0.1 \> 11_admixture/input_renamed.{}.log
-#mv *.P *.Q 11_admixture/
-#grep -h CV 11_admixture/*.log | sort -V
-./01_scripts/02_admixture.sh
+seq 10 | parallel admixture input_renamed.bed {} -j4 --cv -C 0.1 \> 11_admixture/input_renamed.{}.log
+mv *.P *.Q 11_admixture/
+grep -h CV 11_admixture/*.log | sort -V
 
 # Choose K value
-# grep -h CV 11_admixture/*.log | sort -V
-# grep -h CV 11_admixture/*.log | sort -V | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -n
-./01_scripts/03_explore_best_k_value.sh
+ grep -h CV 11_admixture/*.log | sort -V
+ grep -h CV 11_admixture/*.log | sort -V | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -n
 ```
 
 4. Impute missing genotypes using sample related groups
@@ -679,15 +677,15 @@ awk '{gsub(/^[A-Z]*_/,""); print}' 02_vcf/input.vcf |
 ```
 ### 8. Onwards!
 
-You should now have a very clean SNP dataset for your project. Analyze singletons,
-duplicated, diverged, and high coverage SNPs separately.
+You should now have a very clean SNP dataset for your project. Analyze only
+singletons or analyse the different categories of SNPs separately.
 
   - Run population genomics analyses
   - Publish a paper!
 
 ## For the Methods section of your paper
 
-Here is a summary of informations that should in the Methods section of your paper.
+Here is a summary of informations that should go in the Methods section of your paper.
 
 ### Sample preparation
 
