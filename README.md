@@ -118,6 +118,23 @@ This will output the help of the populations program and where it is located
 on your computer. You will also be able to confirm the version number of
 your STACKS installation.
 
+### Dependencies
+
+- STACKS (latest 1.x or 2.x is recommended)
+- Linux or MacOS
+- gnu parallel
+- cutadapt
+- Python3 and packages:
+  - matplotlib
+  - numpy
+  - pandas
+  - PIL (optional, inter-chip normalization)
+  - xlrd (optional, inter-chip normalization)
+  - xlutil (optional, inter-chip normalization)
+- admixture (missing data imputation)
+- plink (missing data imputation)
+
+
 #### Installing Cutadapt
 
 There are different ways you can install Cutadapt. If you have `pip` (a Python
@@ -659,16 +676,105 @@ Here is a summary of informations that should in the Methods section of your pap
   - `./00-scripts/10_split_vcf_in_categories.py`
 - Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
 
+### Missing data imputation
+
+Impute missing data in a VCF using Admixture ancestry relationships
+
+/!\ **WARNING** /!\  
+
+Whatever the method of choice, missing data imputation cannot impute **CORRECT
+GENOTYPES**, only **GENOTYPES THAT MINIMIZE BIASES** in a dataset. You should
+use imputation **ONLY** when you really need it. For example when some piece
+of software will not accept missing data.
+
+#### Limitations of the ancestry-based missing data imputation
+
+- Light: Admixture is slow with big datasets. You can thin down your SNP dataset
+  if this becomes problematic (see admixture manual).
+- Light: Using all the SNPs versus using only neutral SNPs with admixture can
+  change the ancestry estimation of samples. For example, the CV could vary
+  differently as a function of K.
+- Light: Even using cross-validation in Admixture (CV values), the best K value is
+  chosen by the user and so the groups and ancestry will vary. This will have
+  an impact on the imputation but the approach should be fairly robust around K
+  values that make biological sense.
+- **Moderate**: Admixture requires that the individuals be unrelated. Some level
+  of half-sibs or full sibs is probably OK, but watch out for datasets with a lot
+  of related samples. You can use the relatedness part of the filtration steps
+  listed above to check that.
+- **Moderate**: Identity by missing data, where patterns of similarity among
+  sampels is the result of non-random missing data within groups of samples, is
+  problematic for admixture. You need to assert that this pattern is not present
+  in your dataset (using plink) or remove the loci succeptible to this from
+  your VCF before using vcf_impute. See TODO section at the end of this document
+  for a (non-fully implemented) way to check that using plink.
+- **IMPORTANT**: Admixture is a poor choice for cases of samples that with a continuous
+  genetic gratient or a pattern of isolation by distance. Using a k-nearest
+  neighbors approach may be better in this case.
+- **IMPORTANT**: Large genomic features, like big inversions, can create
+  false groups in admixture but that group structure would only apply to
+  small parts of the genome, or even none for complex cases. Here again, using
+  a k-nearest approach may be better.
+
+#### Advantages of the ancestry-based missing data imputation
+
+- Major: Avoid using overfitted models using information about other loci to impute
+  genotypes in the current locus.
+
+#### Running the imputation
+
+1. Format contig/scaffold names
+
+In order to use admixture, contig/scaffold names must be integers. Here is some
+example code to help you rename them in your VCF file.
+
+```bash
+# Replace a portion of text in the contig/scaffold name
+# Note that in the second awk command, there are two tabulations, one after the
+# `\.1` and one between the double quotes `"	"`. You can type tabulations in
+# the terminal by pressing `Ctrl-V TAB`.
+
+awk '{gsub(/^[A-Z]*_/,""); print}' 02_vcf/input.vcf |
+    awk '{gsub(/\.1	/, "	"); print}' > 02_vcf/input_renamed.vcf
+```
+
+2. Use plink to create bed
+
+```bash
+#plink --vcf input_renamed.vcf --make-bed --out input_renamed --allow-extra-chr
+./01_scripts/01_create_bedfile.sh
+```
+
+3. Use admixture and find good K value
+
+```bash
+# Run admixture
+#seq 10 | parallel admixture input_renamed.bed {} -j4 --cv -C 0.1 \> 11_admixture/input_renamed.{}.log
+#mv *.P *.Q 11_admixture/
+#grep -h CV 11_admixture/*.log | sort -V
+./01_scripts/02_admixture.sh
+
+# Choose K value
+# grep -h CV 11_admixture/*.log | sort -V
+# grep -h CV 11_admixture/*.log | sort -V | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -n
+./01_scripts/03_explore_best_k_value.sh
+```
+
+4. Impute missing genotypes using sample related groups
+
+```bash
+./01_scripts/05_impute_missing.sh input_vcf input_admixture output_vcf
+```
 ## TODO
+
+- Revise README
+  - Simplify
+    - Remove installation sections for different software (cutadapt...)
+  - Test code
 
 - Look for shared patterns of missing data caused by the sequencing
   - `plink --vcf <INPUT_VCF> --cluster missing --out <OUTPUT_VCF> --mds-plot 4 --allow-extra-chr`
   - Create figure using strata file to color samples
-
-- Missing data imputation
-  - Look for structure
-  - Impute within each differentiable group
-  - Assign genotypes randomly using observed genotype frequencies
 
 ### Running into problems
 
