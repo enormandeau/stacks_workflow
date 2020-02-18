@@ -5,8 +5,11 @@
 *.bai
 *.bak
 *.bam
+*.bed
+*.bim
 *.bwt
 *.doctree
+*.fam
 *.fas
 *.fasta
 *.fastq.gz*
@@ -17,6 +20,7 @@
 *.jpg
 *.js
 *.log
+*.nosex
 *.numseq
 *.odt
 *.pac
