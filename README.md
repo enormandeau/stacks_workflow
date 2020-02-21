@@ -661,7 +661,7 @@ plink --vcf input_renamed.vcf --make-bed --out input_renamed --allow-extra-chr
 
 ```bash
 # Run admixture
-seq 10 | parallel admixture input_renamed.bed {} -j4 --cv -C 0.1 \> 11-admixture/input_renamed.{}.log
+seq 10 | parallel admixture input_renamed.bed {} -j 4 --cv -C 0.1 \> 11-admixture/input_renamed.{}.log
 mv *.P *.Q 11-admixture/
 
 # Choose K value

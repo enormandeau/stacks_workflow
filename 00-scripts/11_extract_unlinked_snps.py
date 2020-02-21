@@ -165,7 +165,7 @@ if __name__ == '__main__':
                     stacks_version = 2
 
             elif line.startswith("#CHROM"):
-                samples = line.strip().split("\t")
+                samples = line.strip().split("\t")[9:]
                 populations = set([x.split("_")[0] for x in samples])
                 print(f"# VCF contains {len(samples)} samples in {len(populations)} populations")
 
