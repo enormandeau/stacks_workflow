@@ -661,7 +661,7 @@ plink --vcf input_renamed.vcf --make-bed --out input_renamed --allow-extra-chr
 
 ```bash
 # Run admixture
-seq 10 | parallel admixture input_renamed.bed {} -j4 --cv -C 0.1 \> 11-admixture/input_renamed.{}.log
+seq 10 | parallel admixture input_renamed.bed {} -j 4 --cv -C 0.1 \> 11-admixture/input_renamed.{}.log
 mv *.P *.Q 11-admixture/
 
 # Choose K value
@@ -672,7 +672,7 @@ grep -h CV 11-admixture/*.log | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -
 4. Impute missing genotypes using sample related groups
 
 ```bash
-./01_scripts/13_impute_missing.sh input_vcf input_admixture output_vcf
+./00-scripts/13_impute_missing.py input_vcf input_admixture output_vcf
 ```
 ### 8. Onwards!
 
@@ -747,6 +747,7 @@ Here is a summary of informations that should go in the Methods section of your 
 
 ## TODO
 
+- Impute compressed VCFs
 - Look for shared patterns of missing data caused by the sequencing
   - `plink --vcf <INPUT_VCF> --cluster missing --out <OUTPUT_VCF> --mds-plot 4 --allow-extra-chr`
   - Create figure using strata file to color samples
