@@ -418,11 +418,13 @@ def test_min_depth(locus, pop_info, min_depth):
             if sample.genotype in ["0/1", "1/0"]:
                 if sample.depth < min_depth:
                     sample.genotype = "./."
+                    sample.info_full = "./." + sample.info_full[3:]
                     Flags.min_depth_count += 1
 
             elif sample.genotype in ["0/0", "1/1"]:
                 if sample.depth < min_depth:
                     sample.genotype = "./."
+                    sample.info_full = "./." + sample.info_full[3:]
                     Flags.min_depth_count += 1
 
 def get_depth_data(graph_dict, locus, pop_info):
