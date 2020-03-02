@@ -531,12 +531,15 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
   - This will create an unfiltered VCF where the bad samples are removed
 
 ### 3. If needed, make bigger groups of samples
-#### TODO Permit the use of a population map with fast filter script to avoid this
   - If your dataset contains many small populations, regroup samples into fewer and bigger
     groups to avoid strict and overly stochastic filtering
   - STACKS1: Make a copy of `05-stacks/batch_1.vcf` or `06-stacks_rx/batch_1.vcf`
   - STACKS1: Make a copy of `05-stacks/populations.snps.vcf`
   - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
+  - Use bcftools to do that:
+    - `bcftools reheader -s names.txt input.vcf > renamed.vcf`
+    - The `names.txt` file contains current sample names in the first column and desired sample names in a second column.
+    - The columns are separated by a tabulation.
 
 ### 4. Filter new VCF
 
