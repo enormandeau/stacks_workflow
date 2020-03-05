@@ -7,9 +7,17 @@ Usage:
 
 # Modules
 import numpy
+import gzip
 import sys
 
 # Functions
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
+
 def compute_group_weights(data, memberships):
     """For each admixture group, compute the sum of the weights for each allele
     """
@@ -66,8 +74,8 @@ memberships = open(input_admixture).read().strip().split("\n")
 memberships = [[float(y) for y in x.split(" ")] for x in memberships]
 
 # Process VCF
-with open(input_vcf) as infile:
-    with open(output_vcf, "wt") as outfile:
+with myopen(input_vcf) as infile:
+    with myopen(output_vcf, "wt") as outfile:
 
         for line in infile:
             if line.startswith("#"):
