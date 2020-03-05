@@ -8,6 +8,7 @@
 *.bed
 *.bim
 *.bwt
+*.categorized
 *.doctree
 *.fam
 *.fas
@@ -16,6 +17,7 @@
 *.fq
 *.fq.gz
 *.ids
+*.info
 *.infos
 *.jpg
 *.js
