@@ -77,6 +77,9 @@ memberships = [[float(y) for y in x.split(" ")] for x in memberships]
 with myopen(input_vcf) as infile:
     with myopen(output_vcf, "wt") as outfile:
 
+        num_genotypes = 0
+        num_imputed = 0
+
         for line in infile:
             if line.startswith("#"):
                 outfile.write(line)
@@ -90,11 +93,16 @@ with myopen(input_vcf) as infile:
             group_weights = compute_group_weights(data, memberships)
 
             for sample, genotype in enumerate(data):
+                num_genotypes += 1
 
                 if genotype.startswith("./."):
                     new_data.append(impute(memberships[sample], group_weights))
+                    num_imputed += 1
 
                 else:
                     new_data.append(genotype)
 
             outfile.write("\t".join(info + new_data) + "\n")
+
+percent = 100 * num_imputed / num_genotypes
+print(f"Imputed {percent:.2f}% of the genotypes ({num_imputed}/{num_genotypes})")
