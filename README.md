@@ -731,7 +731,7 @@ Here is a summary of informations that should go in the Methods section of your 
   - sstacks (params: na)
   - tsv2bam (params: na)
   - gstacks (params: --max-clipped 0.1)
-  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
+  - populations (params: -p 2, -r 0.6, --fasta-loci, --vcf)
 
 ### Filtering
 
