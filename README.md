@@ -623,12 +623,12 @@ of software will not accept missing data.
   in your dataset (using plink) or remove the loci succeptible to this from
   your VCF before using vcf_impute. See TODO section at the end of this document
   for a (non-fully implemented) way to check that using plink.
-- **IMPORTANT**: Admixture is a poor choice for cases of samples that with a continuous
-  genetic gratient or a pattern of isolation by distance. Using a k-nearest
+- **IMPORTANT**: Admixture is a poor choice for cases of samples with a continuous
+  genetic gradient or a pattern of isolation by distance. Using a k-nearest
   neighbors approach may be better in this case.
 - **IMPORTANT**: Large genomic features, like big inversions, can create
   strong groupings in admixture but that group structure would only apply to
-  small parts of the genome, or even none for complex cases. Here again, using
+  local parts of the genome, or even none for complex cases. Here again, using
   a k-nearest approach may be better.
 
 #### Advantages of the ancestry-based missing data imputation
