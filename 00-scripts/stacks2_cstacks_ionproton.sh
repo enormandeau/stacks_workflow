@@ -12,6 +12,6 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Number of CPUs
-NUM_CPU="32"
+NUM_CPU="12"
 
 cstacks -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/population_map.txt -n 1 -p "$NUM_CPU" --disable-gapped
