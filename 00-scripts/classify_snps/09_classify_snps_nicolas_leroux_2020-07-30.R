@@ -9,7 +9,7 @@ output_file = paste0(input_file, ".categorized")
 data = read.table(input_file, header=T, stringsAsFactors=F)
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom")]
 
-singleton =     "#00000011" # black
+singleton =     "#00000005" # black
 duplicated =    "#FF000022" # red
 diverged =      "#0000FF22" # blue
 lowconf =       "#DD00AA22" # purple
@@ -25,9 +25,9 @@ d$Color[d$MedRatio > 0.7] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
 d$Color[d$Fis < -0.1] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
-d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
-d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
+#d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
+#d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
+#d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.8] = diverged
@@ -36,7 +36,7 @@ d$Color[d$Fis < -0.8] = diverged
 #d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.8] = lowconf
+d$Color[d$Fis > 0.95] = lowconf
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 60 | d$MedCovHet > 60] = highcov
