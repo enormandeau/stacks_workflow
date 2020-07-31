@@ -1,3 +1,5 @@
+*.P
+*.Q
 *.Rhistory
 *.amb
 *.ann
