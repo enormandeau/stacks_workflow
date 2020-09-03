@@ -14,6 +14,6 @@ row.names(data) <- 1:nrow(data)
 Qmatrix <- as.matrix(data)
 
 # Plot figure
-png(output_file, width=1800, height=400)
-    compoplot(Qmatrix)
+png(output_file, width=1800, height=300)
+    compoplot(Qmatrix, legend=F, main=input_file)
 dev.off()

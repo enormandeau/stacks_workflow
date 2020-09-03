@@ -667,6 +667,7 @@ plink --vcf input_renamed.vcf --make-bed --out input_renamed --allow-extra-chr
 
 ```bash
 # Run admixture
+# Adjust the `seq 10` value for your dataset.
 seq 10 | parallel admixture input_renamed.bed {} -j4 --cv -C 0.1 \> 11-admixture/input_renamed.{}.log
 mv *.P *.Q 11-admixture/
 
@@ -677,10 +678,10 @@ grep -h CV 11-admixture/*.log | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -
 # Look at (crude) graphs of group memberships to assist in choosing the K value
 # The .png files will be found in the 11-admixture folder
 # Requires the adegenet package
-parallel ./plot_admixture.R ::: 11-admixture/*.Q
+parallel ./00-scripts/utility_scripts/plot_admixture.R ::: 11-admixture/*.Q
 
 # If you have imagemagick installed, you can combine all images
-convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -gravity center -append all_admixture_figures.png
+convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -trim -border 0x4 -gravity center -append all_admixture_figures.png
 ```
 
 4. Impute missing genotypes using sample related groups
