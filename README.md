@@ -103,11 +103,14 @@ on your computer.
   - matplotlib
   - numpy
   - pandas
-  - PIL (optional, inter-chip normalization)
-  - xlrd (optional, inter-chip normalization)
-  - xlutil (optional, inter-chip normalization)
-- admixture (missing data imputation)
-- plink (missing data imputation)
+  - PIL (optional: inter-chip normalization)
+  - xlrd (optional: inter-chip normalization)
+  - xlutil (optional: inter-chip normalization)
+- admixture (optional: missing data imputation)
+- plink (optional: missing data imputation)
+- R
+  - adegenet (optional: for admixture plots)
+- Imagemagick (optional: join admixture plots)
 
 #### Installing Cutadapt
 
@@ -673,7 +676,11 @@ grep -h CV 11-admixture/*.log | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -
 
 # Look at (crude) graphs of group memberships to assist in choosing the K value
 # The .png files will be found in the 11-admixture folder
+# Requires the adegenet package
 parallel ./plot_admixture.R ::: 11-admixture/*.Q
+
+# If you have imagemagick installed, you can combine all images
+convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -gravity center -append all_admixture_figures.png
 ```
 
 4. Impute missing genotypes using sample related groups
