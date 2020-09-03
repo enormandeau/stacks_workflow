@@ -55,7 +55,6 @@ def impute(sample_membership, group_weights):
 
     # Weighted random sampling of two independent allels
     genotype = "/".join(sorted(numpy.random.choice(["0", "1"], 2, p=weights)))
-    #print(str(weights[0])[:4], genotype, sep=" ")
 
     # Return composed genotype and associated info
     return genotype + ":0:0,0:0:0,0,0"
