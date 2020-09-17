@@ -676,6 +676,7 @@ grep -h CV 11-admixture/*.log | sort -V  # May not work on MacOs or BSD descende
 grep -h CV 11-admixture/*.log | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -n
 
 # Look at (crude) graphs of group memberships to assist in choosing the K value
+# (Thanks to Nicolas Leroux for the original plot R script!)
 # The .png files will be found in the 11-admixture folder
 # Requires the adegenet package
 parallel ./00-scripts/utility_scripts/plot_admixture.R ::: 11-admixture/*.Q
