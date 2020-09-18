@@ -83,7 +83,8 @@ adding information about your project, the analysis date...
 
 ### Download and install [STACKS](http://creskolab.uoregon.edu/stacks/)
 
-Follow the instructions on the STACKS website to install and test the installation with:
+Follow the instructions on the STACKS website to install and test the
+installation with:
 
 ```bash
 populations --version
@@ -107,7 +108,7 @@ on your computer.
   - xlrd (optional: inter-chip normalization)
   - xlutil (optional: inter-chip normalization)
 - admixture (optional: missing data imputation)
-- plink (optional: missing data imputation)
+- plink (optional: missing data imputation and exploration)
 - R
   - adegenet (optional: for admixture plots)
 - Imagemagick (optional: join admixture plots)
@@ -315,9 +316,9 @@ bwa index -p 08-genome/genome ./08-genome/<genome reference>
 
 Different bwa alignment scripts are available in 00-scripts.
 
-**IMPORTANT NOTE**: The two scripts for single-end reads (ie: not the one with `PE` in
-its name) have options that are specific for IonProton data. To align Illumina
-data, remove the `-O 0,0` and `-E 2,2` options.
+**IMPORTANT NOTE**: The two scripts for single-end reads (ie: not the one with
+`PE` in its name) have options that are specific for IonProton data. To align
+Illumina data, remove the `-O 0,0` and `-E 2,2` options.
 
 ```bash
 00-scripts/bwa_mem_align_reads.sh
@@ -534,14 +535,17 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
   - This will create an unfiltered VCF where the bad samples are removed
 
 ### 3. If needed, make bigger groups of samples
-  - If your dataset contains many small populations, regroup samples into fewer and bigger
-    groups to avoid strict and overly stochastic filtering
-  - STACKS1: Make a copy of `05-stacks/batch_1.vcf` or `06-stacks_rx/batch_1.vcf`
+  - If your dataset contains many small populations, regroup samples into fewer
+    and bigger groups to avoid strict and overly stochastic filtering
+  - STACKS1: Make a copy of `05-stacks/batch_1.vcf` or
+    `06-stacks_rx/batch_1.vcf`
   - STACKS1: Make a copy of `05-stacks/populations.snps.vcf`
-  - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the underscore `_` becomes a dash `-`
+  - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the
+    underscore `_` becomes a dash `-`
   - Use bcftools to do that:
     - `bcftools reheader -s names.txt input.vcf > renamed.vcf`
-    - The `names.txt` file contains current sample names in the first column and desired sample names in a second column.
+    - The `names.txt` file contains current sample names in the first column
+and desired sample names in a second column.
     - The columns are separated by a tabulation.
 
 ### 4. Filter new VCF
@@ -561,8 +565,10 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
 
 ```
 
-  - The following criteria are used by in `09_classify_snps.R`. Modify these in the script to fit your data.
-    - Low Confidence: Extreme allele ratios (< 0.4 and > 0.6) with least one rare homozygote
+  - The following criteria are used by in `09_classify_snps.R`. Modify these in
+      the script to fit your data.
+    - Low Confidence: Extreme allele ratios (< 0.4 and > 0.6) with least one
+    rare homozygote
     - Duplicated: Fis < -0.1
     - Duplicated: Fis + MedRatio / 3 < 0.11
     - Diverged: Fis < -0.6
@@ -572,21 +578,22 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
 
 ### 6. Keep all unlinked SNPs
 
-It is often thought that SNPs appearing within the same STACKS locus are 100% linked because
-they are really close. However, this is often not the case. Frequently, you will find SNPs
-that are not linked within the same locus. In order to filter and keep as much genetic information
-as possible, while avoiding close by SNPs with high Linkage Disequilibrium, you can keep all the
+It is often thought that SNPs appearing within the same STACKS locus are 100%
+linked because they are really close. However, this is often not the case.
+Frequently, you will find SNPs that are not linked within the same locus. In
+order to filter and keep as much genetic information as possible, while
+avoiding close by SNPs with high Linkage Disequilibrium, you can keep all the
 SNPs that we refer to as unlinked in all the loci.
 
 The procedure is as follows:
   - Keep the first SNP remove all the others are linked (specifics below)
   - If you have SNPs remaining, repeat
 
-Two SNPs are linked when sample genotypes are highly correlated for these two SNPs. Since RADseq
-data has 1) missing data and 2) mostly SNPs with low MAF values, we need to be careful when
-comparing sample genotypes between two SNPs. As a result, when comparing two SNPs, we only use
-samples that have no missing data in both SNPs and who possess the rare allele in at least one
-of the SNPs.
+Two SNPs are linked when sample genotypes are highly correlated for these two
+SNPs. Since RADseq data has 1) missing data and 2) mostly SNPs with low MAF
+values, we need to be careful when comparing sample genotypes between two SNPs.
+As a result, when comparing two SNPs, we only use samples that have no missing
+data in both SNPs and who possess the rare allele in at least one of the SNPs.
 
 Using the singleton SNPs, keep only unlinked SNPs using:
 
@@ -624,8 +631,7 @@ of software will not accept missing data.
   samples is the result of non-random missing data within groups of samples, is
   problematic for admixture. You need to assert that this pattern is not present
   in your dataset (using plink) or remove the loci succeptible to this from
-  your VCF before using vcf_impute. See TODO section at the end of this document
-  for a (non-fully implemented) way to check that using plink.
+  your VCF before using vcf_impute.
 - **IMPORTANT**: Admixture is a poor choice for cases of samples with a continuous
   genetic gradient or a pattern of isolation by distance. Using a k-nearest
   neighbors approach may be better in this case.
@@ -646,6 +652,7 @@ of software will not accept missing data.
   It is already proposed to explore this idea using real and simulated datasets
   in order to confirm this belief.
 
+
 #### Running the imputation
 
 1. Format contig/scaffold names
@@ -655,6 +662,12 @@ admixture) must be integers.
 
 ```bash
 ./00-scripts/12_rename_vcf_scaffolds_for_plink.py input.vcf input_renamed.vcf
+```
+And check for patterns of identify by missing.
+
+```bash
+./00-scripts/utility_scripts/plink_cluster_missing.sh
+./00-scripts/utility_scripts/plink_cluster_missing_figure.R input_renamed.mds
 ```
 
 2. Use plink to create bed file

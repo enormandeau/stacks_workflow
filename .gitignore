@@ -73,6 +73,7 @@ bad_samples*
 batch_1.*
 filtered_*
 gsnaptemp.list.*
+input_renamed.*
 lane_info.txt
 log_*
 logfiles
