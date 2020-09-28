@@ -24,8 +24,8 @@ d$Color[d$MedRatio < 0.30] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.70] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.4] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.00] = duplicated
+d$Color[d$Fis < -0.25] = duplicated
+d$Color[d$Fis + d$MedRatio < 0.2] = duplicated
 d$Color[d$Fis + d$MedRatio * 3 < 0.58] = duplicated
 d$Color[d$Fis + d$MedRatio * 8 < 2.1] = duplicated
 
