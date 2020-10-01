@@ -12,7 +12,7 @@ d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom
 singleton =     "#00000011" # black
 duplicated =    "#FF000022" # red
 diverged =      "#0000FF22" # blue
-lowconf =       "#DD00AA22" # purple
+lowconf =       "#DD00BB22" # purple
 highcov =       "#00AA0022" # green
 mas =           "#FFAA0022" # orange
 
