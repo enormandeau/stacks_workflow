@@ -69,6 +69,7 @@
 99-project_info/*
 GSNAP*.sh
 PSTACKS*.sh
+all_samples_for_alignment.txt
 bad_samples*
 batch_1.*
 filtered_*
