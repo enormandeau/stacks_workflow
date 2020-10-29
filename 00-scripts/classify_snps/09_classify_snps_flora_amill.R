@@ -24,7 +24,7 @@ d$Color[d$MedRatio < 0.30] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.70] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.15] = duplicated
+d$Color[d$Fis < -0.20] = duplicated
 d$Color[d$Fis + d$MedRatio < 0.25] = duplicated
 #d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
 #d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
@@ -36,7 +36,7 @@ d$Color[d$Fis + d$MedRatio * 2 < -0.10] = diverged
 #d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.75] = lowconf
+d$Color[d$Fis > 0.80] = lowconf
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 60 | d$MedCovHet > 60] = highcov
