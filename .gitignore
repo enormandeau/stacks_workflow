@@ -28,6 +28,7 @@
 *.numseq
 *.odt
 *.pac
+*.pdf
 *.pickle
 *.png
 *.sa
