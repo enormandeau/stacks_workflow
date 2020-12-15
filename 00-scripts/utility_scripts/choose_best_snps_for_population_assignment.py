@@ -118,10 +118,8 @@ with myopen(input_vcf, "rt") as infile:
 
 afd_sums = []
 for p in pairwise_afds:
-    # Squared
-    #best_afds[p] = sorted(pairwise_afds[p], reverse=True)[:214]
-    # Not squared
-    #best_afds[p] = sorted(pairwise_afds[p], reverse=True)[:127]
+    # Squared: 214 SNPs for a total of 500
+    # Not squared: 127 SNPs for a total of 500
     best_afds[p] = sorted(pairwise_afds[p], reverse=True)[:num_snps]
 
     afd_sums.append((sum([x[0] for x in best_afds[p]]), p))
