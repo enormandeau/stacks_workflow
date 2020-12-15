@@ -2,11 +2,11 @@
 """Get allele frequencies for each population and each SNP
 
 Usage:
-    <program> input_vcf output_file method num_snps
+    <program> input_vcf output_file exponent num_snps
 
 Where:
     input_vcf: input vcf (can be gzipped compressed)
-    method: either "normal" or "squared"
+    exponent: x**e, where e is above zero (preferably above 0.5 and below or at 2.0)
     num_snps: number of SNPs for the least differentiated group
     output_vcf: output vcf (can be gzipped compressed)
 
@@ -29,14 +29,14 @@ def myopen(_file, mode="rt"):
 # Parsing user input
 try:
     input_vcf = sys.argv[1]
-    method = sys.argv[2]
+    exponent = float(sys.argv[2])
     num_snps = int(sys.argv[3])
     output_file = sys.argv[4]
 except:
     print(__doc__)
     sys.exit(1)
 
-assert method in ["normal", "squared"], 'Method must be either "normal" or "squared"'
+assert 0 < exponent, "exponent: x**e, where e is above zero (preferably above 0.5 and below or at 2.0)"
 assert 1 < num_snps, "num_snps must be an integer greater than 1"
 
 # Read VCF
@@ -46,68 +46,63 @@ best_afds = defaultdict(list)
 best_snps = set()
 
 with myopen(input_vcf, "rt") as infile:
-    with myopen(output_file, "wt") as outfile:
-        for line in infile:
+#with myopen(output_file, "wt") as outfile:
+    for line in infile:
 
-            # Skip comment lines
-            if line.startswith("##"):
-                continue
+        # Skip comment lines
+        if line.startswith("##"):
+            continue
 
-            l = line.strip().split("\t")
+        l = line.strip().split("\t")
 
-            # Gather sample names and population info
-            if line.startswith("#CHROM"):
-                l[0] = l[0].replace("#", "")
-                samples = l[9: ]
+        # Gather sample names and population info
+        if line.startswith("#CHROM"):
+            l[0] = l[0].replace("#", "")
+            samples = l[9: ]
 
-                for s in list(enumerate(l))[9: ]:
-                    ID = s[0]
-                    pop = s[1].split("_")[0]
+            for s in list(enumerate(l))[9: ]:
+                ID = s[0]
+                pop = s[1].split("_")[0]
 
-                    pop_ids[pop].append(ID)
+                pop_ids[pop].append(ID)
 
-                pops = sorted(pop_ids)
-                snp = l[:3]
-                infos = snp + pops + ["AFD"]
+            pops = sorted(pop_ids)
+            snp = l[:3]
+            infos = snp + pops + ["AFD"]
 
-                for i, p1 in enumerate(pops):
-                    for p2 in pops[i+1:]:
-                        infos.append(p1 + "-" + p2)
+            for i, p1 in enumerate(pops):
+                for p2 in pops[i+1:]:
+                    infos.append(p1 + "-" + p2)
 
-                outfile.write("\t".join(infos) + "\n")
+            #outfile.write("\t".join(infos) + "\n")
 
-            # Extract allele frequencies per SNP
-            else:
-                snp = l[:3]
-                afs = []
-                afs_dict = {}
-                for p in pops:
+        # Extract allele frequencies per SNP
+        else:
+            snp = l[:3]
+            afs = []
+            afs_dict = {}
+            for p in pops:
 
-                    alleles = "".join([l[i].split(":")[0].replace("/", "")
-                        for i in pop_ids[p] if not l[i].startswith("./.")])
+                alleles = "".join([l[i].split(":")[0].replace("/", "")
+                    for i in pop_ids[p] if not l[i].startswith("./.")])
 
-                    af = alleles.count("1") / len(alleles)
-                    afs.append(af)
-                    afs_dict[p] = af
+                af = alleles.count("1") / len(alleles)
+                afs.append(af)
+                afs_dict[p] = af
 
-                # Add allele frequency range
-                afd = max(afs) - min(afs)
-                infos = snp + [f"{a:.4f}" for a in afs] + [f"{afd:.4f}"]
+            # Add allele frequency range
+            afd = max(afs) - min(afs)
+            infos = snp + [f"{a:.4f}" for a in afs] + [f"{afd:.4f}"]
 
-                # Get allele differences (do second loop)
-                for i, p1 in enumerate(pops):
-                    for p2 in pops[i+1:]:
-                        diff = abs(afs_dict[p1] - afs_dict[p2])
-                        infos.append(f"{diff:.4f}")
+            # Get allele differences (do second loop)
+            for i, p1 in enumerate(pops):
+                for p2 in pops[i+1:]:
+                    diff = abs(afs_dict[p1] - afs_dict[p2])
+                    infos.append(f"{diff:.4f}")
+                    pair = p1 + "-" + p2
+                    pairwise_afds[pair].append((diff**exponent, snp))
 
-                        pair = p1 + "-" + p2
-
-                        if method == "normal":
-                            pairwise_afds[pair].append((diff, snp))
-                        elif method == "squared":
-                            pairwise_afds[pair].append((diff**2, snp))
-
-                outfile.write("\t".join(infos) + "\n")
+            #outfile.write("\t".join(infos) + "\n")
 
 # Select best SNPs
 # This process is iterative. You choose number of SNPs for the group with the
