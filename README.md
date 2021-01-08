@@ -1,10 +1,14 @@
-# STACKS Workflow
+# STACKS Workflow2
 
-RADseq workflow using [STACKS](http://creskolab.uoregon.edu/stacks/)
+RADseq workflow using [STACKS2](http://creskolab.uoregon.edu/stacks/)
 
 Developed by [Eric Normandeau](https://github.com/enormandeau) in
 [Louis Bernatchez](http://www.bio.ulaval.ca/louisbernatchez/presentation.htm)'s
 laboratory.
+
+**NOTE!**: stacks_workflow no longer supports STACKS1. For the latest version
+of stack_workflow that does, find `v2.5.2_last_version_supporting_STACKS1` in
+the releases on the stack_workflow GitHub page.
 
 **Warning!**: this software is provided "as is", without warranty of any kind,
 express or implied, including but not limited to the warranties of
@@ -30,17 +34,19 @@ for restriction-site associated DNA sequencing (RADseq) studies, with and
 without a reference genome.
 
 Before starting to use STACKS, you should read the official STACKS papers
-found at the bottom of the official STACKS page (see link above).
+found at the bottom of the official STACKS page (see link above) as well
+as the official STACKS documentation found at the link above.
 
 # STACKS workflow tutorial
 
 The goal of this workflow is to simplify the use of the STACKS pipeline and
 make the analyses more reproducible. One of the major contributions is the
-standardized SNP filtering procedure used to produce quality SNPs.
+standardized SNP filtering procedures used to produce high quality SNP
+datasets.
 
 ## Overview of the steps
 
-1. Install stacks_workflow and STACKS 1 or 2 with its dependencies
+1. Install stacks_workflow and STACKS2
 1. Download your raw data files (illumina lanes or ion proton chips)
 1. Clean the reads and assess their quality
 1. Extract individual data with process_radtags
@@ -66,7 +72,7 @@ Deviate from this at your own risk ;)
 [click here to
 download](https://github.com/enormandeau/stacks_workflow/archive/master.zip)
 
-#### Download using git
+#### Clone stacks_workflow with git
 
 If `git` is installed on your computer, you can run the following command
 instead to get a complete stacks_workflow git repository.
@@ -77,7 +83,8 @@ git clone https://github.com/enormandeau/stacks_workflow
 
 For the rest of the project, use the extracted stacks_workflow archive or
 cloned folder as your working directory. It may be a good idea to rename it by
-adding information about your project, the analysis date...
+adding information about your project, the date or any other useful
+information.
 
 **All the commands in this manual are launched from that directory.**
 
@@ -91,39 +98,25 @@ populations --version
 which populations
 ```
 
-This will output the version of the populations program and where it is located
-on your computer.
+This will output the version of the populations program (part of STACKS) and
+where it is located on your computer.
 
 ### Dependencies
 
-- STACKS (latest 1.x or 2.x version is recommended)
+- STACKS (latest 2.x version is recommended)
 - Linux or MacOS
 - gnu parallel
-- cutadapt
-- Python3 and packages:
+- cutadapt (install with conda or pip)
+- Python3 and packages (best managed with conda):
   - matplotlib
   - numpy
   - pandas
-  - PIL (optional: inter-chip normalization)
-  - xlrd (optional: inter-chip normalization)
-  - xlutil (optional: inter-chip normalization)
-- admixture (optional: missing data imputation)
-- plink (optional: missing data imputation and exploration)
+  - PIL, xlrd, and xlutil (optional: for inter-chip normalization)
+- admixture (optional: for missing data imputation)
+- plink (optional: for missing data imputation and exploration)
 - R
   - adegenet (optional: for admixture plots)
-- Imagemagick (optional: join admixture plots)
-
-#### Installing Cutadapt
-
-There are different ways you can install Cutadapt. If you have `pip` (a Python
-package manager) installed, you can use the following command:
-
-```bash
-sudo pip install --user --upgrade cutadapt
-```
-
-Otherwise, [visit their website to download it and install
-it](https://pypi.python.org/pypi/cutadapt/)
+- Imagemagick (optional: to join admixture plots)
 
 ## Prepare your raw data files
 
@@ -173,17 +166,15 @@ produced by Illumina and Ion Proton sequencers.
 
 ### Prepare a file named `sample_information.csv`
 
-Use the same format found in the `example_sample_information.csv` file in
-the `01-info_files` folder.
+Use the same format found in the `example_sample_information.csv` file located
+in the `01-info_files` folder.
 
 Save this file in the `01-info_files` folder and name it exactly
-`sample_information.csv`.
-
-The `sample_information.csv` file will be used to extract the samples and
+`sample_information.csv`. This file will be used to extract the samples and
 rename the extracted sample files automatically.
 
 The first column **MUST** contain the **EXACT** name of the data file for the
-lane of each sample.
+lane/chip of each sample.
 
 **Notes**:
 
@@ -199,7 +190,7 @@ lane of each sample.
 
 Columns three, four, and five are treated as text, so they can contain either
 text or numbers. Other columns can be present after the fifth one and will be
-ignored.  However, it is crucial that the six first columns respect the format
+ignored. However, it is crucial that the six first columns respect the format
 in the example file exactly. Be especially careful not to include errors in
 this file, for example by mixing lower and capital letters in population or
 sample names (e.g.: Pop01 and pop01), since these will be treated as two
@@ -261,7 +252,9 @@ determine what length to trim to. For highly species with high genetic
 variability, short loci will be more likely to contain SNPs and long loci to
 contain more than one SNP, which is not always informative. Thus, trimming to
 shorter lengths may be more interesting for highly variant species or when
-coverage is limiting.
+coverage is limiting. On the other hand, trimming to keep longer sequences
+(for example 120pb) can be more interesting if the read coverage is very
+good and the genetic varability is low.
 
 ### Rename samples
 
@@ -271,9 +264,10 @@ We provide a script to rename the extracted samples and move them into the
 `04-all_samples` folder. The script behaves differently for samples that are
 present only once in the `01-info_files/sample_information.csv` and for those
 that are present more than once. If a sample is present only once, a link is
-created, using no additional disk space. If it is present more than once,
-all the copies are concatenated into one file, doubling the amount of disk
-space taken by this sample (all the individual files PLUS the combined one).
+created, using no additional disk space. If it is present more than once, it
+means that this sample has been sequenced on multiple lanes/chips and all the
+copies are concatenated into one file, doubling the amount of disk space taken
+by this sample (all the individual files PLUS the combined one).
 
 ```bash
 ./00-scripts/03_rename_samples.sh
@@ -326,6 +320,9 @@ Illumina data, remove the `-O 0,0` and `-E 2,2` options.
 00-scripts/bwa_mem_align_reads_PE.sh
 ```
 
+**NOTE**: To align Illumina data, remove the `-O 0,0` and `-E 2,2` options from
+the bwa script.
+
 ## STACKS pipeline
 
 ### Prepare population info file
@@ -336,7 +333,7 @@ Illumina data, remove the `-O 0,0` and `-E 2,2` options.
 
 ## Edit script parameters
 
-You will need to go through the scripts named `stacks1_*` or `stacks2_*` in the
+You will need to go through the scripts named `stacks2_*` in the
 `00-scripts folder` and edit the options to suit your needs. Depending on your
 project (eg: *de novo* vs reference), you will not use all the scripts.
 
@@ -345,52 +342,16 @@ your study is crucial in order to generate meaningful and optimal results. Read
 the STACKS documentation on their website to learn more about the different
 options.
 
-## Run the STACKS1 programs
-
-### Without a reference genome
-
-```bash
-./00-scripts/stacks1_1a_ustacks.sh
-./00-scripts/stacks1_2_cstacks.sh
-./00-scripts/stacks1_3_sstacks.sh
-./00-scripts/stacks1_4_populations.sh
-./00-scripts/stacks1_5a_rxstacks_likelihoods.sh
-```
-
-Visualize the distribution of log likelihoods in
-`rxstacks_log_likelihoods.png` and choose a cutoff to use in the next script
-(`./00-scripts/stacks1_5b_rxstacks.sh`). Then launch:
-
-```bash
-./00-scripts/stacks1_5b_rxstacks.sh
-./00-scripts/stacks1_6_cstacks_rx.sh
-./00-scripts/stacks1_7_sstacks_rx.sh
-./00-scripts/stacks1_8_populations_rx.sh
-```
-
-### With a reference genome
-
-```bash
-./00-scripts/bwa_mem_align_reads.sh
-./00-scripts/stacks1_1a_pstacks.sh
-./00-scripts/stacks1_2_cstacks.sh
-./00-scripts/stacks1_3_sstacks.sh
-./00-scripts/stacks1_4_populations.sh
-```
-
-**NOTE**: To align Illumina data, remove the `-O 0,0` and `-E 2,2` options from
-the bwa script.
-
 ## Run the STACKS2 programs
 
 ### Without a reference genome
 
-  - ustacks (params: )
-  - cstacks (params: )
-  - sstacks (params: )
-  - tsv2bam (params: )
-  - gstacks (params: )
-  - populations (params: )
+  - ustacks
+  - cstacks
+  - sstacks
+  - tsv2bam
+  - gstacks
+  - populations
 
 ```bash
 ./00-scripts/stacks2_ustacks.sh
@@ -403,19 +364,22 @@ the bwa script.
 
 ### With a reference genome
 
+After the reads are aligned with bwa, run:
+
 ```bash
 ./00-scripts/stacks2_gstacks.sh
 ./00-scripts/stacks2_populations.sh
 ```
 ## Filtering the results
 
-**NOTE**: All the filtering scripts that take a VCF for input or output can read
-and write compressed VCF files. The files must be compressed with gzip and end
-with the `.gz` extension. This is how the Python scripts recognize them. As a
-result, it is recommended to compress your original VCF files from populations
-with gzip as well as any further steps in order to save disk space.
+**NOTE**: All the filtering scripts that take a VCF for input or output can
+read and write compressed VCF files. The files must be compressed with gzip and
+end with the `.gz` extension.  This is how the Python scripts recognize them.
+As a result, it is recommended to compress your original VCF files from
+populations with gzip as well as any further steps in order to save disk space,
+especially for big projects.
 
-### 1. Filter STACKS or STACKS2 VCF minimally and create graphs
+### 1. Filter the VCF minimally and create graphs
 
 #### Fast filter
 
@@ -425,11 +389,11 @@ one.
 Reasons to use the faster filter script:
 
 - Less parameters
-- Faster (5-10X depending on dataset)
 - Uses only needed parameters
+- Faster (5-10X depending on dataset)
 - Recommended for all analyses and much faster for big datasets
 
-Here is the help from this script:
+Here is the documentation from this script:
 
 ```bash
 # Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
@@ -440,7 +404,7 @@ Here is the help from this script:
 # Where:
 #     input_vcf: is the name of the VCF file to filter
 #     min_cov: minimum allele coverage to keep genotype <int>, eg: 4 or more
-#     percent_genotypes: minimum percent of genotype data per population <float> eg: 50, 70, 80, 100
+#     percent_genotypes: minimum percent of genotype data per population <float> eg: 50, 70, 80, 90, 100
 #     max_pop_fail: maximum number of populations that can fail percent_genotypes <int> eg: 1, 2, 3
 #     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
 #     output_vcf: is the name of the filtered VCF
@@ -449,21 +413,21 @@ Here is the help from this script:
 #     The filtering is done purely on a SNP basis. Loci are not taken into account.
 
 # Filtering (STACKS1)
-./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 0 2 filtered_m4_p70_S2.vcf
+./00-scripts/05_filter_vcf_fast.py 05-stacks/batch_1.vcf 4 70 0 2 filtered_m4_p70_x0_S2.vcf
 
 # Filtering (STACKS2)
-./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 0 2 filtered_m4_p70_S2.vcf
+./00-scripts/05_filter_vcf_fast.py 05-stacks/populations.snps.vcf 4 70 0 2 filtered_m4_p70_x0_S2.vcf
 
 # Graphs
-./00-scripts/05_filter_vcf.py -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
+./00-scripts/05_filter_vcf.py -i filtered_m4_p70_x0_S2 -o graphs_filtered_m4_p70_x0_S2 -g
 ```
 
 **Note**: The last option filters on the **MAS**, which is akin to the MAF and
 MAC. It keeps only SNPs where the rare allele has been found in *at least* a
 certain number of samples. For example: `2` means that at least two samples
 have the rare alleles. For RADseq data, the MAS is better than the MAF and MAC,
-which are artificially boosted by genotyping errors, where one heterozygote
-sample is genotyped as a rare-allele homozygote. Given the nature of RADseq,
+which are artificially boosted by genotyping errors where one heterozygote
+sample is falsely genotyped as a rare-allele homozygote. Given the nature of RADseq,
 these errors are quite frequent.
 
 #### Slow filter
@@ -471,20 +435,20 @@ these errors are quite frequent.
 - More parameters but they are not needed with this new filtering procedure.
   They are a relic of an "early era" in the exploration of quality filtering.
 - Slower (5-10X depending on dataset)
-- Keeping only for backward compatibility and to generate graphs
+- Keeping only for backward compatibility and to generate descriptive graphs
 
 ```bash
 # Filtering (STACKS1)
-./00-scripts/05_filter_vcf.py -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
+./00-scripts/05_filter_vcf.py -i 05-stacks/batch_1.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_x0_S2
 
 # Filtering (STACKS2)
-./00-scripts/05_filter_vcf.py -i 05-stacks/populations.snps.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_S2
+./00-scripts/05_filter_vcf.py -i 05-stacks/populations.snps.vcf -m 4 -p 70 --use_percent -S 2 -o filtered_m4_p70_x0_S2
 
 # Graphs
-./00-scripts/05_filter_vcf.py -i filtered_m4_p70_S2 -o graphs_filtered_m4_p70_S2 -g
+./00-scripts/05_filter_vcf.py -i filtered_m4_p70_x0_S2 -o graphs_filtered_m4_p70_x0_S2 -g
 ```
 
-**Note**: The last option filters on the **MAS**, which is akin to the MAF and
+**Note**: The `-S` option filters on the **MAS**, which is akin to the MAF and
 MAC. It keeps only SNPs where the rare allele has been found in *at least* a
 certain number of samples. For example: `2` means that at least two samples
 have the rare alleles. For RADseq data, the MAS is better than the MAF and MAC,
@@ -537,11 +501,9 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
 ### 3. If needed, make bigger groups of samples
   - If your dataset contains many small populations, regroup samples into fewer
     and bigger groups to avoid strict and overly stochastic filtering
-  - STACKS1: Make a copy of `05-stacks/batch_1.vcf` or
-    `06-stacks_rx/batch_1.vcf`
-  - STACKS1: Make a copy of `05-stacks/populations.snps.vcf`
-  - Modify sample names (`POP1_sample` -> `Group1_POP1-sample`. Note that the
-    underscore `_` becomes a dash `-`
+  - Make a copy of `05-stacks/populations.snps.vcf`
+  - Modify sample names (eg: `POP1_sample` -> `Group1_POP1-sample`). Note that the
+    underscore `_` becomes a dash `-`.
   - Use bcftools to do that:
     - `bcftools reheader -s names.txt input.vcf > renamed.vcf`
     - The `names.txt` file contains current sample names in the first column
@@ -553,7 +515,7 @@ and desired sample names in a second column.
 **NOTE**: You can launch the `05_filter_vcf_fast.py` without options to see documentation.
 
 ```bash
-./00-scripts/05_filter_vcf_fast.py batch_1_grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
+./00-scripts/05_filter_vcf_fast.py populations.snps.grouped.vcf 4 70 0 2 filtered_bad_samples_removed_m4_p70_x0_S2
 ```
 
 ### 5. Explore SNP duplication using the following scripts
@@ -586,7 +548,7 @@ avoiding close by SNPs with high Linkage Disequilibrium, you can keep all the
 SNPs that we refer to as unlinked in all the loci.
 
 The procedure is as follows:
-  - Keep the first SNP remove all the others are linked (specifics below)
+  - Keep the first SNP and remove all the other ones appear linked to it
   - If you have SNPs remaining, repeat
 
 Two SNPs are linked when sample genotypes are highly correlated for these two
@@ -598,7 +560,11 @@ data in both SNPs and who possess the rare allele in at least one of the SNPs.
 Using the singleton SNPs, keep only unlinked SNPs using:
 
 ```bash
+# Denovo
 00-scripts/11_extract_unlinked_snps.py
+
+# Reference
+00-scripts/11_extract_unlinked_snps_genome.py
 ```
 
 ### 7. Missing data imputation
@@ -610,7 +576,7 @@ Impute missing data in a VCF using Admixture ancestry relationships
 Whatever the method of choice, missing data imputation cannot impute **CORRECT
 GENOTYPES**, only **GENOTYPES THAT MINIMIZE BIASES** in a dataset. You should
 use imputation **ONLY** when you really need it. For example when some piece
-of software will not accept missing data.
+of software will not accept missing data in its input VCF.
 
 #### Limitations of the ancestry-based missing data imputation
 
@@ -631,14 +597,16 @@ of software will not accept missing data.
   samples is the result of non-random missing data within groups of samples, is
   problematic for admixture. You need to assert that this pattern is not present
   in your dataset (using plink) or remove the loci succeptible to this from
-  your VCF before using vcf_impute.
-- **IMPORTANT**: Admixture is a poor choice for cases of samples with a continuous
-  genetic gradient or a pattern of isolation by distance. Using a k-nearest
+  your VCF before using vcf_impute. See details in the procedure below.
+- **IMPORTANT**: Admixture is a poor choice for samples with a continuous
+  genetic gradient, a pattern of isolation by distance or a dataset with a lot
+  of populations with very low or unequal sample numebrs.  Using a k-nearest
   neighbors approach may be better in this case.
-- **IMPORTANT**: Large genomic features, like big inversions, can create
+- **VERY IMPORTANT**: Large genomic features, such as big inversions, can create
   strong groupings in admixture but that group structure would only apply to
-  local parts of the genome, or even none for complex cases. Here again, using
-  a k-nearest approach may be better.
+  local parts of the genome, or even none at all for complex cases. If you feel
+  like different parts of your genomes could lead to a very different
+  hierarchical population structure, using a k-nearest approach may be better.
 
 #### Advantages of the ancestry-based missing data imputation
 
@@ -649,21 +617,22 @@ of software will not accept missing data.
   that seem correlated are not a good choice to infer missing genotypes. This
   is because the genotypes at these other pseudo-correlated loci have a low
   probability to be informative for the imputation of the missing genotype.
-  It is already proposed to explore this idea using real and simulated datasets
-  in order to confirm this belief.
-
 
 #### Running the imputation
 
 1. Format contig/scaffold names
 
 In order to use admixture, contig/scaffold names (refered to as chromosomes in
-admixture) must be integers.
+admixture) must be integers. We use the following script to correct this. Make
+sure the output vcf is EXACTLY named `input_renamed.vcf`. The input VCF can be
+compressed with gzip.
 
 ```bash
-./00-scripts/12_rename_vcf_scaffolds_for_plink.py input.vcf input_renamed.vcf
+./00-scripts/12_rename_vcf_scaffolds_for_plink.py <input.vcf> input_renamed.vcf
 ```
-And check for patterns of identify by missing.
+
+And check for patterns of identify by missing and potentialy filter the VCF to
+remove the SNPs responsible of any such pattern (not covered in this document).
 
 ```bash
 ./00-scripts/utility_scripts/plink_cluster_missing.sh
@@ -676,15 +645,16 @@ And check for patterns of identify by missing.
 plink --vcf input_renamed.vcf --make-bed --out input_renamed --allow-extra-chr
 ```
 
-3. Use admixture and find good K value
+3. Use admixture and find a good K value
 
 ```bash
 # Run admixture
-# Adjust the `seq 10` value for your dataset.
+# Adjust the `seq 10` value for your dataset. This number is the highest number
+# of groups (K) that will be tried with admixture
 seq 10 | parallel admixture input_renamed.bed {} -j4 --cv -C 0.1 \> 11-admixture/input_renamed.{}.log
 mv *.P *.Q 11-admixture/
 
-# Choose K value
+# Explore CV values and choose an appropriate K value
 grep -h CV 11-admixture/*.log | sort -V  # May not work on MacOs or BSD descendents because of the -V option
 grep -h CV 11-admixture/*.log | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -n
 
@@ -694,14 +664,15 @@ grep -h CV 11-admixture/*.log | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -
 # Requires the adegenet package
 parallel ./00-scripts/utility_scripts/plot_admixture.R ::: 11-admixture/*.Q
 
-# If you have imagemagick installed, you can combine all images
+# If you have imagemagick installed, you can combine all the graphs in one to
+# help choose the best K value
 convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -trim -border 0x4 -gravity center -append all_admixture_figures.png
 ```
 
 4. Impute missing genotypes using sample related groups
 
 ```bash
-./00-scripts/13_impute_missing.py input_vcf input_admixture output_vcf
+./00-scripts/13_impute_missing.py input_vcf input_admixture_K.Q output_vcf
 ```
 ### 8. Onwards!
 
@@ -718,10 +689,20 @@ Here is a summary of informations that should go in the Methods section of your 
 ### Sample preparation
 
 - Data prepared, SNPs VCF generated and filtered using:
-  - [STACKS](http://catchenlab.life.illinois.edu/stacks/) <version> (eg: 1.48 or 2.5)
-  - [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.5)
+  - [STACKS](http://catchenlab.life.illinois.edu/stacks/) <version> (eg: 1.48 or 2.54)
+  - [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.5.4)
 - Raw data cleaned with Cutadapt <version> (eg: 2.1)
 - Samples extracted with `process_radtags` (part of STACKS)
+
+### Denovo
+
+- **STACKS2 pipeline (Denovo)**
+  - ustacks (ex. params: -m 4, -M 3, -N 5)
+  - cstacks (ex. params: -n 3)
+  - sstacks (ex. params: na)
+  - tsv2bam (ex. params: na)
+  - gstacks (ex. params: --max-clipped 0.1)
+  - populations (ex. params: -p 2, -r 0.6, --fasta-loci, --vcf)
 
 ### Reference genome
 
@@ -729,57 +710,25 @@ Here is a summary of informations that should go in the Methods section of your 
   - bwa <version> (eg: 0.7.17-r1188)
   - samtools <version> (eg: 1.8)
 
-- **STACKS1 pipeline (Reference genome)**
-  - pstacks (params: -m 1)
-  - cstacks (params: -n 1, -g)
-  - sstacks (params: -g)
-  - populations (params: )
-
 - **STACKS2 pipeline (Reference genome)**
-  - gstacks (params: --max-clipped 0.1)
-  - populations (params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
-
-### Denovo
-
-- **STACKS1 pipeline (Denovo)**
-  - ustacks (params: -m 4, -M 3, -N 5)
-  - cstacks (params: -n 1)
-  - sstacks (params: na)
-  - populations (params: )
-  - rxstacks (params: --lnl_filter, --lnl_lim -10, --conf_filter, --conf_lim 0.75, --prune_haplo --model_type bounded, --bound_low 0, --bound_high 1)
-  - cstacks (params: -n 1)
-  - sstacks (params: na)
-  - populations (params: -f p_value, --p_value_cutoff 0.1, -a 0.0, --lnl_lim -10, --vcf, --vcf_haplotypes)
-
-- **STACKS2 pipeline (Denovo)**
-  - ustacks (params: -m 4, -M 3, -N 5)
-  - cstacks (params: -n 3)
-  - sstacks (params: na)
-  - tsv2bam (params: na)
-  - gstacks (params: --max-clipped 0.1)
-  - populations (params: -p 2, -r 0.6, --fasta-loci, --vcf)
+  - gstacks (ex. params: --max-clipped 0.1)
+  - populations (ex. params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
 
 ### Filtering
 
-- STACKS VCF filtered a first time with `05_filter_vcf_fast.py` (params: 4 60 2 3)
-- Create graphs to find samples with high missing data `05_filter_vcf.py` (params: -g)
+- STACKS VCF filtered a first time with `05_filter_vcf_fast.py` (ex. params: 4 60 2 3)
+- Create graphs to find samples with high missing data `05_filter_vcf.py` (ex. params: -g)
 - Decide missing data threshold and remove these samples with `06_filter_samples_with_list.py`
 - Look for sample relatedness and heterozygosity problems in new VCF with vcftools
 - Remove them with `06_filter_samples_with_list.py`
 - If needed, regroup populations into larger groups to prevent spurious filtering
-- Filter this new VCF with `05_filter_vcf_fast.py` (params: 4 60 0 3)
+- Filter this new VCF with `05_filter_vcf_fast.py` (ex. params: 4 60 0 3)
 - Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
   - `./00-scripts/08_extract_snp_duplication_info.py`
   - `./00-scripts/09_classify_snps.R`
   - `./00-scripts/10_split_vcf_in_categories.py`
 - Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
-
-## TODO
-
-- Impute compressed VCFs
-- Look for shared patterns of missing data caused by the sequencing
-  - `plink --vcf <INPUT_VCF> --cluster missing --out <OUTPUT_VCF> --mds-plot 4 --allow-extra-chr`
-  - Create figure using strata file to color samples
+- Impute missing data with admixture
 
 ### Running into problems
 
