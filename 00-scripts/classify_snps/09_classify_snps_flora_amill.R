@@ -30,19 +30,19 @@ d$Color[d$Fis + d$MedRatio < 0.25] = duplicated
 #d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
 
 # Very low Fis = diverged
-d$Color[d$Fis < -0.8] = diverged
-d$Color[d$Fis + d$MedRatio * 2 < -0.10] = diverged
+d$Color[d$Fis < -0.9] = diverged
+d$Color[d$Fis + d$MedRatio * 2 < -0.15] = diverged
 #d$Color[d$Fis + d$MedRatio * 3 < 0.10] = diverged
-#d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
+d$Color[d$Fis + d$MedRatio * 3 < 0.3] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.80] = lowconf
+d$Color[d$Fis > 0.90] = lowconf
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 60 | d$MedCovHet > 60] = highcov
 
 # Too few samples with rare allele
-d$Color[data$NumHet + data$NumRare < 5] = mas
+d$Color[data$NumHet + data$NumRare < 3] = mas
 
 # Extract bad loci infos
 bad_snps = d$Color != singleton
