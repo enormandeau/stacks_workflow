@@ -34,7 +34,7 @@ module load bwa
 module load samtools
 
 # Index genome if not alread done
-# bwa index -p "$GENOMEFOLDER"/"${GENOME%.fasta}" "$GENOMEFOLDER"/"$GENOME"
+# bwa index "$GENOMEFOLDER"/"${GENOME%.fasta}"
 
 cat "$SAMPLE_FILE" |
 while read file

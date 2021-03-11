@@ -13,7 +13,7 @@ then
 fi
 
 # Index genome if not alread done
-# bwa index -p "$GENOMEFOLDER"/"${GENOME%.fasta}" "$GENOMEFOLDER"/"$GENOME"
+# bwa index "$GENOMEFOLDER"/"${GENOME%.fasta}"
 
 module load samtools/1.8
 module load bwa/0.7.17

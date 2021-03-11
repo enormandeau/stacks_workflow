@@ -300,10 +300,12 @@ will then have better information then.
 
 ##### Download reference genome to the `08-genome`
 
+Decompress the genome if needed and make a copy of it named `genome.fasta`.
+
 ##### Index the reference genome
 
 ```bash
-bwa index -p 08-genome/genome ./08-genome/<genome reference>
+bwa index ./08-genome/genome.fasta
 ```
 
 ### Align samples
