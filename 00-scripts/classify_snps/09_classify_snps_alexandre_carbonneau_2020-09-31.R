@@ -42,7 +42,7 @@ d$Color[d$Fis > 0.8] = lowconf
 d$Color[d$MedRatio < 0.25 & d$Fis > 0] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Loci with high coverage
-d$Color[d$MedCovHom > 120 | d$MedCovHet > 120] = highcov
+d$Color[d$MedCovHom > 100 | d$MedCovHet > 100] = highcov
 
 # Too few samples with rare allele
 d$Color[data$NumHet + data$NumRare < 2] = mas
