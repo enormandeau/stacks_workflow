@@ -13,7 +13,7 @@ POP_MAP="population_map.txt"
 
 # Number of CPUs
 # TODO use gnu parallel
-NUM_CPU="20"
+NUM_CPU="60"
 
 #id=1
 #ls -1 "$SAMPLE_FOLDER"/*.gz |
@@ -33,5 +33,5 @@ NUM_CPU="20"
 #done
 
 # Gnu Parallel version
-ls -1 "$SAMPLE_FOLDER"/*.gz |
+ls -1 -S "$SAMPLE_FOLDER"/*.gz |
     parallel -j "$NUM_CPU" ustacks -f {} -o "$STACKS_FOLDER" -i {#} -p 1 -m 3 -M 3 -N 5 --disable-gapped # -H --deleverage
