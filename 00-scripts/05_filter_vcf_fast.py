@@ -35,7 +35,7 @@ def get_population_info(line):
 
     pops = [x.split("_")[0] for x in line.split("\t")[9:]]
     unique_pops = sorted(list(set(pops)))
-    print("  " + str(len(unique_pops)) + " populations")
+    print("  " + str(len(pops)) + " samples in " + str(len(unique_pops)) + " populations")
     pop_dict = {}
 
     for p in unique_pops:
