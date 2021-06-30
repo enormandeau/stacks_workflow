@@ -1,4 +1,4 @@
-# STACKS Workflow2
+# STACKS Workflow2 
 
 RADseq workflow using [STACKS2](http://creskolab.uoregon.edu/stacks/)
 
