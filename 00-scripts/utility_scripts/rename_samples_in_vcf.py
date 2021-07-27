@@ -13,6 +13,7 @@ Details:
 """
 
 # Modules
+import gzip
 import sys
 
 # Defining functions
