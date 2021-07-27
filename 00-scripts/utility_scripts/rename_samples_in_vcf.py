@@ -58,4 +58,3 @@ with myopen(input_vcf) as infile:
 
             else:
                 outfile.write(line)
-
