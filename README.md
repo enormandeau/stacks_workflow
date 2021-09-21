@@ -714,7 +714,7 @@ Here is a summary of informations that should go in the Methods section of your 
 
 - **STACKS2 pipeline (Reference genome)**
   - gstacks (ex. params: --max-clipped 0.1)
-  - populations (ex. params: -p 2, -r 0.6, --renz pstI, --merge-sites, --ordered-export, --fasta-loci, --vcf)
+  - populations (ex. params: -p 2, -r 0.6, --ordered-export, --fasta-loci, --vcf)
 
 ### Filtering
 
