@@ -29,9 +29,9 @@ d$Color[d$MedRatio > 0.22 & d$Fis + d$MedRatio * 3 < 1.00] = duplicated
 #d$Color[d$MedRatio > 0.22 & d$Fis + d$MedRatio * 8 < 2.85] = duplicated
 
 # Very low Fis = diverged
-d$Color[d$Fis < -0.1 & d$Fis + d$MedRatio < -0.2] = diverged
-d$Color[d$Fis < -0.1 & d$Fis + d$MedRatio * 3 < 0.6] = diverged
-d$Color[d$Fis < -0.1 & d$Fis + d$MedRatio * 8 < 1.80] = diverged
+#d$Color[d$Fis < -0.1 & d$Fis + d$MedRatio < -0.2] = diverged
+#d$Color[d$Fis < -0.1 & d$Fis + d$MedRatio * 3 < 0.6] = diverged
+#d$Color[d$Fis < -0.1 & d$Fis + d$MedRatio * 8 < 1.80] = diverged
 #d$Color[d$Fis < -0.1 & d$MedRatio < 0.22] = diverged
 
 # Salvage back some singletons
