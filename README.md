@@ -559,7 +559,8 @@ values, we need to be careful when comparing sample genotypes between two SNPs.
 As a result, when comparing two SNPs, we only use samples that have no missing
 data in both SNPs and who possess the rare allele in at least one of the SNPs.
 
-Using the singleton SNPs, keep only unlinked SNPs using:
+Using the singleton SNPs, keep only unlinked SNPs using one the following
+scripts. The input parameters are described by the scripts themselves.
 
 ```bash
 # Denovo

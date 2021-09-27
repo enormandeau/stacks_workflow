@@ -10,11 +10,12 @@ Where:
     input_vcf: name of a VCF from STACKS 1.4x (not vcftools...)
 
     diff_threshold: minimum difference between 0.0 and 1.0 to keep a second
-    SNP. A good value is anywhere between 0.2 and 0.5. A value of 0.2 is
-    permissive and will keep a few false positives, ie: SNPs with low MAFs that
-    have exactly the same information but where some one or a few samples were
-    mis-genotyped. A value of 0.5 will get you 99.9% of what that is different
-    without false positives. Values above 0.5 will lose you true positives.
+    SNP. The recommended value is 0.5. A good value is anywhere between 0.2 and
+    0.5. A value of 0.2 is more permissive and will retain a few false
+    positives, ie: SNPs with low MAFs that have exactly the same information
+    but where some one or a few samples were mis-genotyped. A value of 0.5 will
+    get you 99.9% of what is different without false positives. Values above
+    0.5 will lose you true positives.
 
     output_vcf: name of the output filtered VCF
 """
