@@ -615,9 +615,9 @@ of software will not accept missing data in its input VCF.
 
 - Major: Avoid using overfitted models that depend on information from other
   loci to impute genotypes in the current locus. It is our belief that, in most
-  RADseq studies, apparent correlation among loci exists because of random
+  RADseq studies, apparent correlation among loci exists because of stochastic
   rather than biological reasons. For that reason, using information from loci
-  that seem correlated are not a good choice to infer missing genotypes. This
+  that seem correlated is not a good choice to infer missing genotypes. This
   is because the genotypes at these other pseudo-correlated loci have a low
   probability to be informative for the imputation of the missing genotype.
 
