@@ -81,6 +81,7 @@ lane_info.txt
 log_*
 logfiles
 nohup.out
+numreads_per_sample*
 population_map.txt
 sample_files*
 samples.het
