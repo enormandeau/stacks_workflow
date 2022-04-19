@@ -675,7 +675,8 @@ convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -trim -border 0x4 -g
 4. Impute missing genotypes using sample related groups
 
 ```bash
-./00-scripts/13_impute_missing.py input_vcf input_admixture_K.Q output_vcf
+# Replace K by the desired number of clusters
+./00-scripts/13_impute_missing.py input_vcf 11-admixture/input_renamed.K.Q output_vcf
 ```
 ### 8. Onwards!
 
