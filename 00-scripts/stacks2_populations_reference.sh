@@ -12,7 +12,7 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Populations does not seem to use more than 1 CPU most of the time
-NUM_CPU="1"
+NUM_CPU="10"
 
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 cp $INFO_FILES_FOLDER/$POP_MAP $LOG_FOLDER/"$TIMESTAMP"_"$POP_MAP"
