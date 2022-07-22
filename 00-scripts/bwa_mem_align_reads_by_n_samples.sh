@@ -5,7 +5,7 @@
 # ls -1 *.fq.gz > ../all_samples_for_alignment.txt
 # cd ..
 # mkdir samples_split
-# split -a 4 -l 100 -d all_samples_for_alignment.txt samples_split/samples_split.
+# split -a 4 -l 1 -d all_samples_for_alignment.txt samples_split/samples_split.
 
 ## With GNU Parallel
 # ls -1 samples_split/* | parallel -k -j 10 ./00-scripts/bwa_mem_align_reads_by_n_samples.sh 4 {} \; sleep 0.1
