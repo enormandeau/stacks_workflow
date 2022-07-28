@@ -18,12 +18,6 @@ or other liability, whether in an action of contract, tort or otherwise,
 arising from, out of or in connection with the software or the use or other
 dealings in the software.
 
-**Warning"**: stack_workflow does not support paired-end reads. You can either
-use it with single-end or only forward reads or use the official
-[STACKS](https://catchenlab.life.illinois.edu/stacks/) page for information on
-how to do this. You can still use stack_workflow for the cutting-edge
-filtration steps once you have get your VCF.
-
 stack_workflow was developed with the needs of our research group in mind. We
 make no claim about its usefulness to other groups or in other contexts, but it
 has been and continues to be useful to other groups.
