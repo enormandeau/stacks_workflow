@@ -12,7 +12,7 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Number of CPUs
-NUM_CPU="32"
+NUM_CPU="40"
 
 # Gnu Parallel version
 ls -1 "$SAMPLE_FOLDER"/*1.fq.gz |
