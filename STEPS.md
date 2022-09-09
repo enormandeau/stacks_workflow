@@ -1,6 +1,6 @@
 # Analysis steps
 
-Informations for the Materials and Methods section
+Informations for Materials and Methods
 
 ## Data preparation
 
