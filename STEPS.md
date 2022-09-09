@@ -16,9 +16,8 @@ process_radtags v2.59 (-c -r -t 80 -q -s 0 --barcode_dist_1 2 -E phred33
 ### Denovo
 
 Then we ran ustacks (-m 4 -M 3 -N 5 -H --deleverage), cstacks (-n 1), sstacks,
-tsv2bam, gstacks (-p 2 -r 0.6 --fasta_loci --vcf), and population (-p 2 -r 0.6
---fasta-loci --vcf) to produce a minimally filtered VCF file containing the
-genotypes of the samples.
+tsv2bam, gstacks, and population (-p 2 -r 0.6 --fasta-loci --vcf) to produce a
+minimally filtered VCF file containing the genotypes of the samples.
 
 ### Reference
 
