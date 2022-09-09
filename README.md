@@ -312,18 +312,11 @@ bwa index ./08-genome/genome.fasta
 
 Different bwa alignment scripts are available in 00-scripts.
 
-**IMPORTANT NOTE**: The two scripts for single-end reads (ie: not the one with
-`PE` in its name) have options that are specific for IonProton data. To align
-Illumina data, remove the `-O 0,0` and `-E 2,2` options.
-
 ```bash
 00-scripts/bwa_mem_align_reads.sh
 00-scripts/bwa_mem_align_reads_by_n_samples.sh
 00-scripts/bwa_mem_align_reads_PE.sh
 ```
-
-**NOTE**: To align Illumina data, remove the `-O 0,0` and `-E 2,2` options from
-the bwa script.
 
 ## STACKS pipeline
 

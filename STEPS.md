@@ -22,8 +22,6 @@ genotypes of the samples.
 
 ### Reference
 
-**NOTE** For Illumina, remove (-O 0,0 -E 2,2) from the bwa options.
-
 Then we created alignments using bwa v0.7.17-r1188 (-k 19 -c 500 -O 0,0 -E 2,2
 -T 0) and samtools v1.8 (-Sb -q 1 -F 4 -F 256 -F 2048) and ran gstacks
 (--max-clipped) and population (-p 2 -r 0.6 --ordered-export --fasta-loci
