@@ -9,40 +9,43 @@ output_file = paste0(input_file, ".categorized")
 data = read.table(input_file, header=T, stringsAsFactors=F)
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom")]
 
-singleton =     "#00000011" # black
-duplicated =    "#FF000011" # red
-diverged =      "#0000FF11" # blue
+singleton =     "#00000008" # black
+duplicated =    "#FF000022" # red
+diverged =      "#0000FF22" # blue
 lowconf =       "#DD00BB22" # purple
-highcov =       "#00AA0022" # green
+highcov =       "#00AA0088" # green
 mas =           "#FFAA0022" # orange
 
 # All loci marked singleton before filters
 d$Color = singleton
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.30] = lowconf # & d$PropHomRare > 0.00] = lowconf
-d$Color[d$MedRatio > 0.70] = lowconf # & d$PropHomRare > 0.00] = lowconf
+#d$Color[d$MedRatio < 0.40] = lowconf # & d$PropHomRare > 0.00] = lowconf
+#d$Color[d$MedRatio > 0.70] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.12] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.28] = duplicated
+#d$Color[d$Fis < -0.55] = duplicated
+#d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
 #d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
 #d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
 
 # Very low Fis = diverged
-d$Color[d$Fis < -0.65] = diverged
-#d$Color[d$Fis + d$MedRatio * 2 < 0.10] = diverged
+#d$Color[d$Fis < -0.8] = singleton
+#d$Color[d$Fis + d$MedRatio * 2 < -0.00] = diverged
 #d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
 #d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.8] = lowconf
+#d$Color[d$Fis > 0.5] = lowconf
 
 # Loci with high coverage
-d$Color[d$MedCovHom > 120 | d$MedCovHet > 120] = highcov
+#d$Color[d$MedCovHom > 140 | d$MedCovHet > 140] = highcov
+
+# Loci with low coverage
+#d$Color[d$MedCovHom < 10 | d$MedCovHet < 10] = highcov
 
 # Too few samples with rare allele
-d$Color[data$NumHet + data$NumRare < 3] = mas
+d$Color[data$NumHet + data$NumRare < 70] = mas
 
 # Extract bad loci infos
 bad_snps = d$Color != singleton
@@ -67,7 +70,7 @@ print(report)
 
 # Plots
 png(paste0(input_file, "_1.png"), width=1200, height=950)
-    plot(d[,1:4], pch=16, cex=1, col=d$Color)
+    plot(d[,1:4], pch=16, cex=0.8, col=d$Color)
 invisible(dev.off())
 
 png(paste0(input_file, "_2.png"), width=1200, height=950)

@@ -12,25 +12,7 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Number of CPUs
-# TODO use gnu parallel
 NUM_CPU="60"
-
-#id=1
-#ls -1 "$SAMPLE_FOLDER"/*.gz |
-#while read file
-#do
-#    name=$(basename "$file")
-#    echo
-#    echo "#######################################"
-#    echo "  Treating indivudual $id: ${name%.fq.gz}"
-#    echo "#######################################"
-#    echo
-
-#    ustacks -f "$SAMPLE_FOLDER"/"$name" -o "$STACKS_FOLDER" -i $id -p 1 \
-#        -m 4 -M 3 -N 5 -H --deleverage
-#    let "id+=1"
-
-#done
 
 # Gnu Parallel version
 ls -1 -S "$SAMPLE_FOLDER"/*.gz |

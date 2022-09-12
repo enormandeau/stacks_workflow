@@ -4,10 +4,10 @@ TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
 # Copy script as it was run
 SCRIPT=$0
-NAME=$(basename $0)
+NAME=$(basename "$0")
 LOG_FOLDER="10-log_files"
 
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 # Global variables
 INFO_FILES="01-info_files"
@@ -15,8 +15,7 @@ SAMPLES_FOLDER="03-samples"
 ALL_SAMPLES_FOLDER="04-all_samples"
 
 # Renaming files
-cat 01-info_files/sample_information.csv |
-    grep -vE '^#' |
+grep -vE '^#' "$INFO_FILES"/sample_information.csv |
     cut -f 1-4 |
     perl -pe 's/\.f(ast)*q\.gz//' |
     perl -pe 's/\t/\/sample_/' |
@@ -27,7 +26,7 @@ cat 01-info_files/sample_information.csv |
 cut -f 2 renaming_01.txt | sort -u > renaming_02.txt
 
 cat renaming_02.txt |
-    while read i
+    while read -r i
     do
         echo Treating: "$i"
         rm $ALL_SAMPLES_FOLDER/"$i" 2> /dev/null
@@ -38,7 +37,7 @@ cat renaming_02.txt |
             echo "Creating a link"
             grep "$i" renaming_01.txt |
                 cut -f 1 |
-                while read j
+                while read -r j
                 do
                     echo "    Linking: $SAMPLES_FOLDER/""$j"
                     ln $SAMPLES_FOLDER/"$j" "$i"
@@ -47,7 +46,7 @@ cat renaming_02.txt |
             echo "Merging samples"
             grep "$i" renaming_01.txt |
                 cut -f 1 |
-                while read j
+                while read -r j
                 do
                     echo "    Copying: $SAMPLES_FOLDER/""$j"
                     cat $SAMPLES_FOLDER/"$j" >> "$i"

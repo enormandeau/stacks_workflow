@@ -2,7 +2,7 @@
 
 # First split sample list to align into different files with:
 # cd 04-all_samples
-# ls -1 *.fq.gz > ../all_samples_for_alignment.txt
+# ls -1 *.1.fq.gz > ../all_samples_for_alignment.txt
 # cd ..
 # mkdir samples_split
 # split -a 4 -l 1 -d all_samples_for_alignment.txt samples_split/samples_split.
@@ -37,7 +37,7 @@ module load samtools
 # bwa index "$GENOMEFOLDER"/"${GENOME%.fasta}"
 
 cat "$SAMPLE_FILE" |
-while read file
+while read -r file
 do
     # Name of uncompressed file
     echo "Aligning file $file"
@@ -48,7 +48,10 @@ do
     # Align reads 1 step
     bwa mem -t "$NCPU" -k 19 -c 500 -O 0,0 -E 2,2 -T 0 \
         -R "$ID" \
-        "$GENOMEFOLDER"/"$GENOME" "$DATAFOLDER"/"$name" 2> /dev/null |
+        "$GENOMEFOLDER"/"$GENOME" \
+        "$DATAFOLDER"/"$name" \
+        "$DATAFOLDER"/$(echo "$name" | perl -pe 's/\.1\.fq\.gz$/.2.fq.gz/') \
+        2> /dev/null |
         samtools view -Sb -q 1 -F 4 -F 256 -F 2048 \
         - > "$DATAFOLDER"/"${name%.fq.gz}".bam
 

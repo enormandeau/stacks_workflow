@@ -82,6 +82,8 @@ assert max_pop_fail >= 0, "max_pop_fail needs to be a null or positive integer"
 assert min_mas >= 1, "min_mas needs to be a non-null positive integer"
 
 # Loop over VCF
+counter = 0
+
 with myopen(input_vcf) as infile:
     with myopen(output_vcf, "wt") as outfile:
         for line in infile:
@@ -97,6 +99,11 @@ with myopen(input_vcf) as infile:
                 outfile.write(line)
                 pop_info = get_population_info(line)
                 continue
+
+            # Print progress
+            counter += 1
+            if not counter % 10000:
+                print(f"Treating locus number: {counter}")
 
             # SNP line split into info and genotypes
             infos = l[:9]

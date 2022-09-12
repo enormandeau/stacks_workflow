@@ -10,8 +10,8 @@ data = read.table(input_file, header=T, stringsAsFactors=F)
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom")]
 
 singleton =     "#00000011" # black
-duplicated =    "#FF000011" # red
-diverged =      "#0000FF11" # blue
+duplicated =    "#FF000022" # red
+diverged =      "#0000FF22" # blue
 lowconf =       "#DD00BB22" # purple
 highcov =       "#00AA0022" # green
 mas =           "#FFAA0022" # orange
@@ -20,29 +20,29 @@ mas =           "#FFAA0022" # orange
 d$Color = singleton
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.30] = lowconf # & d$PropHomRare > 0.00] = lowconf
-d$Color[d$MedRatio > 0.70] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio < 0.35] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio > 0.65] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.12] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.28] = duplicated
-#d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
-#d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
+d$Color[d$Fis < -0.27] = duplicated
+d$Color[d$Fis + d$MedRatio < 0.15] = duplicated
+d$Color[d$Fis + d$MedRatio * 3 < 1.0] = duplicated
+d$Color[d$Fis + d$MedRatio * 8 < 2.5] = duplicated
 
 # Very low Fis = diverged
-d$Color[d$Fis < -0.65] = diverged
-#d$Color[d$Fis + d$MedRatio * 2 < 0.10] = diverged
-#d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
-#d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
+d$Color[d$Fis < -0.8] = diverged
+d$Color[d$Fis + d$MedRatio * 2 < -0.00] = diverged
+d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
+d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.8] = lowconf
+d$Color[d$Fis > 0.6] = lowconf
 
 # Loci with high coverage
-d$Color[d$MedCovHom > 120 | d$MedCovHet > 120] = highcov
+d$Color[d$MedCovHom > 100 | d$MedCovHet > 100] = highcov
 
 # Too few samples with rare allele
-d$Color[data$NumHet + data$NumRare < 3] = mas
+d$Color[data$NumHet + data$NumRare < 5] = mas
 
 # Extract bad loci infos
 bad_snps = d$Color != singleton
