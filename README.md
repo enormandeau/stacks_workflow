@@ -313,9 +313,9 @@ bwa index ./08-genome/genome.fasta
 Different bwa alignment scripts are available in 00-scripts.
 
 ```bash
-00-scripts/bwa_mem_align_reads.sh
-00-scripts/bwa_mem_align_reads_by_n_samples.sh
-00-scripts/bwa_mem_align_reads_PE.sh
+./00-scripts/bwa_mem_align_reads.sh
+./00-scripts/bwa_mem_align_reads_by_n_samples.sh
+./00-scripts/bwa_mem_align_reads_PE.sh
 ```
 
 ## STACKS pipeline
@@ -573,10 +573,10 @@ scripts. The input parameters are described by the scripts themselves.
 
 ```bash
 # Denovo
-00-scripts/11_extract_unlinked_snps.py
+./00-scripts/11_extract_unlinked_snps.py
 
 # Reference
-00-scripts/11_extract_unlinked_snps_genome.py
+./00-scripts/11_extract_unlinked_snps_genome.py
 ```
 
 ### 7. Missing data imputation
