@@ -47,7 +47,7 @@ datasets.
 ## Overview of the steps
 
 1. Install stacks_workflow and STACKS2
-1. Download your raw data files (illumina lanes or ion proton chips)
+1. Download your raw data files (Illumina lanes or ion proton chips)
 1. Clean the reads and assess their quality
 1. Extract individual data with process_radtags
 1. Rename the sample files
@@ -185,7 +185,7 @@ lane/chip of each sample.
   population name or abbreviation in the sample name).
 - Neither the population name nor the sample name should contain underscores `_`
 - The fifth column contains a number or string identifying the populations. you
-  can use the same as in the the the third column.
+  can use the same as in the third column.
 - The sixth column contains the plate well identifier.
 
 Columns three, four, and five are treated as text, so they can contain either
@@ -312,18 +312,11 @@ bwa index ./08-genome/genome.fasta
 
 Different bwa alignment scripts are available in 00-scripts.
 
-**IMPORTANT NOTE**: The two scripts for single-end reads (ie: not the one with
-`PE` in its name) have options that are specific for IonProton data. To align
-Illumina data, remove the `-O 0,0` and `-E 2,2` options.
-
 ```bash
-00-scripts/bwa_mem_align_reads.sh
-00-scripts/bwa_mem_align_reads_by_n_samples.sh
-00-scripts/bwa_mem_align_reads_PE.sh
+./00-scripts/bwa_mem_align_reads.sh
+./00-scripts/bwa_mem_align_reads_by_n_samples.sh
+./00-scripts/bwa_mem_align_reads_PE.sh
 ```
-
-**NOTE**: To align Illumina data, remove the `-O 0,0` and `-E 2,2` options from
-the bwa script.
 
 ## STACKS pipeline
 
@@ -376,10 +369,26 @@ After the reads are aligned with bwa, run:
 
 **NOTE**: All the filtering scripts that take a VCF for input or output can
 read and write compressed VCF files. The files must be compressed with gzip and
-end with the `.gz` extension.  This is how the Python scripts recognize them.
+end with the `.gz` extension. This is how the Python scripts recognize them.
 As a result, it is recommended to compress your original VCF files from
 populations with gzip as well as any further steps in order to save disk space,
 especially for big projects.
+
+### Filtration steps summary
+
+- STACKS VCF filtered a first time with `05_filter_vcf_fast.py` (ex. params: 4 60 2 3)
+- Create graphs to find samples with high missing data `05_filter_vcf.py` (ex. params: -g)
+- Decide missing data threshold and remove these samples with `06_filter_samples_with_list.py`
+- Look for sample relatedness and heterozygosity problems in new VCF with vcftools
+- Remove them with `06_filter_samples_with_list.py`
+- If needed, regroup populations into larger groups to prevent spurious filtering
+- Filter this new VCF with `05_filter_vcf_fast.py` (ex. params: 4 60 0 3)
+- Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
+  - `./00-scripts/08_extract_snp_duplication_info.py`
+  - `./00-scripts/09_classify_snps.R`
+  - `./00-scripts/10_split_vcf_in_categories.py`
+- Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
+- Impute missing data with admixture
 
 ### 1. Filter the VCF minimally and create graphs
 
@@ -471,14 +480,14 @@ these errors are quite frequent.
 
 #### 2.2. Relatedness
 
-  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out samples` (use `--gzvcf` for comressed VCF files)
+  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out samples` (use `--gzvcf` for compressed VCF files)
     to identify samples with potential errors / problems
   - Plot graph with `./00-scripts/utility_scripts/plot_relatedness_graphs.R samples.relatedness 0.5`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
 #### 2.3. Heterozygosity
 
-  - Use `vcftools --het --vcf <INPUT_VCF> --out samples` (use `--gzvcf` for comressed VCF files)
+  - Use `vcftools --het --vcf <INPUT_VCF> --out samples` (use `--gzvcf` for compressed VCF files)
   - Plot heterozygosity graph (see steps below)
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
   - Format data with:
@@ -496,7 +505,7 @@ awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
 
 #### 2.4. Remove bad samples
 
-  - Create list of all unwanted samples from subsections  2.2, and 2.3 (one sample name per line)
+  - Create list of all unwanted samples from subsections 2.2, and 2.3 (one sample name per line)
   - Filter original populations VCF with `06_filter_samples_with_list.py`
   - This will create an unfiltered VCF where the bad samples are removed
 
@@ -564,15 +573,15 @@ scripts. The input parameters are described by the scripts themselves.
 
 ```bash
 # Denovo
-00-scripts/11_extract_unlinked_snps.py
+./00-scripts/11_extract_unlinked_snps.py
 
 # Reference
-00-scripts/11_extract_unlinked_snps_genome.py
+./00-scripts/11_extract_unlinked_snps_genome.py
 ```
 
 ### 7. Missing data imputation
 
-Impute missing data in a VCF using Admixture ancestry relationships
+Impute missing data in a VCF using admixture ancestry relationships
 
 /!\ **WARNING** /!\  
 
@@ -583,16 +592,16 @@ of software will not accept missing data in its input VCF.
 
 #### Limitations of the ancestry-based missing data imputation
 
-- Light: Admixture is slow with big datasets. You can thin down your SNP dataset
+- Light: admixture is slow with big datasets. You can thin down your SNP dataset
   if this becomes problematic (see admixture manual).
 - Light: Using all the SNPs versus using only neutral SNPs with admixture can
   change the ancestry estimation of samples. For example, the CV could vary
   differently as a function of K.
-- Light: Even using cross-validation in Admixture (CV values), the best K value is
+- Light: Even using cross-validation in admixture (CV values), the best K value is
   chosen by the user and so the groups and ancestry will vary. This will have
   an impact on the imputation but the approach should be fairly robust around K
   values that make biological sense.
-- **Moderate**: Admixture requires that the individuals be unrelated. Some level
+- **Moderate**: admixture requires that the individuals be unrelated. Some level
   of half-sibs or full sibs is probably OK, but watch out for datasets with a lot
   of related samples. You can use the relatedness part of the filtration steps
   listed above to check that.
@@ -601,9 +610,9 @@ of software will not accept missing data in its input VCF.
   problematic for admixture. You need to assert that this pattern is not present
   in your dataset (using plink) or remove the loci succeptible to this from
   your VCF before using vcf_impute. See details in the procedure below.
-- **IMPORTANT**: Admixture is a poor choice for samples with a continuous
+- **IMPORTANT**: admixture is a poor choice for samples with a continuous
   genetic gradient, a pattern of isolation by distance or a dataset with a lot
-  of populations with very low or unequal sample numebrs.  Using a k-nearest
+  of populations with very low or unequal sample numbers. Using a k-nearest
   neighbors approach may be better in this case.
 - **VERY IMPORTANT**: Large genomic features, such as big inversions, can create
   strong groupings in admixture but that group structure would only apply to
@@ -625,7 +634,7 @@ of software will not accept missing data in its input VCF.
 
 1. Format contig/scaffold names
 
-In order to use admixture, contig/scaffold names (refered to as chromosomes in
+In order to use admixture, contig/scaffold names (referred to as chromosomes in
 admixture) must be integers. We use the following script to correct this. Make
 sure the output vcf is EXACTLY named `input_renamed.vcf`. The input VCF can be
 compressed with gzip.
@@ -634,7 +643,7 @@ compressed with gzip.
 ./00-scripts/12_rename_vcf_scaffolds_for_plink.py <input.vcf> input_renamed.vcf
 ```
 
-And check for patterns of identify by missing and potentialy filter the VCF to
+And check for patterns of identify by missing and potentially filter the VCF to
 remove the SNPs responsible of any such pattern (not covered in this document).
 
 ```bash
@@ -686,57 +695,12 @@ singletons or analyse the different categories of SNPs separately.
   - Run population genomics analyses
   - Publish a paper!
 
-## For the Methods section of your paper
+## Example Materials and Methods section
 
-Here is a summary of informations that should go in the Methods section of your paper.
-
-### Sample preparation
-
-- Data prepared, SNPs VCF generated and filtered using:
-  - [STACKS](http://catchenlab.life.illinois.edu/stacks/) <version> (eg: 1.48 or 2.54)
-  - [stacks_workflow](https://github.com/enormandeau/stack_workflow) <version> (eg: 2.5.4)
-- Raw data cleaned with Cutadapt <version> (eg: 2.1)
-- Samples extracted with `process_radtags` (part of STACKS)
-
-### Denovo
-
-- **STACKS2 pipeline (Denovo)**
-  - ustacks (ex. params: -m 4, -M 3, -N 5)
-  - cstacks (ex. params: -n 3)
-  - sstacks (ex. params: na)
-  - tsv2bam (ex. params: na)
-  - gstacks (ex. params: --max-clipped 0.1)
-  - populations (ex. params: -p 2, -r 0.6, --fasta-loci, --vcf)
-
-### Reference genome
-
-- Cleaned and demultiplexed reads aligned to genome with:
-  - bwa <version> (eg: 0.7.17-r1188)
-  - samtools <version> (eg: 1.8)
-
-- **STACKS2 pipeline (Reference genome)**
-  - gstacks (ex. params: --max-clipped 0.1)
-  - populations (ex. params: -p 2, -r 0.6, --ordered-export, --fasta-loci, --vcf)
-
-### Filtering
-
-- STACKS VCF filtered a first time with `05_filter_vcf_fast.py` (ex. params: 4 60 2 3)
-- Create graphs to find samples with high missing data `05_filter_vcf.py` (ex. params: -g)
-- Decide missing data threshold and remove these samples with `06_filter_samples_with_list.py`
-- Look for sample relatedness and heterozygosity problems in new VCF with vcftools
-- Remove them with `06_filter_samples_with_list.py`
-- If needed, regroup populations into larger groups to prevent spurious filtering
-- Filter this new VCF with `05_filter_vcf_fast.py` (ex. params: 4 60 0 3)
-- Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
-  - `./00-scripts/08_extract_snp_duplication_info.py`
-  - `./00-scripts/09_classify_snps.R`
-  - `./00-scripts/10_split_vcf_in_categories.py`
-- Keep only SNPS that are unlinked within loci with `11_extract_unlinked_snps.py`
-- Impute missing data with admixture
+See file `STEPS_for_MM.md`
 
 ### Running into problems
 
-1. Consider joining the [STACKS Google
-   group](https://groups.google.com/forum/#!forum/stacks-users)
+1. Consider joining the [STACKS Google group](https://groups.google.com/forum/#!forum/stacks-users)
 1. [Biostar](https://www.biostars.org) is a useful bioinformatics forum.
 1. [Stack Overflow (no link with STACKS)](https://stackoverflow.com/) is an essential programming forum.
