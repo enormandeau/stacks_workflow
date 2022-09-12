@@ -697,7 +697,7 @@ singletons or analyse the different categories of SNPs separately.
 
 ## Example Materials and Methods section
 
-See file `STEPS.md`
+See file `STEPS_for_MM.md`
 
 ### Running into problems
 
