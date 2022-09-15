@@ -670,6 +670,11 @@ mv *.P *.Q 11-admixture/
 grep -h CV 11-admixture/*.log | sort -V  # May not work on MacOs or BSD descendents because of the -V option
 grep -h CV 11-admixture/*.log | cut -d " " -f 4,3 | awk '{print $2,$1}' | sort -n
 
+# Create CV plot with gnuplot
+grep -h CV 11-admixture/*.log | sort -V | awk '{print $3,$4}' | cut -d "=" -f 2 | perl -pe 's/\)://' | awk '{print $2,$1}' > data
+
+gnuplot -p -e "set nokey; plot 'data' using 2:1 w l; pause -1"
+
 # Look at (crude) graphs of group memberships to assist in choosing the K value
 # (Thanks to Nicolas Leroux for the original plot R script!)
 # The .png files will be found in the 11-admixture folder

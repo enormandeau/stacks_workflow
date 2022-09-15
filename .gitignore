@@ -71,6 +71,7 @@
 11-admixture/*
 12-results/*
 99-project_info/*
+DELIVERED*
 GSNAP*.sh
 PSTACKS*.sh
 all_samples_for_alignment.txt
