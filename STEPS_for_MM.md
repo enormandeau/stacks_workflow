@@ -46,7 +46,7 @@ VCF file, this time excluding all the unwanted samples that either missed too
 much data, were too similar to others or had high heterozygosity and proceeded
 to filter this VCF again (05_filter_vcf_fast.py, params: 4 70 0 3) with the
 same parameters. Using a modified HD plot approach, we then sought to remove
-SNPs that seemed to display sings of paralogy or over-merging (scripts 08, 09
+SNPs that seemed to display signs of paralogy or over-merging (scripts 08, 09
 and 10 from stacks_workflow). Keeping only canonical SNPs, referred to as
 singletons, we removed SNPs that were in high linkage disequilibrium. In these
 cases, we kept only one SNP.
