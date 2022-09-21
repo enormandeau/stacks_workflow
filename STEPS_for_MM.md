@@ -4,11 +4,11 @@ Informations for Materials and Methods
 
 ## Data preparation
 
-Data preparation, genotyping and filtration were done using STACKS v2.59
-(https://catchenlab.life.illinois.edu/stacks/) and stacks_workflow v2.59
+Data preparation, genotyping and filtration were done using STACKS v2.62
+(https://catchenlab.life.illinois.edu/stacks/) and stacks_workflow v2.62
 (https://github.com/enormandeau/stacks_workflow). Briefly, cutadapt v1.18 (-e
 0.2 -m 50) was used to trim reads for quality. Samples were demultiplexed with
-process_radtags v2.59 (-c -r -t 80 -q -s 0 --barcode_dist_1 2 -E phred33
+process_radtags v2.62 (-c -r -t 80 -q -s 0 --barcode_dist_1 2 -E phred33
 --renz_1 pstI --renz_2 mspI). 
 
 ## Genotyping
