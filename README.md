@@ -500,7 +500,7 @@ awk '{print $5,$1,$1}' samples.het | cut -d "_" -f 1,2 > samples.het.data
   - Extract samples below that threshold with:
 
 ```bash
-awk '$1 < -0.4 {print $2}' samples.het.data > samples.het.ids
+awk '$1 < -0.4 {print $2}' samples.het.data > bad_samples_het.ids
 ```
 
 #### 2.4. Remove bad samples
