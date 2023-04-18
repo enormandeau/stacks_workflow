@@ -25,11 +25,10 @@ d$Color[d$MedRatio < 0.25] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.75] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$color[d$PropHet > 0.5] = highcov
-d$Color[d$Fis < -0.55] = duplicated
-d$Color[d$Fis + d$MedRatio < -0.14] = duplicated
-#d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
-d$Color[d$Fis + d$MedRatio * 8 < 2] = duplicated
+d$Color[d$Fis < -0.38] = duplicated
+d$Color[d$Fis + d$MedRatio < -0.00] = duplicated
+d$Color[d$Fis + d$MedRatio * 3 < 0.70] = duplicated
+#d$Color[d$Fis + d$MedRatio * 8 < 2.2] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.8] = diverged
