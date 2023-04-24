@@ -1,11 +1,13 @@
 #!/usr/bin/Rscript
 
+# TODO Permit list of specific K values separated by commas
+
 library(RColorBrewer)
 color_scheme="Spectral"
 
-# Usage: plotADMIXTURE.r -p <prefix> -i <info file, 2-column file with ind name and population/species name> 
+# Usage: plotADMIXTURE.r -p <prefix> -i <info file, 2-column file with ind name and population/species name>
 #                        -k <max K value> -l <comma-separated list of populations/species in the order to be plotted>
-# This R script makes barplots for K=2 and all other K values until max K (specified with -k). It labels the individuals 
+# This R script makes barplots for K=2 and all other K values until max K (specified with -k). It labels the individuals
 # and splits them into populations or species according to the individual and population/species names in the 2-column file specified with -i.
 # The order of populations/species follows the list of populations/species given with -l.
 # Usage example: plotADMIXTURE.r -p fileXY -i file.ind.pop.txt -k 4 -pop pop1,pop2,pop3
@@ -17,23 +19,25 @@ color_scheme="Spectral"
 # ind4 pop3
 
 # Author: Joana Meier, September 2019
+# Modified by Eric Normandeau, 2024-04-24
 
 # Read in the arguments
 library("optparse")
 option_list = list(
-  make_option(c("-p", "--prefix"), type="character", default=NULL, 
+  make_option(c("-p", "--prefix"), type="character", default=NULL,
               help="prefix name (with path if not in the current directory)", metavar="character"),
-  make_option(c("-i", "--infofile"), type="character", default=NULL, 
+  make_option(c("-i", "--infofile"), type="character", default=NULL,
               help="info text file containing for each individual the population/species information", metavar="character"),
-  make_option(c("-k", "--maxK"), type="integer", default=NULL, 
+  make_option(c("-k", "--maxK"), type="integer", default=NULL,
               help="maximum K value", metavar="integer"),
-  make_option(c("-m", "--minK"), type="integer", default=2, 
+  make_option(c("-m", "--minK"), type="integer", default=2,
               help="minimum K value", metavar="integer"),
-  make_option(c("-l", "--populations"), type="character", default=NULL, 
+  make_option(c("-l", "--populations"), type="character", default=NULL,
               help="comma-separated list of populations/species in the order to be plotted", metavar="character"),
-  make_option(c("-o", "--outPrefix"), type="character", default="default", 
+  make_option(c("-o", "--outPrefix"), type="character", default="default",
               help="output prefix (default: name provided with prefix)", metavar="character")
-) 
+)
+
 opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
@@ -41,13 +45,13 @@ opt = parse_args(opt_parser)
 if (is.null(opt$prefix)){
   print_help(opt_parser)
   stop("Please provide the prefix", call.=FALSE)
-}else if (is.null(opt$infofile)){
+} else if (is.null(opt$infofile)){
   print_help(opt_parser)
   stop("Please provide the info file", call.=FALSE)
-}else if (is.null(opt$maxK)){
+} else if (is.null(opt$maxK)){
   print_help(opt_parser)
   stop("Please provide the maximum K value to plot", call.=FALSE)
-}else if (is.null(opt$populations)){
+} else if (is.null(opt$populations)){
   print_help(opt_parser)
   stop("Please provide a comma-separated list of populations/species", call.=FALSE)
 }
@@ -67,7 +71,7 @@ names(labels) = c("ind", "pop")
 # Add a column with population indices to order the barplots
 # Use the order of populations provided as the fourth argument (list separated by commas)
 labels$n = factor(labels$pop, levels=unlist(strsplit(opt$populations, ",")))
-levels(labels$n) = c(1:length(levels(labels$n)))
+levels(labels$n) = c(1: length(levels(labels$n)))
 labels$n = as.integer(as.character(labels$n))
 
 # read in the different admixture output files
@@ -87,9 +91,10 @@ for(i in 1:length(rep)) {
 spaces = spaces[-length(spaces)]
 
 # Plot the cluster assignments as a single bar for each individual for each K as a separate row
-png(file=paste0(opt$outPrefix, ".png"), width = 3000, height = 1800, res=200)
+#png(file=paste0(opt$outPrefix, ".png"), width = 3000, height = 1800, res=200)
+pdf(file=paste0(opt$outPrefix, ".pdf"), width = 8, height = 5)
 
-    par(mfrow=c(maxK-1, 1),
+    par(mfrow=c(maxK - 1, 1),
         mar=c(0, 1, 0, 0),
         oma=c(2, 1, 9, 1),
         mgp=c(0, 0.2, 0),
@@ -109,9 +114,9 @@ png(file=paste0(opt$outPrefix, ".png"), width = 3000, height = 1800, res=200)
     axis(3, at=bp, labels=labels$ind[order(labels$n)], las=2, tick=F, cex=0.6, )
 
     # Plot higher K values
-    if(maxK>minK) {
-     lapply(2: (maxK-1),
-            function(x) barplot(t(as.matrix(tbl[[x]][order(labels$n), ])),
+    if(maxK > minK) {
+
+     lapply(2: (maxK-1), function(x) barplot(t(as.matrix(tbl[[x]][order(labels$n), ])),
                                 col=brewer.pal(n=x+1, "Spectral"),
                                 xaxt="n",
                                 border=NA,
@@ -120,7 +125,8 @@ png(file=paste0(opt$outPrefix, ".png"), width = 3000, height = 1800, res=200)
                                 space=spaces))
     }
 
-    axis(1, at=c(which(spaces==inter_pop_space), bp[length(bp)])-diff(c(1, which(spaces==inter_pop_space), bp[length(bp)]))/2, 
-     labels=unlist(strsplit(opt$populations, ",")), cex=2)
+    axis(1, at=c(which(spaces==inter_pop_space),
+         bp[length(bp)])-diff(c(1, which(spaces==inter_pop_space),bp[length(bp)]))/2,
+         labels=unlist(strsplit(opt$populations, ",")), cex=2)
 
 dev.off()
