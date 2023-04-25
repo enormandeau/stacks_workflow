@@ -19,7 +19,7 @@ color_scheme="Spectral"
 # ind4 pop3
 
 # Author: Joana Meier, September 2019
-# Modified by Eric Normandeau, 2024-04-24
+# Modified by Eric Normandeau, 2023-04-24
 
 # Read in the arguments
 library("optparse")
