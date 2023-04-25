@@ -43,6 +43,7 @@
 *.ttf
 *.vcf
 *.vcf.gz
+*.weir.fst
 *.xls
 *.xlsx
 *.zip
@@ -87,6 +88,7 @@ logfiles
 nohup.out
 numreads_per_sample*
 population_map.txt
+populations
 sample_files*
 samples.het
 samples.relatedness
