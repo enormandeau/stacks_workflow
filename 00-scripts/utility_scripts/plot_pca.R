@@ -2,8 +2,10 @@
 
 # Usage:
 #     <program> prefix popmap npc_to_plot output
-#     prefix : prefix to  012 files; ex : test to read test.012, test.012.indv 7 test.012.pos
-#     popmap :: 2tab delimited column: first = ind name, second = pop. no header
+#     prefix: prefix to  012 files; ex : test to read test.012, test.012.indv 7 test.012.pos
+#     popmap: 2tab delimited column: first = ind name, second = pop. no header
+#     npc_to_plot: number of PCs to plot
+#     output: Name of output file
 # 
 # Note:
 #     FILE SHOULD BE IMPUTED, will not be performed in this script Use 02_impute.py to perform simple imputation
