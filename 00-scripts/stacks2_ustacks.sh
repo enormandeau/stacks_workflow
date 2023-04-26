@@ -12,8 +12,8 @@ INFO_FILES_FOLDER="01-info_files"
 POP_MAP="population_map.txt"
 
 # Number of CPUs
-NUM_CPU="32"
+NUM_CPU="60"
 
 # Gnu Parallel version
-ls -1 "$SAMPLE_FOLDER"/*.gz |
+ls -1 -S "$SAMPLE_FOLDER"/*.gz |
     parallel -j "$NUM_CPU" ustacks -f {} -o "$STACKS_FOLDER" -i {#} -p 1 -m 4 -M 3 -N 5 -H --deleverage
