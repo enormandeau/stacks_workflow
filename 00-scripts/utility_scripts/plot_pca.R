@@ -59,7 +59,8 @@ PCA_plot <- function(pca, Group, pcvector=c(1, 2)) {
     ggplot(aes_string(x = paste0("PC", pcvector[1]),
                       y = paste0("PC", pcvector[2]))) +
 
-    geom_point(aes(col = Group, shape = Group)) +
+    geom_point(aes(col = Group)) +
+    #geom_point(aes(col = Group, shape = Group %% 6)) +
 
     stat_ellipse(aes(col = as.factor(Group))) +
 
@@ -84,8 +85,8 @@ for( i in seq(1: NPC_to_plot)[c(T, F)]) {
         List_plot[[paste(i)]] <- PCA_plot(pca, ind$V2, c(i, i-1))
     }
 
-    ggsave(paste0(output, "_", i, ".png"), plot = List_plot[[paste(i)]], device = "png")
-    ggsave(paste0(output, "_", i, ".pdf"), plot = List_plot[[paste(i)]], device = "pdf")
+    ggsave(paste0(output, "_", (i+1)/2, ".png"), plot = List_plot[[paste(i)]], device = "png")
+    ggsave(paste0(output, "_", (i+1)/2, ".pdf"), plot = List_plot[[paste(i)]], device = "pdf")
 
     #ggsave(paste0(output, "_", i, ".png"), plot = List_plot[[paste(i)]] +
     #   scale_color_manual(values = c("red", "blue")), device = "png")
