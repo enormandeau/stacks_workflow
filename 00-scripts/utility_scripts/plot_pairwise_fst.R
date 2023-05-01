@@ -5,7 +5,7 @@ library(tidyverse)
 
 # Parse user input
 args = commandArgs(trailingOnly=TRUE)
-input_file = args[1]
+input_file = args[1] # Output from get_pairwise_fst.sh
 
 # Read data
 data = rev(read.table(input_file, header=T, sep="\t"))

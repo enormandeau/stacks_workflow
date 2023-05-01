@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Inputs
-VCF="$1"    # Compressed VCF
+VCF="$1"    # Compressed, imputed VCF
 POPS="$2"   # File with one population name per line
 POPMAP="$3" # Population map with two columns, full sample name then population
 OUT="$4"    # Output file name
