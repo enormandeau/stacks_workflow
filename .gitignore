@@ -71,7 +71,7 @@
 08-genome/*
 09-population_vcfs/*
 10-log_files/*
-11-admixture/*
+11-admixture*
 12-results/*
 99-project_info/*
 DELIVERED*
