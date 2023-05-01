@@ -85,8 +85,19 @@ for( i in seq(1: NPC_to_plot)[c(T, F)]) {
         List_plot[[paste(i)]] <- PCA_plot(pca, ind$V2, c(i, i-1))
     }
 
-    ggsave(paste0(output, "_", (i+1)/2, ".png"), plot = List_plot[[paste(i)]], device = "png")
-    ggsave(paste0(output, "_", (i+1)/2, ".pdf"), plot = List_plot[[paste(i)]], device = "pdf")
+    ggsave(paste0(output, "_", (i+1)/2, ".png"),
+           plot = List_plot[[paste(i)]],
+           device = "png",
+           height=8,
+           width=10,
+           units="in")
+
+    ggsave(paste0(output, "_", (i+1)/2, ".pdf"),
+           plot = List_plot[[paste(i)]],
+           device = "pdf",
+           height=8,
+           width=10,
+           units="in")
 
     #ggsave(paste0(output, "_", i, ".png"), plot = List_plot[[paste(i)]] +
     #   scale_color_manual(values = c("red", "blue")), device = "png")
