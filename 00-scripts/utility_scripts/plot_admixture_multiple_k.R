@@ -5,12 +5,19 @@
 library(RColorBrewer)
 color_scheme="Spectral"
 
-# Usage: plotADMIXTURE.r -p <prefix> -i <info file, 2-column file with ind name and population/species name>
-#                        -k <max K value> -l <comma-separated list of populations/species in the order to be plotted>
-# This R script makes barplots for K=2 and all other K values until max K (specified with -k). It labels the individuals
-# and splits them into populations or species according to the individual and population/species names in the 2-column file specified with -i.
-# The order of populations/species follows the list of populations/species given with -l.
+# Usage: plotADMIXTURE.r -p <prefix>
+#                       -i <info file, 2-column file with ind name and population/species name>
+#                       -k <max K value>
+#                       -l <comma-separated list of populations/species in the order to be plotted>
+
+# This R script makes barplots for K=2 and all other K values until max K
+# (specified with -k). It labels the individuals and splits them into
+# populations or species according to the individual and population/species
+# names in the 2-column file specified with -i.  The order of
+# populations/species follows the list of populations/species given with -l.
+
 # Usage example: plotADMIXTURE.r -p fileXY -i file.ind.pop.txt -k 4 -pop pop1,pop2,pop3
+
 # In this example, the script would use the files fileXY.2.Q, fileXY.3.Q, fileXY.4.Q to make barplots for the three populations.
 # file.ind.pop.txt should contain one line for each individual in the same order as in the admixture files e.g.
 # ind1 pop1
@@ -96,7 +103,7 @@ pdf(file=paste0(opt$outPrefix, ".pdf"), width = 8, height = 5)
 
     par(mfrow=c(maxK - 1, 1),
         mar=c(0, 1, 0, 0),
-        oma=c(2, 1, 9, 1),
+        oma=c(2, 1, 1, 1),
         mgp=c(0, 0.2, 0),
         xaxs="i",
         cex.lab=1.2,
@@ -111,18 +118,21 @@ pdf(file=paste0(opt$outPrefix, ".pdf"), width = 8, height = 5)
               yaxt="n",
               space=spaces)
 
-    axis(3, at=bp, labels=labels$ind[order(labels$n)], las=2, tick=F, cex=0.6, )
+    # Add sample names at top
+    # axis(3, at=bp, labels=labels$ind[order(labels$n)], las=2, tick=F, cex=0.6, )
+    # Add to par(mfrow above to get sample names
+    # oma=c(2, 1, 9, 1),
 
     # Plot higher K values
     if(maxK > minK) {
 
-     lapply(2: (maxK-1), function(x) barplot(t(as.matrix(tbl[[x]][order(labels$n), ])),
-                                col=brewer.pal(n=x+1, "Spectral"),
-                                xaxt="n",
-                                border=NA,
-                                ylab=paste0("K=", x+1),
-                                yaxt="n",
-                                space=spaces))
+        lapply(2: (maxK-1), function(x) barplot(t(as.matrix(tbl[[x]][order(labels$n), ])),
+                                                col=brewer.pal(n=x+1, "Spectral"),
+                                                xaxt="n",
+                                                border=NA,
+                                                ylab=paste0("K=", x+1),
+                                                yaxt="n",
+                                                space=spaces))
     }
 
     axis(1, at=c(which(spaces==inter_pop_space),

@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Inputs
-VCF="$1"    # Compressed VCF
+VCF="$1"    # Compressed, imputed VCF
 POPS="$2"   # File with one population name per line
-OUT="$3"    # Output file name
+POPMAP="$3" # Population map with two columns, full sample name then population
+OUT="$4"    # Output file name
 
 # Prepare output file
 rm "$OUT"
@@ -14,7 +15,7 @@ cat "$POPS" |
     while read i
     do
         echo "$i"
-        grep "$i" popmap_for_admixture_plot.tsv | cut -f 1 > population_"$i".ids
+        grep "$i" "$POPMAP" | cut -f 1 > population_"$i".ids
     done
 
 # Get Fst values with vcftools
