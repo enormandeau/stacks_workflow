@@ -88,6 +88,7 @@ log_*
 logfiles
 nohup.out
 numreads_per_sample*
+population_genomics/*
 population_map.txt
 populations
 sample_files*
