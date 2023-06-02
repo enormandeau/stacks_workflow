@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Load vcftools
+
 # Inputs
 VCF="$1"    # Compressed, imputed VCF
 POPS="$2"   # File with one population name per line
