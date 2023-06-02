@@ -6,7 +6,7 @@ library(RColorBrewer)
 color_scheme="Spectral"
 
 # Usage: plotADMIXTURE.r -p <prefix>
-#                       -i <info file, 2-column file with ind name and population/species name>
+#                       -i <info file, 2-column file with header and \t pop>
 #                       -k <max K value>
 #                       -l <comma-separated list of populations/species in the order to be plotted>
 
@@ -70,7 +70,7 @@ if(opt$outPrefix=="default") opt$outPrefix=opt$prefix
 prefix=opt$prefix
 
 # Get individual names in the correct order
-labels = read.table(opt$infofile)
+labels = read.table(opt$infofile, header=T)[, c(1, 2)]
 
 # Name the columns
 names(labels) = c("ind", "pop")
