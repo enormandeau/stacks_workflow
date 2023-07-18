@@ -2,7 +2,7 @@
 
 # Global variables
 GENOMEFOLDER="08-genome"
-GENOME="inversion_contig.fasta"
+GENOME="genome.fasta"
 DATAFOLDER="04-all_samples"
 NCPU="$1"
 
@@ -15,13 +15,13 @@ fi
 # Index genome if not alread done
 # bwa index "$GENOMEFOLDER"/"${GENOME%.fasta}"
 
-module load samtools/1.8
-module load bwa/0.7.17
+#module load samtools/1.8
+#module load bwa/0.7.17
 
-for file in $(ls -1 "$DATAFOLDER"/*_R1_*.fastq.gz)
+for file in $(ls -1 "$DATAFOLDER"/*.1.fq.gz)
 do
     # Name of uncompressed file
-    file2=$(echo "$file" | perl -pe 's/_R1_/_R2_/')
+    file2=$(echo "$file" | perl -pe 's/\.1.fq.gz/\.2.fq.gz/')
     echo "Aligning file $file $file2" 
 
     name=$(basename "$file")
