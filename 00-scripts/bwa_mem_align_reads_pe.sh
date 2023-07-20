@@ -2,7 +2,7 @@
 
 # Global variables
 GENOMEFOLDER="08-genome"
-GENOME="inversion_contig.fasta"
+GENOME="genome.fasta"
 DATAFOLDER="04-all_samples"
 NCPU="$1"
 
@@ -15,13 +15,13 @@ fi
 # Index genome if not alread done
 # bwa index "$GENOMEFOLDER"/"${GENOME%.fasta}"
 
-module load samtools/1.8
-module load bwa/0.7.17
+#module load samtools/1.8
+#module load bwa/0.7.17
 
-for file in $(ls -1 "$DATAFOLDER"/*_R1_*.fastq.gz)
+for file in $(ls -1 "$DATAFOLDER"/*.1.fq.gz)
 do
     # Name of uncompressed file
-    file2=$(echo "$file" | perl -pe 's/_R1_/_R2_/')
+    file2=$(echo "$file" | perl -pe 's/\.1.fq.gz/\.2.fq.gz/')
     echo "Aligning file $file $file2" 
 
     name=$(basename "$file")
@@ -29,7 +29,10 @@ do
     ID="@RG\tID:ind\tSM:ind\tPL:Illumina"
 
     # Align reads 1 step
-    bwa mem -t "$NCPU" -R "$ID" "$GENOMEFOLDER"/"$GENOME" "$DATAFOLDER"/"$name" "$DATAFOLDER"/"$name2" 2> /dev/null | samtools view -Sb -q 10 - > "$DATAFOLDER"/"${name%.fq.gz}".bam
+    bwa mem -t "$NCPU" \
+        -R "$ID" \
+        "$GENOMEFOLDER"/"$GENOME" "$DATAFOLDER"/"$name" "$DATAFOLDER"/"$name2" 2> /dev/null | 
+        samtools view -Sb -q 10 - > "$DATAFOLDER"/"${name%.fq.gz}".bam
         #samtools view -Sb -q 20 -f 83 -f 163 -f 99 -f 147 - > "$DATAFOLDER"/"${name%.fq.gz}".bam
 
     # Sort and index
@@ -37,4 +40,7 @@ do
         "$DATAFOLDER"/"${name%.fq.gz}".bam
 
     samtools index "$DATAFOLDER"/"${name%.fq.gz}".sorted.bam
+
+    # Cleanup
+    #rm "$DATAFOLDER"/"${name%.fq.gz}".bam
 done
