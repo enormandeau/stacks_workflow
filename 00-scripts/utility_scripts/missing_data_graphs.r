@@ -15,7 +15,7 @@ png(graph_name, width=1000, height=500)
     par(mar=c(8,5,4,2))
 
     # Create basic boxplot
-    boxplot(data$ProportionMissing ~ data$Population,
+    boxplot(data$ProportionMissing ~ as.factor(data$Population),
             main="Proportion of missing genotypes by population",
             xlab="",
             ylab="Proportion of missing genotypes",
