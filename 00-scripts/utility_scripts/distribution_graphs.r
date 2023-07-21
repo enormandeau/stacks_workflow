@@ -5,9 +5,10 @@ folder = read.table(".temp_graph_folder", stringsAsFactors=F)[1,1]
 
 # Get data
 data = read.table(paste(folder, "graph_data.tsv", sep="/"), header=T)
+data$Population = as.factor(data$Population)
 
 # Iterate over parameters
-for (param in levels(data$Parameter)) {
+for (param in levels(as.factor(data$Parameter))) {
     a = data[data$Parameter == param & data$Population == "global", ]
     xmax = max(a[,3])
     xmin = min(a[,3])
