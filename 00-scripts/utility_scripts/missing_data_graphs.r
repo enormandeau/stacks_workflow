@@ -36,7 +36,7 @@ png(graph_name, width=1000, height=500)
     }
 
     # Add all data points
-    points(as.numeric(data$Population),
+    points(as.factor(data$Population),
            data$ProportionMissing,
            pch=19,
            col="#00000022",
