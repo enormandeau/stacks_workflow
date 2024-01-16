@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 """Calculate new volumes needed to normalize the sequencing depth per sample
 and then create a DNA plate template with these volumes for a new library.
 
@@ -59,7 +59,7 @@ try:
     minimumReads = int(sys.argv[2])
     totalVolume = float(sys.argv[3])
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
 # Main
@@ -71,6 +71,7 @@ chips = [x.replace(".infos", "") for x in os.listdir(folder) if x.endswith(".inf
 
 # Iterate over the chips
 for chip in sorted(chips):
+    print(chip)
 
     # File names
     info_file = os.path.join(folder, chip + ".infos")
@@ -78,7 +79,7 @@ for chip in sorted(chips):
 
     # Load data into pandas data frame
     info_df = pd.read_csv(info_file, sep="\t", header=None, usecols=range(6))
-    info_df = info_df.ix[:,0:5]
+    info_df = info_df.loc[:,0:5]
     info_df.columns = ["Chip", "Barcode", "Population", "Individual", "PopID", "Well"]
 
     numseq_df = pd.read_csv(numseq_file, sep=" ", header=None)
@@ -111,7 +112,7 @@ for chip in sorted(chips):
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
 
     # if volume smaller than 1 and missing > 0, correct volume to 1
-    data.loc[(data["Volume"] < 0.5) & (data["Missing"] > 0), "Volume"] = 0.5
+    data.loc[(data["Volume"] < 1.0) & (data["Missing"] > 0), "Volume"] = 1.0
     data.loc[data["NumReads"] > targetNumReads, "Volume"] = -0.1
 
     # calculate number of low samples
@@ -126,26 +127,22 @@ for chip in sorted(chips):
 
 
 
+
     # Create output csv file
     rows = list("ABCDEFGH")
     columns = range(1, 13)
 
-    # Open Excel template, get link to first sheet and print name of chip
+    # Open Excel template, get link to first sheet and print(name of chip)
     rb = open_workbook("01-info_files/normalization_template.xls", formatting_info=True)
     wb = copy(rb)
     s = wb.get_sheet(0)
 
     # Print some useful informations (chip name, some stats...)
-    print chip
-    print "  {0:.2f} million usable reads produced. {1} samples had too few reads.".format(sum_reads / 1000000., num_low_samples)
-    print "  {0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
-        float(data.shape[0]) * (float(targetNumReads) - sum_reads /
-            float(data.shape[0])) / 1000000.0,
-        targetNumReads / 1000000.0)
-    print "  {0:.2f} more chips needed.".format(
-        (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads))
+    print(f"  {round(sum_reads / 1000000., 2)} million usable reads produced. {num_low_samples} samples had too few reads.")
+    print(f"  {round(float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0, 2)} million reads still needed to reach {targetNumReads / 1000000.0} million reads per sample.")
+    print(f"  {round((float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads), 2)} more chips needed.")
 
-    setOutCell(s, 6, 0, chip + " (total: " + str(int(totalVolume)) + "ul)")
+    setOutCell(s, 6, 0, chip + " (total: ~" + str(int(totalVolume)) + "ul)")
     setOutCell(s, 2, 10, "{0:.2f} million usable reads produced. {1} samples had too few reads".format(
         sum_reads / 1000000., num_low_samples))
     setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
@@ -163,8 +160,8 @@ for chip in sorted(chips):
     for well in data["Well"]:
         row = well[0]
         column = int(well[1:])
-        volume = float(data.loc[data["Well"] == well, "Volume"])
-        volume = "{0:.1f}".format(round(volume, 1))
+        volume = data.loc[data["Well"] == well, "Volume"]
+        volume = round(volume.iloc[0], 1)
         plate.loc[row, column] = volume
 
     # Output data array for debugging purposes
