@@ -41,7 +41,8 @@ num_miss = 0
 num_snps = 0
 coverages = []
 
-print(f"VCF: {input_vcf.split('/')[-1]}")
+print(f"{input_vcf.split('/')[-1]}")
+print("--")
 
 with myopen(input_vcf, "rt") as infile:
     for line in infile:
@@ -64,7 +65,7 @@ with myopen(input_vcf, "rt") as infile:
             num_snps += 1
             num_geno += num_samples
             num_miss += data.count("./.")
-            coverages += [int(x.split(":")[1]) for x in data if x != "./."]
+            coverages += [int(x.split(":")[1]) for x in data if x != "./." and x.split(":")[1] != "0"]
 
 print(f"Samples: {num_samples}")
 print(f"SNPs: {num_snps}")
