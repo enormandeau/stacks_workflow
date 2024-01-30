@@ -692,6 +692,12 @@ convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -trim -border 0x4 -g
 # Replace K by the desired number of clusters
 ./00-scripts/13_impute_missing.py input_vcf 11-admixture/input_renamed.K.Q output_vcf
 ```
+
+## Report VCF stats
+```bash
+parallel -k ./00-scripts/utility_scripts/vcf_stats.py ::: <LIST-OF-VCFs> > vcf_stats.txt
+```
+
 ### 8. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze only
