@@ -4,7 +4,7 @@
 #     <program> prefix popmap numPC output
 #     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
 #           Prepared with vcftools -012
-#     popmap: 2+ tab delimited columns WITH HEADER: first = Sample, second = GROUP
+#     popmap: 2+ tab delimited columns WITH HEADER: first = Sample, second = Group
 #           There can be as many columns as wanted after the first two
 #     numPC: number of PCs to plot
 #     output: Name of output file
@@ -37,7 +37,7 @@ Usage:
 
     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
         Prepared with vcftools -012
-    popmap: 2+ tab delimited columns WITH HEADER: first = Sample, second = GROUP
+    popmap: 2+ tab delimited columns WITH HEADER: first = Sample, second = Group
         There can be as many columns as wanted after the first two
     numPC: number of PCs to plot
     output: Name of output file
