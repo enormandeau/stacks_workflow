@@ -70,10 +70,11 @@ if(opt$outPrefix=="default") opt$outPrefix=opt$prefix
 prefix=opt$prefix
 
 # Get individual names in the correct order
-labels = read.table(opt$infofile, header=T)[, c(1, 2)]
+labels = read.table(opt$infofile, header=T)
 
 # Name the columns
-names(labels) = c("ind", "pop")
+names(labels)[1:2] = c("ind", "pop")
+print(head(labels))
 
 # Add a column with population indices to order the barplots
 # Use the order of populations provided as the fourth argument (list separated by commas)
@@ -99,7 +100,7 @@ spaces = spaces[-length(spaces)]
 
 # Plot the cluster assignments as a single bar for each individual for each K as a separate row
 #png(file=paste0(opt$outPrefix, ".png"), width = 3000, height = 1800, res=200)
-pdf(file=paste0(opt$outPrefix, ".pdf"), width = 8, height = 5)
+pdf(file=paste0(opt$outPrefix, ".pdf"), width = 16, height = 5)
 
     par(mfrow=c(maxK - 1, 1),
         mar=c(0, 1, 0, 0),
@@ -119,9 +120,10 @@ pdf(file=paste0(opt$outPrefix, ".pdf"), width = 8, height = 5)
               space=spaces)
 
     # Add sample names at top
-    # axis(3, at=bp, labels=labels$ind[order(labels$n)], las=2, tick=F, cex=0.6, )
-    # Add to par(mfrow above to get sample names
-    # oma=c(2, 1, 9, 1),
+    #axis(3, at=bp, labels=labels$Depth[order(labels$n)], las=2, tick=F, cex=0.1, )
+
+    #Add to par(mfrow above to get sample names
+    #oma=c(2, 1, 9, 1),
 
     # Plot higher K values
     if(maxK > minK) {
