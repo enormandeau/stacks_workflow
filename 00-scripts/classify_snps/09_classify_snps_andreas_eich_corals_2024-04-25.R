@@ -20,7 +20,7 @@ mas =           "#FFAA0022" # orange
 d$Color = singleton
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.1] = duplicated
+d$Color[d$Fis < -0.3] = duplicated
 d$Color[d$Fis + d$MedRatio < 0.08 & d$Fis < 0] = duplicated
 #d$Color[d$Fis + d$MedRatio * 3 < 0.78 & d$Fis < 0] = duplicated
 #d$Color[d$Fis + d$MedRatio * 8 < 2.3 & d$Fis < 0] = duplicated
