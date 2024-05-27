@@ -36,10 +36,10 @@ d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
 d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.98] = lowconf
+#d$Color[d$Fis > 0.98] = lowconf
 
 # Loci with high coverage
-d$Color[d$MedCovHom > 200 | d$MedCovHet > 200] = highcov
+d$Color[d$MedCovHom > 250 | d$MedCovHet > 250] = highcov
 
 # Too few samples with rare allele
 d$Color[data$NumHet + data$NumRare < 5] = mas
