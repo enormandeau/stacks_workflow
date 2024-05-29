@@ -695,7 +695,7 @@ convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -trim -border 0x4 -g
 
 ## Report VCF stats
 ```bash
-parallel -k ./00-scripts/utility_scripts/vcf_stats.py ::: <LIST-OF-VCFs> > vcf_stats.txt
+parallel -k ./00-scripts/utility_scripts/vcf_stats.py ::: <LIST-OF-VCFs> | tee vcf_stats.txt
 ```
 
 ### 8. Onwards!
