@@ -64,7 +64,7 @@ with myopen(input_vcf, "rt") as infile:
             data = l[9:]
             num_snps += 1
             num_geno += num_samples
-            num_miss += data.count("./.")
+            num_miss += len([x for x in data if "./." in x])
             coverages += [int(x.split(":")[1]) for x in data if x != "./." and x.split(":")[1] != "0"]
 
 print(f"Samples: {num_samples}")
