@@ -63,7 +63,7 @@ with myopen(input_vcf) as infile:
                     ]
 
             # allele ratio of snp
-            allele_ratios = [x[1] / sum(x) for x in data_heterozygotes]
+            allele_ratios = [x[1] / sum(x) if sum(x) else 0.0 for x in data_heterozygotes]
             try:
                 med_ratio = statistics.median(allele_ratios)
                 avg_ratio = statistics.mean(allele_ratios)
