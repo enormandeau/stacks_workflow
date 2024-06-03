@@ -42,7 +42,7 @@ d$Color[d$Fis > 0.6] = lowconf
 d$Color[d$MedCovHom > 60 | d$MedCovHet > 60] = highcov
 
 # Too few samples with rare allele
-d$Color[data$NumHet + data$NumRare < 5] = mas
+d$Color[data$NumHet + data$NumRare < 3] = mas
 
 # Extract bad loci infos
 bad_snps = d$Color != singleton
