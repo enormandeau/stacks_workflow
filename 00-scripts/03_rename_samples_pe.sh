@@ -17,6 +17,7 @@ ALL_SAMPLES_FOLDER="04-all_samples"
 # Renaming files
 # Left files
 grep -vE '^#' "$INFO_FILES"/sample_information.csv |
+    grep -v '_R2	' |
     cut -f 1-4 |
     perl -pe 's/\.f(ast)*q\.gz//' |
     perl -pe 's/\t/\/sample_/' |
@@ -28,11 +29,13 @@ cut -f 2 renaming_01l.txt | sort -u > renaming_02l.txt
 
 # Right files
 grep -vE '^#' "$INFO_FILES"/sample_information.csv |
+    grep -v '_R1	' |
     cut -f 1-4 |
     perl -pe 's/\.f(ast)*q\.gz//' |
     perl -pe 's/\t/\/sample_/' |
     perl -pe 's/([ACTG]+)\t/\1.fq.gz\t/' |
     awk '{print $1"\t04-all_samples/"$2"_"$3".fq.gz"}' |
+    perl -pe 's/_R2/_R1/' |
     perl -pe 's/\.fq\.gz/.2.fq.gz/g' > renaming_01r.txt
 
 cut -f 2 renaming_01r.txt | sort -u > renaming_02r.txt
@@ -98,4 +101,3 @@ cat renaming_02r.txt |
     done | tee 10-log_files/"$TIMESTAMP"_03_rename_samples_complex.log
 
 rm renaming_01r.txt renaming_02r.txt 2> /dev/null
-
