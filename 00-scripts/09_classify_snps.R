@@ -7,7 +7,7 @@ output_file = paste0(input_file, ".categorized")
 
 # Load data
 data = read.table(input_file, header=T, stringsAsFactors=F)
-d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHet", "MedCovHom")]
+d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHom", "MedCovHet")]
 
 singleton =     "#00000011" # black
 duplicated =    "#FF000022" # red
@@ -20,8 +20,8 @@ mas =           "#FFAA0022" # orange
 d$Color = singleton
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.35] = lowconf # & d$PropHomRare > 0.00] = lowconf
-d$Color[d$MedRatio > 0.65] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio < 0.20] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio > 0.80] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
 d$Color[d$Fis < -0.4] = duplicated
@@ -36,10 +36,10 @@ d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
 d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.6] = lowconf
+d$Color[d$Fis > 0.9] = lowconf
 
 # Loci with high coverage
-d$Color[d$MedCovHom > 60 | d$MedCovHet > 60] = highcov
+d$Color[d$MedCovHom > 50 | d$MedCovHet > 100] = highcov
 
 # Too few samples with rare allele
 d$Color[data$NumHet + data$NumRare < 3] = mas
@@ -66,8 +66,8 @@ cat("SNPs")
 print(report)
 
 # Plots
-png(paste0(input_file, "_1.png"), width=1200, height=950)
-    plot(d[,1:4], pch=16, cex=1, col=d$Color)
+png(paste0(input_file, "_1.png"), width=1400, height=1200)
+    plot(d[,1:6], pch=16, cex=1, col=d$Color)
 invisible(dev.off())
 
 png(paste0(input_file, "_2.png"), width=1200, height=950)
