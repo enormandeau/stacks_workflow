@@ -23,7 +23,7 @@ boxplot(data[,1] ~ data[,3],
         outpch=19,
         outcex=1.3,
         outcol="black",
-        main="Boxplot of heterozygosity per samples regrouped by populations",
+        main="Boxplot of heterozygosity per samples by populations",
         xlab="Population",
         ylab="Heterozygosity by group from vcftools")
 
