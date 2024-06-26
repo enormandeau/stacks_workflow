@@ -10,16 +10,23 @@ output_figure = paste0(input_file, ".graph.png")
 data = read.table(input_file, header=T, stringsAsFactors=F)
 
 # Figure
-png(output_figure, width=1000, height=600)
-par(mar=c(12, 4, 2, 2) + 0.1)
+if (length(unique(data[,3])) > 10) {
+
+    png(output_figure, width=1900, height=500)
+
+} else {
+
+    png(output_figure, width=1000, height=400)
+}
 
 boxplot(data[,1] ~ data[,3],
         outpch=19,
+        outcex=1.3,
         outcol="black",
         main="Boxplot of heterozygosity per samples regrouped by populations",
-        xlab="",
-        xaxt="n",
+        xlab="Population",
         ylab="Heterozygosity by group from vcftools")
 
-axis(1, at=1:length(unique(data[,3])), las=2, labels=unique(data[,3]))
+points(factor(data[,3]), data[,1], pch=4, col="#00000099")
+
 dev.off()
