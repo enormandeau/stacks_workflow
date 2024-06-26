@@ -48,7 +48,14 @@ with myopen(input_vcf, "rt") as infile:
     for line in infile:
         l = line.strip().split("\t")
 
-        if "##fileDate=" in line:
+        if not line.startswith("#"):
+            data = l[9:]
+            num_snps += 1
+            num_geno += num_samples
+            num_miss += len([x for x in data if "./." in x])
+            coverages += [int(x.split(":")[1]) for x in data if x != "./." and x.split(":")[1] != "0"]
+
+        elif "##fileDate=" in line:
             date = l[0].split("=")[1]
             date = date[:4] + "-" + date[4: 6] + "-" + date[6:]
             print(f"Date: {date}")
@@ -59,13 +66,6 @@ with myopen(input_vcf, "rt") as infile:
         
         elif l[0] == "#CHROM":
             num_samples = len(l[9:])
-
-        elif not line.startswith("#"):
-            data = l[9:]
-            num_snps += 1
-            num_geno += num_samples
-            num_miss += len([x for x in data if "./." in x])
-            coverages += [int(x.split(":")[1]) for x in data if x != "./." and x.split(":")[1] != "0"]
 
 print(f"Samples: {num_samples}")
 print(f"SNPs: {num_snps}")
