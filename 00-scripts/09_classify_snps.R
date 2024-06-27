@@ -70,8 +70,8 @@ cat("SNPs")
 print(report)
 
 # Plots
-png(paste0(input_file, "_1.png"), width=2000, height=2000)
-    plot(d[,1:6], pch=16, cex=1, col=d$Color)
+png(paste0(input_file, "_1.png"), width=1200, height=1000)
+    plot(d[,1:6], pch=16, cex=0.6, col=d$Color)
 invisible(dev.off())
 
 png(paste0(input_file, "_2.png"), width=1200, height=950)
