@@ -112,7 +112,7 @@ for chip in sorted(chips):
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
 
     # if volume smaller than 1 and missing > 0, correct volume to 1
-    data.loc[(data["Volume"] < 1.0) & (data["Missing"] > 0), "Volume"] = 1.0
+    data.loc[(data["Volume"] < 0.5) & (data["Missing"] > 0), "Volume"] = 0.5
     data.loc[data["NumReads"] > targetNumReads, "Volume"] = -0.1
 
     # calculate number of low samples
