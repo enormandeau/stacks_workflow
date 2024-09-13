@@ -92,9 +92,11 @@ for chip in sorted(chips):
 
 
 
-
     # Computations
     sum_reads = sum(data["NumReads"])
+
+    # Ensure at least 10 reads per sample (to avoid crash in correction computation)
+    data.loc[data["NumReads"] == 0, "NumReads"] = 10
 
     # calculate number of missing reads
     data["Missing"] = targetNumReads - data["NumReads"]
@@ -139,7 +141,9 @@ for chip in sorted(chips):
 
     # Print some useful informations (chip name, some stats...)
     print(f"  {round(sum_reads / 1000000., 2)} million usable reads produced. {num_low_samples} samples had too few reads.")
+
     print(f"  {round(float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0, 2)} million reads still needed to reach {targetNumReads / 1000000.0} million reads per sample.")
+
     print(f"  {round((float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads), 2)} more chips needed.")
 
     setOutCell(s, 6, 0, chip + " (total: ~" + str(int(totalVolume)) + "ul)")
