@@ -383,7 +383,7 @@ especially for big projects.
 - Remove them with `06_filter_samples_with_list.py`
 - If needed, regroup populations into larger groups to prevent spurious filtering
 - Filter this new VCF with `05_filter_vcf_fast.py` (ex. params: 4 60 0 3)
-- Classify SNPs into singleton, duplicated, diverged, high coverage, low confidence, MAS with
+- Classify SNPs into canonical and deviant (duplicated, diverged, high coverage, low confidence, low MAS)
   - `./00-scripts/08_extract_snp_duplication_info.py`
   - `./00-scripts/09_classify_snps.R`
   - `./00-scripts/10_split_vcf_in_categories.py`
@@ -568,7 +568,7 @@ values, we need to be careful when comparing sample genotypes between two SNPs.
 As a result, when comparing two SNPs, we only use samples that have no missing
 data in both SNPs and who possess the rare allele in at least one of the SNPs.
 
-Using the singleton SNPs, keep only unlinked SNPs using one the following
+Using the canonical SNPs, keep only unlinked SNPs using one the following
 scripts. The input parameters are described by the scripts themselves.
 
 ```bash
@@ -701,7 +701,7 @@ parallel -k ./00-scripts/utility_scripts/vcf_stats.py ::: <LIST-OF-VCFs> | tee v
 ### 8. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze only
-singletons or analyse the different categories of SNPs separately.
+canonical SNPs or analyse the different categories of SNPs separately.
 
   - Run population genomics analyses
   - Publish a paper!

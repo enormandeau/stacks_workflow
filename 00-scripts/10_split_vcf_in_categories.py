@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Split VCF into singleton vs other duplicated categories
+"""Split VCF into canonical vs deviant SNPs
 
 Usage:
     <program> input_vcf input_categories
