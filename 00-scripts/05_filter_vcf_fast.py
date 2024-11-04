@@ -2,7 +2,7 @@
 """Filtering SNPs in VCF file output by STACKS1 or STACKS2 minimaly
 
 Usage:
-    <program> input_vcf min_cov percent_genotypes max_pop_fail min_mas output_vcf
+    <program> input_vcf min_cov percent_genotypes max_pop_fail min_mas output_vcf [group_all]
 
 Where:
     input_vcf: is the name of the VCF file to filter (can be compressed with gzip, ending in .gz)
@@ -11,6 +11,7 @@ Where:
     max_pop_fail: maximum number of populations that can fail percent_genotypes <int> eg: 1, 2, 3
     min_mas: minimum number of samples with rare allele <int> eg: 2 or more
     output_vcf: is the name of the filtered VCF (can be compressed with gzip, ending in .gz)
+    group_all: whether to consider all samples as one population <int> 0, 1 (default: 0)
 
 WARNING:
     The filtering is done purely on a SNP basis. Loci are not taken into account.
@@ -28,12 +29,17 @@ def myopen(_file, mode="rt"):
     else:
         return open(_file, mode=mode)
 
-def get_population_info(line):
+def get_population_info(line, group_all):
     """Return dictionary of population names with a list of their sample
     positions in the lines of the VCF file.
     """
 
     pops = [x.split("_")[0] for x in line.split("\t")[9:]]
+
+    if group_all:
+        for i, p in enumerate(pops):
+            pops[i] = "pop1"
+
     unique_pops = sorted(list(set(pops)))
     print("  " + str(len(pops)) + " samples in " + str(len(unique_pops)) + " populations")
     pop_dict = {}
@@ -75,6 +81,14 @@ except:
     print(__doc__)
     sys.exit(1)
 
+# group_all
+try:
+    group_all = int(sys.argv[7])
+except:
+    group_all = 0
+
+assert group_all in [0, 1], "Only zero (0) or one (1) are accepted for group_all"
+
 # Validate parameter values
 assert min_cov >= 0, "min_cov needs to be zero or a positive integer"
 assert percent_genotypes >= 0 and percent_genotypes <= 100.0, "percent_genotypes needs to be a number between zero and 100"
@@ -97,7 +111,7 @@ with myopen(input_vcf) as infile:
             # Sample names
             if line.startswith("#CHROM"):
                 outfile.write(line)
-                pop_info = get_population_info(line)
+                pop_info = get_population_info(line, group_all)
                 continue
 
             # Print progress
