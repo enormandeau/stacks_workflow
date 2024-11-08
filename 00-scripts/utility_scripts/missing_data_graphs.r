@@ -9,7 +9,7 @@ graph_name = paste(folder, subfolder, "missing_data.png", sep="/")
 data = read.table(paste(folder, "missing_data.tsv", sep="/"), header=T)
 
 # Produce graph by population
-png(graph_name, width=1000, height=500)
+png(graph_name, width=1000, height=900)
 
     # Increase bottom margin for population names
     par(mar=c(8,5,4,2))
