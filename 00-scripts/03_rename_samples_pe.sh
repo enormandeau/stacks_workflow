@@ -29,7 +29,7 @@ cut -f 2 renaming_01l.txt | sort -u > renaming_02l.txt
 
 # Right files
 grep -vE '^#' "$INFO_FILES"/sample_information.csv |
-    grep -v '_R1	' |
+    grep -v '_R2	' |
     cut -f 1-4 |
     perl -pe 's/\.f(ast)*q\.gz//' |
     perl -pe 's/\t/\/sample_/' |
