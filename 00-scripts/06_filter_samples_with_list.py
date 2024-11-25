@@ -36,7 +36,7 @@ except:
     print(__doc__)
     sys.exit(1)
 
-if not filtering_type in ["wanted", "unwanted"]:
+if not filtering_type in ["w", "u", "wanted", "unwanted"]:
     print("ERROR: filtering_type must be 'wanted' or 'unwanted'")
     sys.exit(2)
 
@@ -62,10 +62,10 @@ with myopen(input_vcf) as infile:
                     if s in listed_samples:
                         sample_ids.add(i)
 
-                if filtering_type == "wanted":
+                if filtering_type in ["w", "wanted"]:
                     wanted_ids = [x for x in range(len(samples)) if x in sample_ids]
 
-                elif filtering_type == "unwanted":
+                elif filtering_type in ["u", "unwanted"]:
                     wanted_ids = [x for x in range(len(samples)) if x not in sample_ids]
 
             infos = l[:9]

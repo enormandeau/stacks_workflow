@@ -50,6 +50,7 @@
 */population_map*
 */sample_information*
 *BWA_temp*
+*WARNING*
 *_filtered_*
 *barcode*
 *data*
@@ -77,6 +78,7 @@
 DELIVERED*
 GSNAP*.sh
 PSTACKS*.sh
+admixture_cv_values.txt
 all_samples_for_alignment.txt
 bad_samples*
 batch_1.*
