@@ -5,6 +5,9 @@ Usage:
     <program> input_vcf chunk_size output_vcf
 
 Input and output VCFs can be compressed with gzip
+
+NOTE: Genome was split with:
+    fasta_split_sliding_window.py genome.fasta 1000000 0 genome.split.fasta
 """
 
 # Modules
