@@ -19,10 +19,11 @@ make no claim about its usefulness in other contexts, but it has been and
 continues to be useful to other groups.
 
 **Using 3D-GBS**: For datasets using the 3D-GBS protocol with the 3 following
-enzymes (`PstI/NsiI/MspI`), the process_radtags scripts from stascks_workflow
-already contain the following parameters (`-c -r -q --barcode_dist_1 2`) that
-will lead to extracting all the loci if you provide the following enzymes:
-`nsiI` and `mspI`.
+enzymes (`PstI/NsiI/MspI`), the process_radtags script should use the following
+parameters (`-c -r -q --barcode_dist_1 2`) that will lead to extracting all the
+loci if you provide the following enzymes: `nsiI` and `mspI`.
+
+Note that these parameters are already part of stacks_workflow.
 
 You can [read more about 3D-GBS in the published article](https://plantmethods.biomedcentral.com/articles/10.1186/s13007-023-00990-7).
 
