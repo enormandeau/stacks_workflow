@@ -6,11 +6,7 @@ Developed by [Eric Normandeau](https://github.com/enormandeau) in
 [Louis Bernatchez](http://www.bio.ulaval.ca/louisbernatchez/presentation.htm)'s
 laboratory.
 
-**NOTE!**: stacks_workflow no longer supports STACKS1. For the latest version
-of stack_workflow that does, find `v2.5.2_last_version_supporting_STACKS1` in
-the releases on the stack_workflow GitHub page.
-
-**Warning!**: this software is provided "as is", without warranty of any kind,
+This software is provided "as is", without warranty of any kind,
 express or implied, including but not limited to the warranties of
 merchantability, fitness for a particular purpose and noninfringement. In no
 event shall the authors or copyright holders be liable for any claim, damages
@@ -19,8 +15,17 @@ arising from, out of or in connection with the software or the use or other
 dealings in the software.
 
 stack_workflow was developed with the needs of our research group in mind. We
-make no claim about its usefulness to other groups or in other contexts, but it
-has been and continues to be useful to other groups.
+make no claim about its usefulness in other contexts, but it has been and
+continues to be useful to other groups.
+
+**Using 3D-GBS**: For datasets using the 3D-GBS protocol with the 3 following
+enzymes (`PstI/NsiI/MspI`), the process_radtags script should use the following
+parameters (`-c -r -q --barcode_dist_1 2`) that will lead to extracting all the
+loci if you provide the following enzymes: `nsiI` and `mspI`.
+
+Note that these parameters are already part of stacks_workflow.
+
+You can [read more about 3D-GBS in the published article](https://plantmethods.biomedcentral.com/articles/10.1186/s13007-023-00990-7).
 
 ## Licence
 

@@ -25,20 +25,11 @@ except:
     print(__doc__)
     sys.exit(1)
 
-# Report on:
-# --
-# VCF name (input_vcf)
-# STACKS version (version)
-# File date (date)
-# Number of samples (num_samples)
-# Number of SNPs
-# Proportion of missing
-# Median coverage
-
 # Extract stats
 num_geno = 0
 num_miss = 0
 num_snps = 0
+loci = set()
 coverages = []
 
 print(f"{input_vcf.split('/')[-1]}")
@@ -50,9 +41,12 @@ with myopen(input_vcf, "rt") as infile:
             l = line.strip().split("\t")
 
             if not line.startswith("#"):
-                data = l[9:]
+                locus = l[2].split(":")[0]
+                loci.add(locus)
                 num_snps += 1
                 num_geno += num_samples
+
+                data = l[9:]
                 num_miss += len([x for x in data if "./." in x])
                 coverages += [int(x.split(":")[1]) for x in data if x != "./." and x.split(":")[1] != "0"]
 
@@ -70,10 +64,12 @@ with myopen(input_vcf, "rt") as infile:
                 num_populations = len(set([x.split("_")[0] for x in l[9:]]))
                 print(f"Samples: {num_samples}")
                 print(f"Populations: {num_populations}")
+
     except EOFError:
         print("\n  !! WARNING:\n  !! Results below are from an incomplete compressed VCF file\n")
 
 print(f"SNPs: {num_snps}")
+print(f"loci: {len(loci)}")
 print(f"Missing: {round(100 * num_miss / num_geno, 2)}%")
 print(f"Coverage mean: {round(statistics.mean(coverages), 2)}")
 print(f"Coverage median: {statistics.median(coverages)}")
