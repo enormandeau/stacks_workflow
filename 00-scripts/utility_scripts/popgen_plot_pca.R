@@ -2,11 +2,12 @@
 
 # Usage:
 #     <program> prefix popmap numPC variable output
+#
 #     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
 #           Prepared with vcftools -012
 #     popmap: 2+ tab delimited columns WITH HEADER: first = Sample
 #           There can be as many columns as wanted after the first two but one of them
-#           must be the `variable` of interest
+#           must be `variable`
 #     numPC: number of PCs to plot
 #     output: Name of output file
 #
@@ -21,29 +22,29 @@ library(magrittr)
 library(ggplot2)
 
 # Parse user input
-if(length(commandArgs(trailingOnly = T)) == 5) {
+if(length(commandArgs(trailingOnly = T)) == 6) {
 
     ##read input file
     dat <- as.data.frame(fread(paste0(commandArgs(trailingOnly=T)[1], ".012"))[, -1])
     ind = as.data.frame(fread(paste0(commandArgs(trailingOnly=T)[1], ".012.indv"), header=F))
     popmap <- read.table(commandArgs(trailingOnly=T)[2], header=T)
     numPC <- as.numeric(commandArgs(trailingOnly=T)[3])
-    variable <- as.character(commandArgs(trailingOnly=T)[4])
-    output <- commandArgs(trailingOnly=T)[5]
+    variable1 <- as.character(commandArgs(trailingOnly=T)[4])
+    output <- commandArgs(trailingOnly=T)[6]
 
-    cat(paste0("Producing figure for: ", variable, "\n"))
+    cat(paste0("Producing figure for: ", variable1, "\n"))
 
 } else {
 
     cat("
 Usage:
-    <program> prefix popmap numPC output
+    <program> prefix popmap numPC variable output
 
     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
-        Prepared with vcftools -012
+          Prepared with vcftools -012
     popmap: 2+ tab delimited columns WITH HEADER: first = Sample
-        There can be as many columns as wanted after the first two but one of them
-        must be the `variable` of interest
+          There can be as many columns as wanted after the first two but one of them
+          must be `variable`
     numPC: number of PCs to plot
     output: Name of output file
 
@@ -57,12 +58,13 @@ Note:
 
 ##running pca
 ind <- merge(ind, popmap, by.x=1, by.y="Sample", sort=F)
-ind[, variable] = as.character(ind[, variable])
+ind[, variable1] = as.factor(ind[, variable1])
+
 pca <- prcomp(dat, scale=F)
 
 names(ind)[1] = "Sample"
 write.table(cbind(ind, pca$x[, 1:20]), paste0(output, "_used_samples_with_pca.tsv"), quote=F, row.names=F, sep="\t")
-#write.table(pca$x, "pc_loadings.tsv", quote=F, row.names=F, sep="\t")
+write.table(pca$x, "pc_loadings.tsv", quote=F, row.names=F, sep="\t")
 
 ###plots
 PCA_plot <- function(pca, ind, v1, pcvector=c(1, 2)) {
@@ -75,7 +77,7 @@ PCA_plot <- function(pca, ind, v1, pcvector=c(1, 2)) {
         ggplot(aes_string(x = paste0("PC", pcvector[1]),
                           y = paste0("PC", pcvector[2]))) +
 
-        geom_point(aes(col = ind[, v1], size=3, alpha=0.6, fill=NA)) +
+        geom_point(aes(col = ind[, v1]), size=3, alpha=0.6, fill=NA) +
 
         theme_bw() +
 

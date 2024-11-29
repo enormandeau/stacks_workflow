@@ -2,6 +2,7 @@
 
 # Usage:
 #     <program> prefix popmap numPC variable1 variable2 output
+#
 #     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
 #           Prepared with vcftools -012
 #     popmap: 2+ tab delimited columns WITH HEADER: first = Sample
@@ -38,20 +39,19 @@ if(length(commandArgs(trailingOnly = T)) == 6) {
 
     cat("
 Usage:
-    <program> prefix popmap numPC output
+    <program> prefix popmap numPC variable1 variable2 output
 
     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
-        Prepared with vcftools -012
+          Prepared with vcftools -012
     popmap: 2+ tab delimited columns WITH HEADER: first = Sample
-           There can be as many columns as wanted after the first two but two of them
-           must be the `variable1` and `variable2` of interest
+          There can be as many columns as wanted after the first two but two of them
+          must be the `variable1` and `variable2` of interest
     numPC: number of PCs to plot
     output: Name of output file
 
 Note:
     012 file must be created from imputed VCF
-
-")
+        ")
 
         quit()
 
@@ -59,7 +59,7 @@ Note:
 
 ##running pca
 ind <- merge(ind, popmap, by.x=1, by.y="Sample", sort=F)
-ind[, variable1] = as.character(ind[, variable1])
+ind[, variable1] = as.factor(ind[, variable1])
 ind[, variable2] = as.factor(ind[, variable2])
 
 pca <- prcomp(dat, scale=F)
