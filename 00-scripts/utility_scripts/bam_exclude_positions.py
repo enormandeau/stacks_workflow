@@ -8,8 +8,8 @@ Example with parallel:
     parallel -j 20 samtools view -h {} \| ../../00-scripts/utility_scripts/bam_exclude_positions.py \
             ../../highcov.bed \| samtools view -Sb \> ../{} ::: *.sorted.bam
 
-NOTE: Don't forget to index with:
-    samtools index *.bam
+Then index your bam files:
+    parallel samtools index ::: *.bam
 """
 
 # Modules
@@ -24,7 +24,7 @@ except:
     sys.exit(1)
 
 # Load positions into range dict
-size = 500
+exclusion_size = 500
 ranges = defaultdict(set)
 
 with open(bedfile, "rt") as infile:
@@ -32,10 +32,10 @@ with open(bedfile, "rt") as infile:
         l = line.strip().split("\t")
         chrom = l[0]
         pos = (int(l[1]) + int(l[2])) // 2
-        unwanted = pos // size
-        ranges[chrom].add(unwanted-1)
-        ranges[chrom].add(unwanted)
-        ranges[chrom].add(unwanted+1)
+        unwanted_region = pos // exclusion_size
+
+        # Also exclude preceding and following regions
+        ranges[chrom].update(range(unwanted_region-1, unwanted_region+2))
 
 # Read bam and remove unwanted regions
 for line in sys.stdin:
@@ -45,7 +45,7 @@ for line in sys.stdin:
     else:
         l = line.rstrip().split("\t")
         chrom = l[2]
-        pos = int(l[3]) // size
+        pos = int(l[3]) // exclusion_size
 
         if pos not in ranges[chrom]:
             print(line.rstrip())
