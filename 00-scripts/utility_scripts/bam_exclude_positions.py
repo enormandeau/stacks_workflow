@@ -4,7 +4,9 @@
 Usage:
     samtools view -h <INPUT.bam> | <this_program> bedfile | samtools view -Sb > <OUTPUT.bam>
 
-Example with parallel:
+First create highcov.bed with mosdepth
+
+Then remove the regions from your bamfiles with parallel:
     parallel -j 20 samtools view -h {} \| ../../00-scripts/utility_scripts/bam_exclude_positions.py \
             ../../highcov.bed \| samtools view -Sb \> ../{} ::: *.sorted.bam
 
