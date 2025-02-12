@@ -172,3 +172,4 @@ for chip in sorted(chips):
 
     # Write filled Excel template
     wb.save(chip + "_normalization.xls")
+    print()
