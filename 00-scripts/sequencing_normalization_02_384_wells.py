@@ -59,7 +59,7 @@ try:
     minimumReads = int(sys.argv[2])
     totalVolume = float(sys.argv[3])
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
 # Main
@@ -78,7 +78,7 @@ for chip in sorted(chips):
 
     # Load data into pandas data frame
     info_df = pd.read_csv(info_file, sep="\t", header=None)
-    info_df = info_df.ix[:,0:5]
+    info_df = info_df.iloc[:,0:6]
     info_df.columns = ["Chip", "Barcode", "Population", "Individual", "PopID", "Well"]
 
     numseq_df = pd.read_csv(numseq_file, sep=" ", header=None)
@@ -86,11 +86,6 @@ for chip in sorted(chips):
 
     # Merge infos and number of reads into one dataframe
     data = pd.merge(info_df, numseq_df, on="Barcode")
-
-
-
-
-
 
     # Computations
     sum_reads = sum(data["NumReads"])
@@ -135,15 +130,11 @@ for chip in sorted(chips):
     wb = copy(rb)
     s = wb.get_sheet(0)
 
-    # Print some useful informations (chip name, some stats...)
-    print chip
-    print "  {0:.2f} million usable reads produced. {1} samples had too few reads.".format(sum_reads / 1000000., num_low_samples)
-    print "  {0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
-        float(data.shape[0]) * (float(targetNumReads) - sum_reads /
-            float(data.shape[0])) / 1000000.0,
-        targetNumReads / 1000000.0)
-    print "  {0:.2f} more chips needed.".format(
-        (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads))
+    ## Print some useful informations (chip name, some stats...)
+    print(chip)
+    print("  {0:.2f} million usable reads produced. {1} samples had too few reads.".format(sum_reads / 1000000., num_low_samples))
+    print("  {0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0, targetNumReads / 1000000.0))
+    print("  {0:.2f} more chips needed.".format((float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads)))
 
     setOutCell(s, 6, 0, chip + " (total: " + str(int(totalVolume)) + "ul)")
     setOutCell(s, 2, 18, "{0:.2f} million usable reads produced. {1} samples had too few reads".format(
@@ -163,8 +154,8 @@ for chip in sorted(chips):
     for well in data["Well"]:
         row = well[0]
         column = int(well[1:])
-        volume = float(data.loc[data["Well"] == well, "Volume"])
-        volume = "{0:.1f}".format(round(volume, 1))
+        volume = data.loc[data["Well"] == well, "Volume"].iloc[0]
+        #volume = "{0:.1f}".format(round(volume, 1))
         plate.loc[row, column] = volume
 
     # Output data array for debugging purposes
