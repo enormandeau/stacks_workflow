@@ -47,6 +47,7 @@
 *.xls
 *.xlsx
 *.zip
+*.~lock*
 */population_map*
 */sample_information*
 *BWA_temp*
