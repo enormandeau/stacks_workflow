@@ -17,7 +17,8 @@ mkdir 03-samples/"$LANE" 2> /dev/null
 
 process_radtags \
     -i gzfastq \
-    -f 02-raw/trimmed/$LANE".fastq.gz" \
+    -1 02-raw/trimmed/"$LANE"".fastq.gz" \
+    -2 02-raw/trimmed/$(echo "$LANE" | perl -pe 's/_R1/_R2/')".fastq.gz" \
     -o 03-samples/"$LANE" \
     -b "$INFO_FILES"/"$TEMPBARCODES" \
     -c -r -t "$TRIM_LENGTH" \

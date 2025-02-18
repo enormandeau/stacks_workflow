@@ -5,7 +5,7 @@ NCPU=$4
 
 # Copy script as it was run
 SCRIPT=$0
-NAME=$(basename $0)
+NAME=$(basename "$0")
 LOG_FOLDER="10-log_files"
 INFO_FILES_FOLDER="01-info_files"
 SAMPLE_INFO="sample_information.csv"
@@ -18,7 +18,6 @@ if [[ -z "$NCPU" ]]
 then
     NCPU=1
 fi
-
 
 ### Global variable
 INFO_FILES="01-info_files"
@@ -33,5 +32,5 @@ echo -e "process_radtags command used:\n\n\
 
 # Extract reads
 cat $INFO_FILES/lane_info.txt |
-    parallel -j $NCPU 00-scripts/utility_scripts/process_radtags_2_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2 $LANE
+    parallel -j $NCPU ./00-scripts/utility_scripts/process_radtags_2_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2 $LANE
 
