@@ -36,7 +36,7 @@ d$Color[d$MedRatio < 0.2] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.8] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # High Fis
-d$Color[d$Fis > 0.9] = lowconf
+d$Color[d$Fis > 0.99] = lowconf
 
 # Loci with high coverage
 d$Color[d$MedCovHom > 200 | d$MedCovHet > 200] = highcov
