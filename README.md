@@ -369,8 +369,8 @@ options.
 ./00-scripts/stacks2_cstacks.sh
 ./00-scripts/stacks2_sstacks.sh
 ./00-scripts/stacks2_tsv2bam.sh
-./00-scripts/stacks2_gstacks.sh
-./00-scripts/stacks2_populations.sh
+./00-scripts/stacks2_gstacks_denovo.sh
+./00-scripts/stacks2_populations_denovo.sh
 ```
 
 ### With a reference genome
@@ -378,8 +378,8 @@ options.
 After the reads are aligned with bwa, run:
 
 ```bash
-./00-scripts/stacks2_gstacks.sh
-./00-scripts/stacks2_populations.sh
+./00-scripts/stacks2_gstacks_reference.sh
+./00-scripts/stacks2_populations_reference.sh
 ```
 ## Filtering the results
 
