@@ -300,6 +300,14 @@ number of reads per sample. Keep samples with low coverages if you are not sure
 what threshold to use at this point. We will filter the VCF for this later and
 will then have better information then.
 
+Note: if there are samples or populations specified in the population map that
+were deleted due to quality control, this can cause errors in gstacks below. To
+resolve, use the following function to update the population map to only include
+the samples that are present.
+```bash
+./00-scripts/reduce_population_map.sh
+```
+
 #### Align reads to a reference genome (optional)
 
 ##### Install `bwa <http://bio-bwa.sourceforge.net>`
