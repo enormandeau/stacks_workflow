@@ -324,12 +324,13 @@ bwa index ./08-genome/genome.fasta
 
 ### Align samples
 
-Different bwa alignment scripts are available in 00-scripts.
+Different bwa alignment scripts are available in 00-scripts. Add the number
+of cores to use after each script name.
 
 ```bash
 ./00-scripts/bwa_mem_align_reads.sh
 ./00-scripts/bwa_mem_align_reads_by_n_samples.sh
-./00-scripts/bwa_mem_align_reads_PE.sh
+./00-scripts/bwa_mem_align_reads_pe.sh
 ```
 
 ## STACKS pipeline
