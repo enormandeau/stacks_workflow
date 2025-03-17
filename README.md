@@ -189,6 +189,7 @@ lane/chip of each sample.
 - The fourth column contains the name of the sample (do not include the
   population name or abbreviation in the sample name).
 - Neither the population name nor the sample name should contain underscores `_`
+  or spaces
 - The fifth column contains a number or string identifying the populations. you
   can use the same as in the third column.
 - The sixth column contains the plate well identifier.
