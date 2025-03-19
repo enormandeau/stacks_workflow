@@ -339,7 +339,7 @@ quality control, this can cause errors in gstacks below. To resolve, use the
 following function to update the population map to only include the samples that 
 are present.
 ```bash
-./00-scripts/reduce_population_map.sh
+./00-scripts/utility_scripts/reduce_population_map.sh
 ```
 
 ## Edit script parameters
