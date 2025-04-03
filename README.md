@@ -189,6 +189,7 @@ lane/chip of each sample.
 - The fourth column contains the name of the sample (do not include the
   population name or abbreviation in the sample name).
 - Neither the population name nor the sample name should contain underscores `_`
+  or spaces
 - The fifth column contains a number or string identifying the populations. you
   can use the same as in the third column.
 - The sixth column contains the plate well identifier.
@@ -315,12 +316,13 @@ bwa index ./08-genome/genome.fasta
 
 ### Align samples
 
-Different bwa alignment scripts are available in 00-scripts.
+Different bwa alignment scripts are available in 00-scripts. Add the number
+of cores to use after each script name.
 
 ```bash
 ./00-scripts/bwa_mem_align_reads.sh
 ./00-scripts/bwa_mem_align_reads_by_n_samples.sh
-./00-scripts/bwa_mem_align_reads_PE.sh
+./00-scripts/bwa_mem_align_reads_pe.sh
 ```
 
 ## STACKS pipeline
@@ -329,6 +331,15 @@ Different bwa alignment scripts are available in 00-scripts.
 
 ```bash
 ./00-scripts/04_prepare_population_map.sh
+```
+
+Note: if there are samples or populations specified in the sample information file 
+and therefore are in the created population map but that were deleted above due to 
+quality control, this can cause errors in gstacks below. To resolve, use the 
+following function to update the population map to only include the samples that 
+are present.
+```bash
+./00-scripts/utility_scripts/reduce_population_map.sh
 ```
 
 ## Edit script parameters
@@ -358,8 +369,8 @@ options.
 ./00-scripts/stacks2_cstacks.sh
 ./00-scripts/stacks2_sstacks.sh
 ./00-scripts/stacks2_tsv2bam.sh
-./00-scripts/stacks2_gstacks.sh
-./00-scripts/stacks2_populations.sh
+./00-scripts/stacks2_gstacks_denovo.sh
+./00-scripts/stacks2_populations_denovo.sh
 ```
 
 ### With a reference genome
@@ -367,8 +378,8 @@ options.
 After the reads are aligned with bwa, run:
 
 ```bash
-./00-scripts/stacks2_gstacks.sh
-./00-scripts/stacks2_populations.sh
+./00-scripts/stacks2_gstacks_reference.sh
+./00-scripts/stacks2_populations_reference.sh
 ```
 ## Filtering the results
 

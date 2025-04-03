@@ -10,7 +10,7 @@ LOG_FOLDER="10-log_files"
 INFO_FILES_FOLDER="01-info_files"
 SAMPLE_INFO="sample_information.csv"
 
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+cp "$SCRIPT" "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 cp $INFO_FILES_FOLDER/$SAMPLE_INFO $LOG_FOLDER/"$TIMESTAMP"_"$SAMPLE_INFO"
 
 # Test if user specified a number of CPUs
@@ -33,4 +33,3 @@ echo -e "process_radtags command used:\n\n\
 # Extract reads
 cat $INFO_FILES/lane_info.txt |
     parallel -j $NCPU ./00-scripts/utility_scripts/process_radtags_2_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2 $LANE
-

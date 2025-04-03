@@ -32,4 +32,4 @@ echo -e "process_radtags command used:\n\n\
 
 # Extract reads
 cat $INFO_FILES/lane_info.txt |
-    parallel -j $NCPU ./00-scripts/utility_scripts/process_radtags_1_enzyme_pe.sh "$TRIM_LENGTH" "$ENZYME1" 
+    parallel -j $NCPU ./00-scripts/utility_scripts/process_radtags_1_enzyme.sh "$TRIM_LENGTH" "$ENZYME1" 
