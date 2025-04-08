@@ -21,4 +21,4 @@ cp $INFO_FILES_FOLDER/$POP_MAP $LOG_FOLDER/"$TIMESTAMP"_"$POP_MAP"
 # module load stacks/2.3e
 
 populations -P "$STACKS_FOLDER" -M "$INFO_FILES_FOLDER"/"$POP_MAP" \
-    -t "$NUM_CPU" -p 4 -r 0.6 --fasta-loci --vcf
+    -t "$NUM_CPU" -p 1 -r 0.5 --fasta-loci --vcf
