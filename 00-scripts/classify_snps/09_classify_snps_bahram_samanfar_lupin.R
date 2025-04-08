@@ -27,14 +27,14 @@ d$MedCovHom[d$MedCovHom > maxMedCovHom * 2] = maxMedCovHom * 2
 d$MedCovHet[d$MedCovHet > maxMedCovHet * 2] = maxMedCovHet * 2
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.20] = lowconf # & d$PropHomRare > 0.00] = lowconf
-d$Color[d$MedRatio > 0.80] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio < 0.25] = lowconf # & d$PropHomRare > 0.00] = lowconf
+d$Color[d$MedRatio > 0.75] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.1] = duplicated
+d$Color[d$Fis < -0.2] = duplicated
 d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
 d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
-d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
+d$Color[d$Fis + d$MedRatio * 8 < 1.3] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.8] = diverged
@@ -43,7 +43,7 @@ d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
 d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.99 & d$PropHomRare < 0.2] = lowconf
+d$Color[d$Fis > 0.9] = lowconf
 
 # Too few samples with rare allele
 d$Color[data$NumHet + data$NumRare < 3] = mas
