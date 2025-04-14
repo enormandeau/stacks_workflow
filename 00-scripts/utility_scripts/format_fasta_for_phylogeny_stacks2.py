@@ -7,7 +7,7 @@ prepare for phylogenetics analyses
 - Input and output files can be gzip compressed
 
 Usage:
-    ./00-scripts/utility_scripts/format_fasta_for_phylogeny_stacks2.py input_vcf input_fasta output_fasta
+    ./00-scripts/utility_scripts/format_fasta_for_phylogeny_stacks2.py input_vcf input_fasta input_genome output_fasta
 """
 
 # Modules
@@ -106,7 +106,7 @@ locus_dict = dict()
 sequences = fasta_iterator(input_fasta)
 
 for s in sequences:
-    locus_id, scaf, pos, sense = s.name.replace("CLocus_", "").replace("[", "").replace("]", "").replace(",", "").split()
+    locus_id, scaf, pos, sense = s.name.replace("CLocus_", "").replace("[", "").replace("]", "").replace(",", "").split(" ")
     s.name = " ".join([locus_id, scaf, pos])
     pos = int(pos)
     locus_dict[locus_id] = s
