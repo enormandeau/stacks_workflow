@@ -94,8 +94,8 @@ for chip in sorted(chips):
 
     # Computations
 
-    # Ensure at least 10 reads per sample (to avoid crash in correction computation)
-    data.loc[data["NumReads"] == 0, "NumReads"] = 10
+    ## Ensure at least 10 reads per sample (to avoid crash in correction computation)
+    #data.loc[data["NumReads"] == 0, "NumReads"] = 10
 
     # calculate number of missing reads
     data["Missing"] = targetNumReads - data["NumReads"]
@@ -114,8 +114,8 @@ for chip in sorted(chips):
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
 
     # if volume smaller than 1 and missing > 0, correct volume to 1
-    data.loc[(data["Volume"] < 1) & (data["Missing"] > 0), "Volume"] = 1
-    data.loc[data["NumReads"] > targetNumReads, "Volume"] = -0.01
+    data.loc[(data["Volume"] < 0.5) & (data["Missing"] > 0), "Volume"] = 0.5
+    data.loc[data["NumReads"] > targetNumReads, "Volume"] = 0.0
 
     # calculate number of low samples
     temp = (data["Missing"] == 0) & (data["NumReads"] < minimumReads)
