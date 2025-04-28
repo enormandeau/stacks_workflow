@@ -93,13 +93,13 @@ for chip in sorted(chips):
 
 
     # Computations
-    sum_reads = sum(data["NumReads"])
 
     # Ensure at least 10 reads per sample (to avoid crash in correction computation)
     data.loc[data["NumReads"] == 0, "NumReads"] = 10
 
     # calculate number of missing reads
     data["Missing"] = targetNumReads - data["NumReads"]
+    data.loc[data["Missing"] < 0, "Missing"] = 0.0
 
     # if too many reads, set missing to 0
     data.loc[data["NumReads"] > targetNumReads, "Missing"] = 0
@@ -114,8 +114,8 @@ for chip in sorted(chips):
     data["Volume"] = data["Correction"] / sum(data["Correction"]) * totalVolume
 
     # if volume smaller than 1 and missing > 0, correct volume to 1
-    data.loc[(data["Volume"] < 0.5) & (data["Missing"] > 0), "Volume"] = 0.5
-    data.loc[data["NumReads"] > targetNumReads, "Volume"] = -0.1
+    data.loc[(data["Volume"] < 1) & (data["Missing"] > 0), "Volume"] = 1
+    data.loc[data["NumReads"] > targetNumReads, "Volume"] = -0.01
 
     # calculate number of low samples
     temp = (data["Missing"] == 0) & (data["NumReads"] < minimumReads)
@@ -123,10 +123,6 @@ for chip in sorted(chips):
 
     # set volume to 0 if missing = 0 and numreads too low
     data.loc[(data["Missing"] == 0) & (data["NumReads"] < minimumReads), "Volume"] = 0.0
-
-
-
-
 
 
 
@@ -140,20 +136,23 @@ for chip in sorted(chips):
     s = wb.get_sheet(0)
 
     # Print some useful informations (chip name, some stats...)
-    print(f"  {round(sum_reads / 1000000., 2)} million usable reads produced. {num_low_samples} samples had too few reads.")
+    sum_missing = round(sum(data["Missing"]) / 1000000.0, 2)
+    sum_reads = round(sum(data["NumReads"]) / 1000000.0, 2)
+    target = round(targetNumReads / 1000000.0, 2)
+    print(f"  {sum_reads} million usable reads. {num_low_samples} samples had too few reads.")
+    print(f"  {sum_missing} million reads still needed to reach {target} million reads per sample.")
+    print(f"  {round(100*(sum_missing / sum_reads), 2)}% more sequencing needed.")
 
-    print(f"  {round(float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0, 2)} million reads still needed to reach {targetNumReads / 1000000.0} million reads per sample.")
 
-    print(f"  {round((float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads), 2)} more chips needed.")
 
+    # Write to Excel sheet
     setOutCell(s, 6, 0, chip + " (total: ~" + str(int(totalVolume)) + "ul)")
-    setOutCell(s, 2, 10, "{0:.2f} million usable reads produced. {1} samples had too few reads".format(
-        sum_reads / 1000000., num_low_samples))
-    setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
-        float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0,
-        targetNumReads / 1000000.0))
-    setOutCell(s, 2, 12, "{0:.2f} more chips needed.".format(
-        (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads)))
+
+    setOutCell(s, 2, 10, "{0:.2f} million usable reads. {1} samples had too few reads".format(sum_reads, num_low_samples))
+
+    setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(sum_missing, target))
+
+    setOutCell(s, 2, 12, "{0:.2f} more sequencing needed.".format(round(100*(sum_missing / sum_reads), 2)))
 
     # Create empty plate
     plate = pd.DataFrame(np.zeros([8, 12]))
