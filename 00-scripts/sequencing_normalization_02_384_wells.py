@@ -71,6 +71,7 @@ chips = [x.replace(".infos", "") for x in os.listdir(folder) if x.endswith(".inf
 
 # Iterate over the chips
 for chip in sorted(chips):
+    print(chip)
 
     # File names
     info_file = os.path.join(folder, chip + ".infos")
@@ -87,11 +88,18 @@ for chip in sorted(chips):
     # Merge infos and number of reads into one dataframe
     data = pd.merge(info_df, numseq_df, on="Barcode")
 
+
+
+
+
     # Computations
-    sum_reads = sum(data["NumReads"])
+
+    ## Ensure at least 10 reads per sample (to avoid crash in correction computation)
+    #data.loc[data["NumReads"] == 0, "NumReads"] = 10
 
     # calculate number of missing reads
     data["Missing"] = targetNumReads - data["NumReads"]
+    data.loc[data["Missing"] < 0, "Missing"] = 0.0
 
     # if too many reads, set missing to 0
     data.loc[data["NumReads"] > targetNumReads, "Missing"] = 0
@@ -118,9 +126,6 @@ for chip in sorted(chips):
 
 
 
-
-
-
     # Create output csv file
     rows = list("ABCDEFGHIJKLMNOP")
     columns = range(1, 25)
@@ -130,20 +135,24 @@ for chip in sorted(chips):
     wb = copy(rb)
     s = wb.get_sheet(0)
 
-    ## Print some useful informations (chip name, some stats...)
-    print(chip)
-    print("  {0:.2f} million usable reads produced. {1} samples had too few reads.".format(sum_reads / 1000000., num_low_samples))
-    print("  {0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0, targetNumReads / 1000000.0))
-    print("  {0:.2f} more chips needed.".format((float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads)))
+    # Print some useful informations (chip name, some stats...)
+    sum_missing = round(sum(data["Missing"]) / 1000000.0, 2)
+    sum_reads = round(sum(data["NumReads"]) / 1000000.0, 2)
+    target = round(targetNumReads / 1000000.0, 2)
+    print(f"  {sum_reads} million usable reads. {num_low_samples} samples had too few reads.")
+    print(f"  {sum_missing} million reads still needed to reach {target} million reads per sample.")
+    print(f"  {round(100*(sum_missing / sum_reads), 2)}% more sequencing needed.")
 
-    setOutCell(s, 6, 0, chip + " (total: " + str(int(totalVolume)) + "ul)")
-    setOutCell(s, 2, 18, "{0:.2f} million usable reads produced. {1} samples had too few reads".format(
-        sum_reads / 1000000., num_low_samples))
-    setOutCell(s, 2, 19, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(
-        float(data.shape[0]) * (float(targetNumReads) - sum_reads / float(data.shape[0])) / 1000000.0,
-        targetNumReads / 1000000.0))
-    setOutCell(s, 2, 20, "{0:.2f} more chips needed.".format(
-        (float(data.shape[0]) * targetNumReads - sum_reads) / float(sum_reads)))
+
+
+    # Write to Excel sheet
+    setOutCell(s, 6, 0, chip + " (total: ~" + str(int(totalVolume)) + "ul)")
+
+    setOutCell(s, 2, 18, "{0:.2f} million usable reads. {1} samples had too few reads".format(sum_reads, num_low_samples))
+
+    setOutCell(s, 2, 19, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(sum_missing, target))
+
+    setOutCell(s, 2, 20, "{0:.2f} more sequencing needed.".format(round(100*(sum_missing / sum_reads), 2)))
 
     # Create empty plate
     plate = pd.DataFrame(np.zeros([16, 24]))
