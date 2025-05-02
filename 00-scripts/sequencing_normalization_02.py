@@ -142,6 +142,7 @@ for chip in sorted(chips):
     print(f"  {sum_reads} million usable reads. {num_low_samples} samples had too few reads.")
     print(f"  {sum_missing} million reads still needed to reach {target} million reads per sample.")
     print(f"  {round(100*(sum_missing / sum_reads), 2)}% more sequencing needed.")
+    print()
 
 
 
