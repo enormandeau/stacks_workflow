@@ -6,7 +6,7 @@ Usage:
 
 Where:
     input_vcf is the name of the VCF file to filter (can be compressed with gzip, ending in .gz)
-    wanted_order
+    wanted_order has one sample name per line (identical to sample names from the VCF to treat)
     output_vcf is the name of the filtered VCF (can be compressed with gzip, ending in .gz)
 """
 
