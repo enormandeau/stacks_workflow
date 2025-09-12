@@ -1,19 +1,4 @@
 #!/usr/bin/env Rscript
-
-# Usage:
-#     <program> prefix popmap numPC variable output
-#
-#     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
-#           Prepared with vcftools -012
-#     popmap: 2+ tab delimited columns WITH HEADER: first = Sample
-#           There can be as many columns as wanted after the first two but one of them
-#           must be `variable`
-#     numPC: number of PCs to plot
-#     output: Name of output file
-#
-# Note:
-#     012 file must be created from imputed VCF
-
 # Code adapted from Florent Sylvestre, 2023-04-25
 
 # Modules
@@ -46,6 +31,7 @@ Usage:
           There can be as many columns as wanted after the first two but one of them
           must be `variable`
     numPC: number of PCs to plot
+    variable: Name of variable to use
     output: Name of output file
 
 Note:

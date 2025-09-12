@@ -20,30 +20,30 @@ mas =           "#FFAA0022" # orange
 d$Color = canonical
 
 # Loci with high coverage
-maxMedCovHom = 30
-maxMedCovHet = 50
+maxMedCovHom = 50
+maxMedCovHet = 200
 d$Color[d$MedCovHom > maxMedCovHom | d$MedCovHet > maxMedCovHet] = highcov
-d$MedCovHom[d$MedCovHom > maxMedCovHom * 3] = maxMedCovHom * 3
-d$MedCovHet[d$MedCovHet > maxMedCovHet * 3] = maxMedCovHet * 3
+d$MedCovHom[d$MedCovHom > maxMedCovHom * 2] = maxMedCovHom * 2
+d$MedCovHet[d$MedCovHet > maxMedCovHet * 2] = maxMedCovHet * 2
 
 # MedRatio is high/low and at least one rare allele homozygote
 d$Color[d$MedRatio < 0.30] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.70] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.1] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
-d$Color[d$Fis + d$MedRatio * 3 < 1.08] = duplicated
+d$Color[d$Fis < -0.2] = duplicated
+d$Color[d$Fis + d$MedRatio < 0.28] = duplicated
+d$Color[d$Fis + d$MedRatio * 3 < 0.98] = duplicated
 d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.8] = diverged
 d$Color[d$Fis + d$MedRatio * 2 < -0.00] = diverged
 d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
-#d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
+d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 
 # High Fis
-d$Color[d$Fis > 0.6] = lowconf
+d$Color[d$Fis > 0.7] = lowconf
 
 # Too few samples with rare allele
 d$Color[data$NumHet + data$NumRare < 3] = mas
@@ -71,7 +71,7 @@ print(report)
 
 # Plots
 png(paste0(input_file, "_1.png"), width=1200, height=1000)
-    plot(d[,1:6], pch=16, cex=0.6, col=d$Color)
+    plot(d[,1:6], pch=16, cex=1, col=d$Color)
 invisible(dev.off())
 
 png(paste0(input_file, "_2.png"), width=1200, height=950)

@@ -24,6 +24,7 @@ INFO_FILES="01-info_files"
 TRIM_LENGTH=$1 # Length to cut reads after process_radtags
 ENZYME1=$2 # Name of the enzyme (run 'process_radtags' without options for list)
 
+
 # Write command to file
 echo -e "process_radtags command used:\n\n\
     $(echo process_radtags_2_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \

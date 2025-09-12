@@ -17,7 +17,8 @@ cat "$POPS" |
     while read i
     do
         echo "$i"
-        grep "$i" "$POPMAP" | cut -f 1 > population_"$i".ids
+        # Get column with sample info for the samples in each group
+        grep "$i" "$POPMAP" | cut -f 2 > population_"$i".ids
     done
 
 # Get Fst values with vcftools

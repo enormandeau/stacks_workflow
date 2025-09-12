@@ -117,7 +117,7 @@ with myopen(input_vcf) as infile:
             # Print progress
             counter += 1
             if not counter % 10000:
-                print(f"Treating locus number: {counter}")
+                print(f"Treating SNP number: {counter}")
 
             # SNP line split into info and genotypes
             infos = l[:9]

@@ -78,7 +78,7 @@ print(head(labels))
 
 # Add a column with population indices to order the barplots
 # Use the order of populations provided as the fourth argument (list separated by commas)
-labels$n = factor(labels$pop, levels=unlist(strsplit(opt$populations, ",")))
+labels$n = factor(labels$Population, levels=unlist(strsplit(opt$populations, ",")))
 levels(labels$n) = c(1: length(levels(labels$n)))
 labels$n = as.integer(as.character(labels$n))
 
