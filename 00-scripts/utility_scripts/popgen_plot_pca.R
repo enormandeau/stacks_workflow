@@ -22,7 +22,7 @@ library(magrittr)
 library(ggplot2)
 
 # Parse user input
-if(length(commandArgs(trailingOnly = T)) == 6) {
+if(length(commandArgs(trailingOnly = T)) == 5) {
 
     ##read input file
     dat <- as.data.frame(fread(paste0(commandArgs(trailingOnly=T)[1], ".012"))[, -1])
@@ -30,7 +30,7 @@ if(length(commandArgs(trailingOnly = T)) == 6) {
     popmap <- read.table(commandArgs(trailingOnly=T)[2], header=T)
     numPC <- as.numeric(commandArgs(trailingOnly=T)[3])
     variable1 <- as.character(commandArgs(trailingOnly=T)[4])
-    output <- commandArgs(trailingOnly=T)[6]
+    output <- commandArgs(trailingOnly=T)[5]
 
     cat(paste0("Producing figure for: ", variable1, "\n"))
 
