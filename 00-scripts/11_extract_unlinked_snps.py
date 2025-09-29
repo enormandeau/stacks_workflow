@@ -9,13 +9,19 @@ Usage:
 Where:
     input_vcf: name of a VCF from STACKS 1.4x (not vcftools...)
 
-    diff_threshold: minimum difference between 0.0 and 1.0 to keep a second
-    SNP. The recommended value is 0.5. A good value is anywhere between 0.2 and
-    0.5. A value of 0.2 is more permissive and will retain a few false
+    diff_threshold: minimum difference to keep SNPs. Differences represent the
+    ratio of genotypes that differ between two SNPs across samples that have at
+    least one rare allele in either of the SNPs. In other words, samples that
+    do not have at least one rare allele in either of the SNPs are not
+    considered.  This metric is robust for SNPs with small MAFs (or MACs/MASs),
+    where most of the genotypes (0/0) are concordant between two low-MAF SNPs,
+    even when the rare alleles are found in different samples for both SNPs.
+
+    The recommended value is 0.1. A good value is anywhere between 0.05 and
+    0.2. A value of 0.1 is more permissive and will retain a few false
     positives, ie: SNPs with low MAFs that have exactly the same information
-    but where some one or a few samples were mis-genotyped. A value of 0.5 will
-    get you 99.9% of what is different without false positives. Values above
-    0.5 will lose you true positives.
+    but where some one or a few samples were mis-genotyped. Value above 0.2
+    lose SNPs that are not linked.
 
     output_vcf: name of the output filtered VCF
 """
@@ -134,6 +140,7 @@ if __name__ == '__main__':
     try:
         input_vcf = sys.argv[1]
         diff_threshold = float(sys.argv[2])
+
         output_vcf = sys.argv[3]
     except:
         print(__doc__)
