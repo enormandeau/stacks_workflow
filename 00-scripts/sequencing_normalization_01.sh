@@ -23,7 +23,7 @@ do
     do
         # Get number of reads per sample per chip
         echo "$j" $(echo $(gunzip -c "$j" | wc -l) / 4 | bc) |
-            perl -pe 's/.*sample_//; s/\.f(ast)?q\.gz//' >> "$numseq"
+            perl -pe 's/.*sample_//; s/\.f(ast)?q\.gz//' | perl -pe 's/ 0/ 1/' >> "$numseq"
 
     done
 done
