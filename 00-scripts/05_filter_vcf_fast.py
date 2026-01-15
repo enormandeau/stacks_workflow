@@ -105,9 +105,12 @@ counter_missing = 0
 counter_mas = 0
 counter_maf = 0
 counter_genotypes = 0
+counter_retained = 0
 
 with myopen(input_vcf) as infile:
     with myopen(output_vcf, "wt") as outfile:
+        print()
+
         for line in infile:
             l = line.strip().split("\t")
 
@@ -123,9 +126,9 @@ with myopen(input_vcf) as infile:
                 continue
 
             # Print progress
-            counter += 1
-            if not counter % 10000:
-                print(f"Treating SNP number: {counter}")
+            #counter += 1
+            #if not counter % 10000:
+            #    print(f"Treating SNP number: {counter}")
 
             # SNP line split into info and genotypes
             infos = l[:9]
@@ -176,24 +179,31 @@ with myopen(input_vcf) as infile:
             # Remove SNPs with MAS below threshold
             mas = len([1 for x in genotypes if x in ["0/1", "1/0", "1/1"]])
 
-            # The second part of the test (after the or) is to take into
-            # account that we may be filtering a VCF that is a subset of a
-            # larger VCF file where a SNP could be 100% homozygote for the rare
-            # allele in the samples we kept, even if its MAF was globally less
-            # than 0.5 in the original VCF.
             non_null_genotypes = [x for x in genotypes if not x in ["./.", "."]]
 
-            if mas < min_mas or mas > len(non_null_genotypes) - min_mas + 1:
+            # We may be filtering a VCF that is a subset of a larger VCF file
+            # where a SNP could be 100% homozygote for the rare allele in the
+            # samples we kept, even if its MAF was globally less than 0.5 in
+            # the original VCF. As a result, we do the adjustment below.
+            if mas > len(non_null_genotypes) / 2:
+                mas = len([1 for x in genotypes if x in ["0/0", "0/1", "1/0"]])
+                if mas < min_mas:
+                    print(non_null_genotypes)
+
+            if mas < min_mas:
                 counter_mas += 1
                 continue
 
             # Create corrected line
+            counter_retained += 1
             line = "\t".join(infos + genotypes_raw) + "\n"
             outfile.write(line)
 
 # Reporting on filtration
-print(f"Genotypes with insufficient coverage ({min_cov}): {counter_genotypes}")
+print(f"Genotypes with insufficient coverage (min {min_cov}): {counter_genotypes}")
 print("Number of SNPs filtered by reason:")
-print(f"  Missing data ({percent_genotypes}): {counter_missing}")
-print(f"  MAF ({min_maf}): {counter_maf}")
-print(f"  MAS ({min_mas}): {counter_mas}")
+print(f"  > Proportion non-missing data (min {percent_genotypes}): {counter_missing}")
+print(f"  > MAF (min {min_maf}): {counter_maf}")
+print(f"  > MAS (min {min_mas}): {counter_mas}")
+print(f"Number of retained SNPs: {counter_retained}")
+print()
