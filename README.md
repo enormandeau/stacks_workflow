@@ -565,27 +565,27 @@ and desired sample names in a second column.
     - High Coverage: MedCovHom > 40 or MedCovHet > 40
     - Minor Allele Sample (MAS): NumRare <= 2
 
-### 6. Keep all unlinked SNPs
+### 6. Keep all non-redundant SNPs
 
 It is often thought that SNPs appearing within the same STACKS locus are 100%
-linked because they are really close. However, this is often not the case.
-Frequently, you will find SNPs that are not linked within the same locus. In
-order to filter and keep as much genetic information as possible, while
-avoiding close by SNPs with high Linkage Disequilibrium, you can keep all the
-SNPs that we refer to as unlinked in all the loci.
+linked because they are very close. However, they often contain different
+information. Frequently, you will find SNPs with non-redundant information
+within the same locus. In order to filter and keep as much genetic information
+as possible, while avoiding close by SNPs with highly redundant information, you
+can keep all the SNPs that we refer to as non-reduntant in all the loci.
 
 The procedure is as follows:
-  - Keep the first SNP and remove all the other ones appear linked to it
+  - Keep the first SNP and remove all the others with highly correlated genotypes
   - If you have SNPs remaining, repeat
 
-Two SNPs are linked when sample genotypes are highly correlated for these two
-SNPs. Since RADseq data has 1) missing data and 2) mostly SNPs with low MAF
+Two SNPs are redundant when sample genotypes are highly correlated for these
+two SNPs. Since RADseq data has 1) missing data and 2) mostly SNPs with low MAF
 values, we need to be careful when comparing sample genotypes between two SNPs.
 As a result, when comparing two SNPs, we only use samples that have no missing
 data in both SNPs and who possess the rare allele in at least one of the SNPs.
 
-Using the canonical SNPs, keep only unlinked SNPs using one the following
-scripts. The input parameters are described by the scripts themselves.
+You can do this by using one the following scripts. The input parameters are
+described by the scripts themselves.
 
 ```bash
 # Denovo
