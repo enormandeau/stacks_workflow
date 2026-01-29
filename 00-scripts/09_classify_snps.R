@@ -70,16 +70,16 @@ cat("SNPs")
 print(report)
 
 # Plots
-png(paste0(input_file, "_1.png"), width=1200, height=1000)
+png(paste0(input_file, "_1.png"), width=1600, height=1150)
     plot(d[,1:6], pch=16, cex=0.6, col=d$Color)
 invisible(dev.off())
 
-png(paste0(input_file, "_2.png"), width=1200, height=950)
+png(paste0(input_file, "_2.png"), width=1600, height=1150)
     plot(d$PropHet, d$MedRatio, pch=19, cex=1.5, col=d$Color, xlim=c(0, 1), ylim=c(0, 0.8))
 invisible(dev.off())
 
 single = d[data$Category == "canonical", ]
-png(paste0(input_file, "_3.png"), width=1200, height=950)
+png(paste0(input_file, "_3.png"), width=1600, height=1150)
     plot(single$PropHet,
          single$MedRatio,
          pch=19, cex=1.5, col=single$Color, xlim=c(0, 1), ylim=c(0, 0.8))
