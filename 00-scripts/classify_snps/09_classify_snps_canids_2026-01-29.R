@@ -20,7 +20,7 @@ mas =           "#FFAA0022" # orange
 d$Color = canonical
 
 # Loci with high coverage
-maxMedCovHom = 35
+maxMedCovHom = 30
 maxMedCovHet = 50
 d$Color[d$MedCovHom > maxMedCovHom | d$MedCovHet > maxMedCovHet] = highcov
 d$MedCovHom[d$MedCovHom > maxMedCovHom * 2] = maxMedCovHom * 2
