@@ -496,14 +496,14 @@ these errors are quite frequent.
 
 #### 2.2. Relatedness
 
-  - Run `vcftools --relatedness --vcf <INPUT_VCF> --out samples` (use `--gzvcf` for compressed VCF files)
+  - Run `vcftools --relatedness --gzvcf <INPUT_VCF> --out samples` (use `--vcf` for uncompressed VCF files)
     to identify samples with potential errors / problems
   - Plot graph with `./00-scripts/utility_scripts/plot_relatedness_graphs.R samples.relatedness 0.5`
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
 
 #### 2.3. Heterozygosity
 
-  - Use `vcftools --het --vcf <INPUT_VCF> --out samples` (use `--gzvcf` for compressed VCF files)
+  - Use `vcftools --het --gzvcf <INPUT_VCF> --out samples` (use `--vcf` for uncompressed VCF files)
   - Plot heterozygosity graph (see steps below)
   - Decide on a threshold and create a file with unwanted samples (one sample name per line)
   - Format data with:
