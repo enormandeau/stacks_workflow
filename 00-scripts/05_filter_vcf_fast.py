@@ -203,7 +203,7 @@ with myopen(input_vcf) as infile:
 print(f"Genotypes with insufficient coverage (min {min_cov}): {counter_genotypes}")
 print("Number of SNPs filtered by reason:")
 print(f"  > Proportion non-missing data (min {percent_genotypes}): {counter_missing}")
-print(f"  > MAF (min {min_maf}): {counter_maf}")
 print(f"  > MAS (min {min_mas}): {counter_mas}")
+print(f"  > MAF (min {min_maf}): {counter_maf}")
 print(f"Number of retained SNPs: {counter_retained}")
 print()
