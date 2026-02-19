@@ -6,15 +6,12 @@ Usage:
 """
 
 # Modules
-#import matplotlib.pyplot as plt
-#import numpy as np
 import sys
 
 # Parse user input
 try:
     input_numreads = sys.argv[1]
     input_propmissing = sys.argv[2]
-    output_png = sys.argv[3]
 except:
     print(__doc__)
     sys.exit(1)
@@ -51,9 +48,3 @@ for s in sorted(sample_dict):
 
     count, proportion = sample_dict[s]
     print(proportion, count)
-
-## Fixing random state for reproducibility
-#x = np.random.rand(N)
-#y = np.random.rand(N)
-#plt.scatter(x, y, s=area, c=colors, alpha=0.5)
-#plt.show()
