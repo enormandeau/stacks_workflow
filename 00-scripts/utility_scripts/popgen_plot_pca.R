@@ -1,4 +1,19 @@
 #!/usr/bin/env Rscript
+
+# Usage:
+#     <program> prefix popmap numPC variable output
+#
+#     prefix: prefix of 012 files (ex : test for test.012, test.012.indv 7 test.012.pos)
+#           Prepared with vcftools -012
+#     popmap: 2+ tab delimited columns WITH HEADER: first = Sample
+#           There can be as many columns as wanted after the first two but one of them
+#           must be `variable`
+#     numPC: number of PCs to plot
+#     output: Name of output file
+#
+# Note:
+#     012 file must be created from imputed VCF
+
 # Code adapted from Florent Sylvestre, 2023-04-25
 
 # Modules
@@ -31,7 +46,6 @@ Usage:
           There can be as many columns as wanted after the first two but one of them
           must be `variable`
     numPC: number of PCs to plot
-    variable: Name of variable to use
     output: Name of output file
 
 Note:
@@ -50,7 +64,7 @@ pca <- prcomp(dat, scale=F)
 
 names(ind)[1] = "Sample"
 write.table(cbind(ind, pca$x[, 1:20]), paste0(output, "_used_samples_with_pca.tsv"), quote=F, row.names=F, sep="\t")
-write.table(pca$x, "pc_loadings.tsv", quote=F, row.names=F, sep="\t")
+write.table(pca$x, paste0(output, "_pc_loadings.tsv"), quote=F, row.names=F, sep="\t")
 
 ###plots
 PCA_plot <- function(pca, ind, v1, pcvector=c(1, 2)) {

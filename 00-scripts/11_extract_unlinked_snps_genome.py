@@ -1,25 +1,34 @@
 #!/usr/bin/env python3
 """Keep only one SNP per linked group within genomic region
 
-If there are multiple SNPs in a linked group, the one on the left is kept.
+If there are multiple SNPs in a linked group, the one on the left is kept
 
 Usage:
     <program> input_vcf diff_threshold max_distance output_vcf
 
 Where:
-    input_vcf: name of a VCF from STACKS 1.4x (not vcftools...)
+    <input_vcf>: name of a VCF from STACKS 2.x (not vcftools...)
 
-    diff_threshold: minimum difference between 0.0 and 1.0 to keep a second
-    SNP. The recommended value is 0.5. A good value is anywhere between 0.2 and
-    0.5. A value of 0.2 is more permissive and will retain a few false
-    positives, ie: SNPs with low MAFs that have exactly the same information
-    but where some one or a few samples were mis-genotyped. A value of 0.5 will
-    get you 99.9% of what is different without false positives. Values above
-    0.5 will lose you true positives.
+    <diff_threshold>: minimum differences in genotypes to keep SNPs.
+    Differences are calculated as the ratio of genotypes that differ between
+    two SNPs taking only into account samples that have a rare allele(s) in
+    either or both of the compared SNPs. In other words, samples that do not
+    have at least one rare allele in either of the SNPs are not considered.
+    This metric is robust for SNPs with small MAFs (Minor Allele Frequency),
+    MACs (Minor Allele Count), or MASs (Minor Allele Samples, or samples that
+    possess at least one copy of the rare allele). For these SNPs, most of the
+    genotypes (0/0) are the same between two low-MAF SNPs, even when the rare
+    alleles are found in different samples for both SNPs.
 
-    max_distance: maximum distance in base pairs to consider linked SNPs
+    The recommended diff_threshold value is 0.1. Good values are anywhere
+    between 0.05 and 0.2. A value of 0.1 is permissive and may retain a few
+    false positives, ie: SNPs with low MAFs that have exactly the same
+    information but where some samples were mis-genotyped. Value above 0.2 may
+    begin removing SNPs that are not linked.
 
-    output_vcf: name of the output filtered VCF
+    <max_distance>: maximum base pair distance to consider linkage between SNPs
+
+    <output_vcf>: name of the output filtered VCF
 """
 
 # Modules
@@ -202,7 +211,6 @@ if __name__ == '__main__':
             # Write header to output file
             outfile.write(line)
             continue
-
 
         # Parse SNP data
         l = line.strip().split()

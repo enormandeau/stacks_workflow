@@ -5,7 +5,7 @@
 # Inputs
 VCF="$1"    # Compressed, imputed VCF
 POPS="$2"   # File with one population name per line
-POPMAP="$3" # Population map with two columns, full sample name then population
+POPMAP="$3" # Population map with two columns, sample name (without pop) then population
 OUT="$4"    # Output file name
 
 # Prepare output file
@@ -18,7 +18,7 @@ cat "$POPS" |
     do
         echo "$i"
         # Get column with sample info for the samples in each group
-        grep "$i" "$POPMAP" | cut -f 2 > population_"$i".ids
+        grep "$i" "$POPMAP" | awk '{print $2"_"$1}' > population_"$i".ids
     done
 
 # Get Fst values with vcftools

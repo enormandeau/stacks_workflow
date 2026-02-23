@@ -20,8 +20,8 @@ mas =           "#FFAA0022" # orange
 d$Color = canonical
 
 # Loci with high coverage
-maxMedCovHom = 50
-maxMedCovHet = 200
+maxMedCovHom = 30
+maxMedCovHet = 50
 d$Color[d$MedCovHom > maxMedCovHom | d$MedCovHet > maxMedCovHet] = highcov
 d$MedCovHom[d$MedCovHom > maxMedCovHom * 2] = maxMedCovHom * 2
 d$MedCovHet[d$MedCovHet > maxMedCovHet * 2] = maxMedCovHet * 2
@@ -31,7 +31,7 @@ d$Color[d$MedRatio < 0.20] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.80] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
-d$Color[d$Fis < -0.4] = duplicated
+d$Color[d$Fis < -0.3] = duplicated
 d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
 d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
 d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated

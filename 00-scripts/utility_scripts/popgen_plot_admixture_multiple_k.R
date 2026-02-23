@@ -6,7 +6,8 @@ library(RColorBrewer)
 color_scheme="Spectral"
 
 # Usage: plotADMIXTURE.r -p <prefix>
-#                       -i <info file, 2-column file with header and \t pop>
+#                       -i <info file, 2-column file with header and Sample <TAB> Population>
+#                       -m <min K value>
 #                       -k <max K value>
 #                       -l <comma-separated list of populations/species in the order to be plotted>
 
@@ -76,9 +77,10 @@ labels = read.table(opt$infofile, header=T)
 names(labels)[1:2] = c("ind", "pop")
 print(head(labels))
 
+
 # Add a column with population indices to order the barplots
 # Use the order of populations provided as the fourth argument (list separated by commas)
-labels$n = factor(labels$Population, levels=unlist(strsplit(opt$populations, ",")))
+labels$n = factor(labels$pop, levels=unlist(strsplit(opt$populations, ",")))
 levels(labels$n) = c(1: length(levels(labels$n)))
 labels$n = as.integer(as.character(labels$n))
 
