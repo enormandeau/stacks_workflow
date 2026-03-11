@@ -33,7 +33,7 @@ except:
     print(__doc__)
     sys.exit(1)
 
-if not filtering_type in ["wanted", "unwanted"]:
+if not filtering_type in ["w", "u", "wanted", "unwanted"]:
     print("ERROR: filtering_type must be 'wanted' or 'unwanted'")
     sys.exit(2)
 
@@ -50,8 +50,8 @@ with myopen(input_vcf) as infile:
                 outfile.write(line)
                 continue
 
-            if filtering_type == "wanted" and tuple(l[:3]) in listed_snps:
+            if filtering_type in ["w", "wanted"] and tuple(l[:3]) in listed_snps:
                 outfile.write(line)
 
-            elif filtering_type == "unwanted" and tuple(l[:3]) not in listed_snps:
+            elif filtering_type in ["u", "unwanted"] and tuple(l[:3]) not in listed_snps:
                 outfile.write(line)
