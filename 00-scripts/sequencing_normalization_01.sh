@@ -19,11 +19,11 @@ do
         perl -pe 's/\.f(ast)?q\.gz//' > "$infos"
 
     # Iterate over samples in a chip
-    for j in 03-samples/"$i"/*.f*q.gz
+    for j in $(ls -1 03-samples/"$i"/*.f*q.gz | grep -v \.rem\. | grep \.1\.fq\.gz)
     do
         # Get number of reads per sample per chip
         echo "$j" $(echo $(gunzip -c "$j" | wc -l) / 4 | bc) |
-            perl -pe 's/.*sample_//; s/\.f(ast)?q\.gz//' | perl -pe 's/ 0/ 1/' >> "$numseq"
+            perl -pe 's/.*sample_//; s/\.1\.f(ast)?q\.gz//' | perl -pe 's/ 0/ 1/' >> "$numseq"
 
     done
 done
