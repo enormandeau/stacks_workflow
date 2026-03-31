@@ -33,7 +33,8 @@ for p in propmissing:
     if p[0] == "Population":
         continue
 
-    name = p[0] + "_" + p[1]
+    name = (p[0] + "_" + p[1]).split(".")[0]
+    print(name)
     proportion = float(p[2])
 
     if name in sample_dict:
