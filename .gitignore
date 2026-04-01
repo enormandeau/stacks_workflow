@@ -75,6 +75,7 @@
 10-log_files/*
 11-admixture*
 12-results/*
+12-results_*
 99-project_info/*
 DELIVERED*
 GSNAP*.sh
