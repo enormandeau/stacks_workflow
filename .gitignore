@@ -12,6 +12,8 @@
 *.bim
 *.bwt
 *.categorized
+*.csv
+*.csv.gz
 *.doctree
 *.fam
 *.fas
@@ -98,8 +100,8 @@ population_map.txt
 populations
 sample_files*
 samples.het
-samples.relatedness
-samples.relatedness.outliers.csv
+samples.relatedness*
+*.relatedness2*
 samples_split/*
 temp.list.*
 vcf_impute/*
