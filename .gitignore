@@ -22,6 +22,7 @@
 *.fq
 *.fq.gz
 *.ids
+*.ignore
 *.info
 *.infos
 *.jpg
@@ -35,6 +36,7 @@
 *.pdf
 *.pickle
 *.png
+*.relatedness2*
 *.sa
 *.sam
 *.swp
@@ -53,6 +55,7 @@
 */population_map*
 */sample_information*
 *BWA_temp*
+*NOTE*
 *WARNING*
 *_filtered_*
 *barcode*
@@ -101,7 +104,7 @@ populations
 sample_files*
 samples.het
 samples.relatedness*
-*.relatedness2*
 samples_split/*
 temp.list.*
 vcf_impute/*
+vcf_stats*
