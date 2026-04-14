@@ -39,7 +39,7 @@ with open(output_mafs, "wt") as outfile:
     with myopen(input_vcf, "rt") as infile:
         for line in infile:
             l = line.strip().split()
-            snp_info = l[:3]
+            snp_info = l[:2]
             data = l[9:]
 
             if line.startswith("##"):
@@ -53,7 +53,7 @@ with open(output_mafs, "wt") as outfile:
                     else:
                         pop_positions[pop].append(i)
 
-                outfile.write("Chrom\tPos\tID\t" + "\t".join(pop_positions.keys()) + "\n")
+                outfile.write("Chrom\tPos\t" + "\t".join(pop_positions.keys()) + "\n")
                 continue
 
             # Extract MAFs
