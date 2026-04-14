@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 
-#########################################
-#########################################
+"""Return the median AFD per pairs of populations
+
 #########################################
 #  WARNING! This script is not finished #
 #########################################
-#########################################
-#########################################
-
-"""Return the median AFD per pairs of populations
 
 Usage:
     <program> input_vcf output_file
