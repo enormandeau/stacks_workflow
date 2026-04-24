@@ -21,6 +21,7 @@
 *.fastq.gz*
 *.fq
 *.fq.gz
+*.het
 *.ids
 *.ignore
 *.info
@@ -90,6 +91,7 @@ all_samples_for_alignment.txt
 bad_samples*
 batch_1.*
 code_*
+distances*
 filtered_*
 gsnaptemp.list.*
 input_renamed.*
@@ -102,7 +104,6 @@ population_genomics/*
 population_map.txt
 populations
 sample_files*
-samples.het
 samples.relatedness*
 samples_split/*
 temp.list.*
