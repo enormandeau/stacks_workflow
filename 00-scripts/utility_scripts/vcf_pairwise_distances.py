@@ -69,9 +69,10 @@ with myopen(input_vcf, "rt") as infile:
 
 # Compute and output distances
 computed = set()
+n = len(sample_data)
 with open(output_distances, "wt") as outfile:
-    for s1 in sample_data:
-        print(s1)
+    for i, s1 in enumerate(sample_data):
+
         for s2 in sample_data:
 
             # Avoid computing twice
@@ -87,3 +88,8 @@ with open(output_distances, "wt") as outfile:
 
             if s1 != s2:
                 outfile.write("\t".join([s2, s1, "{0:0.6f}".format(dist)]) + "\n")
+
+        # Report progress
+        x = i+1
+        print(f"{x}/{len(sample_data)} ({round( 200* (x * (n - x) + x**2 / 2) / n**2, 2)}%): {s1}")
+
