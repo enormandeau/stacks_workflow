@@ -5,6 +5,7 @@
 *.amb
 *.ann
 *.backup
+*.bad
 *.bai
 *.bak
 *.bam
