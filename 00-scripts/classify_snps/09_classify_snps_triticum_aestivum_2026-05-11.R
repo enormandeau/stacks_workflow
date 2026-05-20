@@ -13,7 +13,7 @@ canonical =     "#00000011" # black
 duplicated =    "#FF000022" # red
 diverged =      "#0000FF22" # blue
 lowconf =       "#DD00BB22" # purple
-highcov =       "#00AA0022" # green
+highcov =       "#00AA0088" # green
 mas =           "#FFAA0022" # orange
 
 # All loci marked canonical before filters
@@ -27,8 +27,8 @@ d$MedCovHom[d$MedCovHom > maxMedCovHom * 2] = maxMedCovHom * 2
 d$MedCovHet[d$MedCovHet > maxMedCovHet * 2] = maxMedCovHet * 2
 
 # MedRatio is high/low and at least one rare allele homozygote
-d$Color[d$MedRatio < 0.10] = lowconf # & d$PropHomRare > 0.00] = lowconf
-d$Color[d$MedRatio > 0.90] = lowconf # & d$PropHomRare > 0.00] = lowconf
+#d$Color[d$MedRatio < 0.10] = lowconf # & d$PropHomRare > 0.00] = lowconf
+#d$Color[d$MedRatio > 0.90] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
 #d$Color[d$Fis < -0.4] = duplicated
