@@ -23,9 +23,9 @@ boxplot(data[,1] ~ data[,3],
         outpch=19,
         outcex=1.3,
         outcol="black",
-        main="Boxplot of heterozygosity per samples by populations",
+        main="Homozygosity F-values per samples by populations",
         xlab="Population",
-        ylab="Heterozygosity by group from vcftools")
+        ylab="Homozygosity F-values by group from vcftools")
 
 points(factor(data[,3]), data[,1], pch=4, col="#00000099")
 

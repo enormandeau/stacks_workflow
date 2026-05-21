@@ -1,385 +1,385 @@
-#Lane	Barcode	Population	Sample	PopulationID	PlatePosition		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGTCTACT	pop	1	pop	A01		Notes
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTAGGTCAG	pop	2	pop	B01		DO NOT modify the column titles in the header line
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACCGAT	pop	3	pop	C01		DO NOT modify the order of the first six columns
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACTATCCG	pop	4	pop	D01		DO NOT modify the plate position format (A01, not A1)
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGGATAACG	pop	5	pop	E01		"DO NOT use underscores ""_"" in Population, Sample or PopulationID columns"
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGTCGAT	pop	6	pop	F01		The PopulationID column can contain text (eg: the same as the Population column)
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCTTATACG	pop	7	pop	G01		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGCACAG	pop	8	pop	H01		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATTGGTACAG	pop	9	pop	A02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTATCACCG	pop	10	pop	B02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACGAGT	pop	11	pop	C02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTCGTCAGTG	pop	12	pop	D02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGAAGCACTG	pop	13	pop	E02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGTCAT	pop	14	pop	F02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATAGACAGAG	pop	15	pop	G02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGTCGGCTGT	pop	16	pop	H02		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCGAATG	pop	17	pop	A03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTGTTG	pop	18	pop	B03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCCGTATCG	pop	19	pop	C03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTCCACT	pop	20	pop	D03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCACAGCCAT	pop	21	pop	E03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCCTATCT	pop	22	pop	F03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGTGAAG	pop	23	pop	G03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTACCACGT	pop	24	pop	H03		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCGGTTGT	pop	25	pop	A04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GATGGAT	pop	26	pop	B04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTCATATCGG	pop	27	pop	C04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GACAGTAGTG	pop	28	pop	D04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCCGTACTG	pop	29	pop	E04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTGAGAAG	pop	30	pop	F04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAACATG	pop	31	pop	G04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGTTGAACAG	pop	32	pop	H04		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAGATG	pop	33	pop	A05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TATTCCGAGT	pop	34	pop	B05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGTAGT	pop	35	pop	C05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCCAGGACAT	pop	36	pop	D05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGAGGATGT	pop	37	pop	E05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCAAGT	pop	38	pop	F05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTCCAG	pop	39	pop	G05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGTCAACCT	pop	40	pop	H05		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGACATACG	pop	41	pop	A06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AATCGAGG	pop	42	pop	B06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGCATG	pop	43	pop	C06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTATATGAGG	pop	44	pop	D06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCAGT	pop	45	pop	E06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCTGTCAGG	pop	46	pop	F06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TACGGTG	pop	47	pop	G06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCTTACGAG	pop	48	pop	H06		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAAGGCTACG	pop	49	pop	A07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCTGAGT	pop	50	pop	B07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CACGCTTAG	pop	51	pop	C07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTAAGCGTG	pop	52	pop	D07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTAGGT	pop	53	pop	E07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGCTAT	pop	54	pop	F07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AACCACGCT	pop	55	pop	G07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCATTCCT	pop	56	pop	H07		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCGTTAG	pop	57	pop	A08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTGACGG	pop	58	pop	B08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGAATGG	pop	59	pop	C08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCATCCATG	pop	60	pop	D08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGTTAGG	pop	61	pop	E08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCATTCAGT	pop	62	pop	F08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCAGTACG	pop	63	pop	G08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGTTAGCT	pop	64	pop	H08		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTGCAT	pop	65	pop	A09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTACCATGG	pop	66	pop	B09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CATCACGT	pop	67	pop	C09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGTGGACAAT	pop	68	pop	D09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCTTGG	pop	69	pop	E09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCAGCGTAG	pop	70	pop	F09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GACACT	pop	71	pop	G09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATATGCGGT	pop	72	pop	H09		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TACCGTCAT	pop	73	pop	A10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTGTACCT	pop	74	pop	B10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCATACGGAG	pop	75	pop	C10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGACTCT	pop	76	pop	D10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTCTTAG	pop	77	pop	E10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGGAAG	pop	78	pop	F10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCTCTTG	pop	79	pop	G10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACCTTG	pop	80	pop	H10		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTGGTCACGT	pop	81	pop	A11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAATCTGTCT	pop	82	pop	B11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACACCGT	pop	83	pop	C11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCCAAGGT	pop	84	pop	D11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CACGAGCTTG	pop	85	pop	E11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTCCTGGT	pop	86	pop	F11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGAAGCCAT	pop	87	pop	G11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACGTACTG	pop	88	pop	H11		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGGCAGAT	pop	89	pop	A12		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCGATAGTAG	pop	90	pop	B12		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCCATAAGG	pop	91	pop	C12		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCCAACTG	pop	92	pop	D12		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCTTGAGCTG	pop	93	pop	E12		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGAGAGACT	pop	94	pop	F12		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGGTAGGCT	pop	95	pop	G12		
-NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTACTGG	pop	96	pop	H12		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTCGACT	pop	97	pop	A13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AATGCG	pop	98	pop	B13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GAGTCT	pop	99	pop	C13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TAGCTGT	pop	100	pop	D13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GAGATAG	pop	101	pop	E13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTGGCAT	pop	102	pop	F13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTTCTCT	pop	103	pop	G13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AACTCCTGG	pop	104	pop	H13		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATACATCAGG	pop	105	pop	A14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCATAGCAAT	pop	106	pop	B14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGTAGGAT	pop	107	pop	C14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGGTAAGT	pop	108	pop	D14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGAGTATG	pop	109	pop	E14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGACTCAACT	pop	110	pop	F14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGAGGT	pop	111	pop	G14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCTGATT	pop	112	pop	H14		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACATCG	pop	113	pop	A15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGCAGATTG	pop	114	pop	B15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TAGTCAGG	pop	115	pop	C15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TATGACGCAT	pop	116	pop	D15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTAGCCGT	pop	117	pop	E15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATAAGCACG	pop	118	pop	F15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CAATGTCGT	pop	119	pop	G15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTGGTAG	pop	120	pop	H15		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATCCT	pop	121	pop	A16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CATCGTAG	pop	122	pop	B16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CATATG	pop	123	pop	C16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGAACAGTG	pop	124	pop	D16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACAAGG	pop	125	pop	E16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACCTCTGT	pop	126	pop	F16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTTACTG	pop	127	pop	G16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTGTCCACAG	pop	128	pop	H16		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TAACGG	pop	129	pop	A17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTCATGTGCG	pop	130	pop	B17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATCAG	pop	131	pop	C17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTGTAACCT	pop	132	pop	D17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATCGCAAG	pop	133	pop	E17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGAGGCT	pop	134	pop	F17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTATGCGTAG	pop	135	pop	G17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CCTCTTAG	pop	136	pop	H17		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AACCGCTTG	pop	137	pop	A18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATGTG	pop	138	pop	B18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CAAGTCCAT	pop	139	pop	C18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACATACCAG	pop	140	pop	D18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACTTGAG	pop	141	pop	E18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGATTCCT	pop	142	pop	F18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGATGAG	pop	143	pop	G18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GAATCG	pop	144	pop	H18		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CCTTGAAG	pop	145	pop	A19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CATTGTG	pop	146	pop	B19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGAAGAAGAT	pop	147	pop	C19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GACGCTAT	pop	148	pop	D19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGCAATATG	pop	149	pop	E19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AATGACG	pop	150	pop	F19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TACGTCT	pop	151	pop	G19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CACAGCACTG	pop	152	pop	H19		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGATGCAGG	pop	153	pop	A20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCCGATAAT	pop	154	pop	B20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATGGAG	pop	155	pop	C20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AACATAGCG	pop	156	pop	D20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCGTGACT	pop	157	pop	E20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCCTATCTG	pop	158	pop	F20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GACCGAACCT	pop	159	pop	G20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGCCTTATG	pop	160	pop	H20		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CCAGGTAAT	pop	161	pop	A21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTCCGAACT	pop	162	pop	B21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATTGCGT	pop	163	pop	C21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGCCAT	pop	164	pop	D21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCAGAG	pop	165	pop	E21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTCTAG	pop	166	pop	F21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTACACGG	pop	167	pop	G21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGAATG	pop	168	pop	H21		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTAGTCTCG	pop	169	pop	A22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTGCGGAAT	pop	170	pop	B22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTACCTG	pop	171	pop	C22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTACCGCT	pop	172	pop	D22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGACTATAG	pop	173	pop	E22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTCACGTAT	pop	174	pop	F22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTACTACCT	pop	175	pop	G22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TACAACTTGG	pop	176	pop	H22		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATCTCCGCAT	pop	177	pop	A23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGCCATTG	pop	178	pop	B23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCTTAT	pop	179	pop	C23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACGCAT	pop	180	pop	D23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTATGCG	pop	181	pop	E23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTACAACG	pop	182	pop	F23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTACGTGAT	pop	183	pop	G23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCAAGCT	pop	184	pop	H23		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTGGCAAGCT	pop	185	pop	A24		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTCAAGAGAT	pop	186	pop	B24		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATAGGACCT	pop	187	pop	C24		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATCACCAG	pop	188	pop	D24		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGTGTG	pop	189	pop	E24		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGTCATG	pop	190	pop	F24		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGACCAT	pop	191	pop	G24		
-NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTCCTGACG	pop	192	pop	H24		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGCTATTG	pop	193	pop	I01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CAAGTG	pop	194	pop	J01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGTAGGTG	pop	195	pop	K01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTGCGGAACT	pop	196	pop	L01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCACTACAT	pop	197	pop	M01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CACAAG	pop	198	pop	N01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCATGGT	pop	199	pop	O01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTTAGCT	pop	200	pop	P01		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACCTGGT	pop	201	pop	I02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCCGTAATG	pop	202	pop	J02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AAGGTGT	pop	203	pop	K02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTGTCG	pop	204	pop	L02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGACTG	pop	205	pop	M02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACGGCAAT	pop	206	pop	N02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTCACTTGCG	pop	207	pop	O02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGTTCCT	pop	208	pop	P02		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGGACGTAG	pop	209	pop	I03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TACTTAGCGT	pop	210	pop	J03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGTCTGT	pop	211	pop	K03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCAATTGG	pop	212	pop	L03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CAGGAT	pop	213	pop	M03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAGCTCG	pop	214	pop	N03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCAGTGGT	pop	215	pop	O03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGACTTG	pop	216	pop	P03		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAGAGGAGG	pop	217	pop	I04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGACCATCTG	pop	218	pop	J04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGAGGTAAT	pop	219	pop	K04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTCTTG	pop	220	pop	L04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CAGCCTAT	pop	221	pop	M04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TATGGCAG	pop	222	pop	N04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCCGTGAGT	pop	223	pop	O04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCAACG	pop	224	pop	P04		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAGGAG	pop	225	pop	I05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGTGATG	pop	226	pop	J05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCGAACCT	pop	227	pop	K05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGTACATG	pop	228	pop	L05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGCGATACCT	pop	229	pop	M05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGCTGGAT	pop	230	pop	N05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTGAAGCG	pop	231	pop	O05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACACCTCTG	pop	232	pop	P05		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACTACGT	pop	233	pop	I06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAGGCAAT	pop	234	pop	J06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCAGAATTCG	pop	235	pop	K06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAGTCAG	pop	236	pop	L06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAAGTACTTG	pop	237	pop	M06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTCAGCG	pop	238	pop	N06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGTTCAATGG	pop	239	pop	O06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACCTGT	pop	240	pop	P06		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ATGCTACG	pop	241	pop	I07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TATTGACAGG	pop	242	pop	J07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGCTTCG	pop	243	pop	K07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGGTAGACGG	pop	244	pop	L07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGTAGACG	pop	245	pop	M07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAATCCTCG	pop	246	pop	N07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTCCATG	pop	247	pop	O07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAAGGAGCT	pop	248	pop	P07		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCATATACG	pop	249	pop	I08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGGATGAT	pop	250	pop	J08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TACGCTGAT	pop	251	pop	K08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACTCTG	pop	252	pop	L08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGAACACTCG	pop	253	pop	M08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GATAAGG	pop	254	pop	N08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAACGACTG	pop	255	pop	O08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AACCTG	pop	256	pop	P08		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGTTCTTG	pop	257	pop	I09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CCTCGATTGG	pop	258	pop	J09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCCATTATTG	pop	259	pop	K09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACACAGACT	pop	260	pop	L09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TACAAGACAG	pop	261	pop	M09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGTGGTCT	pop	262	pop	N09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGACTTGGT	pop	263	pop	O09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTCGGCACAT	pop	264	pop	P09		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ATAAGGCTG	pop	265	pop	I10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAGTAG	pop	266	pop	J10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGCTATGT	pop	267	pop	K10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTGAGACT	pop	268	pop	L10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGAGCAACCT	pop	269	pop	M10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CACACTG	pop	270	pop	N10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGCATTCT	pop	271	pop	O10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCTAAG	pop	272	pop	P10		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGACATTAG	pop	273	pop	I11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTTGTCCT	pop	274	pop	J11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CCATACGAT	pop	275	pop	K11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTCACTCT	pop	276	pop	L11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGAACT	pop	277	pop	M11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CCAAGTTAG	pop	278	pop	N11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCGACAACT	pop	279	pop	O11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACAGAGCAT	pop	280	pop	P11		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGTTGG	pop	281	pop	I12		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGCCACT	pop	282	pop	J12		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGAGCAT	pop	283	pop	K12		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGACAGTG	pop	284	pop	L12		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCACAGATAG	pop	285	pop	M12		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AACCGT	pop	286	pop	N12		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AACTCAG	pop	287	pop	O12		
-NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTTCGAAG	pop	288	pop	P12		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AACAGCT	pop	289	pop	I13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACTTGGAG	pop	290	pop	J13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGCTATATAG	pop	291	pop	K13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACTCCGT	pop	292	pop	L13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAACGTTAG	pop	293	pop	M13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCCTACG	pop	294	pop	N13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AAGACG	pop	295	pop	O13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCTGAT	pop	296	pop	P13		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGCCAATGT	pop	297	pop	I14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CATAGT	pop	298	pop	J14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GACGAT	pop	299	pop	K14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGTTACCG	pop	300	pop	L14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AACAGG	pop	301	pop	M14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCTCCAGT	pop	302	pop	N14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACAGT	pop	303	pop	O14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCAAG	pop	304	pop	P14		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATGTGT	pop	305	pop	I15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCATGT	pop	306	pop	J15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTATAGCCG	pop	307	pop	K15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCTGGAGTAT	pop	308	pop	L15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTGTTGT	pop	309	pop	M15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGCACTTG	pop	310	pop	N15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAATATCAGG	pop	311	pop	O15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACAATCGAG	pop	312	pop	P15		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATACCG	pop	313	pop	I16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AACGATGGT	pop	314	pop	J16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGGAAGCT	pop	315	pop	K16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGCTAG	pop	316	pop	L16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTGCTCCT	pop	317	pop	M16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTCCGTTGT	pop	318	pop	N16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACCAGG	pop	319	pop	O16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGACGTGGAT	pop	320	pop	P16		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGAAGG	pop	321	pop	I17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTAACAACGT	pop	322	pop	J17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCGGATATCT	pop	323	pop	K17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTTAGAG	pop	324	pop	L17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTGCCAAG	pop	325	pop	M17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTGCGT	pop	326	pop	N17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCCAATCAG	pop	327	pop	O17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAATCATTGG	pop	328	pop	P17		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACGTGTAG	pop	329	pop	I18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGGTTACG	pop	330	pop	J18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACGGAGT	pop	331	pop	K18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTTAGG	pop	332	pop	L18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CATGAG	pop	333	pop	M18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCGTTGAT	pop	334	pop	N18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCATGAACAG	pop	335	pop	O18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCGAAT	pop	336	pop	P18		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTTCCG	pop	337	pop	I19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACAGAGG	pop	338	pop	J19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACGAAG	pop	339	pop	K19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTTACTTGG	pop	340	pop	L19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTTGTG	pop	341	pop	M19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGTCCG	pop	342	pop	N19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTTCGT	pop	343	pop	O19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACGTGCGAT	pop	344	pop	P19		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCACATATTG	pop	345	pop	I20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTAGTTACGG	pop	346	pop	J20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGAAGTG	pop	347	pop	K20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACGTCAGCT	pop	348	pop	L20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTACCTCTAG	pop	349	pop	M20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CAATACG	pop	350	pop	N20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCGACT	pop	351	pop	O20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CAGAAGTGT	pop	352	pop	P20		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGTACCAT	pop	353	pop	I21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCTTATTGCG	pop	354	pop	J21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTAGCAT	pop	355	pop	K21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACTCGGAT	pop	356	pop	L21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTATTCGG	pop	357	pop	M21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTGAACT	pop	358	pop	N21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CACACGTAT	pop	359	pop	O21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATCCAAGCG	pop	360	pop	P21		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCACGCCAT	pop	361	pop	I22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATTCGGT	pop	362	pop	J22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCTGAAT	pop	363	pop	K22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAATGCTCT	pop	364	pop	L22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGGCTCAAT	pop	365	pop	M22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTAGAT	pop	366	pop	N22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGGTTCT	pop	367	pop	O22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AAGCCT	pop	368	pop	P22		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CAGCATG	pop	369	pop	I23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGGACT	pop	370	pop	J23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AAGTGG	pop	371	pop	K23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGCTCAT	pop	372	pop	L23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGGAGGT	pop	373	pop	M23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGCAATG	pop	374	pop	N23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCGTTACAAG	pop	375	pop	O23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTGAGT	pop	376	pop	P23		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAACTCGT	pop	377	pop	I24		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCCTTAGCCT	pop	378	pop	J24		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCTACTATGT	pop	379	pop	K24		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATAGACG	pop	380	pop	L24		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGTCACTG	pop	381	pop	M24		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTCGAGGAT	pop	382	pop	N24		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCATAGG	pop	383	pop	O24		
-NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACAGTTG	pop	384	pop	P24		
+#Lane	Barcode	Population	Sample	PopulationID	PlatePosition	3D-ID	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGTCTACT	pop	1	pop	A01	3D-001	Notes
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTAGGTCAG	pop	2	pop	B01	3D-002	DO NOT modify the column titles in the header line
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACCGAT	pop	3	pop	C01	3D-003	DO NOT modify the order of the first six columns
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACTATCCG	pop	4	pop	D01	3D-004	DO NOT modify the plate position format (A01, not A1)
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGGATAACG	pop	5	pop	E01	3D-005	"DO NOT use underscores ""_"" in Population, Sample or PopulationID columns"
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGTCGAT	pop	6	pop	F01	3D-006	The PopulationID column can contain text (eg: the same as the Population column)
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCTTATACG	pop	7	pop	G01	3D-007	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGCACAG	pop	8	pop	H01	3D-008	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATTGGTACAG	pop	9	pop	A02	3D-009	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTATCACCG	pop	10	pop	B02	3D-010	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACGAGT	pop	11	pop	C02	3D-011	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTCGTCAGTG	pop	12	pop	D02	3D-012	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGAAGCACTG	pop	13	pop	E02	3D-013	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGTCAT	pop	14	pop	F02	3D-014	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATAGACAGAG	pop	15	pop	G02	3D-015	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGTCGGCTGT	pop	16	pop	H02	3D-016	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCGAATG	pop	17	pop	A03	3D-017	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTGTTG	pop	18	pop	B03	3D-018	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCCGTATCG	pop	19	pop	C03	3D-019	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTCCACT	pop	20	pop	D03	3D-020	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCACAGCCAT	pop	21	pop	E03	3D-021	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCCTATCT	pop	22	pop	F03	3D-022	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGTGAAG	pop	23	pop	G03	3D-023	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTACCACGT	pop	24	pop	H03	3D-024	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCGGTTGT	pop	25	pop	A04	3D-025	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GATGGAT	pop	26	pop	B04	3D-026	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTCATATCGG	pop	27	pop	C04	3D-027	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GACAGTAGTG	pop	28	pop	D04	3D-028	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCCGTACTG	pop	29	pop	E04	3D-029	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTGAGAAG	pop	30	pop	F04	3D-030	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAACATG	pop	31	pop	G04	3D-031	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGTTGAACAG	pop	32	pop	H04	3D-032	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAGATG	pop	33	pop	A05	3D-033	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TATTCCGAGT	pop	34	pop	B05	3D-034	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGTAGT	pop	35	pop	C05	3D-035	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCCAGGACAT	pop	36	pop	D05	3D-036	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGAGGATGT	pop	37	pop	E05	3D-037	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCAAGT	pop	38	pop	F05	3D-038	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTCCAG	pop	39	pop	G05	3D-039	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGTCAACCT	pop	40	pop	H05	3D-040	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGACATACG	pop	41	pop	A06	3D-041	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AATCGAGG	pop	42	pop	B06	3D-042	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGCATG	pop	43	pop	C06	3D-043	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTATATGAGG	pop	44	pop	D06	3D-044	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCAGT	pop	45	pop	E06	3D-045	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCTGTCAGG	pop	46	pop	F06	3D-046	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TACGGTG	pop	47	pop	G06	3D-047	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATCTTACGAG	pop	48	pop	H06	3D-048	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAAGGCTACG	pop	49	pop	A07	3D-049	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCTGAGT	pop	50	pop	B07	3D-050	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CACGCTTAG	pop	51	pop	C07	3D-051	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTAAGCGTG	pop	52	pop	D07	3D-052	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTAGGT	pop	53	pop	E07	3D-053	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGCTAT	pop	54	pop	F07	3D-054	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AACCACGCT	pop	55	pop	G07	3D-055	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCATTCCT	pop	56	pop	H07	3D-056	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCGTTAG	pop	57	pop	A08	3D-057	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTGACGG	pop	58	pop	B08	3D-058	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGAATGG	pop	59	pop	C08	3D-059	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCATCCATG	pop	60	pop	D08	3D-060	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGTTAGG	pop	61	pop	E08	3D-061	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCATTCAGT	pop	62	pop	F08	3D-062	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCAGTACG	pop	63	pop	G08	3D-063	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGTTAGCT	pop	64	pop	H08	3D-064	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTGCAT	pop	65	pop	A09	3D-065	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTACCATGG	pop	66	pop	B09	3D-066	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CATCACGT	pop	67	pop	C09	3D-067	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CGTGGACAAT	pop	68	pop	D09	3D-068	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCTTGG	pop	69	pop	E09	3D-069	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCAGCGTAG	pop	70	pop	F09	3D-070	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GACACT	pop	71	pop	G09	3D-071	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ATATGCGGT	pop	72	pop	H09	3D-072	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TACCGTCAT	pop	73	pop	A10	3D-073	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTGTACCT	pop	74	pop	B10	3D-074	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GCATACGGAG	pop	75	pop	C10	3D-075	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGACTCT	pop	76	pop	D10	3D-076	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTCTTAG	pop	77	pop	E10	3D-077	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGGAAG	pop	78	pop	F10	3D-078	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCTCTTG	pop	79	pop	G10	3D-079	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACCTTG	pop	80	pop	H10	3D-080	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTGGTCACGT	pop	81	pop	A11	3D-081	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GAATCTGTCT	pop	82	pop	B11	3D-082	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACACCGT	pop	83	pop	C11	3D-083	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCCAAGGT	pop	84	pop	D11	3D-084	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CACGAGCTTG	pop	85	pop	E11	3D-085	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TTCCTGGT	pop	86	pop	F11	3D-086	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGAAGCCAT	pop	87	pop	G11	3D-087	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	ACGTACTG	pop	88	pop	H11	3D-088	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	AGGCAGAT	pop	89	pop	A12	3D-089	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCGATAGTAG	pop	90	pop	B12	3D-090	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TCCATAAGG	pop	91	pop	C12	3D-091	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CTCCAACTG	pop	92	pop	D12	3D-092	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	CCTTGAGCTG	pop	93	pop	E12	3D-093	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GGAGAGACT	pop	94	pop	F12	3D-094	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	TGGTAGGCT	pop	95	pop	G12	3D-095	
+NS.2212.004.B715---D501.Godbout-P1_R1.fastq.gz	GTACTGG	pop	96	pop	H12	3D-096	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTCGACT	pop	97	pop	A13	3D-097	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AATGCG	pop	98	pop	B13	3D-098	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GAGTCT	pop	99	pop	C13	3D-099	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TAGCTGT	pop	100	pop	D13	3D-100	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GAGATAG	pop	101	pop	E13	3D-101	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTGGCAT	pop	102	pop	F13	3D-102	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTTCTCT	pop	103	pop	G13	3D-103	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AACTCCTGG	pop	104	pop	H13	3D-104	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATACATCAGG	pop	105	pop	A14	3D-105	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCATAGCAAT	pop	106	pop	B14	3D-106	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGTAGGAT	pop	107	pop	C14	3D-107	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGGTAAGT	pop	108	pop	D14	3D-108	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGAGTATG	pop	109	pop	E14	3D-109	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGACTCAACT	pop	110	pop	F14	3D-110	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGAGGT	pop	111	pop	G14	3D-111	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCTGATT	pop	112	pop	H14	3D-112	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACATCG	pop	113	pop	A15	3D-113	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGCAGATTG	pop	114	pop	B15	3D-114	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TAGTCAGG	pop	115	pop	C15	3D-115	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TATGACGCAT	pop	116	pop	D15	3D-116	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTAGCCGT	pop	117	pop	E15	3D-117	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATAAGCACG	pop	118	pop	F15	3D-118	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CAATGTCGT	pop	119	pop	G15	3D-119	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTGGTAG	pop	120	pop	H15	3D-120	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATCCT	pop	121	pop	A16	3D-121	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CATCGTAG	pop	122	pop	B16	3D-122	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CATATG	pop	123	pop	C16	3D-123	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGAACAGTG	pop	124	pop	D16	3D-124	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACAAGG	pop	125	pop	E16	3D-125	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACCTCTGT	pop	126	pop	F16	3D-126	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTTACTG	pop	127	pop	G16	3D-127	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTGTCCACAG	pop	128	pop	H16	3D-128	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TAACGG	pop	129	pop	A17	3D-129	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTCATGTGCG	pop	130	pop	B17	3D-130	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATCAG	pop	131	pop	C17	3D-131	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTGTAACCT	pop	132	pop	D17	3D-132	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATCGCAAG	pop	133	pop	E17	3D-133	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGAGGCT	pop	134	pop	F17	3D-134	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTATGCGTAG	pop	135	pop	G17	3D-135	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CCTCTTAG	pop	136	pop	H17	3D-136	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AACCGCTTG	pop	137	pop	A18	3D-137	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATGTG	pop	138	pop	B18	3D-138	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CAAGTCCAT	pop	139	pop	C18	3D-139	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACATACCAG	pop	140	pop	D18	3D-140	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACTTGAG	pop	141	pop	E18	3D-141	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGATTCCT	pop	142	pop	F18	3D-142	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGATGAG	pop	143	pop	G18	3D-143	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GAATCG	pop	144	pop	H18	3D-144	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CCTTGAAG	pop	145	pop	A19	3D-145	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CATTGTG	pop	146	pop	B19	3D-146	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGAAGAAGAT	pop	147	pop	C19	3D-147	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GACGCTAT	pop	148	pop	D19	3D-148	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGCAATATG	pop	149	pop	E19	3D-149	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AATGACG	pop	150	pop	F19	3D-150	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TACGTCT	pop	151	pop	G19	3D-151	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CACAGCACTG	pop	152	pop	H19	3D-152	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGATGCAGG	pop	153	pop	A20	3D-153	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCCGATAAT	pop	154	pop	B20	3D-154	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATGGAG	pop	155	pop	C20	3D-155	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AACATAGCG	pop	156	pop	D20	3D-156	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCGTGACT	pop	157	pop	E20	3D-157	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCCTATCTG	pop	158	pop	F20	3D-158	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GACCGAACCT	pop	159	pop	G20	3D-159	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGCCTTATG	pop	160	pop	H20	3D-160	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CCAGGTAAT	pop	161	pop	A21	3D-161	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTCCGAACT	pop	162	pop	B21	3D-162	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GATTGCGT	pop	163	pop	C21	3D-163	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGCCAT	pop	164	pop	D21	3D-164	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCAGAG	pop	165	pop	E21	3D-165	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTCTAG	pop	166	pop	F21	3D-166	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTACACGG	pop	167	pop	G21	3D-167	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGAATG	pop	168	pop	H21	3D-168	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTAGTCTCG	pop	169	pop	A22	3D-169	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTGCGGAAT	pop	170	pop	B22	3D-170	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTACCTG	pop	171	pop	C22	3D-171	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTACCGCT	pop	172	pop	D22	3D-172	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGACTATAG	pop	173	pop	E22	3D-173	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTCACGTAT	pop	174	pop	F22	3D-174	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTACTACCT	pop	175	pop	G22	3D-175	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TACAACTTGG	pop	176	pop	H22	3D-176	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATCTCCGCAT	pop	177	pop	A23	3D-177	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGCCATTG	pop	178	pop	B23	3D-178	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GCTTAT	pop	179	pop	C23	3D-179	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ACGCAT	pop	180	pop	D23	3D-180	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTATGCG	pop	181	pop	E23	3D-181	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GTACAACG	pop	182	pop	F23	3D-182	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	AGTACGTGAT	pop	183	pop	G23	3D-183	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TCAAGCT	pop	184	pop	H23	3D-184	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTGGCAAGCT	pop	185	pop	A24	3D-185	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CTCAAGAGAT	pop	186	pop	B24	3D-186	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATAGGACCT	pop	187	pop	C24	3D-187	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	ATCACCAG	pop	188	pop	D24	3D-188	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TGTGTG	pop	189	pop	E24	3D-189	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	CGTCATG	pop	190	pop	F24	3D-190	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	GGACCAT	pop	191	pop	G24	3D-191	
+NS.2212.004.B715---D502.Godbout-P2_R1.fastq.gz	TTCCTGACG	pop	192	pop	H24	3D-192	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGCTATTG	pop	193	pop	I01	3D-193	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CAAGTG	pop	194	pop	J01	3D-194	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGTAGGTG	pop	195	pop	K01	3D-195	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTGCGGAACT	pop	196	pop	L01	3D-196	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCACTACAT	pop	197	pop	M01	3D-197	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CACAAG	pop	198	pop	N01	3D-198	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCATGGT	pop	199	pop	O01	3D-199	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTTAGCT	pop	200	pop	P01	3D-200	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACCTGGT	pop	201	pop	I02	3D-201	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCCGTAATG	pop	202	pop	J02	3D-202	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AAGGTGT	pop	203	pop	K02	3D-203	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTGTCG	pop	204	pop	L02	3D-204	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGACTG	pop	205	pop	M02	3D-205	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACGGCAAT	pop	206	pop	N02	3D-206	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTCACTTGCG	pop	207	pop	O02	3D-207	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGTTCCT	pop	208	pop	P02	3D-208	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGGACGTAG	pop	209	pop	I03	3D-209	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TACTTAGCGT	pop	210	pop	J03	3D-210	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGTCTGT	pop	211	pop	K03	3D-211	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCAATTGG	pop	212	pop	L03	3D-212	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CAGGAT	pop	213	pop	M03	3D-213	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAGCTCG	pop	214	pop	N03	3D-214	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCAGTGGT	pop	215	pop	O03	3D-215	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGACTTG	pop	216	pop	P03	3D-216	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAGAGGAGG	pop	217	pop	I04	3D-217	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGACCATCTG	pop	218	pop	J04	3D-218	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGAGGTAAT	pop	219	pop	K04	3D-219	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTCTTG	pop	220	pop	L04	3D-220	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CAGCCTAT	pop	221	pop	M04	3D-221	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TATGGCAG	pop	222	pop	N04	3D-222	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCCGTGAGT	pop	223	pop	O04	3D-223	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCAACG	pop	224	pop	P04	3D-224	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAGGAG	pop	225	pop	I05	3D-225	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGTGATG	pop	226	pop	J05	3D-226	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCGAACCT	pop	227	pop	K05	3D-227	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGTACATG	pop	228	pop	L05	3D-228	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGCGATACCT	pop	229	pop	M05	3D-229	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGCTGGAT	pop	230	pop	N05	3D-230	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTGAAGCG	pop	231	pop	O05	3D-231	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACACCTCTG	pop	232	pop	P05	3D-232	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACTACGT	pop	233	pop	I06	3D-233	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAGGCAAT	pop	234	pop	J06	3D-234	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TCAGAATTCG	pop	235	pop	K06	3D-235	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAGTCAG	pop	236	pop	L06	3D-236	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAAGTACTTG	pop	237	pop	M06	3D-237	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTCAGCG	pop	238	pop	N06	3D-238	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGTTCAATGG	pop	239	pop	O06	3D-239	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACCTGT	pop	240	pop	P06	3D-240	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ATGCTACG	pop	241	pop	I07	3D-241	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TATTGACAGG	pop	242	pop	J07	3D-242	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGCTTCG	pop	243	pop	K07	3D-243	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGGTAGACGG	pop	244	pop	L07	3D-244	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGTAGACG	pop	245	pop	M07	3D-245	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TAATCCTCG	pop	246	pop	N07	3D-246	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TTCCATG	pop	247	pop	O07	3D-247	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAAGGAGCT	pop	248	pop	P07	3D-248	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCATATACG	pop	249	pop	I08	3D-249	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGGATGAT	pop	250	pop	J08	3D-250	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TACGCTGAT	pop	251	pop	K08	3D-251	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACTCTG	pop	252	pop	L08	3D-252	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGAACACTCG	pop	253	pop	M08	3D-253	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GATAAGG	pop	254	pop	N08	3D-254	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAACGACTG	pop	255	pop	O08	3D-255	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AACCTG	pop	256	pop	P08	3D-256	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGTTCTTG	pop	257	pop	I09	3D-257	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CCTCGATTGG	pop	258	pop	J09	3D-258	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCCATTATTG	pop	259	pop	K09	3D-259	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACACAGACT	pop	260	pop	L09	3D-260	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TACAAGACAG	pop	261	pop	M09	3D-261	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGTGGTCT	pop	262	pop	N09	3D-262	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGACTTGGT	pop	263	pop	O09	3D-263	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CTCGGCACAT	pop	264	pop	P09	3D-264	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ATAAGGCTG	pop	265	pop	I10	3D-265	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GAGTAG	pop	266	pop	J10	3D-266	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGCTATGT	pop	267	pop	K10	3D-267	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTGAGACT	pop	268	pop	L10	3D-268	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGAGCAACCT	pop	269	pop	M10	3D-269	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CACACTG	pop	270	pop	N10	3D-270	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGCATTCT	pop	271	pop	O10	3D-271	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCTAAG	pop	272	pop	P10	3D-272	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CGACATTAG	pop	273	pop	I11	3D-273	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTTGTCCT	pop	274	pop	J11	3D-274	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CCATACGAT	pop	275	pop	K11	3D-275	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTCACTCT	pop	276	pop	L11	3D-276	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGAACT	pop	277	pop	M11	3D-277	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	CCAAGTTAG	pop	278	pop	N11	3D-278	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCGACAACT	pop	279	pop	O11	3D-279	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	ACAGAGCAT	pop	280	pop	P11	3D-280	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GGTTGG	pop	281	pop	I12	3D-281	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGCCACT	pop	282	pop	J12	3D-282	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AGAGCAT	pop	283	pop	K12	3D-283	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	TGACAGTG	pop	284	pop	L12	3D-284	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GCACAGATAG	pop	285	pop	M12	3D-285	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AACCGT	pop	286	pop	N12	3D-286	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	AACTCAG	pop	287	pop	O12	3D-287	
+NS.2212.004.B715---D503.Godbout-P3_R1.fastq.gz	GTTCGAAG	pop	288	pop	P12	3D-288	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AACAGCT	pop	289	pop	I13	3D-289	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACTTGGAG	pop	290	pop	J13	3D-290	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGCTATATAG	pop	291	pop	K13	3D-291	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACTCCGT	pop	292	pop	L13	3D-292	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAACGTTAG	pop	293	pop	M13	3D-293	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCCTACG	pop	294	pop	N13	3D-294	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AAGACG	pop	295	pop	O13	3D-295	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCTGAT	pop	296	pop	P13	3D-296	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGCCAATGT	pop	297	pop	I14	3D-297	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CATAGT	pop	298	pop	J14	3D-298	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GACGAT	pop	299	pop	K14	3D-299	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGTTACCG	pop	300	pop	L14	3D-300	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AACAGG	pop	301	pop	M14	3D-301	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCTCCAGT	pop	302	pop	N14	3D-302	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACAGT	pop	303	pop	O14	3D-303	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCAAG	pop	304	pop	P14	3D-304	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATGTGT	pop	305	pop	I15	3D-305	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCATGT	pop	306	pop	J15	3D-306	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTATAGCCG	pop	307	pop	K15	3D-307	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCTGGAGTAT	pop	308	pop	L15	3D-308	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTGTTGT	pop	309	pop	M15	3D-309	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGCACTTG	pop	310	pop	N15	3D-310	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAATATCAGG	pop	311	pop	O15	3D-311	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACAATCGAG	pop	312	pop	P15	3D-312	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATACCG	pop	313	pop	I16	3D-313	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AACGATGGT	pop	314	pop	J16	3D-314	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGGAAGCT	pop	315	pop	K16	3D-315	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGCTAG	pop	316	pop	L16	3D-316	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTGCTCCT	pop	317	pop	M16	3D-317	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTCCGTTGT	pop	318	pop	N16	3D-318	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACCAGG	pop	319	pop	O16	3D-319	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGACGTGGAT	pop	320	pop	P16	3D-320	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGAAGG	pop	321	pop	I17	3D-321	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTAACAACGT	pop	322	pop	J17	3D-322	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCGGATATCT	pop	323	pop	K17	3D-323	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTTAGAG	pop	324	pop	L17	3D-324	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTGCCAAG	pop	325	pop	M17	3D-325	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTGCGT	pop	326	pop	N17	3D-326	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCCAATCAG	pop	327	pop	O17	3D-327	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAATCATTGG	pop	328	pop	P17	3D-328	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACGTGTAG	pop	329	pop	I18	3D-329	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGGTTACG	pop	330	pop	J18	3D-330	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACGGAGT	pop	331	pop	K18	3D-331	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTTAGG	pop	332	pop	L18	3D-332	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CATGAG	pop	333	pop	M18	3D-333	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCGTTGAT	pop	334	pop	N18	3D-334	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCATGAACAG	pop	335	pop	O18	3D-335	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCGAAT	pop	336	pop	P18	3D-336	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTTCCG	pop	337	pop	I19	3D-337	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACAGAGG	pop	338	pop	J19	3D-338	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACGAAG	pop	339	pop	K19	3D-339	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTTACTTGG	pop	340	pop	L19	3D-340	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTTGTG	pop	341	pop	M19	3D-341	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGTCCG	pop	342	pop	N19	3D-342	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTTCGT	pop	343	pop	O19	3D-343	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACGTGCGAT	pop	344	pop	P19	3D-344	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCACATATTG	pop	345	pop	I20	3D-345	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTAGTTACGG	pop	346	pop	J20	3D-346	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGAAGTG	pop	347	pop	K20	3D-347	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACGTCAGCT	pop	348	pop	L20	3D-348	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTACCTCTAG	pop	349	pop	M20	3D-349	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CAATACG	pop	350	pop	N20	3D-350	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCGACT	pop	351	pop	O20	3D-351	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CAGAAGTGT	pop	352	pop	P20	3D-352	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGTACCAT	pop	353	pop	I21	3D-353	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCTTATTGCG	pop	354	pop	J21	3D-354	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTAGCAT	pop	355	pop	K21	3D-355	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TACTCGGAT	pop	356	pop	L21	3D-356	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTATTCGG	pop	357	pop	M21	3D-357	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CTGAACT	pop	358	pop	N21	3D-358	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CACACGTAT	pop	359	pop	O21	3D-359	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATCCAAGCG	pop	360	pop	P21	3D-360	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GTCACGCCAT	pop	361	pop	I22	3D-361	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATTCGGT	pop	362	pop	J22	3D-362	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCTGAAT	pop	363	pop	K22	3D-363	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAATGCTCT	pop	364	pop	L22	3D-364	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGGCTCAAT	pop	365	pop	M22	3D-365	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGTAGAT	pop	366	pop	N22	3D-366	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TGGTTCT	pop	367	pop	O22	3D-367	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AAGCCT	pop	368	pop	P22	3D-368	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CAGCATG	pop	369	pop	I23	3D-369	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CGGACT	pop	370	pop	J23	3D-370	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AAGTGG	pop	371	pop	K23	3D-371	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGCTCAT	pop	372	pop	L23	3D-372	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGGAGGT	pop	373	pop	M23	3D-373	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GGCAATG	pop	374	pop	N23	3D-374	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCGTTACAAG	pop	375	pop	O23	3D-375	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTGAGT	pop	376	pop	P23	3D-376	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GAACTCGT	pop	377	pop	I24	3D-377	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	GCCTTAGCCT	pop	378	pop	J24	3D-378	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	CCTACTATGT	pop	379	pop	K24	3D-379	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ATAGACG	pop	380	pop	L24	3D-380	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	AGTCACTG	pop	381	pop	M24	3D-381	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TTCGAGGAT	pop	382	pop	N24	3D-382	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	TCATAGG	pop	383	pop	O24	3D-383	
+NS.2212.004.B715---D504.Godbout-P4_R1.fastq.gz	ACAGTTG	pop	384	pop	P24	3D-384	

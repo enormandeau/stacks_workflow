@@ -5,6 +5,7 @@
 *.amb
 *.ann
 *.backup
+*.bad
 *.bai
 *.bak
 *.bam
@@ -12,6 +13,8 @@
 *.bim
 *.bwt
 *.categorized
+*.csv
+*.csv.gz
 *.doctree
 *.fam
 *.fas
@@ -19,7 +22,9 @@
 *.fastq.gz*
 *.fq
 *.fq.gz
+*.het
 *.ids
+*.ignore
 *.info
 *.infos
 *.jpg
@@ -33,6 +38,7 @@
 *.pdf
 *.pickle
 *.png
+*.relatedness2*
 *.sa
 *.sam
 *.swp
@@ -51,6 +57,7 @@
 */population_map*
 */sample_information*
 *BWA_temp*
+*NOTE*
 *WARNING*
 *_filtered_*
 *barcode*
@@ -75,6 +82,7 @@
 10-log_files/*
 11-admixture*
 12-results/*
+12-results_*
 99-project_info/*
 DELIVERED*
 GSNAP*.sh
@@ -83,6 +91,9 @@ admixture_cv_values.txt
 all_samples_for_alignment.txt
 bad_samples*
 batch_1.*
+code_*
+dist.*
+distances.*
 filtered_*
 gsnaptemp.list.*
 input_renamed.*
@@ -95,9 +106,8 @@ population_genomics/*
 population_map.txt
 populations
 sample_files*
-samples.het
-samples.relatedness
-samples.relatedness.outliers.csv
+samples.relatedness*
 samples_split/*
 temp.list.*
 vcf_impute/*
+vcf_stats*

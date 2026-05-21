@@ -714,6 +714,11 @@ convert $(ls -1 11-admixture/input_renamed.*.png | sort -V) -trim -border 0x4 -g
 parallel -k ./00-scripts/utility_scripts/vcf_stats.py ::: <LIST-OF-VCFs> | tee vcf_stats.txt
 ```
 
+## Get sample names out
+```bash
+gunzip -c <VCF> | head -10000 | grep CHROM | cut -f 10- | perl -pe 's/\s/\n/g' > sample_names_in_order.txt
+```
+
 ### 8. Onwards!
 
 You should now have a very clean SNP dataset for your project. Analyze only
