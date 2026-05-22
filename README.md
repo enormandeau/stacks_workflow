@@ -2,9 +2,8 @@
 
 RADseq workflow using [STACKS2](http://creskolab.uoregon.edu/stacks/)
 
-Developed by [Eric Normandeau](https://github.com/enormandeau) in
-[Louis Bernatchez](http://www.bio.ulaval.ca/louisbernatchez/presentation.htm)'s
-laboratory.
+Developed by [Eric Normandeau](https://github.com/enormandeau) in Louis
+Bernatchez's laboratory.
 
 This software is provided "as is", without warranty of any kind,
 express or implied, including but not limited to the warranties of
