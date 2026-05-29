@@ -22,7 +22,7 @@ def get_maf(genotypes):
     """
     g = [x for x in genotypes if x != "./."]
     g = "".join(g).replace("/", "")
-    return round(g.count("1") / len(g) ,4)
+    return round(g.count("1") / len(g), 4)
 
 # Parse user input
 try:
