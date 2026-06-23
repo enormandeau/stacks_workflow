@@ -153,7 +153,7 @@ for chip in sorted(chips):
 
     setOutCell(s, 2, 11, "{0:.1f} million reads still needed to reach {1:.1f} million reads per sample.".format(sum_missing, target))
 
-    setOutCell(s, 2, 12, "{0:.2f} more sequencing needed.".format(round(100*(sum_missing / sum_reads), 2)))
+    setOutCell(s, 2, 12, "{0:.2f} percent more sequencing needed.".format(round(100*(sum_missing / sum_reads), 2)))
 
     # Create empty plate
     plate = pd.DataFrame(np.zeros([8, 12]))
