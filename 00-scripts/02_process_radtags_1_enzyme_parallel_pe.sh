@@ -27,8 +27,8 @@ ENZYME1=$2 # Name of the enzyme (run 'process_radtags' without options for list)
 
 # Write command to file
 echo -e "process_radtags command used:\n\n\
-    $(echo process_radtags_2_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \
-> 10-log_files/process_radtags_2_enzymes_command.log
+    $(echo process_radtags_1_enzymes.sh $TRIM_LENGTH $ENZYME1 $ENZYME2)" \
+> 10-log_files/process_radtags_1_enzymes_command.log
 
 # Extract reads
 cat $INFO_FILES/lane_info.txt |
