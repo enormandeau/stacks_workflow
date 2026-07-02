@@ -235,7 +235,7 @@ if __name__ == '__main__':
 
         # SNP on same scaffold but too far
         else:
-            while distance(snps[0], l) > diff_threshold:
+            while distance(snps[0], l) > max_distance:
                 snps = prune(snps, diff_threshold, outfile)
 
                 # Nothing left to prune
