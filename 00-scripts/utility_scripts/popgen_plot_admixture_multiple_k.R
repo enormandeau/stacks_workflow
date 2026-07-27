@@ -3,7 +3,7 @@
 # TODO Permit list of specific K values separated by commas
 
 library(RColorBrewer)
-color_scheme="Spectral"
+color_scheme="Set1"
 
 # Usage: plotADMIXTURE.r -p <prefix>
 #                       -i <info file, 2-column file with header and Sample <TAB> Population>
@@ -114,7 +114,7 @@ pdf(file=paste0(opt$outPrefix, ".pdf"), width = 16, height = 5)
 
     # Plot minK
     bp = barplot(t(as.matrix(tbl[[1]][order(labels$n), ])),
-              col=brewer.pal(n=minK, "Spectral"),
+              col=brewer.pal(n=minK, color_scheme),
               xaxt="n",
               border=NA,
               ylab=paste0("K=", minK),
@@ -131,7 +131,7 @@ pdf(file=paste0(opt$outPrefix, ".pdf"), width = 16, height = 5)
     if(maxK > minK) {
 
         lapply(2: (maxK-1), function(x) barplot(t(as.matrix(tbl[[x]][order(labels$n), ])),
-                                                col=brewer.pal(n=x+1, "Spectral"),
+                                                col=brewer.pal(n=x+1, color_scheme),
                                                 xaxt="n",
                                                 border=NA,
                                                 ylab=paste0("K=", x+1),
