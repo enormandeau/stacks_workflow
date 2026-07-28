@@ -106,6 +106,7 @@ population_genomics/*
 population_map.txt
 populations
 sample_files*
+sample_names*
 samples.relatedness*
 samples_split/*
 temp.list.*
