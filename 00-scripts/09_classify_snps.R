@@ -7,6 +7,14 @@ output_file = paste0(input_file, ".categorized")
 
 # Load data
 data = read.table(input_file, header=T, stringsAsFactors=F)
+if (!"NumMinorCarriers" %in% names(data)) {
+    stop("Missing NumMinorCarriers: rerun 08_extract_snp_duplication_info.py with the updated script.")
+}
+if (any(!is.finite(data$NumMinorCarriers) |
+        data$NumMinorCarriers < 0 |
+        data$NumMinorCarriers != floor(data$NumMinorCarriers))) {
+    stop("NumMinorCarriers must contain non-negative integer counts.")
+}
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHom", "MedCovHet")]
 
 canonical =     "#00000011" # black
@@ -46,7 +54,7 @@ d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
 d$Color[d$Fis > 0.9] = lowconf
 
 # Too few samples with rare allele
-d$Color[data$NumHet + data$NumRare < 3] = mas
+d$Color[data$NumMinorCarriers < 3] = mas
 
 # Extract bad loci infos
 bad_snps = d$Color != canonical

@@ -35,7 +35,7 @@ with myopen(input_vcf) as infile:
     with myopen(output_file, "wt") as outfile:
 
         # Write header
-        outfile.write("Scaffold\tPosition\tID\tMedRatio\tAvgRatio\tMedCovHet\tTotCovHet\tMedCovHom\tNumHet\tPropHomFreq\tPropHet\tPropHomRare\tNumRare\tFis\n")
+        outfile.write("Scaffold\tPosition\tID\tMedRatio\tAvgRatio\tMedCovHet\tTotCovHet\tMedCovHom\tNumHet\tPropHomFreq\tPropHet\tPropHomRare\tNumRare\tFis\tNumMinorCarriers\n")
 
         # Iterate over loci and SNPs
         for line in infile:
@@ -94,6 +94,15 @@ with myopen(input_vcf) as infile:
             # proportion heterozygotes (only these with a genotype)
             num_heterozygotes = len(coverages_heterozygotes)
             num_rare = len(coverages_homozygotes_rares) + len(coverages_heterozygotes)
+            # Preserve legacy NumRare (ALT carriers with usable allele depths).
+            # MAS counts individuals, not allele copies, using called genotypes.
+            # For biallelic diploids the less frequent homozygote class identifies
+            # the minor allele; a heterozygote carries either allele once.
+            called_genotypes = [x.split(":")[0] for x in l[9:]]
+            num_minor_carriers = (
+                sum(g in ("0/1", "1/0") for g in called_genotypes)
+                + min(called_genotypes.count("0/0"), called_genotypes.count("1/1"))
+            )
 
             prop_heterozygotes = len(coverages_heterozygotes) / num_samples
 
@@ -132,7 +141,8 @@ with myopen(input_vcf) as infile:
                     prop_heterozygotes,
                     prop_homozygotes_rare,
                     num_rare,
-                    fis
+                    fis,
+                    num_minor_carriers
                     ]
 
             info = [str(x) for x in snp_info]
