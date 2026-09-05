@@ -7,7 +7,6 @@ Usage:
 
 # Modules
 from collections import Counter
-import numpy
 import gzip
 import sys
 
@@ -55,13 +54,15 @@ samples = set([x[0] for x in distances])
 closest_samples = dict()
 
 for s in samples:
-    data = [x for x in distances if x[0] == s]
+    # Exclude self by identity: another sample can also have distance zero,
+    # and input files need not include self-comparisons.
+    data = [x for x in distances if x[0] == s and x[1] != s]
 
     # Decorate and sort
     data = sorted([[x[2]] + x for x in data])
 
     # Extract wanted samples
-    data = [x[2] for x in data[1: 1 + number_closest]]
+    data = [x[2] for x in data[:number_closest]]
     closest_samples[s] = data
 
 # Process VCF
