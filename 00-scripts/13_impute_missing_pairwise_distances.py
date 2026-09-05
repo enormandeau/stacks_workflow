@@ -3,11 +3,13 @@
 
 Usage:
     <program> input_vcf input_distances number_closest output_vcf
+
+Missing calls are retained unchanged when selected neighbours provide no
+fully called donor genotype. Such calls are not counted as imputed.
 """
 
 # Modules
 from collections import Counter
-import numpy
 import gzip
 import sys
 
@@ -23,10 +25,11 @@ def impute(closest_genotypes):
     """Impute using most frequent genotype from closely related samples
     """
     genotypes = [x.split(":")[0] for x in closest_genotypes]
-    genotypes = [x for x in genotypes if x != "./."]
+    # Missing or partially missing donor calls provide no complete genotype.
+    genotypes = [x for x in genotypes if "." not in x]
 
     if not genotypes:
-        genotype = "0/0"
+        return None
     else:
         # Impute most frequent genotype
         counts = Counter(genotypes)
@@ -98,8 +101,12 @@ with myopen(input_vcf) as infile:
                 num_genotypes += 1
 
                 if genotype.startswith("./."):
-                    new_data.append(impute(closest_genotypes))
-                    num_imputed += 1
+                    replacement = impute(closest_genotypes)
+                    if replacement is None:
+                        new_data.append(genotype)
+                    else:
+                        new_data.append(replacement)
+                        num_imputed += 1
 
                 else:
                     new_data.append(genotype)
