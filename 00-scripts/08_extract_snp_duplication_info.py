@@ -30,6 +30,30 @@ def myopen(_file, mode="rt"):
 def duplicated_likelihood(avg_ratio, total_coverage_heterozygotes, med_coverage_heterozygotes, fis):
     return -1
 
+def allele_depths(sample):
+    """Read the expected third (AD) field; missing depths are not zero reads.
+
+    This retains the script's existing GT:DP:AD field-order assumption.
+    """
+    fields = sample.split(":")
+    if len(fields) < 3 or fields[2] in ("", ".", ".,."):
+        return None
+    values = fields[2].split(",")
+    if len(values) != 2:
+        raise ValueError("Expected two biallelic AD values")
+    if "." in values:
+        return None
+    depths = tuple(int(x) for x in values)
+    if min(depths) < 0:
+        raise ValueError("Allele depths must be non-negative")
+    return depths
+
+def median_or_na(values):
+    return statistics.median(values) if values else None
+
+def proportion_or_na(count, total):
+    return count / total if total else None
+
 # Read VCF and compute allelic imbalance for each SNP
 with myopen(input_vcf) as infile:
     with myopen(output_file, "wt") as outfile:
@@ -47,67 +71,60 @@ with myopen(input_vcf) as infile:
             # Get locus information
             scaffold, position, locus_id = l[:3]
             locus = locus_id.split("_")[0]
-            num_samples = len([x for x in l[9:] if x.split(":")[0] != "./."])
+            called = {g: [] for g in ("0/0", "0/1", "1/0", "1/1")}
+            for sample in l[9:]:
+                gt = sample.split(":")[0]
+                if gt in called:
+                    called[gt].append(sample)
+            num_samples = sum(len(samples) for samples in called.values())
 
-            # Get only coverage data per sample for heterozygote samples
-            data_homozygotes_freq = [(int(i[0]), int(i[1])) for i in [x.split(":")[2].split(",")
-                for x in l[9:] if x.split(":")[0] == "0/0" and "," in x.split(":")[2]]
-                    ]
+            def depths_for(genotypes):
+                depths = [allele_depths(sample) for g in genotypes for sample in called[g]]
+                return [x for x in depths if x is not None]
 
-            data_heterozygotes = [(int(i[0]), int(i[1])) for i in [x.split(":")[2].split(",")
-                    for x in l[9:] if x.split(":")[0] in ["0/1", "1/0"] and "," in x.split(":")[2]]
-                    ]
-
-            data_homozygotes_rare = [(int(i[0]), int(i[1])) for i in [x.split(":")[2].split(",")
-                    for x in l[9:] if x.split(":")[0] == "1/1" and "," in x.split(":")[2]]
-                    ]
+            data_homozygotes_freq = depths_for(("0/0",))
+            data_heterozygotes = depths_for(("0/1", "1/0"))
+            data_homozygotes_rare = depths_for(("1/1",))
 
             # allele ratio of snp
-            allele_ratios = [x[1] / sum(x) if sum(x) else 0.0 for x in data_heterozygotes]
-            try:
-                med_ratio = statistics.median(allele_ratios)
-                avg_ratio = statistics.mean(allele_ratios)
-            except:
-                med_ratio = 0.0
-                avg_ratio = 0.0
+            allele_ratios = [x[1] / sum(x) for x in data_heterozygotes if sum(x) > 0]
+            med_ratio = median_or_na(allele_ratios)
+            avg_ratio = statistics.mean(allele_ratios) if allele_ratios else None
 
             # median and stdev coverage
             coverages_heterozygotes = [sum(x) for x in data_heterozygotes]
-            total_coverage_heterozygotes = sum(coverages_heterozygotes)
-            try:
-                med_coverage_heterozygotes = statistics.median(coverages_heterozygotes)
-            except:
-                med_coverage_heterozygotes = 0.0
+            total_coverage_heterozygotes = sum(coverages_heterozygotes) if coverages_heterozygotes else None
+            med_coverage_heterozygotes = median_or_na(coverages_heterozygotes)
 
             coverages_homozygotes = [sum(x) for x in data_homozygotes_freq + data_homozygotes_rare]
             coverages_homozygotes_rares = [sum(x) for x in data_homozygotes_rare]
 
-            try:
-                med_coverage_homozygotes = statistics.median(coverages_homozygotes)
-            except:
-                med_coverage_homozygotes = 0.0
+            med_coverage_homozygotes = median_or_na(coverages_homozygotes)
 
             ## Skip high coverage SNPs
             #coverages_total = coverages_heterozygotes + coverages_homozygotes
             #med_coverage_total = statistics.median(coverages_total)
 
             # proportion heterozygotes (only these with a genotype)
-            num_heterozygotes = len(coverages_heterozygotes)
-            num_rare = len(coverages_homozygotes_rares) + len(coverages_heterozygotes)
+            # Genotype counts must not depend on AD availability.
+            num_heterozygotes = len(called["0/1"]) + len(called["1/0"])
+            num_rare = len(called["1/1"]) + num_heterozygotes
 
-            prop_heterozygotes = len(coverages_heterozygotes) / num_samples
+            prop_heterozygotes = proportion_or_na(num_heterozygotes, num_samples)
 
             # proportion homozygotes for the frequent and rare allele
-            prop_homozygotes_freq = len(data_homozygotes_freq) / num_samples
-            prop_homozygotes_rare = len(data_homozygotes_rare) / num_samples
+            prop_homozygotes_freq = proportion_or_na(len(called["0/0"]), num_samples)
+            prop_homozygotes_rare = proportion_or_na(len(called["1/1"]), num_samples)
 
             # Compute Fis
-            Hobs = prop_heterozygotes
-            p = prop_homozygotes_freq + prop_heterozygotes / 2
-            q = prop_homozygotes_rare + prop_heterozygotes / 2
-            Hexp = 2 * p * q
-
-            fis = 1 - Hobs / Hexp
+            fis = None
+            if num_samples:
+                Hobs = prop_heterozygotes
+                p = prop_homozygotes_freq + prop_heterozygotes / 2
+                q = prop_homozygotes_rare + prop_heterozygotes / 2
+                Hexp = 2 * p * q
+                if Hexp > 0:
+                    fis = 1 - Hobs / Hexp
 
             # Compute likelihood of being a single / duplicated SNP
             likelihood = duplicated_likelihood(
@@ -135,5 +152,5 @@ with myopen(input_vcf) as infile:
                     fis
                     ]
 
-            info = [str(x) for x in snp_info]
+            info = ["NA" if x is None else str(x) for x in snp_info]
             outfile.write("\t".join(info) + "\n")
