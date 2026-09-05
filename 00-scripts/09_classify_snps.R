@@ -31,16 +31,21 @@ d$Color[d$MedRatio < 0.20] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.80] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
+# Apply the ratio-dependent boundaries symmetrically around 0.5.
+# Keep MedRatio unchanged for plotting and the original low-confidence checks.
+# This extends the existing low-ratio rules to their high-ratio counterparts;
+# it does not recalibrate or validate the empirical thresholds.
+classification_ratio = pmin(d$MedRatio, 1 - d$MedRatio)
 d$Color[d$Fis < -0.4] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
-d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
-d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
+d$Color[d$Fis + classification_ratio < 0.08] = duplicated
+d$Color[d$Fis + classification_ratio * 3 < 0.78] = duplicated
+d$Color[d$Fis + classification_ratio * 8 < 2.3] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.8] = diverged
-d$Color[d$Fis + d$MedRatio * 2 < -0.00] = diverged
-d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
-d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
+d$Color[d$Fis + classification_ratio * 2 < -0.00] = diverged
+d$Color[d$Fis + classification_ratio * 3 < 0.20] = diverged
+d$Color[d$Fis + classification_ratio * 8 < 1.5] = diverged
 
 # High Fis
 d$Color[d$Fis > 0.9] = lowconf
