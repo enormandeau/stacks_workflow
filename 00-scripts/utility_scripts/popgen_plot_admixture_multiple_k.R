@@ -77,7 +77,6 @@ labels = read.table(opt$infofile, header=T)
 names(labels)[1:2] = c("ind", "pop")
 print(head(labels))
 
-
 # Add a column with population indices to order the barplots
 # Use the order of populations provided as the fourth argument (list separated by commas)
 labels$n = factor(labels$pop, levels=unlist(strsplit(opt$populations, ",")))
@@ -102,7 +101,7 @@ spaces = spaces[-length(spaces)]
 
 # Plot the cluster assignments as a single bar for each individual for each K as a separate row
 #png(file=paste0(opt$outPrefix, ".png"), width = 3000, height = 1800, res=200)
-pdf(file=paste0(opt$outPrefix, ".pdf"), width = 16, height = 5)
+pdf(file=paste0(opt$outPrefix, ".pdf"), width = 20, height = 5)
 
     par(mfrow=c(maxK - 1, 1),
         mar=c(0, 1, 0, 0),
@@ -139,8 +138,15 @@ pdf(file=paste0(opt$outPrefix, ".pdf"), width = 16, height = 5)
                                                 space=spaces))
     }
 
-    axis(1, at=c(which(spaces==inter_pop_space),
-         bp[length(bp)])-diff(c(1, which(spaces==inter_pop_space),bp[length(bp)]))/2,
+    label_positions = c()
+    counter = 0
+    for (i in which(spaces==inter_pop_space)) {
+        label_positions = c(label_positions, i + counter)
+        counter = counter + 1
+    }
+
+    axis(1, at=c(label_positions,
+         bp[length(bp)])-diff(c(1, label_positions,bp[length(bp)]))/2,
          labels=unlist(strsplit(opt$populations, ",")), cex=2)
 
 dev.off()
