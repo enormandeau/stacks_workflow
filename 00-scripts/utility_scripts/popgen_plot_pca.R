@@ -77,7 +77,7 @@ PCA_plot <- function(pca, ind, v1, pcvector=c(1, 2)) {
         ggplot(aes_string(x = paste0("PC", pcvector[1]),
                           y = paste0("PC", pcvector[2]))) +
 
-        geom_point(aes(col = ind[, v1]), size=3, alpha=0.6, fill=NA) +
+        geom_point(aes(col = ind[, v1]), size=2, alpha=0.6, fill=NA) +
 
         theme_bw() +
 
