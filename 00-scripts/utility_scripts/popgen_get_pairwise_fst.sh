@@ -13,15 +13,23 @@ rm "$OUT"
 echo -e "Pop1\tPop2\tFst" > "$OUT"
 
 # Prepare files with sample IDs
+echo "Populations:"
+echo "--"
+
 cat "$POPS" |
     while read i
     do
         echo "$i"
         # Get column with sample info for the samples in each group
-        grep "$i" "$POPMAP" | awk '{print $2"_"$1}' > population_"$i".ids
+        grep "$i" "$POPMAP" | awk '{print $1}' > population_"$i".ids
     done
 
+echo
+
 # Get Fst values with vcftools
+echo "Pairs:"
+echo "--"
+
 for i in $(cat "$POPS")
 do for j in $(cat "$POPS")
     do
@@ -29,7 +37,7 @@ do for j in $(cat "$POPS")
             then break
         fi
 
-        echo Treating "$i" "$j"
+        echo -e "$i""\t""$j"
 
         vcftools \
             --gzvcf "$VCF" \
@@ -43,4 +51,8 @@ do for j in $(cat "$POPS")
     done
 done
 
+echo
+
+echo "FSTs:"
+echo "--"
 column -t "$OUT"
