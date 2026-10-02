@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Remove ranges around unwanted positions from a bam file piped into this script
+r"""Remove ranges around unwanted positions from a bam file piped into this script
 
 Usage:
     samtools view -h <INPUT.bam> | <this_program> bedfile | samtools view -Sb > <OUTPUT.bam>
