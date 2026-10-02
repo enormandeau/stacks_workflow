@@ -7,6 +7,14 @@ output_file = paste0(input_file, ".categorized")
 
 # Load data
 data = read.table(input_file, header=T, stringsAsFactors=F)
+if (!"NumMinorCarriers" %in% names(data)) {
+    stop("Missing NumMinorCarriers: rerun 08_extract_snp_duplication_info.py with the updated script.")
+}
+if (any(!is.finite(data$NumMinorCarriers) |
+        data$NumMinorCarriers < 0 |
+        data$NumMinorCarriers != floor(data$NumMinorCarriers))) {
+    stop("NumMinorCarriers must contain non-negative integer counts.")
+}
 d = data[,c("MedRatio", "PropHet", "PropHomRare", "Fis", "MedCovHom", "MedCovHet")]
 
 canonical =     "#00000011" # black
@@ -31,22 +39,27 @@ d$Color[d$MedRatio < 0.20] = lowconf # & d$PropHomRare > 0.00] = lowconf
 d$Color[d$MedRatio > 0.80] = lowconf # & d$PropHomRare > 0.00] = lowconf
 
 # Fis is too negative = duplicated
+# Apply the ratio-dependent boundaries symmetrically around 0.5.
+# Keep MedRatio unchanged for plotting and the original low-confidence checks.
+# This extends the existing low-ratio rules to their high-ratio counterparts;
+# it does not recalibrate or validate the empirical thresholds.
+SymetricalRatio = pmin(d$MedRatio, 1 - d$MedRatio)
 d$Color[d$Fis < -0.4] = duplicated
-d$Color[d$Fis + d$MedRatio < 0.08] = duplicated
-d$Color[d$Fis + d$MedRatio * 3 < 0.78] = duplicated
-d$Color[d$Fis + d$MedRatio * 8 < 2.3] = duplicated
+d$Color[d$Fis + SymetricalRatio < 0.08] = duplicated
+d$Color[d$Fis + SymetricalRatio * 3 < 0.78] = duplicated
+d$Color[d$Fis + SymetricalRatio * 8 < 2.3] = duplicated
 
 # Very low Fis = diverged
 d$Color[d$Fis < -0.8] = diverged
-d$Color[d$Fis + d$MedRatio * 2 < -0.00] = diverged
-d$Color[d$Fis + d$MedRatio * 3 < 0.20] = diverged
-d$Color[d$Fis + d$MedRatio * 8 < 1.5] = diverged
+d$Color[d$Fis + SymetricalRatio * 2 < -0.00] = diverged
+d$Color[d$Fis + SymetricalRatio * 3 < 0.20] = diverged
+d$Color[d$Fis + SymetricalRatio * 8 < 1.5] = diverged
 
 # High Fis
 d$Color[d$Fis > 0.9] = lowconf
 
 # Too few samples with rare allele
-d$Color[data$NumHet + data$NumRare < 3] = mas
+d$Color[data$NumMinorCarriers < 3] = mas
 
 # Extract bad loci infos
 bad_snps = d$Color != canonical
