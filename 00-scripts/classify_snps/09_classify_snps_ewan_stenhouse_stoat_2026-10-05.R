@@ -49,11 +49,10 @@ d$Color[d$Fis + SymetricalRatio * 3 < 0.20] = diverged
 d$Color[d$Fis + SymetricalRatio * 8 < 1.5] = diverged
 
 # High Fis
-#d$Color[d$Fis > 0.9] = lowconf
+d$Color[d$Fis > 0.9] = lowconf
 
 # Two species or very diverged groups
 d$Color[data$MedRatio < 0.001 & data$PropHomRare >= 0.3] = canonical
-d$Color[d$Fis > 0.9] = canonical
 
 # Too few samples with rare allele
 d$Color[data$NumMinorCarriers < 3] = mas
