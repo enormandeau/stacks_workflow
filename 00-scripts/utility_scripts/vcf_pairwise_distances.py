@@ -34,7 +34,10 @@ def distance(geno1, geno2):
             if g1 != g2:
                 ndiff += 1
 
-    return ndiff / nkept
+    try:
+        return ndiff / nkept
+    except:
+        return 1.0
 
 # Parse user input
 try:
